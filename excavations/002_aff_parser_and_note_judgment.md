@@ -80,14 +80,16 @@ Arc-curve classifier `0xd51010`, called on the chart arc's curve string during `
 
 | Label | Internal result |
 |---|---|
-| `b` | 0 |
-| `s` | 1 |
+| `b` | 1 |
+| `s` | 0 |
 | `si` | 2 |
 | `so` | 3 |
 | `sisi` | 4 |
 | `sosi` | 5 |
 | `siso` | 6 |
 | `soso` | 7 |
+
+**Authorized correction (2026-10-22):** The original Expedition 002 version mistakenly recorded `b=0, s=1`. Expedition 003 re-examined and executed the original native classifier `0xd51010`: the `b` match at `0xd51058` branches to `0xd511b8` and returns `1`; the `s` match at `0xd51098` returns `0` through `0xd511fc`. The corrected IDs above are `b=1, s=0`. The earlier mapping remains traceable in Git commit `e2796f27f970e30d94b4ad121ad99024cdebbd86`; the user explicitly authorized this correction. Other curve IDs remain unchanged.
 
 Unrecognized curve names fall back to `0` in this classifier. The precise curve equations are not reconstructed here; assigning Bezier/sine formulas solely from these labels would be an inference.
 
