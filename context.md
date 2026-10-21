@@ -158,7 +158,8 @@ Here `I` is an integer token, `F` a float token, `ID` an identifier, and `P` eit
 - Arc flag token TRUE stores mode 1; DESIGNANT stores mode 2; otherwise the consumed token maps to 0, without an explicit FALSE requirement in that branch. An inclusion flag can discard DESIGNANT arcs (`0x139ba08–0x139ba28`), also handled in groups.
 - Arc-tap lists contain `arctap(I time)` items separated by commas. The parser records timestamps, then runtime construction produces child logic objects.
 - Timing-group attributes are a single optional identifier split on `_`: `noinput` clears chart byte `+0x0c`; `fadingholds` sets `+0x0d`; `anglex...` and `angley...` parse suffixes with `stoi` into `+0x10/+0x14`; `tracecol...` parses `%02x%02x%02x` for arcs. The cleared input flag propagates to logic `+0x54`, checked by normal input and judgment loops. Rendering is not thereby disabled.
-- Runtime arc classifier `0xd51010`: `b=0`, `s=1`, `si=2`, `so=3`, `sisi=4`, `sosi=5`, `siso=6`, `soso=7`, unknown -> 0. Curve equations are not established here.
+- Runtime arc classifier `0xd51010`: `b=1`, `s=0`, `si=2`, `so=3`, `sisi=4`, `sosi=5`, `siso=6`, `soso=7`, unknown -> 0. Curve equations were not established in Expedition 002.
+- **Authorized correction (2026-10-22):** Expedition 002 originally reversed the `b` and `s` IDs (`b=0, s=1`). Expedition 003 reinspection and isolated native execution established the mapping `b=1, s=0` in this binary: `b` matches at `0xd51058` and returns 1 via `0xd511b8`; `s` matches at `0xd51098` and returns 0 at `0xd511fc`. The user explicitly authorized correcting the old entry. Original wording remains available in history at commit `34dfe214fed3f618a0c61dc2ca4383554a536c69`.
 - Scene classifier `0x1090060`: `trackdisplay=0`, `redline=1`, `arcahvdistort=2`, `arcahvdebris=3`, `hidegroup=4`, `enwidencamera=5`, `enwidenlanes=6`, other -> 7. Parser aliases `trackhide/trackshow` become `trackdisplay` records with integer 0/255. Parsing an arbitrary scene-control identifier does not prove an effect exists.
 - Camera handler `0x192b5c8` includes `reset`, separates two triples of components, and calls action builders with `qi/qo` branches. Duration-to-seconds division by 1000 is visible in `0x10a2b94`.
 - Lexer-only tokens `at` and `rgb` are not additional top-level events. Negative-number lexing, comments, exponent notation, malformed-input compatibility, complete camera/effect semantics, and all possible header consumers are not fully characterized.
@@ -212,6 +213,8 @@ Recovered local arc equations and sampling, LogicColor contact arbitration/relea
 ### What I Found — new evidence conflicts with prior curve-ID entry
 
 **Preservation notice:** Expedition 002's `b=0, s=1` entry conflicts with direct reinspection and isolated native execution. At classifier `0xd51010`, equality with `b` branches via `0xd51058` to `0xd511b8`, returning 1; equality with `s` at `0xd51098` jumps to the return with zero. Thus the newly verified mapping is **b=1, s=0**. Other curve IDs agree. Earlier text has not been changed; changing it awaits explicit user confirmation. This addition records the new evidence and discrepancy separately.
+
+**Resolution (2026-10-22):** The user subsequently authorized this specific correction. Expedition 002's curve-ID entry in `context.md` and `excavations/002_aff_parser_and_note_judgment.md` has been corrected to `b=1, s=0` with provenance notes. The preceding preservation notice is retained as a historical account of the discrepancy before approval; its pending-confirmation status is no longer current.
 
 ### What I Found — geometry and rendering
 
