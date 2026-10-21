@@ -200,3 +200,66 @@ ARM64 Unicorn validation executed original instructions with synthetic objects a
 ### Unresolved Mysteries
 
 Exact curve equations; complete arc linkage/color/finger arbitration; all spatial transforms and candidate tie-breaking; full camera/effect/special-mode semantics; unusual or malformed chart compatibility; final audio-offset alignment and complete clock lifecycle; real-chart device validation. These are open questions, not scheduled future directions or authorization to start another excavation.
+
+---
+
+## Expedition 003 — Arc geometry, effects, synchronization, and finger tracking
+
+### Result
+
+Recovered local arc equations and sampling, LogicColor contact arbitration/release, LogicArcGroup timing sharing, render feedback, and the game-timeline/audio-provider startup connection. Subject pseudocode/evidence: `excavations/003_arc_geometry_and_finger_tracking.md`. Source: supplied `arccopy.zip`; main `lib/arm64-v8a/libcocos2dcpp.so` SHA-256 `3eaca4e6dabb3395f276f8915698d57675757d0df0970e716b23a3dc201c79be`, Build ID `17d660edbf37ca78beefc32e07672c97419ddce6`. Audio-provider evidence comes from the separate `lib/arm64-v8a/libfmodProvider.so`. Addresses are library-relative VAs, with provider addresses explicitly separated.
+
+### What I Found — new evidence conflicts with prior curve-ID entry
+
+**Preservation notice:** Expedition 002's `b=0, s=1` entry conflicts with direct reinspection and isolated native execution. At classifier `0xd51010`, equality with `b` branches via `0xd51058` to `0xd511b8`, returning 1; equality with `s` at `0xd51098` jumps to the return with zero. Thus the newly verified mapping is **b=1, s=0**. Other curve IDs agree. Earlier text has not been changed; changing it awaits explicit user confirmation. This addition records the new evidence and discrepancy separately.
+
+### What I Found — geometry and rendering
+
+- `0x1925084` generates arc geometry. Logic fields: times `+0x18/+0x1c`, x-position objects `+0x20/+0x28` (float x at their `+0x14`), y endpoints `+0xa8/+0xac`, timing object `+0x48`, curve ID `+0x15c`, extra `+0x118`. Vectors `+0xe8/+0x100` store 12-byte Vec3s.
+- X endpoints become `trunc(float32(x*850-425))`. Y becomes `trunc(float32(y*(H-100)+100))`, H from global integer `0x1bf6d80`. Effective end is max(own end, successor start times in vector `+0x138`). Local z span is `trunc(-(effectiveEnd-start)/timing.float_28)`. These are internal coordinates, not fixed screen pixels.
+- Let I(u)=sin(πu/2), O(u)=1-cos(πu/2), S(u)=3u²-2u³. Sine evaluator `0x180a190` returns `((X1-X0)*Ex, Y0+(Y1-Y0)*Ey, Z*u)`; x is local displacement. Its O implementation is `1-sin((u+1)*π/2)`.
+
+| Label | Newly verified ID | Ex | Ey |
+|---|---:|---|---|
+| s | 0 | u | u |
+| b | 1 | Cubic rotated construction, approximately S | S |
+| si | 2 | I | u |
+| so | 3 | O | u |
+| sisi | 4 | I | I |
+| sosi | 5 | O | I |
+| siso | 6 | I | O |
+| soso | 7 | O | O |
+
+- Cubic helper `0x14f3078`: P0=P1=(0,Y0), P2=P3=(-D,Y1), D=trunc(sqrt(dx²+Z²)); evaluate standard cubic Bezier, rotate its (x,y,0) around Y by `-atan2(dx,-Z)*180/π-90`, return rotated x/y with z replaced by Z*u. D truncation prevents claiming bit-exact `dx*S(u)`. Rotation helpers are `0x1987f94` and `0xcaf3cc`; degeneracies are untested.
+- Sampling rate is 14 for own duration<1000 ms, otherwise 7. With seconds=(effectiveEnd-start)/1000, parameter steps are `1/(seconds*rate)` and `1/(seconds*rate*extra)` for the two vectors. Runtime initializer `0xc664f8` clamps extra to >=1. This traces a geometry-density role for the optional arc parameter, separate from judgment checkpoint density.
+- Render initializer `0x13b5ff8` turns adjacent `+0x100` samples into segment children via `0x14f3f40`, passing first/last flags. Render update `0x11b7d78` places the parent at `(quantized startX,0,logic.i32_30)` and reads current float displacement/y `+0xd4/+0xd8`. Full current-cache production and camera transforms remain unresolved.
+
+### What I Found — contact tracking and ownership
+
+- Android bridge `smali/org/cocos2dx/lib/Cocos2dxGLSurfaceView.smali` supplies pointer IDs and touch coordinates/timestamps. Native begin callback `0x194ff80`, at `0x195007c–0x195009c`, assigns a separate incrementing ID from `0x1bf25f4` to touch `+0x34`. Color ownership uses that generated ID, not simply the raw Android pointer ID. This establishes contact identity, not physical hand/finger recognition across lifts.
+- `0xc98490` checks ordinary arc spatial eligibility, rejects nonzero mode `+0xa4`, consults start time/byte `+0xd0`, and has caller-selected 120 ms start-lookahead versus direct-start branches. Nonzero-duration position uses startX plus `+0xd4`, and float `+0xd8`; zero-duration uses endpoints and separate vertical scale `0x1bf6c9c`. Spatial helper `0x927384` receives 212.0; this is not a proven fixed pixel radius.
+- Arc `+0xb0` points to **LogicColor**: factory `0xd93594`, vtable `0x1aa1b98`, RTTI string `0x47dd29`. Chart helper `0xd51220` reuses chart vector `+0x68` entries by mode/mirror-remapped category `+0x18`.
+- Arc `+0xe0` points to a separate **LogicArcGroup**: construction `0x125e674–0x125e6e0`, vtable `0x1b85570`, RTTI string `0x479db7`, setter `0x165286c`. Builder `0x125e474` tests time neighborhood, endpoint x proximity/y equality, and mode compatibility while linking arcs; the complete predicate is not reconstructed.
+- Claim `0x15a90c4` uses color owner `+0x28`, release time `+0x2c`, interval `+0x0c`, acceptance byte `+0x22`, prior-claim byte `+0x24`, bypass byte `+0x10`, conflict byte `+0x30`, feedback fields `+0x34/+0x38`. Global claimed-contact vector is based at `0x1bfa3d8`.
+- Ordinary path: accept same owner; reject another owner; claim unowned color only if generated contact ID is absent from the global vector. Color byte `+0x10` permits acceptance without owner reassignment; category 3 bypasses assignment after the release-time gate. Arc byte `+0x170` bypasses this claim call entirely. Full bypass provenance remains unknown.
+- Recorded release blocks reacquisition while `now-releaseTime < trunc(min(4*intervalInteger,1000))`, with equality leaving the gate. This is one ownership gate, not a universal judgment window. Other resets exist: `0x95d61c` clears color prior-claim/conflict bytes and release time after an arc's end when its mode/successor conditions allow.
+- Release `0x13db7a0`, called from touch end `0xf9a50c`, clears a matching owner and removes the claimed ID. When a matching global entry is found, prior-claim is set, and bypass clear, it records now as release time. Non-owner release does nothing.
+
+### What I Found — synchronization and effects
+
+- Acceptance `0x15dfe2c` scans pending checkpoints across current/linked arcs, consults connected-group timestamp vector `+0x18`, and conditionally extends group float `+0x14` to `checkpointTime+min(2*interval,500)`. Group bytes `+0x10/+0x12` are activated. This is linked-note coordination, not evidence of beat snapping or network synchronization.
+- Acceptance sets logic bytes `+0x64/+0x65` and render virtual `+0x530` -> `0x155241c` -> render byte `+0x300=1`. Render frame `0x11b7d78` reads that state and group/color feedback; one conflict branch constructs RGB (230,50,50) and applies it through `0x15a0eac`. Exact blend semantics remain unknown. Another branch uses a modulo-5 update counter; no fixed real-time effect frequency is established.
+- `assets/particle/particle_arc.plist`, `particle_arc_mirai_conflict.plist`, and `particle_arc_mirai_light.plist` exist. Their exact recovered-branch selection and the full AFF effect-token dispatch are unproven.
+- Accepted arc with sound handle `+0x68==-1` calls `0x107af5c` with sound ID 0 and arc start time at `0x15e0174–0x15e0198`, storing the result. This is an audio request, not proof of effect-token selection or playback success.
+- Timeline updater `0x16c90bc` starts audio when effective time is strictly greater than `-timeline.i32_30` in its unstarted/unpaused branch, sets `+0x2e`, calls audio manager `0x1735d7c`, and updates compensation `+0x28`. Manager dispatches provider virtual `+0x28` with loop=false, index=0, delay=0. AFF/user/device offset composition is still unresolved.
+- Separate FMOD provider exported `playBGM` at `0x270a8` reads sample rate/parent DSP clock and calls `setDelay(uint64(float32(parentClock + delayMs/1000*sampleRate)),0,true)` before unpausing. Actual float32 intermediate rounding matters. `loadAndScheduleSfxOnMainBGM` at `0x26e04` also schedules timestamp offsets through sample rate/parent DSP time. Position getter `0x32da0` and setter `0x35b38` use FMOD unit literal 1; setter shifts or stops scheduled channels. Getter existence does not establish continuous drift correction.
+
+### Pseudocode and validation
+
+The subject file contains coordinate/cubic/sine pseudocode and literal color-claim/release/arc-acceptance reconstruction, preserving unknown fields and incomplete scan predicates.
+
+Original ARM64 instructions executed in Unicorn with synthetic objects and hooked external sin/string comparisons: nine classifier inputs, 42 sine samples, and seven ownership assertions passed. Ownership coverage includes release bookkeeping, rejection 1 ms below a 400 ms gate, acceptance at equality, and category-3 acceptance without owner change. Full cubic rotation, renderer, hardware touch, audio output, and real charts were not run; the supplied archive contains no AFF samples.
+
+### Unresolved Mysteries
+
+Full current-position/cache and projection transforms; mesh/shader details; cubic degeneracies; complete linkage predicate; special-mode/bypass provenance; cancellation/feedback lifecycle; full effect/particle dispatch; chart/user/device offset composition, pause/seek and drift correction; end-to-end real-chart/device behavior. These are open questions, not scheduled future directions.
