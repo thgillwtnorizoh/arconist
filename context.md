@@ -396,3 +396,79 @@ Unicorn executed original ARM64 with synthetic clock/settings/audio data:4 relev
 ### Unresolved Mysteries
 
 Full deferred/multiplayer-start and special-song semantics; every scheduled-SFX timestamp producer; automatic preset/route selection; all indirect timestamp/audio-position consumers; physical latency/clock drift on hardware; unusual overflow/mode transitions; complete app-background ordering between timeline pause and mixer suspension. These are bounded unknowns, not future plans or authorization for another expedition.
+
+## Expedition 006 — Gauge, Character Skills & Special Gameplay States — 2026-10-22
+
+### Result
+
+Recovered and executed the main **judgment → gauge modification → clear/fail evaluation** chain. Reconstructed note-count-dependent gain, mode-dependent damage/clamps, immediate failure versus final classification, staged gauges, representative character skills, expanded scoring-cap writers, final result snapshots, and concrete SQLite score/clear-type persistence. The full skill catalog, continuous special gauges, and all result-eligibility paths remain bounded unknowns.
+
+Detailed evidence and pseudocode: [006_gauge_skills_and_special_states.md](excavations/006_gauge_skills_and_special_states.md).
+
+### Evidence conventions and preservation
+
+Authoritative instructions, supplied ZIP, existing context, and Expedition 001–005 reports were reviewed. Primary library: `lib/arm64-v8a/libcocos2dcpp.so`; SHA-256 `3eaca4e6dabb3395f276f8915698d57675757d0df0970e716b23a3dc201c79be`, Build ID `17d660edbf37ca78beefc32e07672c97419ddce6`. Extracted bytes match the ZIP member. All addresses in this entry are main-library-relative ELF VAs before relocation; code/rodata VAs equal file offsets, cited `.data.rel.ro` offsets are VA−`0x4000`. Function/field names are researcher descriptions; class names are recovered RTTI.
+
+**Confirmed** denotes instructions, metadata, relocations, or scoped native execution. **Interpretation** denotes explanatory product labels. **Unknown** denotes incomplete provenance/lifecycle. No previous record was edited; previously authorized curve/depth corrections remain resolved. This entry extends the omitted gauge callbacks and unnamed scoring flag in Expedition 002 without changing its ordinary score formula.
+
+### What I Found — judgment, gauge state, and arithmetic
+
+- Accepted recorder `0x1730290` first calls note virtual `+0x20`, increments shining/PURE/FAR counters, then calls gauge handler `0x16e4ab0` for every LifeBarState (`0x1730350`), before ordinary score recomputation and combo increment. Miss recorder `0x868e54` guards through note virtual `+0x38`, increments LOST, visits `0x1869e90`, then resets combo.
+- ScoreState `+0x0c=N`, `+0x14=score`, `+0x1c=combo`, `+0x20/+0x24/+0x28/+0x2c=shining/PURE/FAR/LOST`, `+0x94=selected mode`, `+0x98=active index`, `+0xa0/+0xa8=gauge-vector bounds`, `+0xc8=ability`, `+0xd0=expanded cap`.
+- `LifeBarState` RTTI typeinfo `0x1b7d788`, vtable `0x1ad3848`, factory `0x12c5070`, initializer `0x160a3b8`. Authoritative f32 health H is `+0x10`; lower bound `+0x14`; upper cap `+0x18` and enable byte `+0x1c`; failure threshold F `+0x40`; base gain `+0x8c`; damage percentage `+0x98`; gauge ID `+0xa0`; owner `+0xa8`; hard/grace flags `+0xb8/+0xb9`; ability `+0xc8`; disabled byte `+0x0c`. HUD `0x1713a64` reads active H/F/cap downstream.
+- Default L=0,U=100. Initial argument −1 selects defaults: IDs2/6/7/8/9/11/12/13/14 start100 unless ability supplies a positive override; other IDs use ability initial H or0. Explicit other initial integers are converted to f32. Mode11 then performs additional external-world-state configuration.
+- **Confirmed gain equation** at `0x160a67c–0x160a76c`, positive N: T=`200+N/2` for1..399, `280+(N−400)/2` for400..599, `360+(N−600)/5` for≥600, with native f32 operation order. Q=`f32(T/2.5)`, optionally `f32(f64(Q)*0.8)` for byte`[chart.song+0x54]!=0`, then g=`f32(Q/f32(N))`. The byte's product meaning is unknown. Mode6 additionally scales Q by `(2−p)` and initializes accumulators from Q×`(1−p)`; full p production/integration is unresolved. Native g at N100/400/600/1000 is1/.2800000012/.2399999946/.1759999990.
+- Ordinary default accepted IDs0/1 gain g, ID2 gain g/2. Miss damage uses `0x120dd34`. Normal base D1; easy/mode5 before hard D≈.6; hard-like D4.5 above30 else2.5; mode6 D=`f32(9−6.5p)`; mode7 D5 above30 else2.5 and always doubles; mode8 fixed10 and no accepted gain; mode12 D4.5 even below30. Full table, flags, and rounding are in the subject report.
+- **Exact RTTI caveat:** damage-category testing compares the runtime RTTI-name pointer with `LogicLongNoteBase` typeinfo `0x1af6c48`; it is not an inheritance test. A nonmatch normally doubles weighted damage. Actual `LogicHoldNote`/`LogicArcNote` vtable tests do not match; they must not automatically be assigned reduced damage. Exact-base synthetic tests do match. Ordinary H50 LOST damages2 for tested derived identities and1 for exact-base identity.
+- Modes2/7/9 and promoted10 soften a crossing from old H>30 to new H<30 by adding `0.5*f32(oldH−30)` with double intermediate, before returning H−new. Exactly H30 does not enter that correction. Mode2 nonmatch LOST at H31 leaves22.5; at H30 leaves25.
+- Core `0x133fac8` applies `f32(f32(H+gain)−damage)`, normally clamps to[0,100], permits enabled U>100, then applies post-hooks and an additional enabled U cap (including U<100). Ability callbacks can modify gain/damage and replace score-gauge H. Mode9 stores F=`f32(r*f32(r*70))`, r=`f32(PURE/N)`. Routine itself does not terminate gameplay.
+- Long-note checkpoint weights are resolved by repeated recorder calls per unit (`0xf809a4/0xf80bd8`), preserving per-unit clamp/hook ordering, rather than one aggregate health operation.
+
+### What I Found — gauge IDs and outcomes
+
+- Global map initialized at `0x1905bc8`: outer modes0..11→single same-ID gauge;12→[12,13,14];13→[13,14]. No outer14 entry. Every non-disabled gauge receives judgments. Exhausted active states in selected12/13 are disabled and advance the index at most one step per recorder call.
+- Base selector `0xdce310`: easy→1, hard→2, overflow→5, otherwise0. Recovered specialized selectors associate6 with `CharacterAbilityTempestGauge`,9 with `CharacterAbilityFatalis`,10 with `CharacterAbilityInsight`,11 with `CharacterAbilityInsightKonzetsu`,12/13 with conditional `CharacterAbilitySayaKonzetsu`. Product identities of3/4/7/8 remain unresolved;14 is an internal stage.
+- Frame `0x10a7550`, failure block `0x10a7d74`: IDs2/6/7/8/9/11/12/13 check active **H≤F**;5 only after model`+0x13b`,10 only after`+0x13c`. Without scene grace`+0x34d`, failure writes **H=−1** to all gauges, disables continuous updates, calls delegate`+0x10(true)`, and latches finish. With grace, sets deferred flags and caps all gauges to the failed active H without that immediate callback. Ordinary/easy H0 does not trigger this branch.
+- Overflow mode5 transitions at **H≥100**: model`+0x13b` and all gauge`+0xb8` are set, enabling hard-style damage and threshold failure. 99.999 versus100 boundary was executed.
+- Ordinary chart completion uses strict effective timeline E>chart`+0xbc`; mode6 adds6000ms. A flag in `CharacterAbilityModifyFragmentOnResultOngeki` adds2000ms in its branch. Common completion delegate reaches `0xe2c124`→`0xc27d34`→snapshot`0x1600bb0`; special scene handlers can override ending presentation.
+- Snapshot is cached at ScoreState`+0x68`; disables continuous gauge updates. Final LOST normally becomes **N−PURE−FAR**, including unrecorded units; ScoreState`+0xd1` selects actual recorded LOST instead. `GameResult+0x28=floor(H)`; counters at`+0x14..+0x24`, outer mode`+0x54`, hard flag`+0x84`, ability`+0xc0`.
+- Classifier `0x12a5574`: ordinary types require integer H≥70. Survival IDs2/6..13 and hard-phase5 fail on H<0, additionally H0 when result`+0xb3` is set. After health passes, LOST0/FAR0 returns3, LOST0/FAR>0 returns2; otherwise ordinary1, easy/skill4, survival5. Labels full recall/pure memory/easy/hard are interpretations; numeric predicates are confirmed. Artificial outer14 uses ordinary threshold, while staged runtime retains outer12/13.
+- Mode5 retains an important exception: after its hard-phase health test passes, LOST>0 still returns code4 through `(mode|4)==5`. The hard-phase flag changes health eligibility, not that category branch. Native mode5 tests confirm H0 passes as4 with the zero-health flag clear, but fails with the flag set or H−1.
+
+### What I Found — representative skills and special scoring
+
+- `assets/char/characters.json` contains100 records. Loader`0x96b358` reads skill/unlock/type and optional awakened key; character initializer`0x100ec3c` builds ability`+0xd0` via `0xa44128`→whole-key factory`0x7ac3cc`. Compound keys are matched whole; a generic `|` composition grammar is not established.
+- Selected character/ability flows through scene`+0x330/+0x338`, model`+0x80`, ScoreState and LifeBarState`+0xc8`. Gate`0x9e979c` accepts ability virtual`+0x18` only for return1. Base gate`0x118e220` checks numeric mode/session exclusions, level≥unlock, awakening and further song/pack/session restrictions. Only its bounded prefix was executed.
+- `gaugestart_30|gaugegain_70`: actual `CharacterAbilityGaugeRateModify` constructor gives initial H30, easy selector, gain multiplier f32(.7). Native accepted processing applies it.
+- `challenge_fullcombo_0gauge`: same class, initial H0, base-loss100, selector0. Native damage is200 nonmatch/100 exact-base before clamp; a miss from50 resets to0. Its name does not prove immediate failure.
+- `note_mirror` sets ability`+0x3b`, passed to chart loading; changed touch timing was not established.
+- `scoreclear_aa|visual_scoregauge` constructs `CharacterAbilityClearBasedOnScore` (`0x16acf24`), threshold9,500,000, result4. H is replaced by projected-score visualization; final classifier independently uses stored score≥threshold when LOST>0, and LOST0 selects2/3. Native tests at9,499,999/9,500,000/9,500,001 yield0/4/4 with H0.
+- `0xe43b80` expanded flag changes cap10,000,000→99,999,999 and disables the all-PURE shortcut, retaining ordinary weights. Concrete ScoreState`+0xd0=1` writers occur in `SpecialSceneKonzetsuArghenaChainChallenge` at`0x111b6cc`, `SpecialSceneKonzetsuChainChallenge` at`0x1244c60`, and transfer helper`0x889b9c`. `0x178ce84` retains timeline/ScoreState across a scene transition. Full stage denominator rules remain unknown. No equivalence with Expedition005 timing modes was established.
+- Result getter`0x1315038` normally recomputes score from counters and expanded flag, but result`+0xb1` selects the stored snapshot. Its producer remains unknown.
+
+### What I Found — local saving
+
+SQLite writer`0x13552d4` inserts/replaces a `scores` row only for missing or strictly improved getter score, storing counters, date, song/difficulty, normalized modifier, integer health and ct. Runtime gauge ID is normalized before storage. Independently, when argument w2=0 it invokes classifier and `clearTypes` writer`0x12a5e60`. Native comparator`0xe3c054` uses precedence **fail0 < easy4 < normal1 < hard5 < full-recall2 < pure-memory3**, not numerical max. Comparator tests confirm all42 old/new combinations including missing−1. Caller`0xe44c5c` writes before checking failure, so failed results are not universally excluded from local score storage. Complete caller/remote eligibility is unresolved; queued serialization`0xe26e44` is a separate path, not proof of remote success.
+
+### Pseudocode
+
+```text
+accepted: noteGuard -> increment counters -> update every enabled gauge
+          -> advance staged index -> score helper -> combo update
+miss:     noteGuard -> increment LOST -> weighted native damage on every gauge
+          -> advance staged index -> combo reset
+frame:    continuous update -> phase transitions -> selected-mode H<=F check
+          -> grace/cap continuation OR H=-1 + finish(true)
+finish:   cached snapshot with floor(H), selected LOST, mode, ability and flags
+          -> health/score eligibility -> no-LOST/no-FAR upgrades -> clear code
+```
+
+Exact per-mechanism pseudocode, floating-point order, mode tables and callback uncertainties are in the linked subject report.
+
+### Validation and unresolved boundaries
+
+Unicorn executed original ARM64 routines with ELF relocations and synthetic objects; allocation/string/refcount/time/account/note-guard/delegate infrastructure was hooked. Coverage includes16 gain cases,120 mode/type/judgment combinations, clamping and hard30 boundaries,228 final classification cases,30 failure-block cases, grace/overflow/end-time boundaries, seven skill constructors and activation-prefix cases, staged gauges, score-clear/cap paths, snapshot rounding and clear-type comparison. Mode11 external initialization and complete continuous special gauges were not executed.
+
+Complete scoped examples: N100,g1,H0 with69 native PURE calls→H69/result LOST31/fail0;70 calls→H70/LOST30/clear1, without manual intervening health writes. Mode2 H1→native miss→H0→native failure block→H−1→native snapshot/classifier→fail0. Staged mode12 H[1,100,100]→one native LOST→[0,82,91], active index1.
+
+No device, full-song, actual SQLite/network, or audio validation is claimed. Unknowns include complete continuous Tempest/Insight behavior, exact-base note construction rationale, full skill catalog and external gates, producers of special finalization flags/song scaling byte, all special-stage denominator/result policies, and complete saving/submission eligibility. These are limitations, not future-plan entries or authorization for another expedition.
