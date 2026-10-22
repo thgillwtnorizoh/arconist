@@ -266,3 +266,72 @@ Original ARM64 instructions executed in Unicorn with synthetic objects and hooke
 ### Unresolved Mysteries
 
 Full current-position/cache and projection transforms; mesh/shader details; cubic degeneracies; complete linkage predicate; special-mode/bypass provenance; cancellation/feedback lifecycle; full effect/particle dispatch; chart/user/device offset composition, pause/seek and drift correction; end-to-end real-chart/device behavior. These are open questions, not scheduled future directions.
+
+---
+
+## Expedition 004 — Touch Projection, Spatial Judgment & Input Arbitration — 2026-10-22
+
+### Result
+
+Recovered Android/JNI contact transport, viewport coordinate conversion, camera unprojection and gameplay-plane intersections, lane boundaries/width expansion, arc and arc-tap spatial predicates, initial candidate ordering and consumption, and layered duplicate prevention. Executed isolated ARM64 routines and a synthetic full initial-touch-to-tap-judgment chain.
+
+Detailed evidence and pseudocode: [004_touch_projection_and_input_arbitration.md](excavations/004_touch_projection_and_input_arbitration.md).
+
+Sources: supplied `arccopy.zip`, `smali_classes3/org/cocos2dx/lib/` touch/renderer classes and `lib/arm64-v8a/libcocos2dcpp.so`. Main binary SHA-256 `3eaca4e6dabb3395f276f8915698d57675757d0df0970e716b23a3dc201c79be`, Build ID `17d660edbf37ca78beefc32e07672c97419ddce6`; extracted bytes matched the ZIP. Addresses are ELF VAs before relocation. Instruction/smali-backed facts, interpretations, and unknowns are separated in the subject file. Prior instructions and Expedition 001–003 documents were read first.
+
+### What I Found — discrepancy notice; previous text preserved
+
+Expedition 002's -4000 spatial depth cutoff conflicts with direct decoding and execution: at `0x927620`, immediate `-0x3b860000` is bits `0xc47a0000`, **-1000.0**. `0x92762c` rejects projected `point.z <= -1000`; isolated checks confirm equality rejects and values immediately above can pass. The old entry is unchanged pending separately authorized correction. This append records new contradictory evidence rather than silently rewriting history.
+
+Current context/Expedition 002 already contain the authorized b/s correction (`b=1,s=0`); Expedition 003's historical pending-confirmation wording remains preserved.
+
+### What I Found — identifiers, transport and clocks
+
+- Exact Java sources are under `smali_classes3/org/cocos2dx/lib/`. `Cocos2dxGLSurfaceView::onTouchEvent` captures one current elapsed-realtime timestamp in milliseconds before queueing; collects pointer IDs, X/Y, size*pressure; and queues `$5`–`$10` Runnable wrappers. It does not read MotionEvent event time/history in this method. Renderer forwards `(IFFFJ)` scalar down/up and `([I[F[F[FJ)` move/cancel to JNI.
+- JNI begin `0xbe31a8`, move `0x1706960`, end `0xdda71c`, cancel `0xd8dc50` sign-extend Java IDs to 64 bits, pass coordinate/pressure values, and supply additional force-like floats 1.0. There is no axis or game-coordinate conversion in these stubs.
+- GLView/GLViewImpl vtables `0x1ab6108/0x1b20d60`: begin virtual `+0xe0` -> `0x97d784`, move `+0xe8` -> `0x160b710`, end/cancel `+0xf0/+0xf8` -> wrappers `0x15af680/0x1556de4` -> common `0x95e32c` with action IDs 2/3.
+- Three IDs: Android pointer ID map key; engine slot 0..14; generated gameplay contact ID. Global map `0x1bf1a90`, slot-pointer array `0x1beef90`, bitmask `0x1bfebd4`. Duplicate active pointer begin is skipped; creation also stops when all 15 inspected slots are occupied. Move/end/cancel reuse the mapped object.
+- Touch fields: engine slot `+0x0c`; initial latch `+0x10`; initial XY `+0x14`; current XY `+0x1c`; previous XY `+0x24`; pressure product `+0x2c`; supplied extra force `+0x30`; gameplay ID `+0x34`; last-frame game time `+0x3c`; 64-bit begin timestamp `+0x40`.
+- Gameplay callback `0x194ff80` assigns generated ID from `0x1bf25f4` and copies `0x1bf93e8` to touch `+0x3c`. Frame update `0x10a75c8` writes effective game time to that global, refining the previous provisional field description. Native move does not refresh `+0x40`; end/cancel wrappers drop their timestamp argument. Initial tap judgment reads the timeline, not touch `+0x40`; complete input-latency compensation is unproven.
+
+### What I Found — coordinate pipeline
+
+- GLView converts coordinates: `(inputX-view.float_1c)/view.float_48`, `(inputY-view.float_20)/view.float_4c`, storing converted current/initial/previous coordinates. These are viewport origin/scales by observed arithmetic; there is no Y flip at this stage.
+- Gameplay current-coordinate getter `0x13e0324` reads touch `+0x1c`. Initial routine `0xeec024` -> `0x8a3fac` -> `0xea3e84` -> `0x16d3dcc` unprojects using camera at model `+0x20` wrapper `+0x2a8`, dimensions from Director `+0x180`.
+- Core formula: `v=(2*x/W-1, 2*(H-y)/H-1, 2*zInput-1, 1)`; `q=inverse(cameraCombinedMatrix)*v`; return q.xyz/q.w when W component nonzero, otherwise q.xyz. Inverse helper `0x1344f34 -> 0xca3668`; vector transform `0x197341c -> 0x16d4b40`. Camera/node cache refresh `0xe29b94` derives inverse world/view at camera `+0x2e8`; combined matrix `+0x368` multiplies camera `+0x2a8` by `+0x2e8` when dirty.
+- Input unprojects zInput -1 and +1 (actual NDC depths -3 and +1), origin=+1 result, direction=normalized(minus1Result-plus1Result). Do not silently substitute conventional 0/1 input endpoints.
+- Plane intersection `0x129dee0`: t=(d-dot(n,O))/dot(n,D), or t=0 for exact zero denominator; return O+tD. It does not reject negative t; exact parallelism returns origin. Lanes use Y=0. Arc-taps normally use Z=0; chart byte `+0x110` plus negative camera Z selects Y=0 in the initial path. Camera position getter virtual `+0xe0` -> `0x1154d54` reads node `+0x38/+0x3c/+0x40`.
+
+### What I Found — lane and spatial comparisons
+
+- Lane helper `0x130733c` returns primary low32/secondary high32. Ordinary eligibility is strict **-500<P.z<500**. With chart `+0x110` and cameraZ<0 or cameraZ>900, alternate eligibility is strict **P.z>-1000**, without the ordinary upper bound.
+- Let X=trunc(P.x), E=model.float_74, G=model.float_60. Primary classification: if E>0 and X<-850 ->1; otherwise X<-425 ->2; -425<=X<0 ->3; 0<=X<425 ->4; **X==425 ->0**; X>425 ->5, except X>850 and E>0 ->6. Exactly 850 remains5. X=425.9 truncates425. Outer X is not rejected by this function when E<=0; IDs2/5 extend outward after depth eligibility.
+- G>1 adds possible secondary using X±(G-1)*425/2 and float boundary tests: choose left classification if different from primary, else right if different, else0. Only one secondary is returned. Failed depth or G<=1 leaves secondary0. Product meaning of G/E is provisional.
+- Caller matches raw position integer `+0x10` against both returned values without explicit nonzero checks; therefore “lane0 can never match any object” is unproven. An explicit nonzero lane argument bypasses computed lanes; normal touch begin passes0.
+- Shared arc/arc-tap spatial helper `0x927384` uses initialized globals: `0x1c0094c=180`, `0x1bef2e0=100`, `0x1bee968=250`, `0x1bf6c9c=550` (initializer `0x1930aa4–0x1930ae4`). It gets frame height via `0xf09110` -> GLView virtual+b0 -> `0xc0d108`; this differs from the Director design dimensions used for unprojection.
+- Let delta=clamp(frameHeight-720,0,240), base=900+(delta/-240)*100, S=2 if cameraZ<0 else max(1,cameraZ/base). Native operation order is float32. B=global100 for flag0; flag1 uses212 when chart+110false, otherwise trunc(suppliedWidth). Horizontal strict bounds: `targetX-S*trunc(global180/2)-S*B < pointX < targetX+S*trunc(global180/2)+S*B`. Defaults at S=1 give ordinary arc half-extent190 and arc-tap302 internal units, not pixels.
+- Flag1/chart+110false adjusts Y: Y<=100 ->100; otherwise Y>=G*550 ->G*550. With normal cap>=100 this is a clamp; low-cap exceptional ordering remains literal. Other combinations do not clamp. Then truncate Y toward zero. Strict vertical bounds: `targetY-S*250-(flag?S*60:0) < trunc(Y) < targetY+S*250`. Depth must be **pointZ>-1000**.
+- Ordinary arc caller `0xc98490` passes flag0; arc-tap caller `0xeec47c` flag1/width212. Arc checker rejects nonzero mode+a4. Nonzero-duration arcs require byte+d0 or initial-call `now+120>=start`; zero duration permits byte+d0 or `now+(initial?120:0)>=start`. No separate end-time rejection is present in this helper. Normal arc target is quantized startX+float_d4, float_d8; zero duration uses quantized startX and startY*global550. Arc-tap target adds parent startX to child localXY at+80.
+
+### What I Found — collection, sorting, arbitration and duplicates
+
+- Initial routine `0xeec024` gates on model bytes+138/+139, updates timeline, clears candidate vector+b8/+c0/+c8 and scans active logic range+a0/+a8, skipping note.byte54==0. Tap lane match appends without a tap-time prefilter. Hold appends on lane match plus **start<now+100 and now<end**. Arc branch spatially tests child vector+120 and appends eligible arc-taps, rather than treating the arc body as a tap.
+- Append `0x1082558` pushes/retains; it does not search for duplicates. Sort `0xf6b514` and helpers `0x16af85c/0x96cc18` compare **signed note.startTime(+18) ascending only**. No spatial-distance, absolute-error, type or contact tie key is present. Native execution demonstrates instability for equal timestamps (31-element example), so source-order/type-priority guarantees are unsupported.
+- Ordered loop `0xeec4f0–0xeec570`: taps/arc-taps call `0x160ce28` with touch generated ID+34; false continues, true stops, including a miss/consumed return. Hold branch sets initial latch+a8 and stops without directly scoring a tap. Continuous routine `0x14858d4` is separate; first-consumed stopping is not a universal contact exclusivity rule.
+- Duplicate prevention layers: engine active-pointer map; first initial consumption; note resolved bytes+c/+d; ordinary arc color claim `0x15a90c4` with global claimed IDs. Ordinary tap acceptance `0x965e28` sets note+d=1 and contactID+10; arc-tap acceptance `0xc78814` does likewise with a parent-mode exception. Callback pressure comparisons within 0.00001 are bookkeeping, not proof of physical-finger identity or same-pressure input rejection.
+- Listener binding `0x130bdf0` is identified by callback RTTI as `GameModel::initializeTouchEvents`. Factory `0xb981cc` creates EventListenerTouchAllAtOnce (vtable `0x1b8be30`), model+150. Listener fields+80/+b0/+e0/+110 bind begin194ff80/move10e7008/endd88408/cancel18ba6d8 through std::function vtables; registration1942fc8 receives integer20. Both end/cancel invoke cleanup f9a50c, gated by model+148, releasing retained touches/color ownership. Relative ordering against other listeners remains unestablished.
+- Established judgment chain: Java queued down -> JNI be31a8 -> GLView97d784 -> listener dispatch -> gameplay begin194ff80 -> eec024 -> projection/lane/collection -> f6b514 ->160ce28 -> accepted recorder1730290 or miss868e54. Existing tap timing tiers remain unchanged; classifier true includes101–120 ms miss handling and independent expiry can preempt late candidates.
+
+### Pseudocode and validation
+
+Subject document contains transport, unprojection, exact line-plane intersection, lane classification/expansion, spatial predicate and initial candidate-pass pseudocode with unknown branches explicitly bounded.
+
+Original ARM64 Unicorn checks passed: **12** unprojection cases with native matrix inverse/transform, **3** line-plane cases, **115** lane cases, **333** spatial cases, **65** native-sort cases. Also passed spatial-to-classifier routing, full synthetic initial-touch-to-tap path, an earlier-versus-closer candidate case, and blocked-note rejection.
+
+Full-input fixture: cached identity camera/design1280x720, touch(640,360), lane4 note1000, timeline1008 -> ID0. Two eligible lane4 notes1000/1049 collected in reverse order at timeline1050 -> exactly one result, ID1 for the earlier note's50ms error, despite the later note's1ms error. This verifies chronological arbitration rather than closest-error selection.
+
+Tests supply synthetic cached camera/objects and hook node refresh, camera getter/frame size, type casts, retain/release, timeline refresh and result/UI callbacks. Core inverse/transform, plane, lane, spatial, sort, collection and classifier instructions execute. No actual hardware/renderer/audio/score side effects or real AFF chart were run; archive contains no AFF samples. Only authorized docs are committed.
+
+### Unresolved Mysteries
+
+Complete camera/viewport producers and runtime policies; nonfinite/singular matrices; lane-zero position provenance; product meanings/lifecycle of width and special-mode fields; active-range/frame-maintenance rules; complete platform dispatch/cancellation scheduling; timestamp uses elsewhere and input/audio-latency compensation; all continuous multi-contact special cases on real hardware. These are unresolved questions, not scheduled future directions or authorization for another expedition.
