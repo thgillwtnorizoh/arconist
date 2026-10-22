@@ -338,3 +338,61 @@ Tests supply synthetic cached camera/objects and hook node refresh, camera gette
 ### Unresolved Mysteries
 
 Complete camera/viewport producers and runtime policies; nonfinite/singular matrices; lane-zero position provenance; product meanings/lifecycle of width and special-mode fields; active-range/frame-maintenance rules; complete platform dispatch/cancellation scheduling; timestamp uses elsewhere and input/audio-latency compensation; all continuous multi-contact special cases on real hardware. These are unresolved questions, not scheduled future directions or authorization for another expedition.
+
+---
+
+## Expedition 005 — Audio Timeline, Offsets & Synchronization — 2026-10-22
+
+### Result
+
+Recovered normal judgment-clock initialization/start/update/pause/resume behavior; concrete AFF/user offset sources and signs; timeline adjustments; FMOD start/seek/SFX arithmetic; and touch-age correction in offset calibration. No periodic audio-position feedback was found in the inspected running gameplay clock/frame/input chain. Explicit resume/seek alignment is confirmed and distinct from continuous drift correction.
+
+Subject evidence/pseudocode: [005_audio_timeline_offsets_and_synchronization.md](excavations/005_audio_timeline_offsets_and_synchronization.md).
+
+Sources: supplied `arccopy.zip`; authoritative instructions and current cumulative/relevant Expedition 002–004 records read first. Main `lib/arm64-v8a/libcocos2dcpp.so` SHA-256 `3eaca4e6dabb3395f276f8915698d57675757d0df0970e716b23a3dc201c79be`, Build ID `17d660edbf37ca78beefc32e07672c97419ddce6`; separate `lib/arm64-v8a/libfmodProvider.so` SHA-256 `db07590708c1e2b7ed3a17800a8839392d5a7a8322cd102d5b35bda05b251bfb`. Extracted files matched ZIP bytes. Addresses are library-relative ELF VAs; provider addresses explicitly belong to the second ELF. Earlier text remains unchanged; newly resolved questions below do not rewrite historical unknowns.
+
+### What I Found — judgment clock and lifecycle
+
+- Authoritative normal judgment time is effective **GameTimeline** time, not a direct FMOD playhead or stored touch timestamp. RTTI name `0x4d6216`, typeinfo `0x1b09aa0`, vtable point `0x1af5e60`; model timeline pointer+30. Factory/model initialization `0xfbfd04` allocates/zeroes timeline, clears cursor/anchor/flags and sets combined offset.
+- Timeline fields: +10 steady epoch Osteady (i64), +18 system epoch Osystem (i64), +20 raw R (i32), +24 pause reference P, +28 compensation C, bytes+2c paused/+2d steady mode/+2e music-started/+2f adjustment/fade flag, +30 combined offset O, +34 cursor/adjustment A, +38 startup effective anchor B. A is not established as a frame delta.
+- Effective getter: steady mode -> E=R-C; otherwise E=A-C-(A<=0?3000:0). Tap160ce28, initial inputeec024, continuous14858d4 and frame10a7550 use these fields. Manual/prestart branch uses A rather than R.
+- Helper1271200 calls `std::chrono::steady_clock::now` (PLT1a6dc60), converts nanoseconds/1,000,000 to ms. Updater16c90bc uses low32 origin and signed32 arithmetic. Helper11a7ae0 instead calls `system_clock::now` (PLT1a6dbe0) and converts its native count/1000 to ms. Epochs are not assumed interchangeable with Android elapsed realtime.
+- Start wrapper8db04c stores supplied epochs+10/+18 and sets steady flag+2d, without recalculating R/C. Callers192d8a0,14b2910,9605f8 supply current or deferred origins using the two helpers. Full network/deferred-start policy is not reconstructed.
+- Updater16c90bc normal steady path: base=steadyNow-low32(Osteady)-(A<=0?3000:0); R=base; if paused C=base-P. If music not started and effective time (before final R+=A) is **strictly greater than -O**, and unpaused, request BGM start, set latch, C=base+O, B=-O; optional fade branch. Finally R+=A. With ordinary A=0, startup anchors E exactly to -O and discards crossing-frame overshoot. Subsequent E advances with steady elapsed time. The3000 term is explicit count-in/pre-roll, not measured DAC latency.
+- Model pausee31764 sets input gate+138 then calls9e74f4. Pause routine first updates under old state. Pause true stores P=E-A, requests audio pause and sets paused flag. Paused updates make E=P+A fixed while C absorbs elapsed OS time.
+- Resume false after music start seeks to **E-B**, then unpauses and clears flag; with ordinary B=-O this is **E+O**. Resume before start clears pause without the started-music seek branch. This is explicit timeline-derived realignment, not an audio-drift measurement.
+- Adjustmenta19088 via model15a0238: mode0/other subtracts delta from both64-bit epochs without immediate seek; mode1/2 adds delta to A, updates and seeks with **E**; mode2 also sets+2f and model wrapper handles note/checkpoint state. Resume E-B and adjustment E are distinct. A sign/zero changes affect the3000 branch, so cursor changes are not universally plain deltas to E. Observed callers include special-song triggers and initialization/multiplayer skips, not a recovered periodic drift loop.
+
+### What I Found — offset sources and signs
+
+- AFF AudioOffset: atoi at173bcfc -> LogicChart signed+c4 (as previously traced). Atfbfed0–fbff54, model initialization selects user value settings+4 when settings.i32_0==0, otherwise+8; stores **O=AFF+selectedUserOffset** at timeline+30. No sign reversal/sample conversion occurs in that sum.
+- Settings loader1a02b48: field0 key `audio_preset` default0. Field4 prefers `offset_int_2`; if missing, legacy `offset_int` minus**20**, or0 if both missing. Field8 key `bt_offset`, default**200**. INT_MIN is the missing sentinel. Setter169e288 writes selected field to `offset_int_2` or `bt_offset`. Legacy migration is not an additional subtraction on every current offset.
+- Inference from ordinary anchored path, ignoring backend/output latency: logical music playhead M and chart E satisfy **E≈M-(AFF+user)**; chart note n nominally matches at **M≈n+AFF+user**. A positive selected offset therefore moves nominal matching input later on the logical music timeline. This is not a physical speaker/touch-latency measurement. Example AFF120+user30 ->O150 and E=-150 at the music-start request.
+
+### What I Found — playback, SFX and device configuration
+
+- Main startup1735d7c dispatches provider virtual+28 with loop=false,index0,delay0 after clearing queued/fade settings and restoring volume. In separate provider ELF: +28->270a8 playBGM; +30->22124 pause; +38->32da0 position getter; +40->35b38 seek; +58->26e04 scheduled SFX; +70->39b8c interactive SFX; +a8->39ea0 update; +b8/+c0->3f708/49118 mixer suspend/resume.
+- Provider270a8 queries software sample rate Fs and main channel parent DSP clock; computes `samples=f32(f32(f32(delayMs)/1000)*f32(Fs))`, `start=uint64(f32(samples+f32(parentDSP)))`; calls setDelay(start,0,true), then unpauses selected channel/main group. Normal GameTimeline startup supplies delay0; API support for a future delay is not proof that normal start requests one. Float32 clock conversion is real: tested parent536870929/delay0 schedules536870912.
+- Getter32da0 uses FMOD Channel.getPosition(...,unit1); seek35b38 uses setPosition(...,unit1). Unit1 and surrounding conversions support milliseconds. Main wrappers1947af4 read index0, fbf24c seek,18c9ba4 pause. No external manual substituted for binary evidence.
+- Mainc81b18 copies/prefixes resource/time pairs and dispatches+58, without adding offsets in that inspected copy path. Provider26e04 pauses main group, prepares channels, reads Fs/main parentDSP, schedules supplied times as parent+time/1000*Fs, assigns channels to main group and retains records. Every upstream timestamp producer is not reconstructed.
+- Main seek35b38 first reads old main/index0 position, then sets requested channel. For index0, each scheduled SFX start is shifted by `-f32((newPos-oldMainPos)/1000)*Fs` with native float32 rounding; if shifted start<parentDSP, stop it, else setDelay; equality reschedules. Nonzero index skips main-SFX adjustment. Interactive39b8c unpauses immediately and has no DSP scheduling calls in its inspected body.
+- `smali/low/moe/AppActivity.smali` reads OUTPUT_SAMPLE_RATE/OUTPUT_FRAMES_PER_BUFFER and a Bluetooth-related adapter/profile boolean. Provider JNI3cc90 stores buffer size58510 and bool584e4 plus JNI/VM state; its inspected body does not add sample rate to timeline compensation. Init30af0 conditionally setOutput(enum11), setDSPBufferSize(bufferSize,4), then init512 channels. Playback separately queries actual software rate. No bufferSize/Fs or measured output-latency term was traced into O or tap error; automatic physical-latency correction remains unestablished.
+
+### What I Found — input age and drift
+
+- Positive timestamp-age consumer: calibration callback192410c, RTTI `SettingsLayerV2Offset::showSync` dialog touch lambda, function-object vtable1b32250. It reads Touch+40 timestamp T, GLView virtual+100 current Android time N, main audio position M, and stores **M+T-N-expectedBeat**. Beats1000/3000/5000/7000 selected across playback thresholds1999/3999/5999. Thus touch age is subtracted in calibration.
+- GLViewImpl+100 resolves12e0d48, which calls Java Cocos2dxGLSurfaceView.getTouchTimestampNow through JNI. This shares the timestamp source, rather than assuming the C++ system-clock epoch equals Android elapsed realtime. Timestamp is Java onTouchEvent sampling, not necessarily the sensor's original event time.
+- Ordinary begin194ff80 ->eec024 ->160ce28 updates/reads GameTimeline; classifier receives note/contactID, not Touch. Continuous14858d4 also uses E. No Touch+40 age subtraction was found in those inspected gameplay paths. Static calibrated offset is confirmed; per-event gameplay queue-age compensation remains unestablished. Calibration behavior must not be imported into judgment pseudocode.
+- Running updater16c90bc does not call audio-position getter; after startup, pause and explicit adjustments account for recovered clock corrections. Main getter1947af4 direct callers are calibration192410c and StartScene::init touch lambda1591420 (one branch enforces static music position15930). Other inspected position accesses concern seeks, queued system BGM, and TopBar login state, not a demonstrated normal-gameplay drift controller.
+- Provider39ea0 calls FMOD System.update then error handling48240 (zero result returns). No audio-position query/application timeline mutation occurs there. Mixer suspend/resume3f708/49118 is separate from timeline pause/resume; complete platform ordering is unknown.
+- Supported model: steady-derived judge time, startup anchor, configured offsets, paused-time compensation, explicit seek/resume alignment, and shared DSP scheduling. **No continuous application-level audio-playhead drift correction was found in the recovered normal clock/frame/input chain.** This is a bounded negative finding, not proof across all indirect callers/modes or FMOD internals.
+
+### Pseudocode and validation
+
+Subject document contains source-key migration, offset sum, effective getter, literal update/startup fallback, pause/resume, adjustment modes, DSP conversion and calibration pseudocode.
+
+Unicorn executed original ARM64 with synthetic clock/settings/audio data:4 relevant settings-prefix cases;9 offset-selection/sum basic-block cases;5 startup-offset boundary scenarios;4 paused elapsed jumps;resume seek/unpause/progression;5 long-duration elapsed intervals;3 adjustment modes/manual branch;21 calibration beat/age cases. Separate provider passed45 rate/delay/parent-clock combinations,2 group-pause cases,4 seek-SFX shift/stop cases. FMOD APIs/map bookkeeping, node/UI/spatial calibration wrappers and external clocks are hooked; native timing/calibration/provider arithmetic executes. No actual Android queue/audio hardware, live score effects, measured oscillator drift or full scheduled-SFX loading was executed. Archive contains no AFF samples. Only the two authorized docs are committed.
+
+### Unresolved Mysteries
+
+Full deferred/multiplayer-start and special-song semantics; every scheduled-SFX timestamp producer; automatic preset/route selection; all indirect timestamp/audio-position consumers; physical latency/clock drift on hardware; unusual overflow/mode transitions; complete app-background ordering between timeline pause and mixer suspension. These are bounded unknowns, not future plans or authorization for another expedition.
