@@ -139,7 +139,9 @@ For non-tightest tiers, early/late discriminator is `1` when `now < noteTime` an
 
 Miss/expiry pass `0xf8056c` independently records ordinary tap misses once `now > endTime + 100`; arc-tap expiry is checked against `endTime + 100` within parent processing. Consequently the tap classifier's mathematical `101–120` late band is not a promise that a note survives that long in every frame/input ordering.
 
-Spatial checker `0x927384` is resolution/camera/configuration dependent. It tests strict horizontal and vertical bounds and a depth condition against `-4000`. Its width argument is not a fixed screen-pixel radius. Complete geometry and lane boundary behavior are not claimed here.
+Spatial checker `0x927384` is resolution/camera/configuration dependent. It tests strict horizontal and vertical bounds and a depth condition against `-1000` (strict acceptance: `point.z > -1000`). Its width argument is not a fixed screen-pixel radius. Complete geometry and lane boundary behavior were not reconstructed in Expedition 002.
+
+**Authorized correction (2026-10-22):** The original Expedition 002 report mistakenly stated a depth cutoff of `-4000`. Expedition 004 directly decoded instruction `0x927620` (`w8 = -0x3b860000`, float32 bits `0xc47a0000` = `-1000.0`) and identified the branch at `0x92762c` rejecting `point.z <= -1000`; isolated native checks supported the strict boundary. The user expressly authorized correction. The incorrect wording remains traceable in the original Expedition 002 Git commit [`e2796f27`](https://github.com/thgillwtnorizoh/arconist/commit/e2796f27f970e30d94b4ad121ad99024cdebbd86); the complete supporting geometry analysis is in [`004_touch_projection_and_input_arbitration.md`](004_touch_projection_and_input_arbitration.md). Other Expedition 002 findings are unchanged.
 
 ### G. Holds and arcs
 
