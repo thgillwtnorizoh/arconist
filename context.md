@@ -170,6 +170,7 @@ Here `I` is an integer token, `F` a float token, `ID` an identifier, and `P` eit
 - Effective judge time is `timeline.i32_20 - i32_28` when byte `0x2d` is nonzero; otherwise it is `i32_34 - i32_28`, with an additional `-3000` when `i32_34 <= 0`. Field names/lifecycle remain provisional.
 - Touch routine `0xeec024` performs projection and candidate selection. Floor taps require matching a computed lane candidate. Arc-taps are spatially tested through their parent arc's child list and `0x927384`, then use the tap classifier. Input-enabled logic byte `+0x54` gates normal processing.
 - Candidate sorting calls `0xf6b514`; its exact comparator/tie-breaking policy was not reconstructed. The spatial helper uses resolution/camera/configuration-dependent strict bounds, not a proven fixed screen-pixel hitbox.
+- **Authorized spatial-depth correction (2026-10-22):** The Expedition 002 subject document originally identified `0x927384`'s depth cutoff as `-4000`. Expedition 004 decoded `0x927620` as float32 `-1000.0` (bits `0xc47a0000`) and `0x92762c` as rejecting `point.z <= -1000`, supported by isolated ARM64 testing. The user approved correction to the subject document; its earlier wording remains accessible in commit `e2796f27f970e30d94b4ad121ad99024cdebbd86`. The remainder of Expedition 002's earlier findings is preserved.
 
 **Confirmed classifier `0x160ce28`:** checks virtual consumed-state slots 8 and 6 before taking absolute error. For ordinary taps those read bytes `+0x0c/+0x0d`. Arc-tap miss acceptance separately consults parent state via slot 7.
 
@@ -282,6 +283,8 @@ Sources: supplied `arccopy.zip`, `smali_classes3/org/cocos2dx/lib/` touch/render
 ### What I Found — discrepancy notice; previous text preserved
 
 Expedition 002's -4000 spatial depth cutoff conflicts with direct decoding and execution: at `0x927620`, immediate `-0x3b860000` is bits `0xc47a0000`, **-1000.0**. `0x92762c` rejects projected `point.z <= -1000`; isolated checks confirm equality rejects and values immediately above can pass. The old entry is unchanged pending separately authorized correction. This append records new contradictory evidence rather than silently rewriting history.
+
+**Resolution (2026-10-22):** The user explicitly authorized the `-4000` to `-1000` correction. The Expedition 002 subject file was updated with a provenance note, and the cumulative Expedition 002 entry above now records the correction. The preceding discrepancy statement is retained as a historical record of the pending state prior to authorization; that pending status is no longer current. The original incorrect claim remains inspectable through Git history.
 
 Current context/Expedition 002 already contain the authorized b/s correction (`b=1,s=0`); Expedition 003's historical pending-confirmation wording remains preserved.
 
