@@ -1,0 +1,34 @@
+"""Read-only external input; no application binary/resource is redistributed."""
+import hashlib
+import io
+import zipfile
+from pathlib import Path
+
+BINARY_MEMBER = 'lib/arm64-v8a/libcocos2dcpp.so'
+EXPECTED_SHA256 = '3eaca4e6dabb3395f276f8915698d57675757d0df0970e716b23a3dc201c79be'
+archive_path = None
+_binary = None
+
+def configure(path):
+    global archive_path, _binary
+    archive_path = Path(path).expanduser().resolve()
+    if not archive_path.is_file():
+        raise ValueError(f'Archive not found: {archive_path}')
+    try:
+        with zipfile.ZipFile(archive_path) as archive:
+            data = archive.read(BINARY_MEMBER)
+    except (zipfile.BadZipFile, KeyError) as exc:
+        raise ValueError(f'Archive must contain {BINARY_MEMBER}: {exc}') from exc
+    actual = hashlib.sha256(data).hexdigest()
+    if actual != EXPECTED_SHA256:
+        raise ValueError(f'ARM64 binary SHA-256 mismatch: expected {EXPECTED_SHA256}, got {actual}')
+    _binary = data
+    return actual
+
+def elf_stream():
+    if _binary is None:
+        raise RuntimeError('Configure and verify archive before native execution')
+    return io.BytesIO(_binary)
+
+def fixture_text():
+    return (Path(__file__).resolve().parents[1] / 'fixtures' / 'ordinary_two_tap.aff').read_text()

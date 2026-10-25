@@ -1,0 +1,50 @@
+#!/usr/bin/env python3
+"""One-process native regression. Outputs are external to the package by default."""
+import argparse
+import contextlib
+import io
+import json
+import sys
+import traceback
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent / 'src'))
+import config
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--archive', required=True, help='External read-only arccopy.zip')
+    parser.add_argument('--output', default='regression-result.json')
+    parser.add_argument('--unavailable-song', action='store_true', help='Run native negative eligibility control instead')
+    parser.add_argument('--verbose', action='store_true', help='Print adapter diagnostics to stderr')
+    args = parser.parse_args()
+    result = {'status': 'fail', 'binary_sha256': None, 'native_failures': []}
+    try:
+        if not __debug__:
+            raise ValueError('Python optimization disables native regression assertions; run without -O')
+        result['binary_sha256'] = config.configure(args.archive)
+        # Historical adapter print statements remain optional diagnostics, never JSON evidence.
+        with contextlib.redirect_stdout(sys.stderr if args.verbose else io.StringIO()):
+            from regression import run
+            result.update(run(args.unavailable_song))
+    except Exception as exc:
+        result['status'] = 'fail'
+        result['native_failures'] = [{'type': type(exc).__name__, 'message': str(exc), 'location': traceback.extract_tb(exc.__traceback__)[-1].name if exc.__traceback__ else None}]
+        if args.verbose:
+            traceback.print_exc()
+    output = Path(args.output).expanduser().resolve()
+    try:
+        if output == Path(args.archive).expanduser().resolve():
+            raise ValueError('Output must not overwrite the external archive')
+        if output.is_relative_to(Path(__file__).resolve().parent):
+            raise ValueError('Choose an output path outside research_harness')
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(json.dumps(result, indent=2) + '\n')
+    except Exception as exc:
+        print(f'Cannot write report: {exc}', file=sys.stderr)
+        return 2
+    print(f"{result['status'].upper()}: {output}")
+    return 0 if result['status'] == 'pass' else 1
+
+if __name__ == '__main__':
+    sys.exit(main())
