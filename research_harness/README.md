@@ -189,3 +189,23 @@ ARCONIST_HOLD_TEST_ARCHIVE=/path/to/arccopy.zip \
 ```
 
 Historical fixtures, scenario source/assertions, tests and pinned requirements are preserved.
+
+## Expedition 028 moving arc and crossing scenario
+
+```bash
+/path/to/venv/bin/python research_harness/run.py \
+  --archive /path/to/arccopy.zip --scenario moving_arc \
+  --output /path/to/moving-arc-result.json
+```
+
+This runs `fixtures/native_moving_arc.aff` first, then `fixtures/native_crossing_arcs.aff` in a fresh native runtime only after the moving control passes. Both use ordinary arcs1000..2000, linear`s`, X.20→.80, Y.50; the pair adds the reverse direction in color1. Original parser/builders create geometry, checkpoints, colors and spatial index inside ordinary solo-created GameScenes. `crossing_arc` is an internal fixture selection used by this driver, not another exposed CLI scenario.
+
+The scenario additionally executes **complete original ELF initializer `0x1930604`**, the `.init_array` member referenced at`0x1b95c90`, before chart construction. Its native stores at`0x1930abc/0x1930ac8/0x1930adc/0x1930ae4` produce the established spatial globals180/550/250/100. Earlier scenarios leave those globals at zero; ordinary arc width would then be degenerate. No Python global assignment or gameplay skip repairs that rejection. This initialization is scoped to the new scenario; old scenario source/assertions remain unchanged. The native geometry-height global remains0 in this controlled environment, producing sampled/cache Y50. Rendering fidelity is not asserted.
+
+`src/jni_arrays.py` recovers only011's minimal JNIEnv array contract: GetArrayLength(+0x558), GetIntArrayRegion(+0x658), GetFloatArrayRegion(+0x668), bounded to one/two elements and checked types/regions. Its `0x4000400/0x4000410/0x4000420` trampolines are emulated host-service addresses, not ELF code. It copies external ID/float arrays to native JNI staging buffers; original JNI MOVE `0x1706960`, GLView `0x160b710` and gameplay callback `0x10e7008` update all Touch fields. It never assigns a gameplay Touch, owner, geometry/cache, active flag or score. The unchanged025 OBJ/libc helper is installed for reuse; these fixtures make zero calls to it. No new third-party dependency, renderer proxy or PC skip is added.
+
+Director frames sample E1000/1001/1125/1250/1300/1375/1500/1625/1750/1875. Each first computes original caches; the host projects targets derived from those caches, delivers DOWN or one MOVE array, then visits another original Director frame at the same E. Repeated-time frames execute native duplicate guards. This sparse following schedule is supplied input, not host AFF interpolation or Android queue/hardware emulation. Native consumer float32 quantization combines parent-start X with local cache displacement; Z=0 is the input plane, separately from sampled local Z. Original continuous input may clamp Y before its native spatial test.
+
+Read-only observations record parsed X/Y/mode/curve, factory returns, native geometry appends/sample vectors, original cache writes`0x19f423c`, camera/projection, retained Touch identity and current/previous coordinates, spatial results, native color claims/releases, actual proximity comparisons and record-resolution writes. N3/N6 and the original record weights determine result assertions. Both cases require unique native checkpoint writes and original recording with no misses; cleanup must empty mappings/slots/retention/claimed IDs and clear arc activity without another award.
+
+The crossing comparison distinguishes the original comparison distance from the post-frame separation. The original loop can compare one updated arc cache with its neighbor's older cache; bypass can also persist under the native500 ms reset condition. The scenario records actual owners/bypass/conflict/release state rather than forcing exclusive owners or immediate restoration after separation. It stops at E1876 after UP and next-frame cleanup; completion/results/SQLite are not exercised for these charts. No extra optional native unittest wrapper is added; the CLI runs both complete gates and all assertions.
