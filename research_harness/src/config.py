@@ -8,9 +8,11 @@ BINARY_MEMBER = 'lib/arm64-v8a/libcocos2dcpp.so'
 EXPECTED_SHA256 = '3eaca4e6dabb3395f276f8915698d57675757d0df0970e716b23a3dc201c79be'
 archive_path = None
 _binary = None
+_fixture_name = 'ordinary_two_tap.aff'
 
-def configure(path):
-    global archive_path, _binary
+def configure(path, scenario='ordinary'):
+    global archive_path, _binary, _fixture_name
+    _fixture_name = {'ordinary': 'ordinary_two_tap.aff', 'arc_tap': 'native_arc_tap.aff'}[scenario]
     archive_path = Path(path).expanduser().resolve()
     if not archive_path.is_file():
         raise ValueError(f'Archive not found: {archive_path}')
@@ -31,4 +33,4 @@ def elf_stream():
     return io.BytesIO(_binary)
 
 def fixture_text():
-    return (Path(__file__).resolve().parents[1] / 'fixtures' / 'ordinary_two_tap.aff').read_text()
+    return (Path(__file__).resolve().parents[1] / 'fixtures' / _fixture_name).read_text()

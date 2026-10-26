@@ -102,3 +102,34 @@ The first command checks missing archive and incorrect library hash; the second 
 ## Clean validation
 
 Copy only this package into an otherwise empty directory (or check out the published commit), create a fresh Python3.12 environment, install this requirements file and run the documented command from another directory with the external archive. No generated source files, extracted native binaries or scratch modules are inputs. The024 report and final handoff record the actual validation outcome and pinned publication.
+
+## Expedition 025 arc-tap scenario
+
+The default command and two-tap fixture/assertions remain unchanged. A separate, bounded scenario loads `fixtures/native_arc_tap.aff` through the original whole-chart path:
+
+```bash
+/path/to/venv/bin/python research_harness/run.py \
+  --archive /path/to/arccopy.zip --scenario arc_tap \
+  --output /path/to/arc-tap-result.json
+```
+
+`--scenario ordinary` is the explicit default. `--unavailable-song` belongs only to that ordinary scenario; combining it with `arc_tap` fails clearly. Dependency versions are unchanged.
+
+The new fixture contains one constant-position trace arc with one embedded child at1500. Native construction must produce the parent/child vector, back-link, geometry and N1; those links/fields are never assigned by the driver. The scenario derives the ordinary Z=0 input-plane target from child geometry XY and quantized parent X, calls original camera projection `0xbdbb70`, then applies the Y-up/design-coordinate conversion. Sampler-local geometry Z is recorded separately and is not assumed to be the ordinary input plane.
+
+Two original JNI contacts use fresh pointer IDs at the same native effective E1500. Both must traverse the same parent's child vector, pass native spatial eligibility and reach the same child's timing classifier. Only one may reach `0xc78814`/the recorder. The duplicate must read consumed=1 through original `0x180cf28`, leave score/counters/health unchanged, and clean up its native contact. The scenario stops here; it does not run ending/results/SQLite or create a GameResult.
+
+Read-only code/memory observations prove the parsed child time/mode, native factory result, native parent-store PC and native geometry-store PCs. All assertions use relational heap pointers. No direct host call to a builder, sampler, model frame, classifier, acceptance or recorder is permitted. Expected score is derived from the native N1/all-PURE result, rather than copied from the earlier prepared-child test. JSON records exact observed geometry, projection, native calls, result deltas, duplicate guard, ABI use and boundaries.
+
+This first arc-tap construction also exercises the original archived `models/tap_l.obj`/`.mtl` CPU reader. `src/arc_tap_services.py` supplies its missing libc interfaces only for this scenario: `strspn`, `strcspn`, `strchr`, double `pow`/`ldexp`, bounded `sscanf`, and checked formatting through the existing formatter. The original mesh reader and game geometry/construction remain native. The finite fixture uses only `%s` scanning; the adapter supports only simple `%f`/`%d`/`%s`, whitespace/slash formats, at most six output pointers and input shorter than256 bytes, failing outside that domain. Linux host libc is accessed through standard-library ctypes; this is a supplied ABI service, not native Bionic or an extra Python dependency. Complete scanf, floating overflow/error semantics and malformed OBJ compatibility are not claimed.
+
+The nine existing PC skips remain declared. No new instruction skip or graphics-object proxy is introduced. Native-created geometry in this controlled environment is not a claim of original-device visual fidelity.
+
+Optional native unittest (the documented CLI itself also performs all scenario assertions):
+
+```bash
+ARCONIST_ARC_TAP_TEST_ARCHIVE=/path/to/arccopy.zip \
+  /path/to/venv/bin/python -m unittest discover -s research_harness/tests -v
+```
+
+Without that environment variable, this expensive native test is explicitly skipped. Original input tests and the optional unavailable-song test retain their separate switches.
