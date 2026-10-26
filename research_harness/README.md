@@ -133,3 +133,30 @@ ARCONIST_ARC_TAP_TEST_ARCHIVE=/path/to/arccopy.zip \
 ```
 
 Without that environment variable, this expensive native test is explicitly skipped. Original input tests and the optional unavailable-song test retain their separate switches.
+
+## Expedition 026 hold scenario
+
+```bash
+/path/to/venv/bin/python research_harness/run.py \
+  --archive /path/to/arccopy.zip --scenario hold \
+  --output /path/to/hold-result.json
+```
+
+This scenario runs **two fresh Unicorn/native runtimes** with `fixtures/native_hold.aff`: one uninterrupted contact and one JNI UP/repress comparison. Python3.12 and the pinned024 dependencies are unchanged. No025 arc-tap-specific ABI service is needed, and no new service, instruction skip or proxy is introduced. The default and arc-tap scenarios retain their fixtures and assertions.
+
+Original parser/chart builders create the hold, lane conversion,250 ms interval, three12-byte checkpoint records, N3, chart end and spatial index. Read-only observations record the original factory return, generated record inputs, actual index keys, native checkpoint-resolution writes, resolved guards, contact reset/activation writes and recorder entries. Heap identities are relational. The existing ordinary entry/loading/Director driver supplies all native scene/model handoffs.
+
+The external contact target is derived from the native-created lane4 and the original ordinary lane selector's world interval `[0,425)` at `0x13074d0..0x13074e0`. Its center `(212.5,0,0)` is projected through the scene's original camera `0xbdbb70`, with native Director height/Y-up conversion. This is an external input-plane target, not host-assigned hold geometry. Original JNI/continuous input must independently unproject it into the correct lane. No old screen coordinate is presumed valid.
+
+The native clock anchor supplies wall times for E1000/1001,1124/1125,1200/1201,1300/1301,1374/1375 and1624/1625/1626. The interrupted case sends UP42 at E1200 and DOWN43 at E1300. Assertions distinguish Android ID, generated gameplay ID, Touch allocation, engine map/mask, model retention, initial latch and current activity. E1201 must clear activity with no retained contact; E1301 must activate using the new Touch. Both cases clean up through terminal JNI UP and a final E1627 Director frame.
+
+Both must record PURE3/FAR0/LOST0, score10000003 and native live health approximately80.5999985. Every checkpoint must have exactly one native0→1 resolution write at `0xf80924`, and later native `0xf80904` guards must observe it resolved. Native accepted recorder calls must total3 on the original hold at E1125/1375/1625; misses must total0. JSON includes each complete trace and the comparison. It stops before completion, GameResult, ending, results or SQLite for this fixture.
+
+Optional original-native unittest (the CLI itself performs all assertions):
+
+```bash
+ARCONIST_HOLD_TEST_ARCHIVE=/path/to/arccopy.zip \
+  /path/to/venv/bin/python -m unittest discover -s research_harness/tests -v
+```
+
+Existing `ARCONIST_TEST_ARCHIVE` and `ARCONIST_ARC_TAP_TEST_ARCHIVE` switches remain independent. Tests without an archive switch explicitly skip the corresponding native run; they never emit canned success.
