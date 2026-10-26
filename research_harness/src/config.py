@@ -13,7 +13,7 @@ _fixture_name = 'ordinary_two_tap.aff'
 def configure(path, scenario='ordinary'):
     global archive_path, _binary, _fixture_name
     _fixture_name = {'ordinary': 'ordinary_two_tap.aff', 'arc_tap': 'native_arc_tap.aff',
-                     'hold': 'native_hold.aff'}[scenario]
+                     'hold': 'native_hold.aff', 'chord': 'native_chord.aff'}[scenario]
     archive_path = Path(path).expanduser().resolve()
     if not archive_path.is_file():
         raise ValueError(f'Archive not found: {archive_path}')

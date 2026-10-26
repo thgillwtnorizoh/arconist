@@ -160,3 +160,32 @@ ARCONIST_HOLD_TEST_ARCHIVE=/path/to/arccopy.zip \
 ```
 
 Existing `ARCONIST_TEST_ARCHIVE` and `ARCONIST_ARC_TAP_TEST_ARCHIVE` switches remain independent. Tests without an archive switch explicitly skip the corresponding native run; they never emit canned success.
+
+## Expedition 027 chord scenario
+
+```bash
+/path/to/venv/bin/python research_harness/run.py \
+  --archive /path/to/arccopy.zip --scenario chord \
+  --output /path/to/chord-result.json
+```
+
+`fixtures/native_chord.aff` contains `(1500,1);` and `(1500,4);`. Original parsing and runtime construction must produce two distinct equal-time LogicTapNotes, native lanes2/5, N2 and index membership for both. The existing ordinary solo entry, original loading initializer and Director activation remain unchanged. There is no new ABI service, proxy, PC skip or dependency.
+
+`src/chord.py` runs two fresh emulators. Android42 always targets native lane2 and Android43 lane5. Forward sends DOWN42/DOWN43/UP42/UP43; reverse sends DOWN43/DOWN42/UP43/UP42. Both DOWNs occur at the same observed native E1500 and wall time, without an intervening Director frame or clock advance. Native begin refreshes are observed after `0xeec07c`; supplied event timestamps do not determine chart time. This is overlapping contact lifetime across sequential JNI calls, not atomic Android MotionEvent batching.
+
+External input-plane centers `(-637.5,0,0)` and `(637.5,0,0)` are chosen from native-created lane IDs and original selector semantics, projected through current native camera `0xbdbb70`, then Y-converted using native Director height. These conservative interior targets do not assert universal outer hitbox bounds. Original unprojection must independently return lane2/5 with secondary0; each native candidate vector must contain only the matching note.
+
+After the first DOWN, exactly one note/contact/judgment may exist. After the second and before any UP, both Android IDs, distinct slots, native Touch allocations and generated gameplay IDs must coexist. Each note's original accepted-ID field must match its corresponding contact; the first contact must remain retained. Original `0x965e68` consumed-byte and `0x965e6c` contact-ID writes, `0x965e28` acceptance and `0x1730290` recorder provenance are observed without modifying them. Each note is accepted once, with two accepted units and no miss.
+
+Both cases must finish with PURE2/FAR0/LOST0, shining2, score10000002 and native live health approximately80.4000015. Original UPs must remove both mappings, slot pointers, mask and gameplay retention without another judgment. The JSON compares note identities by native lane/time, not equal-time vector order or cross-emulator heap addresses/generated-ID assignment. It stops at E1500 after cleanup; no chord GameResult/results/SQLite replay is performed.
+
+The CLI performs every chord assertion; no extra unittest wrapper is required. To execute all existing opt-in scenario/input tests (in addition to the ordinary and chord CLI commands):
+
+```bash
+ARCONIST_TEST_ARCHIVE=/path/to/arccopy.zip \
+ARCONIST_ARC_TAP_TEST_ARCHIVE=/path/to/arccopy.zip \
+ARCONIST_HOLD_TEST_ARCHIVE=/path/to/arccopy.zip \
+  /path/to/venv/bin/python -m unittest discover -s research_harness/tests -v
+```
+
+Historical fixtures, scenario source/assertions, tests and pinned requirements are preserved.
