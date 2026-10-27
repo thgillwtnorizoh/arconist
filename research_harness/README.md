@@ -261,3 +261,21 @@ No new dependency, platform/renderer service or PC skip is added. Existing scena
 The final diagnostic lets original loading and Director activation finish to inspect those native producers, then stops. It does not advance a fade timeline, manually schedule a timer or run a callback. `fixtures/native_track_fade_replace.aff` adds the proposed900ms replacement toward255 but remains an **unexecuted candidate**; internal `track_fade_replace` selection is not a tested second CLI case. Closure counters, callback interpolation, Node propagation and timer replacement are explicitly unexecuted. Available partial observations survive unexpected failures.
 
 The missing prerequisite is a genuinely scene-control-permitted original chart/catalog context, not a callback ABI or a renderer repair. Do not write chart+110 or owner+2c8, fabricate a digest, rename the song with inconsistent metadata, call the fade handler directly or inject events/Nodes. Previous007/008 isolated callback evidence retains its original scope. G-006 and `camera_reset` remain unchanged and blocked; the existing successful regressions remain separate from both failing diagnostics. No new dependency, service or PC skip is introduced.
+
+## Expedition 032 CPU tap refresh and expiry
+
+```bash
+/path/to/venv/bin/python research_harness/run.py \
+  --archive /path/to/arccopy.zip --scenario cpu_note \
+  --output /path/to/cpu-note-result.json
+```
+
+`src/cpu_note.py` runs the single-tap `fixtures/native_cpu_note.aff` in two fresh ordinary GameScenes: `judged_tap`, then `unjudged_expiry`. It verifies native renderer initialization and reciprocal logic links, the embedded TrackLayer+3b8 renderer vector, original child quad, chart/index/listener and Director activation. This chart produces N1/end1620 and504 renderers (503 bars/one tap); heap pointers are relational observations.
+
+Only this scenario removes the existing inert `0x129c924` Node::visit hook **after original loading/activation**. Complete original base traversal then reaches TrackLayer::visit `960288 → b1638c →` renderer virtual+518 `cf2640 → f20c28`. No selective renderer dispatch, new graphics service or PC skip is introduced. The updater is never called by Python. `cf2640` receives native effective E in W1, then overwrites X1 with the updater address before its tail branch; the raw X1 in `f20c28` must not be interpreted as E. The TrackLayer frame stamp limits each active renderer to one CPU refresh per Director frame despite multiple camera visits.
+
+The CLI asserts native position/quad writes at E1000/1300/1499/1500 before judgment. Native lane4 produces renderer X212/Y4; the separate input-plane center212.5 is projected through the real primary camera. Original JNI DOWN42/UP42 accepts one PURE/shining unit, score10000001/H80.19999694824219, and cleans contacts. At E1501 the processed tap leaves the active vector; its retained renderer stays visible with its last placement and no further refresh/visit. Chart depth can continue changing independently.
+
+The fresh no-input case proves that depth308 at E1538 and809 at E1600 do not hide an unresolved tap. Strict expiry records LOST1 at E1601; the same frame's original processed predicate returns1 at depth817 and native visibility setter writes0 once. E1602 removes the logic from active processing without another miss or refresh. Both renderer objects remain in their TrackLayer collections, with reciprocal links and no observed detach/destructor. Neither removal nor visibility is described as reclamation.
+
+JSON contains construction/caller identities, frame/depth/position/quad/opacity snapshots, original write PCs, processed-predicate results, native call counts, JNI projection, cleanup assertions and declared boundaries. Unexpected failures preserve partial observations and return exit1. Existing allocator/autorelease, GL imports, framebuffer/swap and platform/audio/resource boundaries remain; no GPU pixels or complete reclamation are claimed. G-006/G-007 expected-failure diagnostics and all earlier scenarios are unchanged. Stop at E1602, before this chart's completion/results.
