@@ -1,0 +1,7 @@
+AudioOffset:0
+TimingPointDensityFactor:1.0
+-
+timing(0,120.00,4.00);
+scenecontrol(600,trackdisplay,2.00,0);
+scenecontrol(900,trackdisplay,2.00,255);
+(1500,3);

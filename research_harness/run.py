@@ -14,7 +14,7 @@ import config
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--archive', required=True, help='External read-only arccopy.zip')
-    parser.add_argument('--scenario', choices=['ordinary', 'arc_tap', 'hold', 'chord', 'moving_arc', 'timing_group', 'camera_reset'], default='ordinary')
+    parser.add_argument('--scenario', choices=['ordinary', 'arc_tap', 'hold', 'chord', 'moving_arc', 'timing_group', 'camera_reset', 'track_fade'], default='ordinary')
     parser.add_argument('--output', default='regression-result.json')
     parser.add_argument('--unavailable-song', action='store_true', help='Run native negative eligibility control instead')
     parser.add_argument('--verbose', action='store_true', help='Print adapter diagnostics to stderr')
@@ -28,7 +28,10 @@ def main():
         result['binary_sha256'] = config.configure(args.archive, args.scenario)
         # Historical adapter print statements remain optional diagnostics, never JSON evidence.
         with contextlib.redirect_stdout(sys.stderr if args.verbose else io.StringIO()):
-            if args.scenario == 'camera_reset':
+            if args.scenario == 'track_fade':
+                from track_fade import run
+                result.update(run())
+            elif args.scenario == 'camera_reset':
                 from camera_reset import run
                 result.update(run())
             elif args.scenario == 'timing_group':

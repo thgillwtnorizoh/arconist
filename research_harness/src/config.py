@@ -16,7 +16,8 @@ def configure(path, scenario='ordinary'):
                      'hold': 'native_hold.aff', 'chord': 'native_chord.aff',
                      'moving_arc': 'native_moving_arc.aff', 'crossing_arc': 'native_crossing_arcs.aff',
                      'timing_group': 'native_timing_group.aff', 'reverse_scroll': 'native_reverse_scroll.aff',
-                     'camera_reset': 'native_camera_overlap.aff', 'camera_reset_variant': 'native_camera_reset.aff'}[scenario]
+                     'camera_reset': 'native_camera_overlap.aff', 'camera_reset_variant': 'native_camera_reset.aff',
+                     'track_fade': 'native_track_fade.aff', 'track_fade_replace': 'native_track_fade_replace.aff'}[scenario]
     archive_path = Path(path).expanduser().resolve()
     if not archive_path.is_file():
         raise ValueError(f'Archive not found: {archive_path}')

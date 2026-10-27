@@ -245,3 +245,19 @@ The diagnostic records parsed objects, actual builder decisions/property write, 
 Native chart+110 can be enabled by original digest/named-song decisions, and the builder separately recognizes exact Song ID`designant`. Those alternatives need a justified ordinary catalog/chart/eligibility fixture before another integrated attempt. Do not supply a fake digest, assign chart+110, rename the baseline song while retaining false metadata, or skip the original branch. The reset/child-action survival question remains unknown in an ordinary native-owned GameScene. Original007–011 isolated action evidence retains its stated limits.
 
 No new dependency, platform/renderer service or PC skip is added. Existing scenarios, fixtures, assertions and dependency pins are preserved; run their commands and existing opt-in unittests normally. The expected failing camera diagnostic must not be counted as an end-to-end passing regression.
+
+## Expedition 031 track-display construction blocker
+
+```bash
+/path/to/venv/bin/python research_harness/run.py \
+  --archive /path/to/arccopy.zip --scenario track_fade \
+  --output /path/to/track-fade-result.json
+```
+
+**This is a reproducible blocked diagnostic, not a passing fade/replacement regression.** It returns exit1/JSON `status: fail` with `NativeTrackDisplayConstructionExcluded`. Original whole parsing accepts `scenecontrol(600,trackdisplay,2.00,0);` from `fixtures/native_track_fade.aff`, and original classifier `1090060` returns kind0. But native chart+110=0 sends construction through fallback comparisons for kinds4/5/6 and named-song exceptions; the current `sayonarahatsukoi` fixture satisfies none. The observed native `186558c→1863d60` edge omits the control, so no LogicSceneControl or fade timer exists.
+
+`src/track_fade.py` also records the original feature producer: `e2f5cc` initializes handler+2c8 to0, `e2f5d4` sets current opacity255, and `e2f618` copies the original `16a3a6c(chart)` property result into handler+2c8. That result is0. The later kind0 handler gate is instruction-backed and unexecuted here; it must not be described as an executed rejection. Original owner initialization connects the existing TrackLayer collection, whose actual native TrackBase membership and opacity bytes are recorded read-only. No arbitrary Node is inserted and no setter/callback is invoked from Python.
+
+The final diagnostic lets original loading and Director activation finish to inspect those native producers, then stops. It does not advance a fade timeline, manually schedule a timer or run a callback. `fixtures/native_track_fade_replace.aff` adds the proposed900ms replacement toward255 but remains an **unexecuted candidate**; internal `track_fade_replace` selection is not a tested second CLI case. Closure counters, callback interpolation, Node propagation and timer replacement are explicitly unexecuted. Available partial observations survive unexpected failures.
+
+The missing prerequisite is a genuinely scene-control-permitted original chart/catalog context, not a callback ABI or a renderer repair. Do not write chart+110 or owner+2c8, fabricate a digest, rename the song with inconsistent metadata, call the fade handler directly or inject events/Nodes. Previous007/008 isolated callback evidence retains its original scope. G-006 and `camera_reset` remain unchanged and blocked; the existing successful regressions remain separate from both failing diagnostics. No new dependency, service or PC skip is introduced.
