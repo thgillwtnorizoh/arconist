@@ -15,7 +15,8 @@ def configure(path, scenario='ordinary'):
     _fixture_name = {'ordinary': 'ordinary_two_tap.aff', 'arc_tap': 'native_arc_tap.aff',
                      'hold': 'native_hold.aff', 'chord': 'native_chord.aff',
                      'moving_arc': 'native_moving_arc.aff', 'crossing_arc': 'native_crossing_arcs.aff',
-                     'timing_group': 'native_timing_group.aff', 'reverse_scroll': 'native_reverse_scroll.aff'}[scenario]
+                     'timing_group': 'native_timing_group.aff', 'reverse_scroll': 'native_reverse_scroll.aff',
+                     'camera_reset': 'native_camera_overlap.aff', 'camera_reset_variant': 'native_camera_reset.aff'}[scenario]
     archive_path = Path(path).expanduser().resolve()
     if not archive_path.is_file():
         raise ValueError(f'Archive not found: {archive_path}')

@@ -227,3 +227,21 @@ Director frames sample E0/1000/1100/1199/1200/1201/1300/1499/1500 using the nati
 The reverse tap is admitted during preroll and remains retained while its depth rises above the300 new-admission limit, then reverses at E1200 and returns to zero atE1500. This does not assert successful fresh admission after an arbitrary frame jump. Input-enabled, resolved, index, query and active states are reported separately.
 
 At E1500 native lane5/2 centers on the input plane are projected through current original camera `0xbdbb70`, converted using Director height, and delivered as DOWN42/UP42 then DOWN43/UP43 without advancing chart time. Original unprojection, lane-specific candidate vectors, classifier, recorder, consumed-byte/contact-ID writes and cleanup must agree. Both cases require N2, PURE2/shining2/FAR0/LOST0, score10000002 and live health80.4000015258789. The JSON retains available partial observations and emits failure if a gate fails; no scripted native success is substituted. CLI assertions cover both gates without another optional unittest wrapper. Stop atE1500 after native UP cleanup; no new results/SQLite run or audio-reversal claim.
+
+## Expedition 030 camera construction blocker
+
+```bash
+/path/to/venv/bin/python research_harness/run.py \
+  --archive /path/to/arccopy.zip --scenario camera_reset \
+  --output /path/to/camera-reset-result.json
+```
+
+**This is a reproducible blocked diagnostic, not a passing camera/reset regression.** It returns exit1/JSON `status: fail` with `NativeCameraConstructionExcluded` when the verified original rejection is reproduced. `src/camera_reset.py` runs only the overlap control using `fixtures/native_camera_overlap.aff`. The original whole parser accepts camera600/translation600X/linear2000ms and camera900/rotation15Z/qi2000ms, but original chart construction omits both for the unchanged ordinary `sayonarahatsukoi` fixture. Native `1863e58` reads chart+110=0; the original exact-song exception is also false; `186453c→1863d60` skips each parsed record. Original `173c3cc` produced the zero property byte. No host assignment repairs it.
+
+The diagnostic records parsed objects, actual builder decisions/property write, native scene/rig/child-camera relationships, tap/index state, original Scheduler→ActionManager dt and target snapshots atE500/600/601/900/901. It distinguishes other loading/UI actions from camera actions: no rig or child-camera target entry exists at those snapshots, and no camera handler/builders/reset/JNI judgment execute. Child transforms remain unchanged. Cached matrices are reported as read; no observation getter forces a refresh.
+
+`fixtures/native_camera_reset.aff` preserves the control and adds the proposed zero-triple reset at1200. It remains an **unexecuted candidate** because Gate A failed. `camera_reset_variant` is an internal fixture mapping, not a tested second scenario. The package neither fabricates camera logic/actions nor starts Gate B or judges a stationary-camera tap as evidence of camera integration.
+
+Native chart+110 can be enabled by original digest/named-song decisions, and the builder separately recognizes exact Song ID`designant`. Those alternatives need a justified ordinary catalog/chart/eligibility fixture before another integrated attempt. Do not supply a fake digest, assign chart+110, rename the baseline song while retaining false metadata, or skip the original branch. The reset/child-action survival question remains unknown in an ordinary native-owned GameScene. Original007–011 isolated action evidence retains its stated limits.
+
+No new dependency, platform/renderer service or PC skip is added. Existing scenarios, fixtures, assertions and dependency pins are preserved; run their commands and existing opt-in unittests normally. The expected failing camera diagnostic must not be counted as an end-to-end passing regression.
