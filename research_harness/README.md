@@ -209,3 +209,21 @@ Director frames sample E1000/1001/1125/1250/1300/1375/1500/1625/1750/1875. Each 
 Read-only observations record parsed X/Y/mode/curve, factory returns, native geometry appends/sample vectors, original cache writes`0x19f423c`, camera/projection, retained Touch identity and current/previous coordinates, spatial results, native color claims/releases, actual proximity comparisons and record-resolution writes. N3/N6 and the original record weights determine result assertions. Both cases require unique native checkpoint writes and original recording with no misses; cleanup must empty mappings/slots/retention/claimed IDs and clear arc activity without another award.
 
 The crossing comparison distinguishes the original comparison distance from the post-frame separation. The original loop can compare one updated arc cache with its neighbor's older cache; bypass can also persist under the native500 ms reset condition. The scenario records actual owners/bypass/conflict/release state rather than forcing exclusive owners or immediate restoration after separation. It stops at E1876 after UP and next-frame cleanup; completion/results/SQLite are not exercised for these charts. No extra optional native unittest wrapper is added; the CLI runs both complete gates and all assertions.
+
+## Expedition 029 timing-group and reverse-scroll scenario
+
+```bash
+/path/to/venv/bin/python research_harness/run.py \
+  --archive /path/to/arccopy.zip --scenario timing_group \
+  --output /path/to/timing-group-result.json
+```
+
+`src/timing_group.py` first runs `fixtures/native_timing_group.aff`, then creates a fresh runtime for `fixtures/native_reverse_scroll.aff` only after the complete control assertions pass. Both have default-group tempo120/tap1500/raw4 and separate-group tempo60/tap1500/raw1. The reverse fixture adds only `timing(1200,-60.00,4.00);` inside the separate group. `reverse_scroll` is an internal fixture selector, not an additional CLI option. Both fixtures are synthetic research input.
+
+The scenario reuses ordinary native solo entry/loading/Director activation and complete original static initializer `0x1930604` from028. It adds no service, dependency or gameplay PC skip. Original whole-file/group parsing, timing initialization, tap construction, group-index and timing-pointer stores, precomputed-depth writes, descriptor lifetime stores, native index insertion and active-range updates remain native. Native pointers are checked relationally, not against fixed heap addresses.
+
+Director frames sample E0/1000/1100/1199/1200/1201/1300/1499/1500 using the native timeline/music anchor. Read-only observers record actual `0xcf918c` inputs, contributing timing records and float32 returns, `0x1017d80` inputs/native depth stores, signed producer keys and query intervals, the new-admission depth predicate and retained membership independently. This fixture's tap insertion keys are1 and0 in both cases; negative-tempo parsing does not imply a negative insertion key. Native preroll queries also exercise negative signed intervals, separately from the negative-tempo transition.
+
+The reverse tap is admitted during preroll and remains retained while its depth rises above the300 new-admission limit, then reverses at E1200 and returns to zero atE1500. This does not assert successful fresh admission after an arbitrary frame jump. Input-enabled, resolved, index, query and active states are reported separately.
+
+At E1500 native lane5/2 centers on the input plane are projected through current original camera `0xbdbb70`, converted using Director height, and delivered as DOWN42/UP42 then DOWN43/UP43 without advancing chart time. Original unprojection, lane-specific candidate vectors, classifier, recorder, consumed-byte/contact-ID writes and cleanup must agree. Both cases require N2, PURE2/shining2/FAR0/LOST0, score10000002 and live health80.4000015258789. The JSON retains available partial observations and emits failure if a gate fails; no scripted native success is substituted. CLI assertions cover both gates without another optional unittest wrapper. Stop atE1500 after native UP cleanup; no new results/SQLite run or audio-reversal claim.
