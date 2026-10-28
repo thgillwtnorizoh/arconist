@@ -315,3 +315,34 @@ Both metadata records retain `is_available:false`. That byte is not equated to a
 Tempest gauge p is deliberately zeroed by the common native factory at12c5144 before the initializer reads it. This was observed for mode0 and is instruction-backed for a hypothetical mode6 allocation; it does not establish a valid Tempest session or exclude later writers. Optional character-record `prog_tempest` is separately subtracted from `prog` by96b780; equivalence to gauge p is unverified. Insight initialization conditionally reads context mode/difficulty/profile relief and, only for a particular context mode6, timing-window data. That context-mode namespace is distinct from gauge ID6. Ordinary context+38 is0, so the extra profile lookup would be skipped; the mode11 initializer branch itself is not executed. Do not describe an unconditional World-state dependency.
 
 JSON keeps ordinary native construction/field/time/JNI evidence separate from fresh producer-phase boundary reads, archived metadata and instruction-backed contracts. Special activation, selection results, gauge objects, parameters, temporal evolution and failure/completion are `null` or `not_run`; overall success is not fabricated. Existing ABI/platform/account/catalog/profile/settings/resource/clock/graphics/audio/allocator boundaries and all nine PC skips remain unchanged. No special callback, recorder, H/F/p/cap write or direct ability constructor is used. Existing fixtures/assertions/dependencies and the camera_reset/track_fade/flick_producer diagnostics remain intact; generated reports/resources/databases are excluded from source publication.
+
+
+## Expedition 030-R: external Designant material/provenance diagnostic
+
+```bash
+python research_harness/run.py \
+  --archive /path/to/arccopy.zip --scenario camera_designant \
+  --designant-materials /path/to/designant-materials \
+  --output /path/outside/research_harness/camera-designant-result.json
+```
+
+The external directory contains the supplied original `0.aff`, `1.aff`, `2.aff`,
+`3.aff` and `base.ogg`, with unchanged filenames/bytes. They are not distributed
+with this package. The scenario inventories their hashes/formats and camera
+records, reads the archived Designant catalog, and executes an unchanged
+`sayonarahatsukoi` ordinary entry/loading/Director control. The configured AFF
+remains `ordinary_two_tap.aff` for that explicitly separate native control.
+
+**Expected result: exit 1**, `status: fail`,
+`NativeDesignantSelectionProvenanceUnavailable`. Gate A stops before native
+Designant selection: the current adapter has no produced purchased-Song
+descriptor or justified ownership/unlock input for `purchase: lephon`. The
+observed purchase count in the supplied local-state storage is zero. The diagnostic does not manufacture
+these inputs or rename the ordinary Song. This is a bounded source-state
+blocker, not an executed rejection of Designant or proof of a universal access
+rule. No missing-packlist requirement is established.
+
+Supplied charts are inspected lexically only; native parsing/digest/construction
+of them, camera overlap/reset and target JNI projection are `not_run`. Both the
+original `camera_reset` diagnostic and all earlier fixtures/assertions remain
+unchanged. No new runtime dependency, service substitution or PC skip is added.
