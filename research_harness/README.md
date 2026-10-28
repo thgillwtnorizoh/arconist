@@ -346,3 +346,42 @@ Supplied charts are inspected lexically only; native parsing/digest/construction
 of them, camera overlap/reset and target JNI projection are `not_run`. Both the
 original `camera_reset` diagnostic and all earlier fixtures/assertions remain
 unchanged. No new runtime dependency, service substitution or PC skip is added.
+
+
+## Expedition 035: JNI late-input versus frame expiry
+
+```bash
+python research_harness/run.py \
+  --archive /path/to/arccopy.zip --scenario late_input_expiry \
+  --output /path/outside/research_harness/late-input-expiry-result.json
+```
+
+`fixtures/native_late_input_expiry.aff` is synthetic: two same-lane taps at
+1000/1109, timing120. Two fresh ordinary solo-created GameScenes independently
+establish native E1000 with both notes admitted, enabled and unresolved.
+Native camera projection derives the same JNI input point in both cases.
+
+The input_first case advances only the external clock to comparison time,
+delivers original JNI DOWN/UP, then runs an original Director frame at the same
+E1110. The frame_first case runs that frame before DOWN/UP. No timeline field,
+active vector, candidate list, guard, score or gauge state is assigned.
+
+The observed result is different: input_first records one LOST on the older
+note and consumes iteration without a successful hit (score0/H0/combo0).
+Frame_first expires the older note, then the initial classifier rejects its
+missed guard and accepts the newer note as shining PURE
+(score5000001/H40.20000076293945/combo1, PURE1/LOST1). Both candidate vectors
+include both notes; input consumption is distinct from the successful-hit byte.
+Both contacts clean up. There is no completion/result snapshot in this scenario.
+
+The scenario does not assert the historical result before observation. It
+checks native construction/index/ownership, equivalent preconditions and
+projection, JNI/Director provenance, classifier returns, recorder-derived
+counter changes, native guard writes and cleanup, and reports whether outcomes
+differ. Read-only hooks retain before/after-sort candidates, missed/consumed
+guards, caller branch/stop, note/contact identities, recorder caller PCs,
+score/combo/health snapshots and writes. Exceptions preserve partial evidence
+and fail. `status: pass` means the comparison and its provenance gates pass;
+it is not a hardware Android input-queue timing claim. No new service, runtime
+dependency or gameplay skip is introduced. Existing boundaries remain declared
+in the JSON; outputs must remain outside this package.
