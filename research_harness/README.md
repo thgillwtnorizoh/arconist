@@ -427,3 +427,46 @@ Failure retains partial evidence; the second case stays not_run if the first
 cannot complete. Read-only original score/classification getters inspect the
 completion-produced cache. Existing services and all inherited PC skips stay
 unchanged; dependency pins and prior scenarios/assertions/fixtures are intact.
+
+## Expedition 037: mixed hold/tap arbitration and contact continuity
+
+```bash
+python research_harness/run.py \
+  --archive /path/to/arccopy.zip --scenario mixed_hold_tap \
+  --output /path/outside/research_harness/mixed-hold-tap-result.json
+```
+
+Three independent fresh ordinary native-created GameScenes run two synthetic
+fixtures. `native_mixed_hold_tap_hold_first.aff` combines hold1000..2000/raw3
+with tap1250/raw3; `native_mixed_hold_tap_tap_first.aff` changes the tap to950.
+Cases are `hold_unlatched` (first DOWN atE1250), `hold_latched` (DOWN atE1000,
+native activation/checkpoint, second DOWN atE1250) and `tap_first` (two DOWNs
+at unchangedE1000 before another frame). These are different contact histories
+and, for the comparator, different tap times—not identical-precondition trials.
+
+Original AFF/runtime construction produces both notes, native lane4, checkpoints
+1250/1500/1750 of weight1, N4/end2500 and original index/admission. Native
+camera projection derives the shared contact point. Both mixed candidates are
+observed before/after original chronological sorting. In both hold-first cases,
+the hold latch branch stops initial iteration before tap classification, even
+when latch1 is already set. The unplayed tap later expires natively. In tap-first,
+the first contact judges the earlier tap as ID1/PURE at+50; the second reads its
+consumed guard, continues and latches the hold. Equal-key stability is untested.
+
+Original continuous processing accepts both retained same-lane Touches. After
+one is released, the other sustains activity: second contact43 in hold_latched;
+original tap-judging contact42 after the latching contact43 is removed in
+tap_first. This is not an exclusive hold-owner model. Native frame reset and
+activation writes are observed separately from the initial latch.
+
+Each checkpoint resolves once through original recorder calls. Observed final
+PURE/FAR/LOST is3/0/1, score7500003/H58.60000228881836 in both hold-first
+histories, versus4/0/0 (shining3), score10000003/H80.80000305175781 in tap-first.
+All UPs remove native mappings/slots/mask/retention without scoring; the next
+Director frame clears activity while latch1 remains. StopE1627, before chart
+completion/results/SQLite. JSON contains construction/fixture hashes, original
+call/store provenance, mixed candidate vectors, per-contact identities,
+checkpoint guards, recorder deltas, score/gauge writes and cleanup. Causal
+identity assertions accompany the observed output; no host score equation or
+gameplay-state repair is used. Failures preserve partial cases/not_run stages.
+All established external services, PC skips and dependency pins remain unchanged.
