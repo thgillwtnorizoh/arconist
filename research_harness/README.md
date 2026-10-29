@@ -385,3 +385,45 @@ and fail. `status: pass` means the comparison and its provenance gates pass;
 it is not a hardware Android input-queue timing claim. No new service, runtime
 dependency or gameplay skip is introduced. Existing boundaries remain declared
 in the JSON; outputs must remain outside this package.
+
+
+## Expedition 036: native noinput semantics
+
+```bash
+python research_harness/run.py \
+  --archive /path/to/arccopy.zip --scenario noinput_semantics \
+  --output /path/outside/research_harness/noinput-result.json
+```
+
+Two independent fresh ordinary solo-created GameScenes load
+`native_noinput_control.aff` and `native_noinput_group.aff`, differing only by
+the timing-group attribute. Original parsing, flag stores, chart count/end,
+index/admission, JNI input, expiry and completion/snapshot remain enabled.
+
+Observed: both create two runtime taps, two timing groups and the same native
+index memberships. The parser clears the grouped parsed tap's flag; original
+builder18640f4 stores logic+54=0. Native counting excludes it (N2 versus N1).
+The disabled object is still indexed and active. Its JNI DOWN produces a native
+Touch but no candidate/classifier/recorder; the ordinary tap still judges.
+It remains unmissed/unconsumed through expiry checks and native completion.
+Native chart end remains1620, completion occurs atE1621, and native snapshots
+have PURE2/LOST0 versus PURE1/LOST0. Scores are10000002 versus10000001; live
+health80.4000015258789 versus80.19999694824219, result health80/clear3 for both.
+Clear3 is read through the original result classifier on the native cache;
+this scenario does not run the results scene or save.
+
+Per-note end-loop observations show the disabled tap skipped before its end
+time is consumed. The unchanged maximum is therefore not the sole evidence
+for end-time filtering. Both group1 lifetime fields still become2700 through
+the separate native descriptor pass. No optional later-note pair is needed
+for this scoped branch result; no later-note execution is claimed.
+
+JSON preserves native parser/comparison/store PCs, identities, count inputs
+and return, object counts before/after bars, timing/descriptor/index data,
+active state, original JNI mapping/projection/candidates, recorder deltas,
+expiry flag predicates, completion/cache provenance and result reconciliation.
+Outcome values are observed rather than supplied as host gameplay rules.
+Failure retains partial evidence; the second case stays not_run if the first
+cannot complete. Read-only original score/classification getters inspect the
+completion-produced cache. Existing services and all inherited PC skips stay
+unchanged; dependency pins and prior scenarios/assertions/fixtures are intact.
