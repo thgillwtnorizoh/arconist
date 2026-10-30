@@ -564,3 +564,47 @@ data, original lane IDs/candidate vectors, recorder deltas, note/contact identit
 and cleanup. Assertions preserve the observed native causal relationships;
 failures retain partial cases and unexecuted stages. Old scenarios, fixtures,
 assertions, dependency pins and exact inherited PC skips are unchanged.
+
+## Expedition 040: settings-derived offsets and the native judgment clock
+
+```bash
+python research_harness/run.py \
+  --archive /path/to/arccopy.zip --scenario settings_offset_clock \
+  --output /path/outside/research_harness/settings-offset-result.json
+```
+
+Four required configurations and one optional legacy case use independent fresh
+emulators. Only the external persistence values and the specified AFF offset
+change. The ordinary sayonarahatsukoi/difficulty0/mode0 selection stays intact.
+
+The isolated `settings_backend_services.py` adapter supplies typed getters at the
+existing persistence interface. Original application initializer `0x1a146a0`
+allocates/publishes the application, allocates Settings, stores application+0x70,
+and calls the complete original loader from `0x1a1476c`. Execution stops at the
+loader's genuine return boundary `0x1a14770`; later unrelated application startup
+is not executed. Existing external application facades are rebound to that
+native-created application. Its Settings pointer and loaded offset fields are
+preserved into the original GameScene/Model. Host-write guards protect these
+results and the Timeline's derived fields. Previous scenarios retain their
+original bootstrap unchanged.
+
+Observed combined offsets are0/80/80/200 for baseline/regular/alternate/AFF120+80.
+The optional missing-current-key/legacy100 case natively produces80. At the
+strict music-start equality frame no request occurs. A1ms crossing requests
+playback at the existing inert audio-manager boundary; native compensation then
+anchors E to -O. At elapsed1500ms after each observed request, native E is
+1500/1420/1420/1300. Reaching native E1500 requires elapsed1500/1580/1580/1700ms.
+Each original-camera-projected JNI DOWN judges the original-created lane4 tap
+once: N1, shining PURE1, score10000001, H80.19999694824219. Original UP and the next
+Director frame clean mappings/slots/mask/retention without duplicate scoring.
+
+JSON preserves backend/default/sentinel calls, original allocation/ownership and
+field stores, model profile/addition operands, AFF offset, native timeline
+R/C/O/origins, strict startup comparisons, request-before-compensation versus
+post-compensation state, elapsed-time samples, input/candidate/classifier/recorder
+and cleanup evidence. Failures retain achieved stages and mark later gates.
+
+This is not a native preferences-file parser, completed application startup,
+executed FMOD output, Bluetooth-route detection, physical latency measurement,
+Android queue test or drift-correction experiment. Existing platform/resource/
+ABI/audio/graphics boundaries and exact gameplay/presentation PC skips remain.
