@@ -470,3 +470,54 @@ checkpoint guards, recorder deltas, score/gauge writes and cleanup. Causal
 identity assertions accompany the observed output; no host score equation or
 gameplay-state repair is used. Failures preserve partial cases/not_run stages.
 All established external services, PC skips and dependency pins remain unchanged.
+
+## Expedition 038: linked-arc generation and successor continuity
+
+```bash
+python research_harness/run.py \
+  --archive /path/to/arccopy.zip --scenario linked_arc \
+  --output /path/outside/research_harness/linked-arc-result.json
+```
+
+`native_linked_arc_successors.aff` contains two constant-position ordinary arcs,
+1000..2001 then2001..3001, matching X/Y=.5 and color0. Original whole-chart
+initialization creates the shared LogicColor, separate shared LogicArcGroup,
+first successor vector and second predecessor pointer. Arc+150 is a single
+pointer in this path, not a predecessor vector. No native links are supplied.
+
+The original factory deliberately initializes arc+a0=0. Native linking changes
+the successor byte to1. Original173bdf0..173bd9c passes these actual0/1 values
+to virtualba81e8→d92558. Base first records1250/1500/1750 are then folded by
+the native successor/duration branch into(1250,1),(1500,2). Successor records
+are(2001,1),(2251,1),(2501,1),(2751,1). Native N7/end3501 differ from009's
+prepared flag1-for-both/N8 experiment. No historical flag or N is required.
+
+One original JNI DOWN42 supplies a native retained Touch at a point projected
+by the original camera from native constant geometry. No MOVE is necessary.
+Original continuous processing claims shared color0 and activates the first
+arc. AtE2000 activity is first1/1, successor0/0; atE2001 it switches to0/0,
+1/1. The first arc is removed from active membership atE2002. The same Touch,
+generated ID and color owner persist; original successor-aware cleanup avoids
+resetting shared color state. Native acceptance reads linked record references
+and writes shared group activity bytes. Group timestamp vector stays empty,
+window+14 stays0 and its extension branch is not entered. This does not prove
+that group machinery is unnecessary in other charts; no counterfactual control
+is claimed.
+
+The six native final records resolve once and produce seven actual accepted
+recorder calls, including two atE1375 for weight2. Native outputs are PURE7,
+FAR0/LOST0, shining7/combo7, score10000007/H81.4000015258789. JNI UP atE2876
+clears map/slot/mask/retention/claimed IDs and releases owner to−1. E2877 clears
+arc activity and group+10/+12, while cache-related group+11 remains1; score is
+unchanged. Stop before completion/results/SQLite.
+
+JSON preserves parser/factory/link predicates and stores, generation arguments
+and upstream writers, base/final record vectors, count/index/admission, native
+geometry/cache/projection, one contact's identity, spatial returns, predecessor
+and successor reads, group/color writes, resolved guards, recorder multiplicity
+and cleanup. Assertions check native causal relationships rather than a host
+score calculation; failures retain partial evidence and incomplete gates.
+Existing ABI/resource/platform/presentation boundaries and exact PC skips stay
+unchanged. Optional comparison is not run; prior fixtures/assertions/pins are
+preserved. This fixture establishes one ordinary constant-geometry connection,
+not arbitrary branching arcs, real GPU output or Android hardware scheduling.
