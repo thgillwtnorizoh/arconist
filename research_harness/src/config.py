@@ -12,7 +12,7 @@ _fixture_name = 'ordinary_two_tap.aff'
 
 def configure(path, scenario='ordinary'):
     global archive_path, _binary, _fixture_name
-    _fixture_name = {'ordinary': 'ordinary_two_tap.aff', 'linked_arc': 'native_linked_arc_successors.aff', 'mixed_hold_tap': 'native_mixed_hold_tap_hold_first.aff', 'mixed_hold_tap_tap_first': 'native_mixed_hold_tap_tap_first.aff', 'noinput_semantics': 'native_noinput_control.aff', 'noinput_group': 'native_noinput_group.aff', 'late_input_expiry': 'native_late_input_expiry.aff', 'camera_designant': 'ordinary_two_tap.aff', 'continuous_gauge': 'ordinary_two_tap.aff', 'arc_tap': 'native_arc_tap.aff',
+    _fixture_name = {'ordinary': 'ordinary_two_tap.aff', 'lane_widening': 'native_widen_control.aff', 'widen_camera': 'native_widen_camera.aff', 'widen_lanes': 'native_widen_lanes.aff', 'linked_arc': 'native_linked_arc_successors.aff', 'mixed_hold_tap': 'native_mixed_hold_tap_hold_first.aff', 'mixed_hold_tap_tap_first': 'native_mixed_hold_tap_tap_first.aff', 'noinput_semantics': 'native_noinput_control.aff', 'noinput_group': 'native_noinput_group.aff', 'late_input_expiry': 'native_late_input_expiry.aff', 'camera_designant': 'ordinary_two_tap.aff', 'continuous_gauge': 'ordinary_two_tap.aff', 'arc_tap': 'native_arc_tap.aff',
                      'flick_producer': 'native_flick_probe.aff', 'cpu_note': 'native_cpu_note.aff', 'hold': 'native_hold.aff', 'chord': 'native_chord.aff',
                      'moving_arc': 'native_moving_arc.aff', 'crossing_arc': 'native_crossing_arcs.aff',
                      'timing_group': 'native_timing_group.aff', 'reverse_scroll': 'native_reverse_scroll.aff',

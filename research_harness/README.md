@@ -521,3 +521,46 @@ Existing ABI/resource/platform/presentation boundaries and exact PC skips stay
 unchanged. Optional comparison is not run; prior fixtures/assertions/pins are
 preserved. This fixture establishes one ordinary constant-geometry connection,
 not arbitrary branching arcs, real GPU output or Android hardware scheduling.
+
+## Expedition 039: chart-driven lane widening and input geometry
+
+```bash
+python research_harness/run.py \
+  --archive /path/to/arccopy.zip --scenario lane_widening \
+  --output /path/outside/research_harness/lane-widening-result.json
+```
+
+Three fresh ordinary native-created scenes load `native_widen_control.aff`,
+`native_widen_camera.aff` and `native_widen_lanes.aff`. Each has two taps at1500,
+raw positions2/5, natively converted to lanes3/6. The variants add only
+`scenecontrol(500,enwidencamera,500.00,1)` or `enwidenlanes` with those parameters.
+Original parsing/classification and kind5/6 fallback construction succeed with
+native chart+110=0. This does not reopen031's excluded kind0 trackdisplay.
+
+Original SceneControl dispatch occurs once atE501, after the frame's widening
+interpolation. Kind5 uses originald59c24 to write model+54/+58/+5c; kind6 uses
+the handler's original stores to+68/+6c/+70. Both use event start500, direction1,
+duration500. The E501 scalar remains unchanged; E502 G=1.0019999742507935 or
+W=.004000000189989805, E750 G1.25 orW.5, E1000 G1.5 orW1. The other scalar stays
+ordinary. No Python transition/interpolation state is supplied.
+
+AtE1500 all three scenes use identical native-projected JNI coordinates for
+worldX40 and950/Y0/Z0. Original unprojection truncates X to39/949. Control lane
+outputs are(4,0)/(5,0), with no candidates. Kind5 changes only the first to(4,3)
+and judges lane3; kind6 changes only the second to(6,0) and judges lane6. Native
+Camera position/Euler/FOV and P/V/world/PV data match at the sampled anchor and
+judgment endpoints. This verifies input eligibility; it does not establish a
+rendered track-width or Camera-FOV effect from the identifier names.
+
+Control has no judgment; each variant records one shining PURE, score5000001,
+H40.20000076293945/combo1 with nativeN2/end1620. Each JNI DOWN creates a Touch
+even when candidates are empty. Original UP empties mappings/slots/mask/retained
+contacts without scoring, and the E1501 Director frame produces no duplicate.
+Unplayed taps remain unresolved; expiry/completion/results/SQLite are not run.
+
+JSON preserves parsed/runtime controls, native feature/constructor decisions,
+transition/store/interpolation provenance, scalar trajectories, camera/probe
+data, original lane IDs/candidate vectors, recorder deltas, note/contact identity
+and cleanup. Assertions preserve the observed native causal relationships;
+failures retain partial cases and unexecuted stages. Old scenarios, fixtures,
+assertions, dependency pins and exact inherited PC skips are unchanged.
