@@ -608,3 +608,47 @@ This is not a native preferences-file parser, completed application startup,
 executed FMOD output, Bluetooth-route detection, physical latency measurement,
 Android queue test or drift-correction experiment. Existing platform/resource/
 ABI/audio/graphics boundaries and exact gameplay/presentation PC skips remain.
+
+## Expedition 041: native gameplay interruption and hold contact continuity
+
+```bash
+python research_harness/run.py \
+  --archive /path/to/arccopy.zip --scenario gameplay_interruption \
+  --output /path/outside/research_harness/gameplay-interruption-result.json
+```
+
+Four fresh ordinary scenes reuse the unchanged `native_hold.aff`: uninterrupted,
+retained-contact pause/resume, UP while paused followed by repress, and optional
+CANCEL while paused followed by repress. Original AFF construction supplies the
+hold/checkpoints/index and N3/end2500. Original JNI supplies every Touch.
+
+Renderer background enters original AppDelegate/GameScene pause acceptance and
+Timeline pause at E1200. After a supplied60000ms interruption, the stopped
+Director wrapper performs no Scheduler/Model/Timeline update. Foreground restarts
+Director, but gameplay remains paused. Its next original frame changes R/C from
+1202/2 to61202/60002 while E stays1200 and hold activity clears to0/0.
+
+The scene already owns native UILayer/PauseLayer controls and a native-created
+resume function capture. The diagnostic supplies Widget event enum2 to that
+original callback; its original secondary delegate reaches the same GameScene.
+Original UI hide processing is essential: an inert hide-menu boundary preserves
+modal input behavior and prevents new DOWN from reaching gameplay. The final
+scenario leaves `b9e0d0 → 18d60cc` original, allowing native active-state/decoration
+cleanup, Scheduler fade work and subsequent gameplay input. No UI flags, Nodes,
+callbacks or listener memberships are repaired by the host.
+
+With contact retained, the same Touch reactivates at E1201 without another DOWN.
+UP/CANCEL remove mapping and Model retention during pause; latch1 survives and
+activity is stale until the next frame. A fresh DOWN43 at E1300 creates a distinct
+Touch/generated ID and activates at E1301. All four executions resolve1250/1500/
+1750 once at E1125/1375/1625: shining PURE3, score10000003, H80.5999984741211.
+Terminal UP/frame1627 empties map/slots/mask/retention and clears activity while
+latch1 remains. No results/SQLite or optional arc comparison is run.
+
+`interruption_services.py` isolates012-style AppDelegate singleton/original-vtable,
+Android animation-interval and audio-provider facades. A source-backed empty
+AudioManager query header permits original resume seek forwarding. Provider
+pause/seek/update/predicate are supplied interfaces, not FMOD output; native-ready
+flags are never assigned. Java/GLThread scheduling, physical finger persistence,
+AppActivity ready-gated callbacks and device/audio latency are unexecuted.
+Existing scenarios, fixtures, assertions, pins and exact PC skips are unchanged.
