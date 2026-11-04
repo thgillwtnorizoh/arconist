@@ -40,3 +40,32 @@ depth (010 preprocessing), rather than add two untruncated float values. Correct
 that operation order and strengthened035 golden checkpoints with the published
 E1000 depths0/-881 and E1110 depths890/8. The prior goldens did not assert depth;
 this discrepancy and repair are preserved, not hidden by a relaxed comparison.
+
+## R001 verified delivery — 2026-11-05
+
+Final stricter validation:build0/zero warnings/errors;36/36 tests,zero failures,
+zero skips; ordinary/input-first/frame-first CLI0 with9/6/6 computed events and
+passing normalized native comparisons. Each replay test adds100 byte-identical
+repetitions. CLI negative controls return1 for an intermediate combo mismatch
+(`$.trace[3].combo: expected 99, actual 1`) and unsupported hold syntax; failure
+output is preserved in ignored out/. No expected comparison was weakened.
+
+Committed implementation09634fea52aec46c91b25e56640c55b4abc42fb6 was cloned into
+an empty clean source copy and rebuilt/rerun:36/36,zero skipped,three real CLI
+comparisons pass. All three clean JSON traces match final development output bytes.
+Curated commands/environment/output hashes and initial failures are preserved in
+validation/R001.md; raw traces/build outputs are excluded from publication.
+
+Published reconstruction/r001 with ordinary non-force push. GitHub immutable
+compare/readback and remote ref verify implementation09634f,main remains required
+parent0c174c6.25 added paths; all118 preexisting Git blobs verified unchanged.
+Final audit commit only updates validation/R001.md and appends this history.
+
+R001 engineering gates A-G PASS. Minimum independent AFF/timestamped tap executable
+is achieved; Headquarters audit/acceptance remains pending. Verified ordinary
+boundary:024 full two-tap gameplay/result and035 controlled interleavings with
+exact health bits/depth samples, guards,candidates and cleanup. No fresh native,
+physical-device, Godot, Unity, audio or visual claim. Missing original ZIP and
+standalone project introduction remain explicitly recorded; published native
+reports/harness assertions are the oracle authority. R001 stops here; no R002,
+additional expedition or production-engine work is initiated.
