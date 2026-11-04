@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="core/Arconist.Core.csproj" />
+  <Project Path="headless/Arconist.Headless.csproj" />
+  <Project Path="tests/Arconist.Tests.csproj" />
+</Solution>

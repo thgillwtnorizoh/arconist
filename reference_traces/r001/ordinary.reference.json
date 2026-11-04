@@ -1,0 +1,29 @@
+{
+  "authority": "024 Observed clean-run results; 010 fixture A; research_harness/src/regression.py run/verify; 002/006/008 instruction-backed intermediates",
+  "sourceCommit": "0c174c6e481158ae73e4d7c18afabaa670794d2d",
+  "chart": {"judgmentUnits":2,"endTime":2120,"audioOffset":0,"density":1,
+    "taps":[
+      {"id":"tap:0:1000:4","time":1000,"endTime":1000,"rawLane":3,"lane":4,"normalizedX":1},
+      {"id":"tap:1:2000:3","time":2000,"endTime":2000,"rawLane":2,"lane":3,"normalizedX":0.5}
+    ]},
+  "checkpoints": [
+    {"event":0,"state":{"effectiveTime":-2999,"lastFrameTime":-2999,"musicStarted":false,"pure":0,"far":0,"lost":0,"score":0,"healthBits":0,"finished":false}},
+    {"event":1,"state":{"effectiveTime":0,"lastFrameTime":0,"musicStarted":true,"compensation":2,"pure":0,"far":0,"lost":0,"score":0,"combo":0,"maxCombo":0,"healthBits":0,"finished":false}},
+    {"event":2,"state":{"effectiveTime":1000,"lastFrameTime":1000,"pure":0,"far":0,"lost":0,"score":0,
+      "notes":[{"id":"tap:0:1000:4","active":true,"missed":false,"consumed":false,"contact":-1},{"id":"tap:1:2000:3","active":true,"missed":false,"consumed":false,"contact":-1}]}},
+    {"event":3,"state":{"effectiveTime":1000,"lastFrameTime":1000,"candidates":["tap:0:1000:4"],
+      "classifications":[{"note":"tap:0:1000:4","outcome":"SHINING_PURE","error":0,"consumesInput":true}],
+      "pure":1,"far":0,"lost":0,"shining":1,"score":5000001,"combo":1,"maxCombo":1,"healthBits":1109445837,"contacts":1,
+      "notes":[{"id":"tap:0:1000:4","missed":false,"consumed":true,"contact":0},{"id":"tap:1:2000:3","missed":false,"consumed":false,"contact":-1}]}},
+    {"event":4,"state":{"effectiveTime":1000,"pure":1,"far":0,"lost":0,"score":5000001,"combo":1,"healthBits":1109445837,"contacts":0}},
+    {"event":5,"state":{"effectiveTime":2000,"lastFrameTime":2000,"notes":[{"id":"tap:0:1000:4","active":false,"consumed":true,"missed":false},{"id":"tap:1:2000:3","active":true,"consumed":false,"missed":false}]}},
+    {"event":6,"state":{"effectiveTime":2000,"lastFrameTime":2000,"candidates":["tap:1:2000:3"],
+      "classifications":[{"note":"tap:1:2000:3","outcome":"SHINING_PURE","error":0,"consumesInput":true}],
+      "pure":2,"far":0,"lost":0,"shining":2,"score":10000002,"combo":2,"maxCombo":2,"healthBits":1117834445,"contacts":1,
+      "notes":[{"id":"tap:0:1000:4","missed":false,"consumed":true,"contact":0},{"id":"tap:1:2000:3","missed":false,"consumed":true,"contact":1}]}},
+    {"event":7,"state":{"effectiveTime":2000,"pure":2,"far":0,"lost":0,"score":10000002,"combo":2,"healthBits":1117834445,"contacts":0}},
+    {"event":8,"state":{"effectiveTime":2122,"lastFrameTime":2122,"pure":2,"far":0,"lost":0,"shining":2,"score":10000002,"combo":2,"maxCombo":2,"healthBits":1117834445,"contacts":0,"finished":true,
+      "notes":[{"id":"tap:0:1000:4","active":false,"missed":false,"consumed":true},{"id":"tap:1:2000:3","active":false,"missed":false,"consumed":true}]}}
+  ],
+  "result":{"pure":2,"far":0,"lost":0,"recordedLost":0,"shining":2,"score":10000002,"health":80,"category":3,"maxCombo":2,"early":0,"late":0}
+}

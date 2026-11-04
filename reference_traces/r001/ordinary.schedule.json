@@ -1,0 +1,14 @@
+{
+  "epochMs": 0,
+  "events": [
+    {"kind":"FRAME","wallMs":1},
+    {"kind":"FRAME","wallMs":3002},
+    {"kind":"FRAME","wallMs":4002},
+    {"kind":"DOWN","wallMs":4002,"pointer":42,"lane":4,"timestampMs":987042},
+    {"kind":"UP","wallMs":4002,"pointer":42,"timestampMs":988042},
+    {"kind":"FRAME","wallMs":5002},
+    {"kind":"DOWN","wallMs":5002,"pointer":43,"lane":3,"timestampMs":987043},
+    {"kind":"UP","wallMs":5002,"pointer":43,"timestampMs":988043},
+    {"kind":"FRAME","wallMs":5124}
+  ]
+}

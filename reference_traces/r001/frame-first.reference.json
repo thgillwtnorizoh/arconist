@@ -1,0 +1,185 @@
+{
+  "authority": "035 shared precondition, Case B, outcome table and pseudocode; 005 timeline arithmetic",
+  "sourceCommit": "0c174c6e481158ae73e4d7c18afabaa670794d2d",
+  "chart": {
+    "judgmentUnits": 2,
+    "endTime": 1229,
+    "audioOffset": 0,
+    "taps": [
+      {
+        "id": "tap:0:1000:4",
+        "time": 1000,
+        "lane": 4
+      },
+      {
+        "id": "tap:1:1109:4",
+        "time": 1109,
+        "lane": 4
+      }
+    ]
+  },
+  "checkpoints": [
+    {
+      "event": 2,
+      "state": {
+        "effectiveTime": 1000,
+        "lastFrameTime": 1000,
+        "pure": 0,
+        "far": 0,
+        "lost": 0,
+        "shining": 0,
+        "score": 0,
+        "combo": 0,
+        "maxCombo": 0,
+        "healthBits": 0,
+        "contacts": 0,
+        "finished": false,
+        "notes": [
+          {
+            "id": "tap:0:1000:4",
+            "active": true,
+            "missed": false,
+            "consumed": false,
+            "contact": -1,
+            "depth": 0
+          },
+          {
+            "id": "tap:1:1109:4",
+            "active": true,
+            "missed": false,
+            "consumed": false,
+            "contact": -1,
+            "depth": -881
+          }
+        ]
+      }
+    },
+    {
+      "event": 3,
+      "state": {
+        "effectiveTime": 1110,
+        "lastFrameTime": 1110,
+        "expired": [
+          "tap:0:1000:4"
+        ],
+        "pure": 0,
+        "far": 0,
+        "lost": 1,
+        "shining": 0,
+        "score": 0,
+        "combo": 0,
+        "maxCombo": 0,
+        "healthBits": 0,
+        "contacts": 0,
+        "finished": false,
+        "notes": [
+          {
+            "id": "tap:0:1000:4",
+            "active": true,
+            "missed": true,
+            "consumed": false,
+            "contact": -1,
+            "depth": 890
+          },
+          {
+            "id": "tap:1:1109:4",
+            "active": true,
+            "missed": false,
+            "consumed": false,
+            "contact": -1,
+            "depth": 8
+          }
+        ]
+      }
+    },
+    {
+      "event": 4,
+      "state": {
+        "effectiveTime": 1110,
+        "lastFrameTime": 1110,
+        "candidates": [
+          "tap:0:1000:4",
+          "tap:1:1109:4"
+        ],
+        "classifications": [
+          {
+            "note": "tap:0:1000:4",
+            "outcome": "guard_missed",
+            "error": 110,
+            "consumesInput": false
+          },
+          {
+            "note": "tap:1:1109:4",
+            "outcome": "SHINING_PURE",
+            "error": 1,
+            "consumesInput": true
+          }
+        ],
+        "pure": 1,
+        "far": 0,
+        "lost": 1,
+        "shining": 1,
+        "score": 5000001,
+        "combo": 1,
+        "maxCombo": 1,
+        "healthBits": 1109445837,
+        "contacts": 1,
+        "finished": false,
+        "notes": [
+          {
+            "id": "tap:0:1000:4",
+            "active": true,
+            "missed": true,
+            "consumed": false,
+            "contact": -1,
+            "depth": 890
+          },
+          {
+            "id": "tap:1:1109:4",
+            "active": true,
+            "missed": false,
+            "consumed": true,
+            "contact": 0,
+            "depth": 8
+          }
+        ]
+      }
+    },
+    {
+      "event": 5,
+      "state": {
+        "effectiveTime": 1110,
+        "lastFrameTime": 1110,
+        "pure": 1,
+        "far": 0,
+        "lost": 1,
+        "shining": 1,
+        "score": 5000001,
+        "combo": 1,
+        "maxCombo": 1,
+        "healthBits": 1109445837,
+        "contacts": 0,
+        "finished": false,
+        "notes": [
+          {
+            "id": "tap:0:1000:4",
+            "active": true,
+            "missed": true,
+            "consumed": false,
+            "contact": -1,
+            "depth": 890
+          },
+          {
+            "id": "tap:1:1109:4",
+            "active": true,
+            "missed": false,
+            "consumed": true,
+            "contact": 0,
+            "depth": 8
+          }
+        ]
+      }
+    }
+  ],
+  "result": null
+}

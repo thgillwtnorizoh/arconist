@@ -1,0 +1,11 @@
+{
+  "epochMs": 0,
+  "events": [
+    {"kind":"FRAME","wallMs":1},
+    {"kind":"FRAME","wallMs":3002},
+    {"kind":"FRAME","wallMs":4002},
+    {"kind":"FRAME","wallMs":4112},
+    {"kind":"DOWN","wallMs":4112,"pointer":42,"lane":4},
+    {"kind":"UP","wallMs":4112,"pointer":42}
+  ]
+}
