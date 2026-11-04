@@ -652,3 +652,14 @@ pause/seek/update/predicate are supplied interfaces, not FMOD output; native-rea
 flags are never assigned. Java/GLThread scheduling, physical finger persistence,
 AppActivity ready-gated callbacks and device/audio latency are unexecuted.
 Existing scenarios, fixtures, assertions, pins and exact PC skips are unchanged.
+
+## Expedition 042 — mixed judgment recovery and final results
+
+```bash
+python research_harness/run.py --archive /path/to/arccopy.zip \
+  --scenario mixed_judgment_recovery --output /path/outside/research_harness/mixed-judgment-recovery.json
+```
+
+Two fresh ordinary native-created scenes consume the new synthetic six-tap `native_mixed_judgment_recovery.aff`. Both produce JNI shining PURE/PURE/FAR at E1000/1500/2060 and an original frame-expiry LOST at E2601. `mixed_recovery` then supplies on-time JNI inputs at3000/3500; `mixed_no_recovery` leaves those notes to original expiry. The diagnostic compares equivalent native prefixes and records chronological recorder returns, combo/max writes, native health/score, note/index/active state, projected contacts and cleanup. Both reach original completion at3621, GameResult, native ending/results/save gate, bundled SQLite and results-scene activation.
+
+Verified fixture outputs are PURE4/FAR1/LOST1, combo2/max3, score7500004/live H58.89999771118164 versus PURE2/FAR1/LOST3, combo0/max3, score4166668/live H27.833332061767578. Both original result categories are0, interpreted as failure; integer H is58/27. Actual recorded and final LOST agree. Failed-category local rows save through original code and remain unchanged after extra updates. No result/score/health/note state is host-assigned. A second owning snapshot request and an all-PURE reference are explicitly not run. No new runtime service or PC skip is added; all inherited platform/ABI/resource/audio/GPU/account/allocator/presentation boundaries remain. Full evidence and limitations: [042 report](../excavations/042_native_mixed_judgment_recovery_combo_gauge_and_final_results.md).
