@@ -245,3 +245,23 @@ injection,playthrough or screenshot inspection occurred. Owner launch/render/inp
 judgment/results/restart acceptance pending;R003 PASS is not declared. Remaining
 build limitation is unresolved default Publish concurrency cause;serialization is
 the verified mitigation. Stop at delivery;await owner and Headquarters decision.
+
+## Headquarters publication and owner-testing directive — 2026-11-05
+
+The owner instructed that subsequent reconstruction work be published on `main`
+rather than left solely on separate reconstruction branches. GitHub confirms R001,
+R002 and R003-C01 source were already integrated into main by pull request #1,
+merge commit d6e74241b720c712807ca0e7d90e8b857c675ca1; no redundant merge was
+performed. Headquarters updated reconstructed/Instruction.md on main to make main
+the required publication/integration branch for subsequent Work 2 missions. A
+separate temporary development branch is permitted, but mission deliverables,
+validation notes and append-only context must reach main without force pushing.
+Publication of incomplete/failed source does not constitute milestone PASS.
+
+The owner's prior policy against automated GUI operations, SendInput and simulated
+playthroughs remains in force. Only the owner will launch, visually inspect and
+play the delivered Windows prototype for qualification. Conventional compilation,
+package checks and non-graphical regression tests remain engineering checks, never
+human acceptance. R003-C01 remains READY FOR HUMAN QUALIFICATION, with the owner
+planning to test this specific build and return feedback. No R004, Unity work, or
+further graphical testing was authorized by this administrative directive.
