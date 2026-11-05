@@ -69,3 +69,47 @@ physical-device, Godot, Unity, audio or visual claim. Missing original ZIP and
 standalone project introduction remain explicitly recorded; published native
 reports/harness assertions are the oracle authority. R001 stops here; no R002,
 additional expedition or production-engine work is initiated.
+
+## R002 authorization and implementation — 2026-11-05
+
+Headquarters accepted R001 and authorized the first actual Windows Godot tap
+prototype, directly from a295ec3c129c4fd8cea3e454c4165e2ef2d2249e on new branch
+reconstruction/r002. Read Instruction.md and this full history before proceeding.
+No merge to main, new native expedition, R003 or Unity authorization is inferred.
+
+Used installed Godot4.7.2.stable.mono.official.ed1daf0bf, .NET SDK10.0.402/runtime
+10.0.13, Windows x64. New Godot project references an engine-neutral session/input
+bridge and the unchanged .NET Standard2.1 core via ProjectReference. Renderer/HUD
+read core E/notes/state/result. One Godot monotonic tick source serves _Input and
+_Process independently, with the core's ordinary3-second preroll; no input-triggered
+Frame is inserted. Physical/logical D/F/J/K map to lanes2..5; mouse uses pointer100.
+Focus loss releases contacts while time continues. These are frontend adapters,
+not claims of original Android transport, native rendering or audio synchronization.
+
+Implemented16-note original synthetic practice, selectable byte-identical two-tap
+reference, start/results/replay, judgments/counters/health and core-time-driven
+approaching shapes. New15-test bridge suite covers mapping/OS fallback/035 order,
+cleanup/results/restart and related core behavior. All36 R001 tests and three
+reference comparisons pass unchanged; no skip or reference rewrite.
+
+Preserved failures: C# namespace ambiguities and nullable annotation compile errors;
+first exporter returned0 but logged missing-solution ERROR and was treated as failed;
+added genuine Godot solution. Controlled input initially exposed non-letter physical
+code4194313 with valid logical letter code; fixed logical fallback and added exact
+regression (including correcting Godot Unicode's long type). No core boundary,
+test assertion or golden was weakened. Preliminary logs remain in ignored out/.
+
+Actual graphical source run completes two-tap with PURE2/FAR0/LOST0/shining1,
+score10000001,H80/category3. Separate exported Windows process completes practice
+with PURE15/FAR1/LOST0/shining9,score9687509,max16,H80/category2. Restart resets all
+state; wrong K atE2022 records no judgment, then all16 unique notes expire once,
+ending PURE0/FAR0/LOST16,score0,H0/category0. Both export results occur atE24622;
+all17 DOWN/UP pairs clean contacts to0. F8 saves actual viewport images; JSONL
+contains7955 frame/input/state records across these final export runs.
+
+This is controlled Windows SendInput testing using the computer-use skill, received
+as genuine Godot InputEventKey callbacks, not internal synthetic judgments or a
+claim of human/owner hands-on acceptance. The successful/missed/restart evidence is
+from complete actual graphical sessions. Binary package includes the self-contained
+.NET runtime and is launched without the editor; publication/readback and final
+artifact verification are recorded in the R002 delivery addendum.

@@ -1,0 +1,7 @@
+.godot/
+**/bin/
+**/obj/
+export/
+NuGet.local.Config
+bridge/**/*.uid
+tests/**/*.uid
