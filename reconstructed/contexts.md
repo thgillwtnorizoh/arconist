@@ -182,3 +182,35 @@ geometry policy, status of every gate and targeted remaining work. Final publica
 verification is recorded separately. R003 is FAIL: minimum playable3D Windows goal
 has not been demonstrated; no gate is waived. G-006/G-007 remain blocked; stop at
 R003 without main merge, R004, Unity or another native expedition.
+
+## R003-C01 corrective export recovery — 2026-11-05 Asia/Bangkok
+
+Headquarters orders recovery from 4305f1c22d628916b1f2e0b82bb7079d44067f5d
+on reconstruction/r003. All automated graphical interaction/playtesting is now
+prohibited. Compilation, deterministic and headless checks are technical evidence
+only. Owner qualification controls acceptance; no R003 PASS or R004/Unity follows.
+Read permanent instructions and this full history before work. Original research,
+core, bridge, test assertions and 3D gameplay implementation remain untouched.
+
+Fresh Ubuntu24.04 host, matching Godot4.7.2.NET ed1daf0bf and SDK10.0.402/runtime
+10.0.13 reproduced the export Publish/GetTargetFrameworks failure, including exit0
+and partial EXE/PCK without runtime. The Linux SDK lacked NETStandard.Library.Ref;
+installed the official2.1.0 reference pack without altering the portable target.
+Direct serialized publish succeeds with zero diagnostics. Process-local
+DOTNET_PROCESSOR_COUNT=1 also lets the actual Godot exporter complete Publish.
+The lower-level concurrency failure remains undiagnosed; this is an observed
+build-process mitigation, not a proven gameplay defect or engine patch.
+
+A subsequent resource-packing ERROR exposed bridge/obj sourcelink JSON indexed
+before Publish removed it. Added .gdignore in bridge/tests; project references
+still compile. Fresh import/export then completes without ERROR/WARNING lines.
+Updated PowerShell driver to serialize SDK children and remove mandatory RTK use.
+Added cross-platform logged build/package driver and owner launch instructions.
+It requires fresh output/evidence, checks required files/AMD64/.NET runtime/PCK
+fixture contents, ZIP CRCs and extracted hashes. Full delivery results follow.
+
+The first packaging verifier incorrectly required the editor-only GodotPlugins
+assembly in the Windows game. Rejected that packaging attempt at the assertion;
+no ZIP was delivered. Corrected the required-file list and strengthened validation
+to require every runtime/native/resource asset listed by the exported deps.json.
+This changes the packaging checker only, not gameplay or regression expectations.

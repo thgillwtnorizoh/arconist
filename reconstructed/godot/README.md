@@ -1,41 +1,61 @@
-# Arconist R003 — native-informed 3D tap foundation
+# Arconist R003-C01 — Windows export recovery
 
-**Current mission result: FAIL / incomplete acceptance.** Source compiles and the
-mandatory automated suites pass, but graphical inspection, controlled OS-input
-sessions, and a launch of the final Windows export were not completed. Computer
-Use reported a physical Escape stop; no further UI actions were issued. This is
-preserved partial work for targeted repair, not an accepted playable milestone.
-See `../validation/R003.md` for observed evidence and remaining gates.
+R003 remains unaccepted. Headquarters R003-C01 makes the owner’s human
+qualification authoritative. Automated GUI operation, gameplay input injection
+and automated screenshot inspection are prohibited. Headless suites establish
+technical correctness only. The historical failed R003 report is preserved in
+`../validation/R003.md`; the corrective record is `../validation/R003-C01.md`.
 
-## Build and run
+## Build and package
 
-Use Godot 4.7.2 .NET and the existing .NET 10 SDK. From the repository root:
+Use Godot **4.7.2 .NET**, .NET SDK **10.0.402**, Python 3.11+ and the matching
+**mono** export templates. `dotnet` must be on PATH. The SDK needs the .NET
+Standard 2.1 reference pack; the explicit restore can acquire it on fresh hosts.
+Download Godot/templates from https://godotengine.org/download/archive/4.7.2-stable/.
+Prepare a notices folder with GODOT-LICENSE.txt and GODOT-COPYRIGHT.txt from that
+Godot source tag, plus DOTNET-LICENSE.txt and DOTNET-THIRD-PARTY-NOTICES.txt from
+the Microsoft.NETCore.App.Runtime.win-x64 10.0.13 NuGet package.
 
-```powershell
-rtk proxy powershell -NoProfile -ExecutionPolicy Bypass -File reconstructed/godot/build.ps1 -GodotExecutable C:/path/to/Godot_v4.7.2-stable_mono_win64_console.exe
+From the repository root (Linux or Windows; use your local paths):
+
+```text
+python reconstructed/godot/build.py --godot /path/to/Godot.NET --templates /path/to/templates.tpz --notices /path/to/notices
 ```
 
-`-OfflineRestore` is an explicit option when packages/runtime packs are already
-cached and the online NuGet vulnerability-advisory endpoint cannot be reached.
-It disables only that online lookup for this build process. The ordinary build
-retains the default lookup. All compiler checks and mandatory tests remain enabled.
-RTK is the installed wrapper; remove `rtk proxy` if it is unavailable elsewhere.
-The script uses existing 4.7.2 templates under `../out/r002-tools`, runs 36 R001
-tests/three native comparisons, builds/runs 15 bridge tests, imports the Godot
-project, executes 30 Camera3D spatial tests, and exports `../out/r003-windows`.
-It rejects nonzero exits and Godot ERROR lines. Export is not launch validation.
+The driver runs core/reference/bridge/headless spatial checks, imports and exports
+through Godot, validates AMD64 headers and the self-contained runtime, packages
+all export files/notices/player instructions and verifies ZIP CRCs and every
+extracted file hash. It never launches Windows or operates a graphical game.
+Outputs are under `reconstructed/out`: `Arconist-R003-C01-Windows-x64.zip`,
+`r003-windows/` and `r003-c01-evidence/` (logs and package-integrity.json).
+Each attempt requires a new evidence directory; archive the existing one first.
+A prior export is moved aside to evidence before a clean export is created.
+Do not distribute `previous-export/` as a prototype.
+
+The Windows PowerShell compilation/export entry remains available:
 
 ```powershell
-# Source graphical run; forward-slash absolute log/evidence paths are recommended.
-& $Godot --path reconstructed/godot --log-file C:/path/to/source.log -- --evidence-dir=C:/path/to/evidence
-# Runtime geometry tests, no OS gameplay input or GPU validation implied.
-& $Godot --headless --path reconstructed/godot -- --spatial-tests --evidence-dir=C:/path/to/tests
+powershell -NoProfile -ExecutionPolicy Bypass -File reconstructed/godot/build.ps1 -GodotExecutable C:/path/to/Godot_v4.7.2-stable_mono_win64_console.exe
 ```
 
-The test runner returns 1 on any failed check, with no skip path. Its JSON report
-is `spatial-tests.json`. The source and export include no original assets/music.
-Keep `Arconist.exe`, `Arconist.pck`, and the entire adjacent
-`data_Arconist.Godot_windows_x86_64` directory together. The export contains .NET.
+No RTK wrapper is required. Both drivers set process-local
+`DOTNET_PROCESSOR_COUNT=1` for the exporter’s SDK child. Default exporter Publish
+reproduced the silent GetTargetFrameworks failure; serialization completes it.
+The underlying SDK/host concurrency defect is not proven. No gameplay code,
+compiler checks or regression assertions are changed. `.gdignore` excludes
+bridge/tests build artifacts from Godot’s resource scan; their C# project
+references still compile normally. The full Python driver is the ZIP delivery path.
+
+`-OfflineRestore` on the PowerShell driver disables only the online advisory
+lookup when all required packages are already cached. It does not supply missing
+packages, bypass compiler diagnostics or establish qualification.
+
+## Owner launch
+
+Extract the whole ZIP and open `Arconist.exe`. Keep `Arconist.pck` and the entire
+adjacent `data_Arconist.Godot_windows_x86_64` folder together. The package includes
+.NET 10.0.13; no editor or separate runtime installation is needed. See PLAYER.txt.
+Windows launch, graphics, gameplay and restart are pending owner inspection.
 
 ## Controls and session behavior
 
@@ -84,8 +104,8 @@ The surrounding UI container is only a viewport-coordinate transform.
 
 ## Boundaries
 
-30 automated geometry/timing/projection groups pass in the actual Godot runtime.
-This is not a completed graphical/interactive acceptance. G-006 camera reset and
+30 headless geometry/timing/projection groups establish technical correctness.
+Human graphical and gameplay qualification remains pending. G-006 camera reset and
 G-007 track fade remain historically blocked. No widening/scene camera actions,
 holds/arcs/flicks, physical multitouch, Android, audio, exact FOV calibration,
 original shaders/GPU reproduction, pixel fidelity or Unity is implemented.
