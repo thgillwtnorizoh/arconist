@@ -70,10 +70,13 @@ def verify(package, templates):
     assets = []
     for library in deps['targets'][deps['runtimeTarget']['name']].values():
         for kind in ('runtime', 'native', 'resources'):
-            for name in library.get(kind, {}):
-                path = package / DATA / name
+            for name, metadata in library.get(kind, {}).items():
+                # deps.json retains NuGet asset paths (e.g. lib/net8.0/...);
+                # dotnet publish flattens runtime/native files into the output.
+                relative = Path(metadata.get('locale', '')) / Path(name).name if kind == 'resources' else Path(name).name
+                path = package / DATA / relative
                 assert path.is_file() and path.stat().st_size, name
-                assets.append(name)
+                assets.append(str(relative))
     pck = (package / 'Arconist.pck').read_bytes()
     assert pck[:4] == b'GDPC'
     for chart in ('practice.aff', 'ordinary_two_tap.aff'):

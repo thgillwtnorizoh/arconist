@@ -214,3 +214,8 @@ assembly in the Windows game. Rejected that packaging attempt at the assertion;
 no ZIP was delivered. Corrected the required-file list and strengthened validation
 to require every runtime/native/resource asset listed by the exported deps.json.
 This changes the packaging checker only, not gameplay or regression expectations.
+The dependency-closure check then rejected NuGet's lib/net8.0/GodotSharp.dll key:
+publish stores that assembly at the output root. Corrected mapping to published
+basenames (culture directories for resources). Static verification then confirms
+all191 listed runtime/native assets and the complete self-contained payload.
+Both rejected packaging attempts retain their diagnostics; no rejected ZIP shipped.
