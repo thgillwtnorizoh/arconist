@@ -63,3 +63,32 @@ Mandatory Acceptance Table A-G, Validation Commands, Publication, and Final
 Reconstruction Boundary. Include verified SHA/branch, changed paths and preservation.
 If a gate fails, preserve and deliver the failed state with errors/divergences and
 targeted repair. Stop after R001; no R002/R003 or new expeditions without authority.
+
+## Headquarters publication and human qualification policy — 2026-11-05
+
+This section supersedes R001-era directions requiring reconstruction work to remain
+on dedicated reconstruction/r00x branches until a separate merge. The official
+integration and publication target for all subsequent Arconist reconstruction
+missions and corrective orders is the repository's `main` branch. Work may use a
+temporary safety branch during development, but must publish the resulting source,
+validation report, and append-only contexts on `main` before reporting its work as
+delivered. Never force-push, rewrite history, or overwrite unrelated original-native
+research. Check current `main` ancestry and use a normal fast-forward or reviewed
+non-destructive integration if another agent has advanced it. State the final `main`
+SHA and release-asset location in every handoff. Original work can be committed as
+FAIL/partial or READY FOR HUMAN QUALIFICATION with those labels clearly retained;
+publication to `main` alone never means an accepted PASS.
+
+All graphical interaction/playtesting automation is prohibited for prototype
+qualification: no Computer Use operation of the game, SendInput, keyboard/mouse
+injection, scripted graphical playthrough, or screenshot inspection offered as a
+substitute for the owner's testing. Build/export/package validation, deterministic
+unit tests and headless gameplay/spatial regressions remain permitted as technical
+checks only. The project owner alone performs actual prototype launch, visual,
+input, gameplay, results and replay qualification. Work must stop at READY FOR HUMAN
+QUALIFICATION after a complete technical delivery, and Headquarters must not accept
+the playable mission until the owner reports a satisfactory hands-on result.
+
+R003-C01's Windows package was delivered for owner qualification; it is not
+accepted as R003 PASS. The owner will test that specific build and report findings.
+Do not launch R004 or Unity because source is now on `main`.
