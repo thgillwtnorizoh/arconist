@@ -219,3 +219,29 @@ publish stores that assembly at the output root. Corrected mapping to published
 basenames (culture directories for resources). Static verification then confirms
 all191 listed runtime/native assets and the complete self-contained payload.
 Both rejected packaging attempts retain their diagnostics; no rejected ZIP shipped.
+
+
+## R003-C01 technical package delivered — 2026-11-05 Asia/Bangkok
+
+Published build source cb5dc5db9fdb8cbda17f02680fd61c844842623d, reconstruction/r003.
+Final full driver exits0:36 core,three reference comparisons,15 bridge and30
+headless spatial checks pass;zero failures/skips;zero compiler warnings/errors.
+Actual fresh Godot Windows export completes without ERROR/WARNING lines. Package
+verifier confirms AMD64/self-contained .NET10.0.13,all191 dependency assets and
+unchanged AFF bytes.201 payload files plus SHA256SUMS;ZIP CRC and every extracted
+hash pass. Windows ZIP 75209412bytes, SHA256
+c1dd5a638bfb63261d7a55d165a99c5e8b1992e5b0a4803b71099882ebca75cb.
+
+Preservation from4305f1c:166 baseline blobs,163 unchanged;only build.ps1,Godot README
+and this append change;five additions;zero deletions. Prior12050-byte history
+prefix retained exactly. No gameplay/core/bridge/test/research source changes.
+Final audit updates history and corrective report only; package source identity
+remains the implementation commit above. Build/export/failure/integrity logs and
+owner instructions delivered separately from source. No proprietary assets or
+editor are shipped.
+
+READY FOR HUMAN QUALIFICATION. No Windows executable launch,GUI automation,input
+injection,playthrough or screenshot inspection occurred. Owner launch/render/input/
+judgment/results/restart acceptance pending;R003 PASS is not declared. Remaining
+build limitation is unresolved default Publish concurrency cause;serialization is
+the verified mitigation. Stop at delivery;await owner and Headquarters decision.
