@@ -113,3 +113,30 @@ claim of human/owner hands-on acceptance. The successful/missed/restart evidence
 from complete actual graphical sessions. Binary package includes the self-contained
 .NET runtime and is launched without the editor; publication/readback and final
 artifact verification are recorded in the R002 delivery addendum.
+
+## R002 delivery verified — 2026-11-05
+
+Implementation c6b869e0aca0d0a3127ec8f2c3e57d95e0d3fd1a published directly from
+accepted R001 head on reconstruction/r002. Complete reproduction wrapper exits0:
+36/36 R001,15/15 bridge,zero skips,three reference comparisons pass,Godot .NET
+build/import/Windows export all successful. Both ZIP integrity checks and every
+extracted Windows-package file hash pass. The extracted ZIP executable separately
+starts, loads16 practice notes and renders actual gameplay, without the editor.
+All tested graphical processes close normally with exit0.
+
+Release https://github.com/thgillwtnorizoh/arconist/releases/tag/reconstruction-r002
+targets implementation c6b869e. Windows ZIP75487796bytes, SHA-256
+8f642712efc2c3d1ff90a7ed067ace28e7a278a7618892d43e8b2fc9ca6aa531;
+evidence ZIP413744bytes, SHA-256
+40290bdc95b9c42340c494dc21b136991f3e43fff5448ce6e996a89013cd8bfe.
+GitHub API asset sizes/digests independently match these local tested artifacts.
+No binary export or raw generated trace is committed; release evidence contains
+actual viewport images, event logs and audit summary. Final audit commit changes
+only this append-only history and validation/R002.md, not the tested playable code.
+
+143 R001 baseline blobs audited:142 unchanged exactly; contexts.md retains its
+entire prior byte prefix.19 changed paths:18 additions and the history append.
+Remote main and reconstruction/r001 remain unchanged; no force push or main merge.
+R002 mandatory A-H PASS at engineering delivery. Headquarters acceptance and the
+owner's later hands-on testing remain separate. Stop here without R003/Unity or
+another original-native expedition.
