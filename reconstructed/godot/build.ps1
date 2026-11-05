@@ -1,4 +1,4 @@
-param([Parameter(Mandatory=$true)][string]$GodotExecutable)
+param([Parameter(Mandatory=$true)][string]$GodotExecutable, [switch]$OfflineRestore)
 $ErrorActionPreference = 'Stop'
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $GodotExecutable = (Resolve-Path $GodotExecutable).Path
@@ -8,8 +8,11 @@ $env:DOTNET_CLI_TELEMETRY_OPTOUT = '1'
 $env:DOTNET_GENERATE_ASPNET_CERTIFICATE = 'false'
 $env:DOTNET_CLI_WORKLOAD_UPDATE_NOTIFY_DISABLE = '1'
 $env:MSBuildEnableWorkloadResolver = 'false'
+# Explicit offline build option: packages must already exist locally. This only
+# skips the unreachable online advisory lookup; no test or compiler gate changes.
+if ($OfflineRestore) { $env:NuGetAudit = 'false' }
 $toolsDir = Join-Path $repoRoot 'reconstructed/out/r002-tools'
-$exportDir = Join-Path $repoRoot 'reconstructed/out/r002-windows'
+$exportDir = Join-Path $repoRoot 'reconstructed/out/r003-windows'
 function Invoke-Dotnet {
     param([string[]]$Arguments)
     & rtk proxy dotnet @Arguments
@@ -48,9 +51,11 @@ try {
     Push-Location $PSScriptRoot
     try {
         Invoke-Dotnet -Arguments @('build','Arconist.Godot.csproj','-c','Debug','-m:1','-nr:false')
-        Invoke-Dotnet -Arguments @('run','--project','tests/Arconist.Bridge.Tests.csproj')
+        Invoke-Dotnet -Arguments @('build','tests/Arconist.Bridge.Tests.csproj','-c','Debug','-m:1','-nr:false')
+        Invoke-Dotnet -Arguments @('tests/bin/Debug/net10.0/Arconist.Bridge.Tests.dll')
     } finally { Pop-Location }
     Invoke-Godot -Arguments @('--headless','--editor','--path','reconstructed/godot','--import','--quit')
+    Invoke-Godot -Arguments @('--headless','--path','reconstructed/godot','--','--spatial-tests')
     Invoke-Godot -Arguments @('--headless','--path','reconstructed/godot','--export-release','Windows x64')
     if (-not (Test-Path (Join-Path $exportDir 'data_Arconist.Godot_windows_x86_64/coreclr.dll'))) { throw 'Self-contained runtime missing' }
     Write-Host ('Built Windows x64 application: '+(Join-Path $exportDir 'Arconist.exe'))

@@ -9,6 +9,10 @@ public partial class Main : Control
     private sealed class GodotClock : IMonotonicClock { public long Milliseconds => (long)Time.GetTicksMsec(); }
     private readonly GameplaySession session = new(new GodotClock());
     private Font font = null!;
+    private SpatialTrack track = null!;
+    private SubViewport viewport3D = null!;
+    private readonly Vector2 trackOrigin = new(40,130);
+    private readonly Vector2 trackSize = new(610,550);
     private Button start = null!, home = null!;
     private OptionButton charts = null!;
     private Label hud = null!, status = null!;
@@ -22,6 +26,10 @@ public partial class Main : Control
     public override void _Ready()
     {
         font = ThemeDB.FallbackFont;
+        var container = new SubViewportContainer { Position=trackOrigin, Size=trackSize, Stretch=true, MouseFilter=MouseFilterEnum.Ignore };
+        viewport3D = new SubViewport { Size=(Vector2I)trackSize, OwnWorld3D=true, RenderTargetUpdateMode=SubViewport.UpdateMode.Always, HandleInputLocally=false };
+        container.AddChild(viewport3D); AddChild(container);
+        track = new SpatialTrack(); viewport3D.AddChild(track);
         practice = Godot.FileAccess.GetFileAsString("res://content/practice.aff");
         reference = Godot.FileAccess.GetFileAsString("res://content/ordinary_two_tap.aff");
         foreach (string arg in OS.GetCmdlineUserArgs())
@@ -36,7 +44,8 @@ public partial class Main : Control
         home = MakeButton("Back to start", 692, 564, () => session.Home());
         hud = MakeLabel(692, 186, 336, 245, 25);
         status = MakeLabel(692, 115, 340, 65, 29);
-        GetWindow().FocusExited += () => session.ReleaseAll();
+        GetWindow().FocusExited += () => { session.ReleaseAll(); mouseLane=0; };
+        if (OS.GetCmdlineUserArgs().Contains("--spatial-tests")) CallDeferred(nameof(RunSpatialTests));
         GD.Print("ARCONIST_READY Godot=" + Engine.GetVersionInfo()["string"] + " .NET=" + System.Environment.Version + " evidence=" + evidenceDir);
         UpdateHud();
     }
@@ -50,13 +59,15 @@ public partial class Main : Control
         var label = new Label { Position = new Vector2(x,y), Size = new Vector2(w,h), MouseFilter = MouseFilterEnum.Ignore };
         label.AddThemeFontSizeOverride("font_size",size); AddChild(label); return label;
     }
-    private void Begin() { session.Start(charts.Selected == 0 ? practice : reference); UpdateHud(); QueueRedraw(); }
-    public override void _Process(double delta) { session.Frame(); UpdateHud(); QueueRedraw(); }
+    private void Begin() { mouseLane=0; session.Start(charts.Selected == 0 ? practice : reference); UpdateHud(); QueueRedraw(); }
+    public override void _Process(double delta) { session.Frame(); track.Refresh(session.Core); UpdateHud(); QueueRedraw(); }
     public override void _Input(InputEvent ev)
     {
         if (ev is InputEventKey key)
         {
             GD.Print($"KEY_EVENT logical={(long)key.Keycode} physical={(long)key.PhysicalKeycode} unicode={key.Unicode} pressed={key.Pressed} echo={key.Echo}");
+            if (key.Pressed && !key.Echo && key.Keycode == Key.F6) { track.SetView(!track.AlternateView); LogSpatial("CAMERA"); return; }
+            if (key.Pressed && !key.Echo && key.Keycode == Key.F7) { GetWindow().Size = GetWindow().Size.X == 1100 ? new Vector2I(1320,888) : new Vector2I(1100,740); LogSpatial("RESIZE"); return; }
             if (key.Pressed && !key.Echo && key.Keycode == Key.F8) { Capture(); return; }
             char letter = GameplaySession.ResolveKey((long)key.PhysicalKeycode,(long)key.Keycode,key.Unicode);
             if (letter != '\0')
@@ -68,8 +79,13 @@ public partial class Main : Control
         }
         if (ev is InputEventMouseButton mouse && mouse.ButtonIndex == MouseButton.Left)
         {
-            if (mouse.Pressed && mouse.Position.X >= 72 && mouse.Position.X < 592 && mouse.Position.Y >= 140 && mouse.Position.Y < 665)
-            { mouseLane = 2 + (int)((mouse.Position.X-72)/130); session.Contact(100,mouseLane,true); }
+            if (mouse.Pressed && mouseLane == 0)
+            {
+                Vector2 local=(mouse.Position-trackOrigin) * (Vector2)viewport3D.Size / trackSize;
+                int lane=track.Pick(local,out var point);
+                log?.WriteLine(JsonSerializer.Serialize(new { kind="MOUSE_PROJECTION", run=session.Run, x=mouse.Position.X,y=mouse.Position.Y, lane, world=new[]{point.X,point.Y,point.Z} }));
+                if (lane != 0 && session.Contact(100,lane,true)) mouseLane=lane;
+            }
             else if (!mouse.Pressed && mouseLane != 0) { session.Contact(100,mouseLane,false); mouseLane = 0; }
         }
     }
@@ -101,45 +117,21 @@ public partial class Main : Control
     public override void _Draw()
     {
         if (font == null) return;
-        DrawRect(new Rect2(0,0,1100,740),new Color("0b1020"));
-        Text("ARCONIST",72,64,32,ink); Text("TAP PRACTICE   /   R002",692,60,17,muted);
+        DrawRect(new Rect2(665,0,435,740),new Color("0b1020"));
+        Text("ARCONIST",72,64,32,ink); Text("TAP PRACTICE   /   R003",692,60,17,muted);
         Text("D  ·  F  ·  J  ·  K",72,102,19,muted);
-        DrawRect(new Rect2(72,140,520,525),new Color("141e32"));
-        for (int lane=0;lane<4;lane++)
-        {
-            float x = 72+lane*130;
-            DrawLine(new Vector2(x,140),new Vector2(x,665),new Color("2b3853"),1);
-            Text(new[]{"D","F","J","K"}[lane],x+54,648,26,ink);
-            Text((lane+2).ToString(),x+59,687,13,muted);
-        }
-        DrawLine(new Vector2(72,590),new Vector2(592,590),accent,4);
-        Text("JUDGMENT LINE",72,721,13,muted);
-        Text("Original shapes · shared gameplay core · no audio",692,686,14,muted);
-        var k = session.Core;
-        if (k != null)
-        {
-            int e = k.Timeline.EffectiveTime;
-            foreach (var note in k.Notes)
-            {
-                if (note.Consumed || note.Missed) continue;
-                float y = 590 - (note.Data.Time-e)*0.18f;
-                if (y<140 || y>610) continue;
-                float x = 72+(note.Data.Lane-2)*130+10;
-                DrawRect(new Rect2(x,y-10,110,20),cyan);
-                DrawLine(new Vector2(x+5,y-7),new Vector2(x+105,y-7),ink,2);
-            }
-            float progress = Math.Clamp((float)e/k.Chart.EndTime,0,1);
-            DrawRect(new Rect2(72,120,520,4),new Color("2b3853")); DrawRect(new Rect2(72,120,520*progress,4),accent);
-            if (k.Result != null)
-            { Text("CHART FINISHED",178,350,29,accent); Text("Your next run starts fresh.",162,393,20,muted); }
-        }
-        else
-        {
-            Text("READY WHEN YOU ARE",139,350,26,accent);
-            Text("Choose a chart and press Start.",134,395,20,muted);
-        }
+        Text("Native coordinates / 425   |   perspective Camera3D",52,713,15,muted);
+        Text("F6 view   F7 resize   F8 capture",692,686,15,muted);
     }
-    private void Log(string kind)
+    private void RunSpatialTests() => SpatialValidation.Run(this,track,evidenceDir);
+    private void LogSpatial(string kind)
+    {
+        var centers=Enumerable.Range(2,4).Select(lane => {
+            var p=track.Camera.UnprojectPosition(SpatialTrack.World(SpatialTrack.NativeX(lane),0,0));
+            return new { lane, x=p.X+trackOrigin.X,y=p.Y+trackOrigin.Y };
+        }).ToArray();
+        log?.WriteLine(JsonSerializer.Serialize(new { kind, view=track.AlternateView, viewport=new[]{viewport3D.Size.X,viewport3D.Size.Y}, centers }));
+    }    private void Log(string kind)
     {
         var k=session.Core;
         log?.WriteLine(JsonSerializer.Serialize(new { sequence=++sequence, run=session.Run, kind,
@@ -147,12 +139,13 @@ public partial class Main : Control
             pure=k?.Pure,far=k?.Far,lost=k?.Lost,shining=k?.Shining,score=k?.Score,combo=k?.Combo,maxCombo=k?.MaxCombo,
             health=k?.Health,contacts=k?.ContactCount,held=session.HeldCount,finished=k?.Finished,
             candidates=k?.Candidates.ToArray(),classifications=k?.Classifications.ToArray(),expired=k?.Expired.ToArray(),
-            notes=k?.Notes.Select(n=>new { id=n.Data.Id, consumed=n.Consumed,missed=n.Missed,active=n.Active,contact=n.Contact }).ToArray(),result=k?.Result }));
+            notes=k?.Notes.Select(n=>new { id=n.Data.Id, consumed=n.Consumed,missed=n.Missed,active=n.Active,contact=n.Contact,depth=SpatialTrack.CurrentDepth(k!,n),visible=SpatialTrack.Present(k!,n) }).ToArray(),result=k?.Result }));
     }
     private async void Capture()
     {
         await ToSignal(RenderingServer.Singleton,RenderingServer.SignalName.FramePostDraw);
         string path=Path.Combine(evidenceDir,$"run{session.Run}-{DateTime.UtcNow:HHmmssfff}.png");
+        LogSpatial("CAPTURE_GEOMETRY");
         Error error=GetViewport().GetTexture().GetImage().SavePng(path); GD.Print($"VIEWPORT_CAPTURE {error} {path}");
     }
     public override void _ExitTree() { session.ReleaseAll(); log?.Dispose(); }

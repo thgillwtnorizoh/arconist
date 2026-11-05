@@ -140,3 +140,45 @@ Remote main and reconstruction/r001 remain unchanged; no force push or main merg
 R002 mandatory A-H PASS at engineering delivery. Headquarters acceptance and the
 owner's later hands-on testing remain separate. Stop here without R003/Unity or
 another original-native expedition.
+
+## R003 partial reconstruction — 2026-11-05
+
+Headquarters authorized native-informed 3D track/spatial-input mission from exact
+accepted R002 head fe9d460d40951edc3e1bd933d00b413a7522db28, branch
+reconstruction/r003. Read Instruction.md, full existing reconstruction history,
+Godot README, R001/R002 validation and relevant004/007/008/009/029/032/039/040
+research before implementation. Original research and portable gameplay behavior
+remain unchanged; no original-native expedition or Unity work was initiated.
+
+Added real Node3D/Camera3D/BoxMesh track and note presentation under Godot, while
+retaining shared core and bridge authority. Native axes uniformly divide by425;
+ordinary integer centers -638/-213/212/637 and Y4 are preserved. Current depth
+reads the existing timing integrator with integer-predepth/float-add/truncation.
+Ground Y0 and judgment Z0 remain explicit. Single camera, FOV65, placeholder mesh
+style, immediate resolve hiding, four-lane clipping and safe ray rejection are
+engineering boundaries, not native GPU/camera calibration or physical touch claims.
+
+Actual final individual tests pass36/36 R001,three independent native comparisons,
+15/15 unchanged bridge and30/30 R003 actual Godot Camera3D groups,zero skips.
+All ten E032 depth samples and E0350/-881,890/8 match. Initial resize evidence was
+rejected because Godot refused direct viewport sizing; repaired test resizes its
+container and asserts actual size. Final resize/projection run has no warnings.
+
+Initial online NuGet advisory lookup failed; optional process-local offline restore
+allows cached-package builds without relaxing compiler/test checks. Installed-editor
+APPDATA/assembly startup failure was worked around with a complete local editor
+copy/portable data and writable APPDATA. Actual source starts using OpenGL3.3 on
+RTX3050/596.21 and reports4.7.2.NET/runtime10.0.13; its game window was enumerated.
+Graphical helper capture/activation failed, reset/reconnection then explicitly
+reported physical Escape stop. No further UI control or alternative OS-input
+injection was issued. No accepted screenshot or complete controlled gameplay
+session is claimed, and owner hands-on testing is not demanded.
+
+Windows export fails in .NET Publish/GetTargetFrameworks after restore; its partial
+EXE/PCK lacks the self-contained runtime and is not a distribution. Shell GitHub
+auth/network attempts fail; connected GitHub creates R003 at the authorized parent
+for partial-source preservation. R003 validation report records commands, failures,
+geometry policy, status of every gate and targeted remaining work. Final publication
+verification is recorded separately. R003 is FAIL: minimum playable3D Windows goal
+has not been demonstrated; no gate is waived. G-006/G-007 remain blocked; stop at
+R003 without main merge, R004, Unity or another native expedition.
