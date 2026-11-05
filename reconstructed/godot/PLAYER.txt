@@ -1,0 +1,26 @@
+ARCONIST R003-C01 — Windows x64 / human qualification build
+
+Extract the entire ZIP to a writable folder. Open Arconist.exe.
+Keep Arconist.pck and the whole data_Arconist.Godot_windows_x86_64 folder
+beside the executable. No Godot editor or separate .NET installation is needed.
+Requires Windows 10/11 x64 with an OpenGL 3.3 compatible graphics driver.
+
+Leave “Practice · 16 taps / four lanes” selected and click Start chart.
+Wait through the three-second countdown. Tap D, F, J, K for the four lanes
+from left to right as notes meet the green judgment line. Release between taps.
+Mouse: left-click the ground region of the desired lane near the green line.
+Clicks far from the judgment line are rejected. Release between clicks.
+After results, click Play again to restart or Back to start to return.
+The chart selector also offers the two-tap native reference fixture.
+
+F6: alternate camera. F7: change window size. F8: save an owner-requested
+viewport capture under %APPDATA%/Godot/app_userdata/Arconist R003 - 3D Tap Practice/evidence.
+Session diagnostics are saved in that same evidence folder.
+
+This is a silent, tap-only research prototype with placeholder graphics.
+Holds, arcs, flicks, music, exact original graphics and lane widening are absent.
+Losing focus releases held contacts but does not pause chart time.
+The build is unsigned. Windows launch, visible rendering, input, results and
+restart await the owner's personal inspection and play.
+
+READY FOR HUMAN QUALIFICATION. This does not declare R003 PASS.
