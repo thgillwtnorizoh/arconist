@@ -1,111 +1,103 @@
-# Arconist R003-C01 — Windows export recovery
+# Arconist R004 — ordinary taps, holds and continuous contacts
 
-R003 remains unaccepted. Headquarters R003-C01 makes the owner’s human
-qualification authoritative. Automated GUI operation, gameplay input injection
-and automated screenshot inspection are prohibited. Headless suites establish
-technical correctness only. The historical failed R003 report is preserved in
-`../validation/R003.md`; the corrective record is `../validation/R003-C01.md`.
+The owner exclusively qualifies Windows launch, graphical appearance, physical
+input, results and restart. This build is **READY FOR HUMAN QUALIFICATION** only
+after the complete logged technical delivery. No GUI automation, input injection,
+graphical playthrough or automated screenshot inspection is authorized.
 
-## Build and package
+## Build and delivery
 
-Use Godot **4.7.2 .NET**, .NET SDK **10.0.402**, Python 3.11+ and the matching
-**mono** export templates. `dotnet` must be on PATH. The SDK needs the .NET
-Standard 2.1 reference pack; the explicit restore can acquire it on fresh hosts.
-Download Godot/templates from https://godotengine.org/download/archive/4.7.2-stable/.
-Prepare a notices folder with GODOT-LICENSE.txt and GODOT-COPYRIGHT.txt from that
-Godot source tag, plus DOTNET-LICENSE.txt and DOTNET-THIRD-PARTY-NOTICES.txt from
-the Microsoft.NETCore.App.Runtime.win-x64 10.0.13 NuGet package.
+Use Godot **4.7.2 .NET**, **.NET SDK10.0.402**, Python3.11+ and matching **mono**
+export templates. `dotnet` must be on PATH. Godot packages are resolved from
+`GODOT_NUPKGS` set by the driver to the editor's GodotSharp/Tools/nupkgs folder;
+no developer absolute paths are committed. Explicit restore supplies fresh hosts'
+missing .NET Standard2.1 targeting pack through the project NuGet configuration.
 
-From the repository root (Linux or Windows; use your local paths):
+Obtain toolchains from https://godotengine.org/download/archive/4.7.2-stable/ and
+https://dotnet.microsoft.com/download/dotnet/10.0. Prepare a notices directory with
+GODOT-LICENSE.txt/GODOT-COPYRIGHT.txt from the Godot4.7.2 tag and
+DOTNET-LICENSE.txt/DOTNET-THIRD-PARTY-NOTICES.txt from the
+Microsoft.NETCore.App.Runtime.win-x64 10.0.13 NuGet package.
+
+Commit all source, then from repository root:
 
 ```text
 python reconstructed/godot/build.py --godot /path/to/Godot.NET --templates /path/to/templates.tpz --notices /path/to/notices
 ```
 
-The driver runs core/reference/bridge/headless spatial checks, imports and exports
-through Godot, validates AMD64 headers and the self-contained runtime, packages
-all export files/notices/player instructions and verifies ZIP CRCs and every
-extracted file hash. It never launches Windows or operates a graphical game.
-Outputs are under `reconstructed/out`: `Arconist-R003-C01-Windows-x64.zip`,
-`r003-windows/` and `r003-c01-evidence/` (logs and package-integrity.json).
-Each attempt requires a new evidence directory; archive the existing one first.
-A prior export is moved aside to evidence before a clean export is created.
-Do not distribute `previous-export/` as a prototype.
+The driver rejects an uncommitted tree, runs the unchanged36 core/three reference/
+15 bridge/30 spatial regressions, new33 core/bridge groups and15 headless Godot
+hold groups, then imports/exports and verifies the Windows package. It preserves
+the R003-C01 **DOTNET_PROCESSOR_COUNT=1** child-SDK mitigation and `.gdignore`
+resource exclusions. It rejects nonzero exits AND Godot ERROR lines. No graphical
+Windows application is launched. The Windows PowerShell build/export wrapper is
+also available; the Python driver produces the verified ZIP and evidence package.
 
-The Windows PowerShell compilation/export entry remains available:
+Outputs under `reconstructed/out`:
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File reconstructed/godot/build.ps1 -GodotExecutable C:/path/to/Godot_v4.7.2-stable_mono_win64_console.exe
-```
+- `Arconist-R004-Windows-x64.zip`: executable/PCK/self-contained .NET10.0.13,
+  owner instructions, notices, SOURCE.txt and per-file SHA256SUMS.txt.
+- `Arconist-R004-Technical-Evidence.zip`: command/exit logs, actual MSBuild export
+  diagnostics, native comparison traces, spatial/hold reports and package checks.
+- `r004-evidence/`: logs, integrity JSON and extracted verification copy.
 
-No RTK wrapper is required. Both drivers set process-local
-`DOTNET_PROCESSOR_COUNT=1` for the exporter’s SDK child. Default exporter Publish
-reproduced the silent GetTargetFrameworks failure; serialization completes it.
-The underlying SDK/host concurrency defect is not proven. No gameplay code,
-compiler checks or regression assertions are changed. `.gdignore` excludes
-bridge/tests build artifacts from Godot’s resource scan; their C# project
-references still compile normally. The full Python driver is the ZIP delivery path.
+An existing evidence directory is never overwritten. Archive it before repeating
+the full driver. A prior export is moved aside before a clean one is created.
+Do not distribute previous-export as the new prototype. ZIP checks validate CRCs
+and every extracted payload hash; the runtime's exported dependency closure is
+checked, rather than trusting the EXE alone. All six AFF resource bytes are verified
+inside the actual PCK. Publication target is **main**, without force pushing.
 
-`-OfflineRestore` on the PowerShell driver disables only the online advisory
-lookup when all required packages are already cached. It does not supply missing
-packages, bypass compiler diagnostics or establish qualification.
+## Owner play
 
-## Owner launch
+See [PLAYER.txt](PLAYER.txt). Extract everything and open Arconist.exe.
+The default mixed practice contains taps and four holds. D/F/J/K retain one
+contact each until UP; left mouse provides a separate contact in a projected lane.
+Holding J plus left mouse on the J ground region, then releasing J, tests
+same-lane continuation. Briefly release and press again to test reacquisition.
+Mouse movement updates retained lane membership without classifying a fresh tap.
 
-Extract the whole ZIP and open `Arconist.exe`. Keep `Arconist.pck` and the entire
-adjacent `data_Arconist.Godot_windows_x86_64` folder together. The package includes
-.NET 10.0.13; no editor or separate runtime installation is needed. See PLAYER.txt.
-Windows launch, graphics, gameplay and restart are pending owner inspection.
+Selectable charts: new mixed practice; unchanged16-tap practice; unchanged two-tap
+reference; byte-identical E026 hold; E037 hold-first and tap-first fixtures.
+The HUD includes chart descriptions, hold activity/contact/unit status, checkpoint
+feedback, results and replay. F6/F7/F8 remain owner-operated view/resize/capture.
+Focus loss releases contacts while chart time continues; pause is deferred.
 
-## Controls and session behavior
+## Native evidence and engineering boundary
 
-Select the 16-tap synthetic practice or byte-identical two-tap native reference,
-then Start chart. Three seconds of preroll precede effective gameplay time.
-D/F/J/K resolve to internal lanes 2/3/4/5. Press/release each tap; repeated DOWN
-and key echoes do not create extra hits. Mouse clicks near the green judgment
-line project through the actual track camera to the ground plane. Click the
-lane's ground region; the input plane is Y=0 while the thin tap mesh is centered
-at native Y=4. Only ground intersections strictly within native -500<Z<500 and
--850<=X<=850 are supported. A far-away click is deliberately rejected.
+[Reference ledger](../../reference_traces/r004/README.md) identifies E001/002/008–010/
+026/027/035/037. `core/Chart.cs` creates ordinary flag0 interior hold records with
+f32 stages. Raw integer lanes1..4 map to internal2..5. The supported hold domain
+has duration>=2ms, nonnegative times below INT_MAX−1,000,000, finite interval>=1ms,
+unique strictly interior integer checkpoints, <=100000 generation steps and a
+bounded positive-depth bucket span. Unsupported forms fail explicitly. This keeps
+the original R0011ms invalid-domain regression intact; it does not claim arbitrary
+short/large/native malformed AFF compatibility. Positive timing changes are retained;
+hold interval uses the timing at start. No groups/reverse-scroll expansion occurs.
 
-F6 switches between two controlled camera poses, F7 toggles 1100x740/1320x888,
-and F8 saves the real viewport with projection metadata. HUD, judgments, combo,
-health, completion/results and replay come from the existing shared core. Focus
-loss releases contacts without pausing time. Mouse pointer100 stays distinct from
-keyboard contacts. UP cleans the retained pointer even outside the track.
+N=taps+checkpoint weights; end=max(tap+120,hold.end+500). Initial latch requires
+start<E+100 and E<end; continuous activity requires latch and start<E<end and
+matching retained contacts. DOWN never inserts FRAME. Activity resets every frame;
+UP removes retention, leaves latch and does not advance E. All matching contacts
+can sustain the same hold. Initial chronology and the unconditional hold latch
+stop reproduce E037 A1/A2/B. Source order breaks equal-start ties as an existing
+engineering rule, not a universal native priority claim.
 
-## Native facts and engineering mapping
+Checkpoint handling uses due trunc(f32(E+interval/2)) and the original inactive
+half/overdue cutoff distinction. Ordinary factory+6c starts0; advanced flag/mode
+producers are not supported. Records resolve backwards through a pending prefix;
+per-unit recorder/clamp calls apply gain or2HP damage once. The renderer only reads
+these results. Native E026/E037 stop before results; composed full hold sessions are
+reconstruction tests. E008/009 independently supply the overdue-to-results case.
 
-E007/E032 ordinary tap placement is `(425*(lane-1)-1063, 4, currentDepth)`;
-lanes2..5 therefore use X -638/-213/212/637. Godot retains all axis directions and
-uniformly divides every native coordinate by425. Ground is Y=0; judgment is Z=0.
-Negative Z is distant, approaching Z=0 as core effective time advances.
+Hold bodies/heads/checkpoint marks are real BoxMeshes; body endpoints use the same
+integer-predepth/float-add depth model as taps. After the start crosses the line,
+the visible front is clamped to Z0 while the tail approaches. Amber/green/red,
+geometry sizes, clipping, shrink policy and brief checkpoint markers are functional
+presentation choices, not native mesh/material fidelity. Fresh kernels replace old
+note/hold visual trees. Native coordinates/425, FOV65, single camera and safe ground
+ray picking remain the accepted R003 approximation.
 
-The renderer uses `trunc(trunc(core.DepthAt(note.Time))-core.DepthAt(E))`, exactly
-the existing integer-predepth/float-add ordering, without integrating frame delta.
-The core owns chart time, offsets, effective time, candidate membership, expiry,
-judgments and results. Rendering does not mutate any of them. Presentation hides
-consumed/missed notes immediately and clips depth to[-9500,1000]; this explicit
-engineering policy is not E032's retained native renderer lifecycle or GPU output.
-
-Camera home `(0,900,900)` and target `(0,-550,-2000)`, up+Y, are E007-informed.
-Near1/far10000 are uniformly scaled. Vertical FOV65 is an engineering selection
-from the recovered50..65 range to fit the narrower610x550 viewport; it is not the
-native resolution interpolation or a calibrated original camera. One perspective
-camera replaces the original paired-camera/layer arrangement. Alternate pose
-`(220,1100,1050)` is solely a controlled viewing aid. Track BoxMeshes, sizes,
-lighting, colors, depth guides and Label3D key labels are original placeholders.
-
-Picking uses Camera3D.ProjectRayOrigin/ProjectRayNormal, intersects Y=0 and applies
-E004's signed-X truncation/thresholds, including X==425 -> no lane. Four-lane outer
-clipping, finite checks, epsilon-parallel and backwards-ray rejection are bounded
-engineering substitutions. No fixed screen rectangles determine lane identity.
-The surrounding UI container is only a viewport-coordinate transform.
-
-## Boundaries
-
-30 headless geometry/timing/projection groups establish technical correctness.
-Human graphical and gameplay qualification remains pending. G-006 camera reset and
-G-007 track fade remain historically blocked. No widening/scene camera actions,
-holds/arcs/flicks, physical multitouch, Android, audio, exact FOV calibration,
-original shaders/GPU reproduction, pixel fidelity or Unity is implemented.
+No audio, arc/arc-tap/flick, widening, special gauge, character, full pause, Android,
+persistence, original shader fidelity or Unity work is included. Headless evidence
+never establishes visible graphical correctness or human playability.

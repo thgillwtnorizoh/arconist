@@ -15,8 +15,16 @@ public partial class Main : Control
     private readonly Vector2 trackSize = new(610,550);
     private Button start = null!, home = null!;
     private OptionButton charts = null!;
-    private Label hud = null!, status = null!;
-    private string practice = "", reference = "";
+    private Label hud = null!, status = null!, holdStatus = null!, chartInfo = null!;
+    private readonly List<string> chartData = new();
+    private static readonly (string file, string title, string description)[] ChartChoices = {
+        ("mixed_practice.aff", "R004 mixed taps + holds", "F 4–6.5s: release / press again.\nJ 8–11s: key + mouse, release J.\nKeep mouse pressed near the line."),
+        ("practice.aff", "Original practice · 16 taps", "Original R002/R003 chart.\nD / F / J / K: tap and release.\nMouse: click lane near green line."),
+        ("ordinary_two_tap.aff", "Native reference · two taps", "Two taps: J at1s, F at2s.\nRelease between inputs.\nOriginal reference bytes preserved."),
+        ("native_hold.aff", "E026 · J hold 1–2 seconds", "Hold J, briefly release, press again.\nFor two contacts: J + left mouse.\nRelease one; keep the other held."),
+        ("hold_first.aff", "E037 · hold first / tap blocked", "Earlier J hold blocks the1.25s tap.\nTry J + mouse, then release one.\nNative target: PURE3 / LOST1."),
+        ("tap_first.aff", "E037 · tap first / two contacts", "Near1s: press J, then mouse on J.\nRelease mouse; keep J held.\nNative target: PURE4 / shining3.")
+    };
     private string evidenceDir = "";
     private StreamWriter? log;
     private long sequence;
@@ -30,8 +38,8 @@ public partial class Main : Control
         viewport3D = new SubViewport { Size=(Vector2I)trackSize, OwnWorld3D=true, RenderTargetUpdateMode=SubViewport.UpdateMode.Always, HandleInputLocally=false };
         container.AddChild(viewport3D); AddChild(container);
         track = new SpatialTrack(); viewport3D.AddChild(track);
-        practice = Godot.FileAccess.GetFileAsString("res://content/practice.aff");
-        reference = Godot.FileAccess.GetFileAsString("res://content/ordinary_two_tap.aff");
+        foreach (var choice in ChartChoices)
+            chartData.Add(Godot.FileAccess.GetFileAsString("res://content/" + choice.file));
         foreach (string arg in OS.GetCmdlineUserArgs())
             if (arg.StartsWith("--evidence-dir=", StringComparison.Ordinal)) evidenceDir = arg.Substring(15);
         if (evidenceDir.Length == 0) evidenceDir = ProjectSettings.GlobalizePath("user://evidence");
@@ -39,13 +47,19 @@ public partial class Main : Control
         log = new StreamWriter(Path.Combine(evidenceDir, "session-" + DateTime.UtcNow.ToString("yyyyMMdd-HHmmss") + ".jsonl")) { AutoFlush = true };
         session.Changed += Log;
         charts = new OptionButton { Position = new Vector2(692, 440), Size = new Vector2(320, 44) };
-        charts.AddItem("Practice · 16 taps / four lanes"); charts.AddItem("Native reference · two taps"); AddChild(charts);
+        foreach (var choice in ChartChoices) charts.AddItem(choice.title);
+        AddChild(charts);
+        chartInfo = MakeLabel(692, 620, 330, 64, 16);
+        chartInfo.Text = ChartChoices[0].description;
+        charts.ItemSelected += index => chartInfo.Text = ChartChoices[(int)index].description;
+        holdStatus = MakeLabel(692, 402, 336, 32, 18);
         start = MakeButton("Start practice", 692, 502, () => Begin());
         home = MakeButton("Back to start", 692, 564, () => session.Home());
         hud = MakeLabel(692, 186, 336, 245, 25);
-        status = MakeLabel(692, 115, 340, 65, 29);
+        status = MakeLabel(692, 115, 340, 65, 24);
         GetWindow().FocusExited += () => { session.ReleaseAll(); mouseLane=0; };
         if (OS.GetCmdlineUserArgs().Contains("--spatial-tests")) CallDeferred(nameof(RunSpatialTests));
+        if (OS.GetCmdlineUserArgs().Contains("--hold-tests")) CallDeferred(nameof(RunHoldTests));
         GD.Print("ARCONIST_READY Godot=" + Engine.GetVersionInfo()["string"] + " .NET=" + System.Environment.Version + " evidence=" + evidenceDir);
         UpdateHud();
     }
@@ -59,7 +73,7 @@ public partial class Main : Control
         var label = new Label { Position = new Vector2(x,y), Size = new Vector2(w,h), MouseFilter = MouseFilterEnum.Ignore };
         label.AddThemeFontSizeOverride("font_size",size); AddChild(label); return label;
     }
-    private void Begin() { mouseLane=0; session.Start(charts.Selected == 0 ? practice : reference); UpdateHud(); QueueRedraw(); }
+    private void Begin() { mouseLane=0; session.Start(chartData[charts.Selected]); UpdateHud(); QueueRedraw(); }
     public override void _Process(double delta) { session.Frame(); track.Refresh(session.Core); UpdateHud(); QueueRedraw(); }
     public override void _Input(InputEvent ev)
     {
@@ -77,6 +91,11 @@ public partial class Main : Control
                 GetViewport().SetInputAsHandled();
             }
         }
+        if (ev is InputEventMouseMotion motion && mouseLane != 0)
+        {
+            Vector2 local = (motion.Position-trackOrigin) * (Vector2)viewport3D.Size / trackSize;
+            session.MoveContact(100, track.Pick(local, out _));
+        }
         if (ev is InputEventMouseButton mouse && mouse.ButtonIndex == MouseButton.Left)
         {
             if (mouse.Pressed && mouseLane == 0)
@@ -92,13 +111,19 @@ public partial class Main : Control
     private void UpdateHud()
     {
         var k = session.Core;
+        holdStatus.Visible = k != null && !k.Finished && k.Holds.Count > 0;
+        if (holdStatus.Visible)
+        {
+            var hold = k!.Holds.FirstOrDefault(h => h.Holding) ?? k.Holds.FirstOrDefault(h => h.End > k.Timeline.EffectiveTime);
+            holdStatus.Text = hold == null ? "HOLDS COMPLETE" : $"HOLD {(hold.Holding ? "ON" : "OFF")}   contacts {hold.ActivatingContacts.Count}   units {hold.Records.Count(r=>r.Resolved)}/{hold.Records.Count}";
+        }
         charts.Visible = k == null || k.Finished; start.Visible = charts.Visible;
         home.Visible = k != null && k.Finished;
         start.Text = k == null ? "Start chart" : "Play again";
         if (k == null)
         {
             status.Text = "FIND YOUR RHYTHM";
-            hud.Text = "Four lanes. One timing line.\n\nD     F     J     K\n\nPress as each note meets the line.\nA quiet, audio-free practice.";
+            hud.Text = "D     F     J     K\n\nCyan: tap and release.\nAmber: hold the key.\nGreen: hold contact active.\n\nKey + mouse = two contacts.\nSilent practice; see guide below.";
             hud.AddThemeFontSizeOverride("font_size",21); return;
         }
         hud.AddThemeFontSizeOverride("font_size",25);
@@ -118,11 +143,12 @@ public partial class Main : Control
     {
         if (font == null) return;
         DrawRect(new Rect2(665,0,435,740),new Color("0b1020"));
-        Text("ARCONIST",72,64,32,ink); Text("TAP PRACTICE   /   R003",692,60,17,muted);
+        Text("ARCONIST",72,64,32,ink); Text("TAPS + HOLDS   /   R004",692,60,17,muted);
         Text("D  ·  F  ·  J  ·  K",72,102,19,muted);
         Text("Native coordinates / 425   |   perspective Camera3D",52,713,15,muted);
         Text("F6 view   F7 resize   F8 capture",692,686,15,muted);
     }
+    private void RunHoldTests() => HoldValidation.Run(this, track, evidenceDir);
     private void RunSpatialTests() => SpatialValidation.Run(this,track,evidenceDir);
     private void LogSpatial(string kind)
     {
@@ -138,6 +164,8 @@ public partial class Main : Control
             wall=(long)Time.GetTicksMsec(), e=k?.Timeline.EffectiveTime, lastFrame=k?.LastFrameTime,
             pure=k?.Pure,far=k?.Far,lost=k?.Lost,shining=k?.Shining,score=k?.Score,combo=k?.Combo,maxCombo=k?.MaxCombo,
             health=k?.Health,contacts=k?.ContactCount,held=session.HeldCount,finished=k?.Finished,
+            holds=k?.Holds.Select(h=>new { id=h.Data.Id, h.Active, h.Latched, h.Holding, h.ActivatingContacts, h.Records }).ToArray(),
+            retained=k?.Contacts, judgments=k?.Judgments.ToArray(),
             candidates=k?.Candidates.ToArray(),classifications=k?.Classifications.ToArray(),expired=k?.Expired.ToArray(),
             notes=k?.Notes.Select(n=>new { id=n.Data.Id, consumed=n.Consumed,missed=n.Missed,active=n.Active,contact=n.Contact,depth=SpatialTrack.CurrentDepth(k!,n),visible=SpatialTrack.Present(k!,n) }).ToArray(),result=k?.Result }));
     }

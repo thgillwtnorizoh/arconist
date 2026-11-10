@@ -9,6 +9,16 @@ public partial class SpatialTrack : Node3D
     public const float Unit = 1f / 425f;
     public Camera3D Camera { get; private set; } = null!;
     private readonly Dictionary<string, MeshInstance3D> notes = new();
+    private sealed class HoldView
+    {
+        public Node3D Root = null!;
+        public MeshInstance3D Body = null!, Head = null!;
+        public List<MeshInstance3D> Markers = new();
+    }
+    private readonly Dictionary<string, HoldView> holds = new();
+    private Kernel? displayedCore;
+    public int HoldVisualCount => holds.Count;
+    public Node3D? HoldVisual(string id) => holds.TryGetValue(id, out var view) ? view.Root : null;
     public bool AlternateView { get; private set; }
     public static Vector3 World(float x, float y, float z) => new(x * Unit, y * Unit, z * Unit);
     public static int NativeX(int lane) => 425 * (lane - 1) - 1063;
@@ -60,12 +70,12 @@ public partial class SpatialTrack : Node3D
             AddChild(label);
         }
     }
-    private MeshInstance3D Box(Vector3 position, Vector3 size, Color color, bool unshaded=false)
+    private MeshInstance3D Box(Vector3 position, Vector3 size, Color color, bool unshaded=false, Node3D? parent=null)
     {
         var m = new StandardMaterial3D { AlbedoColor = color, Roughness=0.8f };
         if (unshaded) m.ShadingMode = BaseMaterial3D.ShadingModeEnum.Unshaded;
         var mesh = new MeshInstance3D { Mesh = new BoxMesh { Size=size }, MaterialOverride=m, Position=position };
-        AddChild(mesh); return mesh;
+        (parent ?? this).AddChild(mesh); return mesh;
     }
     public void SetView(bool alternate)
     {
@@ -75,6 +85,12 @@ public partial class SpatialTrack : Node3D
     }
     public void Refresh(Kernel? core)
     {
+        if (!ReferenceEquals(core, displayedCore))
+        {
+            foreach (var mesh in notes.Values) { RemoveChild(mesh); mesh.QueueFree(); }
+            foreach (var view in holds.Values) { RemoveChild(view.Root); view.Root.QueueFree(); }
+            notes.Clear(); holds.Clear(); displayedCore = core;
+        }
         var ids=core?.Notes.Select(n=>n.Data.Id).ToHashSet() ?? new HashSet<string>();
         foreach (string id in notes.Keys.Where(id=>!ids.Contains(id)).ToArray()) { notes[id].QueueFree(); notes.Remove(id); }
         if (core == null) return;
@@ -84,5 +100,41 @@ public partial class SpatialTrack : Node3D
             { mesh=Box(Vector3.Zero,World(382,8,95),new Color("69e1f7")); notes.Add(note.Data.Id,mesh); }
             mesh.Position=NotePosition(core,note); mesh.Visible=Present(core,note);
         }
+        foreach (var hold in core.Holds)
+        {
+            if (!holds.TryGetValue(hold.Id, out var view))
+            {
+                view = new HoldView { Root = new Node3D() }; AddChild(view.Root);
+                view.Body = Box(Vector3.Zero, World(345,10,1), new Color("f3b85b"), true, view.Root);
+                view.Body.Name = "Body";
+                view.Head = Box(Vector3.Zero, World(382,16,95), new Color("ffd891"), true, view.Root);
+                view.Head.Name = "Head";
+                foreach (var r in hold.Records)
+                {
+                    var marker=Box(Vector3.Zero, World(250,18,24), new Color("fff1c7"), true, view.Root);
+                    marker.Name="Checkpoint"+r.Time; view.Markers.Add(marker);
+                }
+                holds.Add(hold.Id, view);
+            }
+            int now = core.Timeline.EffectiveTime;
+            int startDepth = HoldDepth(core, hold.Data.Start), endDepth = HoldDepth(core, hold.Data.End);
+            float front = Math.Min(startDepth, 0), tail = Math.Max(endDepth, -9500);
+            view.Root.Visible = !core.Finished && !(hold.Terminal && now > hold.End+300);
+            view.Body.Visible = now < hold.End && endDepth <= 1000 && startDepth >= -9500;
+            view.Body.Position = World(NativeX(hold.Lane), 7, (front+tail)*0.5f);
+            ((BoxMesh)view.Body.Mesh).Size = World(345,10,Math.Max(1,Math.Abs(front-tail)));
+            ((StandardMaterial3D)view.Body.MaterialOverride).AlbedoColor = new Color(hold.Holding ? "a5f56d" : "f3b85b");
+            view.Head.Position = World(NativeX(hold.Lane), 8, Math.Min(startDepth,0));
+            view.Head.Visible = view.Body.Visible;
+            for(int i=0;i<hold.Records.Count;i++)
+            {
+                var r=hold.Records[i];var marker=view.Markers[i];
+                int depth=HoldDepth(core,r.Time);
+                marker.Position=World(NativeX(hold.Lane),20,r.Resolved?Math.Min(depth,0):depth);
+                marker.Visible = depth >= -9500 && (r.Resolved ? now-r.ResolvedAt!.Value <= 300 : depth <= 1000);
+                ((StandardMaterial3D)marker.MaterialOverride).AlbedoColor = new Color(!r.Resolved ? "fff1c7" : r.Outcome=="LOST" ? "ff6985" : "c3fa7d");
+            }
+        }
     }
+    public static int HoldDepth(Kernel core,int time) => (int)((int)core.DepthAt(time)-core.DepthAt(core.Timeline.EffectiveTime));
 }

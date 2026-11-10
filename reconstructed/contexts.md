@@ -265,3 +265,43 @@ package checks and non-graphical regression tests remain engineering checks, nev
 human acceptance. R003-C01 remains READY FOR HUMAN QUALIFICATION, with the owner
 planning to test this specific build and return feedback. No R004, Unity work, or
 further graphical testing was authorized by this administrative directive.
+
+## R004 implementation — 2026-11-10 Asia/Bangkok
+
+Headquarters authorizes ordinary holds/mixed taps from main
+bc7f3b2f47c93093ec9be2da825ab1018db3e956 and supplies R003-C01 owner acceptance.
+Historical pending-owner/FAIL entries remain unchanged. Read permanent instructions,
+full history, Scout003 and all requested validation/native references before work.
+No original research changes/new expedition, GUI operation, OS input injection or
+automated screenshot inspection. All final source goes to main without force push.
+
+Added typed Hold/flag0 interior records with literal E001/010 f32 interval/generation,
+unit-aware N/end, endpoint index/range, distinct latch/activity/retained contact
+identities/lane state, once-only due/overdue recording and existing per-unit score/
+gauge/combo/results. Shared initial chronology preserves E037 unconditional hold
+stop and consumed-tap continuation. UP retains latch, next frame resets activity;
+all same-lane contacts can sustain a hold. Mouse MOVE changes retained lane without
+new DOWN or timing/frame work. Derived hold misses cost2HP. Ordinary+6c flag0 is
+confirmed by static consultation of the already cited factory, not fresh execution.
+
+Supported hold domain explicitly rejects <2ms, noninteger/outside1..4 raw lanes,
+nonfinite/sub1ms intervals, noninterior/duplicate truncated records, excessive
+record/bucket spans and extreme timestamps. R001's1ms rejected specimen/assertion
+is untouched. No artificial head/tail units; midpoint fallback is supported inside
+this domain. Timing at start supplies interval; positive timing depth is preserved.
+
+Normalized native cases were transcribed before new tests executed: E026 control/
+repress, E037 A1/A2/B and E008/009 overdue/results. Development runs match all
+intermediate expectations exactly, including H and2249/2250; no first divergence.
+New suite33/33 and headless Godot15/15 pass. Unchanged36 R001/15 bridge/30 spatial
+groups pass; final standalone-reference/full-driver reproduction follows. No
+failure/assertion weakening is hidden; a trailing-whitespace check was repaired.
+
+Real hold bodies/heads/checkpoint marks read the core; amber/green/red, body-front
+clipping to Z0, sizes and short marker display are explicit presentation choices.
+New mixed/selectable native diagnostics coexist with byte-identical old charts.
+Fresh kernels replace hold/tap trees and reset all contacts/records. R003-C01
+serialization and resource-scan ignores retained. Preflight Windows export succeeds
+and structural verification finds all191 dependencies and all six AFF contents.
+Final clean committed-source ZIP/evidence/publication results follow; this is not
+owner launch/render/input/results/restart qualification. No R005 or Unity follows.

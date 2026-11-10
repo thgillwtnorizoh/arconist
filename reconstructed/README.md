@@ -1,3 +1,18 @@
+# Arconist reconstruction — R004
+
+Current implementation adds ordinary holds to the independent core and accepted
+Godot3D tap prototype. See [Godot build/player guide](godot/README.md),
+[R004 technical report](validation/R004.md), [native hold references](../reference_traces/r004/README.md)
+and [append-only history](contexts.md). Main is the final publication target.
+Human qualification is owner-only. The R004 Windows package includes all runtime
+dependencies; the owner does not need to compile it.
+
+The following section documents the preserved R001 tap runner and its36-test
+regression interface. R004 hold-specific tests live separately in `hold-tests/`;
+the full Godot build driver executes both plus bridge/headless suites. Historical
+R001 scope statements below describe that original runner, not the current Godot
+or hold implementation.
+
 # Independent ordinary tap kernel — R001
 
 Portable `core/` targets .NET Standard 2.1. `headless/` and `tests/` target .NET 10;

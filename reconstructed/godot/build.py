@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""R003-C01: logged technical checks and Windows packaging; never GUI playtesting."""
+"""R004: logged technical checks and Windows packaging; never GUI playtesting."""
 import argparse
 import hashlib
 import json
@@ -79,7 +79,7 @@ def verify(package, templates):
                 assets.append(str(relative))
     pck = (package / 'Arconist.pck').read_bytes()
     assert pck[:4] == b'GDPC'
-    for chart in ('practice.aff', 'ordinary_two_tap.aff'):
+    for chart in ('practice.aff', 'ordinary_two_tap.aff', 'mixed_practice.aff', 'native_hold.aff', 'hold_first.aff', 'tap_first.aff'):
         assert (PROJECT / 'content' / chart).read_bytes() in pck, chart
     assert b'sourcelink.json' not in pck
     return {'required_files': required, 'dependency_assets_verified': len(assets), 'runtime': runtime,
@@ -100,7 +100,9 @@ def main():
     ENV.update(GODOT_NUPKGS=str(godot.parent / 'GodotSharp/Tools/nupkgs'),
                DOTNET_PROCESSOR_COUNT='1', MSBuildEnableWorkloadResolver='false',
                DOTNET_CLI_TELEMETRY_OPTOUT='1', GODOT_SILENCE_ROOT_WARNING='1')
-    LOGS = OUT / 'r003-c01-evidence'
+    if subprocess.check_output(['git', 'status', '--porcelain'], cwd=ROOT, text=True).strip():
+        raise RuntimeError('Commit all source changes before the qualification build.')
+    LOGS = OUT / 'r004-evidence'
     LOGS.mkdir(parents=True, exist_ok=False)  # Never overwrite an earlier attempt.
     version = run('godot-version', [godot, '--version'])
     assert version.strip().startswith('4.7.2.stable.mono.')
@@ -126,6 +128,10 @@ def main():
                        f'research_harness/fixtures/{chart}.aff',
                        f'reference_traces/r001/{scenario}.schedule.json', LOGS / (scenario + '.json'),
                        '--reference', f'reference_traces/r001/{scenario}.reference.json'])
+    run('r004-build', ['dotnet', 'build', 'reconstructed/hold-tests/Arconist.Hold.Tests.csproj',
+                         '-c', 'Release', *common])
+    run('r004-core-bridge-tests', ['dotnet', 'reconstructed/hold-tests/bin/Release/net10.0/Arconist.Hold.Tests.dll',
+                                  '.', LOGS / 'r004-core'])
     run('godot-build', ['dotnet', 'build', PROJECT / 'Arconist.Godot.csproj', '-c', 'Debug', *common])
     run('bridge-build', ['dotnet', 'build', PROJECT / 'tests/Arconist.Bridge.Tests.csproj',
                          '-c', 'Debug', *common])
@@ -133,11 +139,19 @@ def main():
     run('import', [godot, '--headless', '--editor', '--path', PROJECT, '--import', '--quit'])
     run('spatial-tests', [godot, '--headless', '--path', PROJECT, '--', '--spatial-tests',
                            '--evidence-dir=' + str(LOGS / 'spatial')])
-    package = OUT / 'r003-windows'
+    run('r004-headless-tests', [godot, '--headless', '--path', PROJECT, '--', '--hold-tests',
+                                '--evidence-dir=' + str(LOGS / 'holds')])
+    package = OUT / 'r004-windows'
     if package.exists():
         shutil.move(str(package), str(LOGS / 'previous-export'))
     package.mkdir()
     run('windows-export', [godot, '--headless', '--path', PROJECT, '--export-release', 'Windows x64'])
+    # Keep the actual .NET exporter logger, beyond Godot's top-level stdout.
+    data_home = Path(ENV.get('APPDATA', '')) / 'Godot' if os.name == 'nt' else Path(ENV.get('XDG_DATA_HOME', str(Path.home() / '.local/share'))) / 'godot'
+    msbuild_logs = list((data_home / 'mono/build_logs').glob('*_ExportRelease/msbuild_log.txt'))
+    if not msbuild_logs:
+        raise RuntimeError('Exporter MSBuild diagnostics were not found.')
+    shutil.copyfile(max(msbuild_logs, key=lambda f: f.stat().st_mtime), LOGS / 'godot-msbuild-export.log')
     report = verify(package, tools)
     assert sorted(x.name for x in a.notices.iterdir()) == [
         'DOTNET-LICENSE.txt', 'DOTNET-THIRD-PARTY-NOTICES.txt', 'GODOT-COPYRIGHT.txt', 'GODOT-LICENSE.txt']
@@ -145,29 +159,39 @@ def main():
     shutil.copyfile(PROJECT / 'PLAYER.txt', package / 'README.txt')
     source = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
     (package / 'SOURCE.txt').write_text(
-        'https://github.com/thgillwtnorizoh/arconist\nbranch: reconstruction/r003\ncommit: ' + source +
+        'https://github.com/thgillwtnorizoh/arconist\nbranch: main\ncommit: ' + source +
         '\nGodot 4.7.2 .NET; SDK 10.0.402; bundled runtime 10.0.13\n'
-        'READY FOR HUMAN QUALIFICATION. R003 acceptance pending.\n', encoding='utf-8')
+        'READY FOR HUMAN QUALIFICATION. R004 acceptance pending.\n', encoding='utf-8')
     files = sorted(f for f in package.rglob('*') if f.is_file())
     manifest = {f.relative_to(package).as_posix(): sha(f) for f in files}
     (package / 'SHA256SUMS.txt').write_text(''.join(f'{v}  {k}\n' for k, v in manifest.items()), encoding='utf-8')
-    archive = OUT / 'Arconist-R003-C01-Windows-x64.zip'
+    archive = OUT / 'Arconist-R004-Windows-x64.zip'
     with zipfile.ZipFile(archive, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as z:
         for f in sorted(package.rglob('*')):
             if f.is_file():
-                z.write(f, 'Arconist-R003-C01/' + f.relative_to(package).as_posix())
+                z.write(f, 'Arconist-R004/' + f.relative_to(package).as_posix())
     # Validate CRCs and every extracted payload hash, independently of source paths.
     with zipfile.ZipFile(archive) as z:
         assert z.testzip() is None
         z.extractall(LOGS / 'extracted')
-    extracted = LOGS / 'extracted/Arconist-R003-C01'
+    extracted = LOGS / 'extracted/Arconist-R004'
     for name, expected in manifest.items():
         assert sha(extracted / name) == expected, name
     assert sha(extracted / 'SHA256SUMS.txt') == sha(package / 'SHA256SUMS.txt')
-    report.update(source_commit=source, branch='reconstruction/r003',
+    report.update(source_commit=source, branch='main',
                   archive=archive.name, archive_bytes=archive.stat().st_size, archive_sha256=sha(archive),
                   payload_files=len(manifest), zip_crc_and_extracted_hashes='PASS')
     (LOGS / 'package-integrity.json').write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
+    shutil.copyfile(package / 'SHA256SUMS.txt', LOGS / 'WINDOWS-PAYLOAD-SHA256SUMS.txt')
+    (LOGS / 'WINDOWS-ZIP-SHA256.txt').write_text(report['archive_sha256'] + '  ' + archive.name + '\n', encoding='utf-8')
+    shutil.copyfile(ROOT / 'reconstructed/validation/R004.md', LOGS / 'R004.md')
+    evidence_zip = OUT / 'Arconist-R004-Technical-Evidence.zip'
+    with zipfile.ZipFile(evidence_zip, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as z:
+        for f in sorted(LOGS.rglob('*')):
+            if f.is_file() and f.relative_to(LOGS).parts[0] not in ('extracted', 'previous-export'):
+                z.write(f, 'Arconist-R004-Evidence/' + f.relative_to(LOGS).as_posix())
+    with zipfile.ZipFile(evidence_zip) as z:
+        assert z.testzip() is None
     print(json.dumps(report, indent=2))
     print('READY FOR HUMAN QUALIFICATION — no Windows execution or GUI interaction performed.')
 

@@ -15,7 +15,7 @@ $env:DOTNET_PROCESSOR_COUNT = '1'
 # skips the unreachable online advisory lookup; no test or compiler gate changes.
 if ($OfflineRestore) { $env:NuGetAudit = 'false' }
 $toolsDir = Join-Path $repoRoot 'reconstructed/out/r002-tools'
-$exportDir = Join-Path $repoRoot 'reconstructed/out/r003-windows'
+$exportDir = Join-Path $repoRoot 'reconstructed/out/r004-windows'
 function Invoke-Dotnet {
     param([string[]]$Arguments)
     & dotnet @Arguments
@@ -56,6 +56,8 @@ try {
         $chart = if ($scenario -eq 'ordinary') { 'research_harness/fixtures/ordinary_two_tap.aff' } else { 'research_harness/fixtures/native_late_input_expiry.aff' }
         Invoke-Dotnet -Arguments @('reconstructed/headless/bin/Release/net10.0/Arconist.Headless.dll',$chart,('reference_traces/r001/'+$scenario+'.schedule.json'),(Join-Path $toolsDir ($scenario+'.json')),'--reference',('reference_traces/r001/'+$scenario+'.reference.json'))
     }
+    Invoke-Dotnet -Arguments @('build','reconstructed/hold-tests/Arconist.Hold.Tests.csproj','-c','Release','-m:1','-nr:false')
+    Invoke-Dotnet -Arguments @('reconstructed/hold-tests/bin/Release/net10.0/Arconist.Hold.Tests.dll','.','reconstructed/out/r004-core')
     Push-Location $PSScriptRoot
     try {
         Invoke-Dotnet -Arguments @('build','Arconist.Godot.csproj','-c','Debug','-m:1','-nr:false')
@@ -64,6 +66,7 @@ try {
     } finally { Pop-Location }
     Invoke-Godot -Arguments @('--headless','--editor','--path','reconstructed/godot','--import','--quit')
     Invoke-Godot -Arguments @('--headless','--path','reconstructed/godot','--','--spatial-tests')
+    Invoke-Godot -Arguments @('--headless','--path','reconstructed/godot','--','--hold-tests')
     Invoke-Godot -Arguments @('--headless','--path','reconstructed/godot','--export-release','Windows x64')
     if (-not (Test-Path (Join-Path $exportDir 'data_Arconist.Godot_windows_x86_64/coreclr.dll'))) { throw 'Self-contained runtime missing' }
     Write-Host ('Built Windows x64 application: '+(Join-Path $exportDir 'Arconist.exe'))

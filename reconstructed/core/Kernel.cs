@@ -27,16 +27,81 @@ public sealed class Timeline
     }
 }
 
-public sealed class NoteState
+public abstract class RuntimeNote
+{
+    public abstract string Id { get; }
+    public abstract int Start { get; }
+    public abstract int End { get; }
+    public abstract int Lane { get; }
+    public abstract int SourceOrder { get; }
+    public abstract bool Terminal { get; }
+    public bool Active { get; internal set; }
+    public int Depth { get; internal set; }
+    public int EndDepth { get; internal set; }
+    public int Bucket { get; internal set; }
+    public int EndBucket { get; internal set; }
+}
+
+public sealed class NoteState : RuntimeNote
 {
     public Tap Data { get; }
-    public bool Active { get; internal set; }
+    public override string Id => Data.Id;
+    public override int Start => Data.Time;
+    public override int End => Data.Time;
+    public override int Lane => Data.Lane;
+    public override int SourceOrder => Data.SourceOrder;
+    public override bool Terminal => Missed || Consumed;
     public bool Missed { get; internal set; }
     public bool Consumed { get; internal set; }
     public int Contact { get; internal set; } = -1;
-    public int Depth { get; internal set; }
-    public int Bucket { get; internal set; }
     internal NoteState(Tap data) { Data = data; }
+}
+
+public sealed class CheckpointState
+{
+    public int Time { get; }
+    public int Weight => 1; // Ordinary hold flag0 records, E001/026.
+    public bool Resolved { get; internal set; }
+    public string? Outcome { get; internal set; }
+    public int? ResolvedAt { get; internal set; }
+    internal CheckpointState(int time) { Time = time; }
+}
+
+public sealed class HoldState : RuntimeNote
+{
+    public Hold Data { get; }
+    public override string Id => Data.Id;
+    public override int Start => Data.Start;
+    public override int End => Data.End;
+    public override int Lane => Data.Lane;
+    public override int SourceOrder => Data.SourceOrder;
+    public override bool Terminal => Records.All(r => r.Resolved);
+    public bool Latched { get; internal set; }
+    public bool Holding { get; internal set; }
+    // Factory0x144650c initializes +6c to0 for this ordinary hold domain.
+    public bool FirstRecordEarlyExpiry => false;
+    public IReadOnlyList<CheckpointState> Records { get; }
+    public IReadOnlyList<int> ActivatingContacts => activating.AsReadOnly();
+    internal readonly List<int> activating = new List<int>();
+    internal HoldState(Hold data) { Data = data; Records = data.Checkpoints.Select(t => new CheckpointState(t)).ToList().AsReadOnly(); }
+}
+
+public sealed class RetainedContact
+{
+    public int Pointer { get; }
+    public int Id { get; }
+    public int Lane { get; internal set; }
+    internal RetainedContact(int pointer, int id, int lane) { Pointer = pointer; Id = id; Lane = lane; }
+}
+
+public sealed class JudgmentEvent
+{
+    public string Note { get; }
+    public int? CheckpointTime { get; }
+    public string Outcome { get; }
+    public int EffectiveTime { get; }
+    internal JudgmentEvent(string note, int? checkpointTime, string outcome, int effectiveTime)
+    { Note = note; CheckpointTime = checkpointTime; Outcome = outcome; EffectiveTime = effectiveTime; }
 }
 
 public sealed class Classification
@@ -77,9 +142,12 @@ public sealed class Kernel
     public Chart Chart { get; }
     public Timeline Timeline { get; }
     public IReadOnlyList<NoteState> Notes { get; }
-    private readonly List<NoteState> active = new List<NoteState>();
-    private readonly Dictionary<int, List<NoteState>> buckets = new Dictionary<int, List<NoteState>>();
-    private readonly Dictionary<int, int> contacts = new Dictionary<int, int>();
+    public IReadOnlyList<HoldState> Holds { get; }
+    private readonly List<RuntimeNote> active = new List<RuntimeNote>();
+    private readonly Dictionary<int, List<RuntimeNote>> buckets = new Dictionary<int, List<RuntimeNote>>();
+    private readonly Dictionary<int, RetainedContact> contacts = new Dictionary<int, RetainedContact>();
+    public IReadOnlyList<RetainedContact> Contacts => contacts.Values.OrderBy(c => c.Id).ToList().AsReadOnly();
+    public List<JudgmentEvent> Judgments { get; } = new List<JudgmentEvent>();
     private readonly float[] scales;
     private int nextContact;
     public float EffectiveSpeed { get; }
@@ -111,12 +179,21 @@ public sealed class Kernel
         scales = chart.Timings.Select(t => (1f / (t.Bpm * EffectiveSpeed)) * 60f).ToArray();
         if (scales.Any(s => !float.IsFinite(s) || s <= 0)) throw new ArgumentException("Unsupported timing scale.");
         var notes = chart.Taps.Select(t => new NoteState(t)).ToList(); Notes = notes.AsReadOnly();
-        foreach (var note in notes)
+        var holds = chart.Holds.Select(h => new HoldState(h)).ToList(); Holds = holds.AsReadOnly();
+        var objects = notes.Cast<RuntimeNote>().Concat(holds).OrderBy(n => n.Start).ThenBy(n => n.SourceOrder);
+        foreach (var note in objects)
         {
-            note.Bucket = (int)(DepthAt(note.Data.Time) / -10000f);
-            note.Depth = (int)DepthAt(note.Data.Time);
-            if (!buckets.TryGetValue(note.Bucket, out var list)) buckets[note.Bucket] = list = new List<NoteState>();
-            list.Add(note);
+            note.Bucket = (int)(DepthAt(note.Start) / -10000f);
+            note.EndBucket = (int)(DepthAt(note.End) / -10000f);
+            note.Depth = (int)DepthAt(note.Start); note.EndDepth = (int)DepthAt(note.End);
+            // E009 endpoint-only index: one long note can occupy several buckets.
+            if ((long)note.EndBucket - note.Bucket > 100000)
+                throw new NotSupportedException("Hold index exceeds the supported bucket span.");
+            for (int key = note.Bucket; key <= note.EndBucket; key++)
+            {
+                if (!buckets.TryGetValue(key, out var list)) buckets[key] = list = new List<RuntimeNote>();
+                list.Add(note);
+            }
         }
         int n = chart.JudgmentUnits;
         float total = n < 400 ? 200f + n * 0.5f : n < 600 ? 280f + (n - 400) * 0.5f : 360f + (n - 600) / 5f;
@@ -138,7 +215,7 @@ public sealed class Kernel
         return depth;
     }
 
-    private void BeginEvent() { Candidates.Clear(); Classifications.Clear(); Expired.Clear(); }
+    private void BeginEvent() { Candidates.Clear(); Classifications.Clear(); Expired.Clear(); Judgments.Clear(); }
 
     public void Frame(long wallMs)
     {
@@ -148,8 +225,9 @@ public sealed class Kernel
         foreach (var note in active.ToArray())
         {
             // 010 preprocessing stores integer pre-depth; the frame adds current float depth to that stored value.
-            note.Depth = (int)((int)DepthAt(note.Data.Time) + a);
-            if ((note.Missed || note.Consumed || Finished) && now > note.Data.Time)
+            note.Depth = (int)((int)DepthAt(note.Start) + a);
+            note.EndDepth = (int)((int)DepthAt(note.End) + a);
+            if ((note.Terminal || Finished) && now > note.End)
             { note.Active = false; active.Remove(note); }
         }
         int low = Math.Min((int)((a - 700f) / 10000f), (int)((b - 700f) / 10000f));
@@ -161,15 +239,26 @@ public sealed class Kernel
             foreach (var note in pair.Value)
             {
                 if (note.Active) continue;
-                note.Depth = (int)((int)DepthAt(note.Data.Time) + a);
-                if (note.Depth >= 300 || note.Missed || note.Consumed || Finished) continue;
+                note.Depth = (int)((int)DepthAt(note.Start) + a);
+                note.EndDepth = (int)((int)DepthAt(note.End) + a);
+                if (Math.Min(note.Depth, note.EndDepth) >= 300 || note.Terminal || Finished) continue;
                 note.Active = true; active.Add(note);
             }
         }
         if (Finished) return;
-        foreach (var note in active)
-            if (!note.Missed && !note.Consumed && now > note.Data.Time + 100)
+        // E026/E037: reset frame activity, then restore it through ALL retained
+        // contacts. Initial DOWN never performs this frame pass or owns the hold.
+        foreach (var hold in Holds) { hold.Holding = false; hold.activating.Clear(); }
+        foreach (var contact in contacts.Values.OrderBy(c => c.Id))
+            foreach (var hold in active.OfType<HoldState>())
+                if (hold.Latched && hold.Start < now && now < hold.End && contact.Lane == hold.Lane)
+                { hold.Holding = true; hold.activating.Add(contact.Id); }
+        foreach (var item in active)
+        {
+            if (item is NoteState note && !note.Missed && !note.Consumed && now > note.Data.Time + 100)
             { Miss(note); Expired.Add(note.Data.Id); }
+            else if (item is HoldState hold) ResolveHold(hold, now);
+        }
         if (now > Chart.EndTime)
         { Finished = true; Result = new GameResult(this); }
     }
@@ -179,14 +268,24 @@ public sealed class Kernel
         BeginEvent();
         if (lane < 2 || lane > 5) throw new NotSupportedException("Ordinary input accepts internal lanes 2..5; widening is deferred.");
         if (contacts.ContainsKey(pointer)) throw new ArgumentException("DOWN pointer already retained.");
-        int contact = nextContact++; contacts.Add(pointer, contact);
+        int contact = nextContact++; contacts.Add(pointer, new RetainedContact(pointer, contact, lane));
         if (Finished) return;
         Timeline.Update(wallMs); int now = Timeline.EffectiveTime;
         // Range maintenance belongs to FRAME, never to DOWN. Guards are evaluated after collection.
-        var ordered = active.Where(n => n.Data.Lane == lane).OrderBy(n => n.Data.Time).ThenBy(n => n.Data.Ordinal).ToArray();
-        Candidates.AddRange(ordered.Select(n => n.Data.Id));
-        foreach (var note in ordered)
+        var ordered = active.Where(n => n.Lane == lane &&
+            (n is NoteState || (n.Start < (long)now + 100 && now < n.End)))
+            .OrderBy(n => n.Start).ThenBy(n => n.SourceOrder).ToArray();
+        Candidates.AddRange(ordered.Select(n => n.Id));
+        foreach (var item in ordered)
         {
+            if (item is HoldState hold)
+            {
+                // E037: even a prior latch1->1 stops initial iteration.
+                hold.Latched = true;
+                Classifications.Add(new Classification(hold.Id, "HOLD_LATCH", 0, true));
+                break;
+            }
+            var note = (NoteState)item;
             int error = (int)Math.Abs((long)now - note.Data.Time);
             string outcome; bool consumes = false;
             if (note.Missed) outcome = "guard_missed";
@@ -198,22 +297,81 @@ public sealed class Kernel
                 int id = error <= 25 ? 0 : error <= 50 ? 1 : 2;
                 outcome = id == 0 ? "SHINING_PURE" : id == 1 ? "PURE" : "FAR";
                 note.Consumed = true; note.Contact = contact;
-                if (id == 0) Shining++;
-                if (id < 2) Pure++; else Far++;
+                RecordAccepted(note.Id, null, id, now);
                 if (id != 0) { if (now < note.Data.Time) Early++; else Late++; }
-                ApplyHealth(id < 2 ? BaseGain : BaseGain * 0.5f, 0);
-                Score = CalculateScore(Pure, Far, Shining, Chart.JudgmentUnits);
-                Combo++; MaxCombo = Math.Max(MaxCombo, Combo); consumes = true;
+                consumes = true;
             }
             Classifications.Add(new Classification(note.Data.Id, outcome, error, consumes));
             if (consumes) break;
         }
     }
 
+    // Desktop retained mouse movement changes lane membership, not initial
+    // arbitration, timeline or FRAME. Lane0 means outside the supported track.
+    public void Move(int pointer, int lane)
+    {
+        BeginEvent();
+        if (lane != 0 && (lane < 2 || lane > 5)) throw new NotSupportedException("Unsupported contact lane.");
+        if (!contacts.TryGetValue(pointer, out var contact)) throw new ArgumentException("MOVE pointer is not retained.");
+        contact.Lane = lane;
+    }
+
     // Ordinary UP only cleans retained contacts; it does not refresh the judgment clock (035).
     public void Up(int pointer) { BeginEvent(); if (!contacts.Remove(pointer)) throw new ArgumentException("UP pointer is not retained."); }
     private void Miss(NoteState note)
-    { note.Missed = true; Lost++; ApplyHealth(0, 2); Combo = 0; }
+    { note.Missed = true; RecordMiss(note.Id, null, Timeline.EffectiveTime); }
+
+    private void RecordAccepted(string note, int? checkpoint, int id, int now)
+    {
+        if (id == 0) Shining++;
+        if (id < 2) Pure++; else Far++;
+        ApplyHealth(id < 2 ? BaseGain : BaseGain * 0.5f, 0);
+        Score = CalculateScore(Pure, Far, Shining, Chart.JudgmentUnits);
+        Combo++; MaxCombo = Math.Max(MaxCombo, Combo);
+        Judgments.Add(new JudgmentEvent(note, checkpoint, id == 0 ? "SHINING_PURE" : id == 1 ? "PURE" : "FAR", now));
+    }
+    private void RecordMiss(string note, int? checkpoint, int now)
+    {
+        Lost++; ApplyHealth(0, 2); Combo = 0;
+        // E008/009: derived ordinary LogicHoldNote takes the 2HP branch.
+        Judgments.Add(new JudgmentEvent(note, checkpoint, "LOST", now));
+    }
+    private void ResolveHold(HoldState hold, int now)
+    {
+        int last = -1;
+        if (hold.Holding)
+        {
+            int cutoff = (int)((float)now + hold.Data.Interval * 0.5f);
+            while (last + 1 < hold.Records.Count && hold.Records[last + 1].Time <= cutoff) last++;
+        }
+        else
+        {
+            // E002 c6e938: double half-cutoff, then f32 overdue cutoff. Ordinary
+            // factory flag+6c is0; preserve its separate first-record condition.
+            int halfCutoff = (int)((double)now - Math.Min((double)hold.Data.Interval * 0.5, 500.0));
+            int count = hold.Records.Count(r => r.Time <= halfCutoff);
+            if (count == 1 && hold.FirstRecordEarlyExpiry) last = 0;
+            else
+            {
+                int cutoff = (int)((float)now - Math.Min(hold.Data.Interval * 2f, 500f));
+                while (last + 1 < hold.Records.Count && hold.Records[last + 1].Time <= cutoff) last++;
+            }
+        }
+        // Native resolves an unresolved prefix backwards, stopping at a resolved
+        // record, then makes one genuine recorder/clamp call per unit.
+        var resolved = new List<CheckpointState>();
+        for (int i = last; i >= 0 && !hold.Records[i].Resolved; i--)
+        {
+            var r = hold.Records[i]; r.Resolved = true; r.ResolvedAt = now;
+            r.Outcome = hold.Holding ? "SHINING_PURE" : "LOST"; resolved.Add(r);
+        }
+        foreach (var r in resolved)
+            for (int unit = 0; unit < r.Weight; unit++)
+            {
+                if (hold.Holding) RecordAccepted(hold.Id, r.Time, 0, now);
+                else { RecordMiss(hold.Id, r.Time, now); Expired.Add(hold.Id + ":checkpoint:" + r.Time); }
+            }
+    }
     private void ApplyHealth(float gain, float damage)
     { float sum = Health + gain; float value = sum - damage; Health = Math.Max(0f, Math.Min(100f, value)); }
     public static int CalculateScore(int pure, int far, int shining, int total)

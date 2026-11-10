@@ -1,26 +1,53 @@
-ARCONIST R003-C01 — Windows x64 / human qualification build
+ARCONIST R004 — ordinary taps and holds / human qualification build
 
-Extract the entire ZIP to a writable folder. Open Arconist.exe.
-Keep Arconist.pck and the whole data_Arconist.Godot_windows_x86_64 folder
-beside the executable. No Godot editor or separate .NET installation is needed.
-Requires Windows 10/11 x64 with an OpenGL 3.3 compatible graphics driver.
+Extract the ENTIRE ZIP to a writable folder and open Arconist.exe.
+Keep Arconist.pck and data_Arconist.Godot_windows_x86_64 beside the EXE.
+No editor, SDK or separate .NET installation is needed.
+Requires Windows10/11 x64 and an OpenGL3.3 compatible graphics driver.
 
-Leave “Practice · 16 taps / four lanes” selected and click Start chart.
-Wait through the three-second countdown. Tap D, F, J, K for the four lanes
-from left to right as notes meet the green judgment line. Release between taps.
-Mouse: left-click the ground region of the desired lane near the green line.
-Clicks far from the judgment line are rejected. Release between clicks.
-After results, click Play again to restart or Back to start to return.
-The chart selector also offers the two-tap native reference fixture.
+Select R004 mixed taps + holds, then click Start chart. Wait3 seconds.
+D / F / J / K correspond to the four ground lanes from left to right.
+Cyan notes: tap and release at the green line.
+Amber bodies: press the lane key when the front meets the line and keep it held.
+Green bodies indicate core-confirmed continuous contact activity. Checkpoints
+produce feedback/counters; momentary release does not immediately cause a miss.
 
-F6: alternate camera. F7: change window size. F8: save an owner-requested
-viewport capture under %APPDATA%/Godot/app_userdata/Arconist R003 - 3D Tap Practice/evidence.
-Session diagnostics are saved in that same evidence folder.
+Mixed chart instructions (time shown by the HUD after the countdown):
+  Tap D at2s and K at3s.
+  Hold F from4–6.5s. Briefly release and press again during the body.
+  Tap K at6s while F is held.
+  Hold J from8–11s. Tap D at9.5s using the other hand.
+  Tap F at12.5s.
+  Hold D from14–16.5s; tap K at15.5s.
+  Hold K from18–20s; tap J at21s. Results follow shortly afterward.
 
-This is a silent, tap-only research prototype with placeholder graphics.
-Holds, arcs, flicks, music, exact original graphics and lane widening are absent.
-Losing focus releases held contacts but does not pause chart time.
-The build is unsigned. Windows launch, visible rendering, input, results and
-restart await the owner's personal inspection and play.
+Mouse: left-click the lane ground near the green line for taps, or keep the
+button pressed to sustain a hold. A held mouse moved to another lane/outside
+the track stops sustaining its previous lane on the following frame. Moving
+back can restore hold activity; movement does not make a fresh tap judgment.
 
-READY FOR HUMAN QUALIFICATION. This does not declare R003 PASS.
+Two contacts in ONE lane: while J is held, press and HOLD left mouse on J's
+ground region near the green line. Release J but keep the mouse pressed.
+The hold should continue until both contacts are removed. Try the reverse too.
+The short E026 J-hold diagnostic is also selectable. Each new key press/mouse
+press has a distinct logical identity; key repeat does not manufacture presses.
+
+Other chart choices retain the original16-tap practice and two-tap reference.
+E037 diagnostics intentionally show native arbitration:
+  Hold-first: earlier J hold blocks the competing1.25s tap, even when already
+  latched. Expected bounded native path: PURE3 / LOST1, score7500003.
+  Tap-first: near1s first press J to judge tap950, then press mouse on J to
+  latch hold1000. Release mouse; the still-held J can sustain all checkpoints.
+  Exact native score depends on the owner's timing; the diagnostic gives only
+  one second before the hold begins after preroll.
+
+After results choose Play again or Back to start. Restart must clear all hold
+records, contacts, feedback and geometry. F6 switches camera, F7 resizes.
+F8 captures the owner's viewport into the same folder as session diagnostics:
+%APPDATA%/Godot/app_userdata/Arconist R004 - 3D Tap and Hold Practice/evidence
+Focus loss releases contacts; chart time continues. Pause is not implemented.
+
+Silent, unsigned, tap/ordinary-hold prototype with functional placeholder meshes.
+No arcs, flicks, music/SFX, special gauges, widening, Android or Unity.
+READY FOR HUMAN QUALIFICATION — R004. Human launch/render/input/results/restart
+qualification is pending. Technical checks do not declare final R004 PASS.

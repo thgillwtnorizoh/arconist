@@ -1,0 +1,5 @@
+AudioOffset:0
+TimingPointDensityFactor:1.0
+-
+timing(0,120.00,4.00);
+hold(1000,2000,3);

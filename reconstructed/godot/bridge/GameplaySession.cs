@@ -37,7 +37,12 @@ public sealed class GameplaySession
     {
         if (Core == null || Core.Finished) return;
         Core.Frame(clock.Milliseconds);
-        if (Core.Expired.Count > 0) Feedback = "LOST";
+        if (Core.Judgments.Count > 0)
+        {
+            var last = Core.Judgments.Last();
+            Feedback = (last.CheckpointTime.HasValue ? "CHECKPOINT " : "") + last.Outcome.Replace('_', ' ');
+        }
+        else if (Core.Expired.Count > 0) Feedback = "LOST";
         if (Core.Finished) { ReleaseAll(); Changed?.Invoke("RESULT"); }
         else Changed?.Invoke("FRAME");
     }
@@ -62,6 +67,11 @@ public sealed class GameplaySession
             Core.Up(pointer); Changed?.Invoke("UP");
         }
         return true;
+    }
+    public bool MoveContact(int pointer, int lane)
+    {
+        if (Core == null || Core.Finished || !held.Contains(pointer)) return false;
+        Core.Move(pointer, lane); Changed?.Invoke("MOVE"); return true;
     }
     public void ReleaseAll()
     {

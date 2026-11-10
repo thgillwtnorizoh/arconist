@@ -1,0 +1,1340 @@
+{
+  "provenance": "E026/E037 tables, E008 \u00a712, E009 \u00a710; transcribed before reconstruction execution, not measured from it",
+  "cases": [
+    {
+      "name": "E026_uninterrupted",
+      "fixture": "native_hold.aff",
+      "judgmentUnits": 3,
+      "endTime": 2500,
+      "steps": [
+        {
+          "e": 1000,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 0,
+            "far": 0,
+            "lost": 0,
+            "shining": 0,
+            "score": 0,
+            "health": 0,
+            "hold": {
+              "resolved": [
+                0,
+                0,
+                0
+              ],
+              "holding": false,
+              "latched": false
+            }
+          }
+        },
+        {
+          "e": 1000,
+          "kind": "DOWN",
+          "expect": {
+            "pure": 0,
+            "far": 0,
+            "lost": 0,
+            "shining": 0,
+            "score": 0,
+            "health": 0,
+            "hold": {
+              "resolved": [
+                0,
+                0,
+                0
+              ],
+              "holding": false,
+              "latched": true
+            },
+            "contactCount": 1
+          },
+          "pointer": 42,
+          "lane": 4
+        },
+        {
+          "e": 1001,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 0,
+            "far": 0,
+            "lost": 0,
+            "shining": 0,
+            "score": 0,
+            "health": 0,
+            "hold": {
+              "resolved": [
+                0,
+                0,
+                0
+              ],
+              "holding": true,
+              "latched": true
+            }
+          }
+        },
+        {
+          "e": 1124,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 0,
+            "far": 0,
+            "lost": 0,
+            "shining": 0,
+            "score": 0,
+            "health": 0,
+            "hold": {
+              "resolved": [
+                0,
+                0,
+                0
+              ],
+              "holding": true
+            }
+          }
+        },
+        {
+          "e": 1125,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 1,
+            "far": 0,
+            "lost": 0,
+            "shining": 1,
+            "score": 3333334,
+            "health": 26.866666793823242,
+            "hold": {
+              "resolved": [
+                1,
+                0,
+                0
+              ],
+              "holding": true,
+              "latched": true
+            }
+          }
+        },
+        {
+          "e": 1200,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 1,
+            "far": 0,
+            "lost": 0,
+            "shining": 1,
+            "score": 3333334,
+            "health": 26.866666793823242,
+            "hold": {
+              "resolved": [
+                1,
+                0,
+                0
+              ],
+              "holding": true,
+              "latched": true
+            }
+          }
+        },
+        {
+          "e": 1201,
+          "kind": "FRAME",
+          "expect": {
+            "hold": {
+              "holding": true,
+              "latched": true
+            },
+            "pure": 1,
+            "lost": 0
+          }
+        },
+        {
+          "e": 1300,
+          "kind": "FRAME",
+          "expect": {
+            "hold": {
+              "holding": true
+            },
+            "pure": 1,
+            "lost": 0
+          }
+        },
+        {
+          "e": 1301,
+          "kind": "FRAME",
+          "expect": {
+            "hold": {
+              "holding": true,
+              "activatingContacts": [
+                0
+              ]
+            },
+            "pure": 1
+          }
+        },
+        {
+          "e": 1374,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 1,
+            "far": 0,
+            "lost": 0,
+            "shining": 1,
+            "score": 3333334,
+            "health": 26.866666793823242,
+            "hold": {
+              "resolved": [
+                1,
+                0,
+                0
+              ],
+              "holding": true,
+              "latched": true
+            }
+          }
+        },
+        {
+          "e": 1375,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 2,
+            "far": 0,
+            "lost": 0,
+            "shining": 2,
+            "score": 6666668,
+            "health": 53.733333587646484,
+            "hold": {
+              "resolved": [
+                1,
+                1,
+                0
+              ],
+              "holding": true,
+              "latched": true
+            }
+          }
+        },
+        {
+          "e": 1624,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 2,
+            "far": 0,
+            "lost": 0,
+            "shining": 2,
+            "score": 6666668,
+            "health": 53.733333587646484,
+            "hold": {
+              "resolved": [
+                1,
+                1,
+                0
+              ],
+              "holding": true,
+              "latched": true
+            }
+          }
+        },
+        {
+          "e": 1625,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 3,
+            "far": 0,
+            "lost": 0,
+            "shining": 3,
+            "score": 10000003,
+            "health": 80.5999984741211,
+            "hold": {
+              "resolved": [
+                1,
+                1,
+                1
+              ],
+              "holding": true,
+              "latched": true
+            }
+          }
+        },
+        {
+          "e": 1626,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 3,
+            "far": 0,
+            "lost": 0,
+            "shining": 3,
+            "score": 10000003,
+            "health": 80.5999984741211,
+            "hold": {
+              "resolved": [
+                1,
+                1,
+                1
+              ],
+              "holding": true,
+              "latched": true
+            }
+          }
+        },
+        {
+          "e": 1626,
+          "kind": "UP",
+          "expect": {
+            "hold": {
+              "holding": true,
+              "latched": true
+            },
+            "contactCount": 0,
+            "pure": 3
+          },
+          "pointer": 42,
+          "lane": 4
+        },
+        {
+          "e": 1627,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 3,
+            "far": 0,
+            "lost": 0,
+            "shining": 3,
+            "score": 10000003,
+            "health": 80.5999984741211,
+            "hold": {
+              "resolved": [
+                1,
+                1,
+                1
+              ],
+              "holding": false,
+              "latched": true
+            },
+            "contactCount": 0,
+            "finished": false,
+            "result": null
+          }
+        }
+      ]
+    },
+    {
+      "name": "E026_reacquisition",
+      "fixture": "native_hold.aff",
+      "judgmentUnits": 3,
+      "endTime": 2500,
+      "steps": [
+        {
+          "e": 1000,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 0,
+            "far": 0,
+            "lost": 0,
+            "shining": 0,
+            "score": 0,
+            "health": 0,
+            "hold": {
+              "resolved": [
+                0,
+                0,
+                0
+              ],
+              "holding": false,
+              "latched": false
+            }
+          }
+        },
+        {
+          "e": 1000,
+          "kind": "DOWN",
+          "expect": {
+            "pure": 0,
+            "far": 0,
+            "lost": 0,
+            "shining": 0,
+            "score": 0,
+            "health": 0,
+            "hold": {
+              "resolved": [
+                0,
+                0,
+                0
+              ],
+              "holding": false,
+              "latched": true
+            },
+            "contactCount": 1
+          },
+          "pointer": 42,
+          "lane": 4
+        },
+        {
+          "e": 1001,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 0,
+            "far": 0,
+            "lost": 0,
+            "shining": 0,
+            "score": 0,
+            "health": 0,
+            "hold": {
+              "resolved": [
+                0,
+                0,
+                0
+              ],
+              "holding": true,
+              "latched": true
+            }
+          }
+        },
+        {
+          "e": 1124,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 0,
+            "far": 0,
+            "lost": 0,
+            "shining": 0,
+            "score": 0,
+            "health": 0,
+            "hold": {
+              "resolved": [
+                0,
+                0,
+                0
+              ],
+              "holding": true
+            }
+          }
+        },
+        {
+          "e": 1125,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 1,
+            "far": 0,
+            "lost": 0,
+            "shining": 1,
+            "score": 3333334,
+            "health": 26.866666793823242,
+            "hold": {
+              "resolved": [
+                1,
+                0,
+                0
+              ],
+              "holding": true,
+              "latched": true
+            }
+          }
+        },
+        {
+          "e": 1200,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 1,
+            "far": 0,
+            "lost": 0,
+            "shining": 1,
+            "score": 3333334,
+            "health": 26.866666793823242,
+            "hold": {
+              "resolved": [
+                1,
+                0,
+                0
+              ],
+              "holding": true,
+              "latched": true
+            }
+          }
+        },
+        {
+          "e": 1200,
+          "kind": "UP",
+          "expect": {
+            "hold": {
+              "latched": true,
+              "holding": true
+            },
+            "contactCount": 0,
+            "pure": 1
+          },
+          "pointer": 42,
+          "lane": 4
+        },
+        {
+          "e": 1201,
+          "kind": "FRAME",
+          "expect": {
+            "hold": {
+              "holding": false,
+              "latched": true
+            },
+            "pure": 1,
+            "lost": 0
+          }
+        },
+        {
+          "e": 1300,
+          "kind": "FRAME",
+          "expect": {
+            "hold": {
+              "holding": false
+            },
+            "pure": 1,
+            "lost": 0
+          }
+        },
+        {
+          "e": 1300,
+          "kind": "DOWN",
+          "expect": {
+            "hold": {
+              "holding": false,
+              "latched": true
+            },
+            "contacts": [
+              {
+                "pointer": 43,
+                "id": 1,
+                "lane": 4
+              }
+            ]
+          },
+          "pointer": 43,
+          "lane": 4
+        },
+        {
+          "e": 1301,
+          "kind": "FRAME",
+          "expect": {
+            "hold": {
+              "holding": true,
+              "activatingContacts": [
+                1
+              ]
+            },
+            "pure": 1
+          }
+        },
+        {
+          "e": 1374,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 1,
+            "far": 0,
+            "lost": 0,
+            "shining": 1,
+            "score": 3333334,
+            "health": 26.866666793823242,
+            "hold": {
+              "resolved": [
+                1,
+                0,
+                0
+              ],
+              "holding": true,
+              "latched": true
+            }
+          }
+        },
+        {
+          "e": 1375,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 2,
+            "far": 0,
+            "lost": 0,
+            "shining": 2,
+            "score": 6666668,
+            "health": 53.733333587646484,
+            "hold": {
+              "resolved": [
+                1,
+                1,
+                0
+              ],
+              "holding": true,
+              "latched": true
+            }
+          }
+        },
+        {
+          "e": 1624,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 2,
+            "far": 0,
+            "lost": 0,
+            "shining": 2,
+            "score": 6666668,
+            "health": 53.733333587646484,
+            "hold": {
+              "resolved": [
+                1,
+                1,
+                0
+              ],
+              "holding": true,
+              "latched": true
+            }
+          }
+        },
+        {
+          "e": 1625,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 3,
+            "far": 0,
+            "lost": 0,
+            "shining": 3,
+            "score": 10000003,
+            "health": 80.5999984741211,
+            "hold": {
+              "resolved": [
+                1,
+                1,
+                1
+              ],
+              "holding": true,
+              "latched": true
+            }
+          }
+        },
+        {
+          "e": 1626,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 3,
+            "far": 0,
+            "lost": 0,
+            "shining": 3,
+            "score": 10000003,
+            "health": 80.5999984741211,
+            "hold": {
+              "resolved": [
+                1,
+                1,
+                1
+              ],
+              "holding": true,
+              "latched": true
+            }
+          }
+        },
+        {
+          "e": 1626,
+          "kind": "UP",
+          "expect": {
+            "hold": {
+              "holding": true,
+              "latched": true
+            },
+            "contactCount": 0,
+            "pure": 3
+          },
+          "pointer": 43,
+          "lane": 4
+        },
+        {
+          "e": 1627,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 3,
+            "far": 0,
+            "lost": 0,
+            "shining": 3,
+            "score": 10000003,
+            "health": 80.5999984741211,
+            "hold": {
+              "resolved": [
+                1,
+                1,
+                1
+              ],
+              "holding": false,
+              "latched": true
+            },
+            "contactCount": 0,
+            "finished": false,
+            "result": null
+          }
+        }
+      ]
+    },
+    {
+      "name": "E037_A1",
+      "fixture": "native_mixed_hold_tap_hold_first.aff",
+      "judgmentUnits": 4,
+      "endTime": 2500,
+      "steps": [
+        {
+          "e": 1250,
+          "kind": "FRAME",
+          "expect": {
+            "hold": {
+              "latched": false,
+              "holding": false,
+              "resolved": [
+                0,
+                0,
+                0
+              ]
+            },
+            "pure": 0
+          }
+        },
+        {
+          "e": 1250,
+          "kind": "DOWN",
+          "expect": {
+            "pure": 0,
+            "score": 0,
+            "health": 0,
+            "hold": {
+              "latched": true,
+              "holding": false
+            },
+            "candidates": [
+              "hold:0:1000:2000:4",
+              "tap:0:1250:4"
+            ],
+            "outcomes": [
+              "HOLD_LATCH"
+            ]
+          },
+          "pointer": 42,
+          "lane": 4
+        },
+        {
+          "e": 1251,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 1,
+            "score": 2500001,
+            "health": 20.200000762939453,
+            "hold": {
+              "holding": true,
+              "resolved": [
+                1,
+                0,
+                0
+              ]
+            }
+          }
+        },
+        {
+          "e": 1252,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 1
+          }
+        },
+        {
+          "e": 1350,
+          "kind": "FRAME",
+          "expect": {
+            "lost": 0,
+            "pure": 1
+          }
+        },
+        {
+          "e": 1351,
+          "kind": "FRAME",
+          "expect": {
+            "lost": 1,
+            "pure": 1,
+            "health": 18.200000762939453,
+            "combo": 0,
+            "tap": {
+              "missed": true,
+              "consumed": false
+            }
+          }
+        },
+        {
+          "e": 1375,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 2,
+            "lost": 1,
+            "score": 5000002,
+            "health": 38.400001525878906
+          }
+        },
+        {
+          "e": 1376,
+          "kind": "FRAME",
+          "expect": {}
+        },
+        {
+          "e": 1625,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 3,
+            "shining": 3,
+            "lost": 1,
+            "combo": 2,
+            "score": 7500003,
+            "health": 58.60000228881836
+          }
+        },
+        {
+          "e": 1626,
+          "kind": "FRAME",
+          "expect": {}
+        },
+        {
+          "e": 1626,
+          "kind": "UP",
+          "expect": {
+            "contactCount": 0
+          },
+          "pointer": 42,
+          "lane": 4
+        },
+        {
+          "e": 1627,
+          "kind": "FRAME",
+          "expect": {
+            "hold": {
+              "latched": true,
+              "holding": false,
+              "resolved": [
+                1,
+                1,
+                1
+              ]
+            },
+            "finished": false,
+            "result": null,
+            "contactCount": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "E037_A2",
+      "fixture": "native_mixed_hold_tap_hold_first.aff",
+      "judgmentUnits": 4,
+      "endTime": 2500,
+      "steps": [
+        {
+          "e": 1000,
+          "kind": "FRAME",
+          "expect": {}
+        },
+        {
+          "e": 1000,
+          "kind": "DOWN",
+          "expect": {
+            "pure": 0,
+            "score": 0,
+            "health": 0,
+            "hold": {
+              "latched": true,
+              "holding": false
+            },
+            "candidates": [
+              "hold:0:1000:2000:4",
+              "tap:0:1250:4"
+            ],
+            "outcomes": [
+              "HOLD_LATCH"
+            ]
+          },
+          "pointer": 42,
+          "lane": 4
+        },
+        {
+          "e": 1001,
+          "kind": "FRAME",
+          "expect": {
+            "hold": {
+              "holding": true
+            }
+          }
+        },
+        {
+          "e": 1125,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 1,
+            "health": 20.200000762939453
+          }
+        },
+        {
+          "e": 1250,
+          "kind": "FRAME",
+          "expect": {}
+        },
+        {
+          "e": 1250,
+          "kind": "DOWN",
+          "expect": {
+            "pure": 1,
+            "contactCount": 2,
+            "hold": {
+              "latched": true,
+              "holding": true
+            },
+            "candidates": [
+              "hold:0:1000:2000:4",
+              "tap:0:1250:4"
+            ],
+            "outcomes": [
+              "HOLD_LATCH"
+            ],
+            "tap": {
+              "consumed": false
+            }
+          },
+          "pointer": 43,
+          "lane": 4
+        },
+        {
+          "e": 1251,
+          "kind": "FRAME",
+          "expect": {
+            "hold": {
+              "holding": true,
+              "activatingContacts": [
+                0,
+                1
+              ]
+            },
+            "pure": 1
+          }
+        },
+        {
+          "e": 1251,
+          "kind": "UP",
+          "expect": {
+            "contactCount": 1
+          },
+          "pointer": 42,
+          "lane": 4
+        },
+        {
+          "e": 1252,
+          "kind": "FRAME",
+          "expect": {
+            "hold": {
+              "holding": true,
+              "activatingContacts": [
+                1
+              ]
+            }
+          }
+        },
+        {
+          "e": 1350,
+          "kind": "FRAME",
+          "expect": {
+            "lost": 0,
+            "pure": 1
+          }
+        },
+        {
+          "e": 1351,
+          "kind": "FRAME",
+          "expect": {
+            "lost": 1,
+            "pure": 1,
+            "health": 18.200000762939453,
+            "combo": 0,
+            "tap": {
+              "missed": true,
+              "consumed": false
+            }
+          }
+        },
+        {
+          "e": 1375,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 2,
+            "lost": 1,
+            "score": 5000002,
+            "health": 38.400001525878906
+          }
+        },
+        {
+          "e": 1376,
+          "kind": "FRAME",
+          "expect": {}
+        },
+        {
+          "e": 1625,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 3,
+            "shining": 3,
+            "lost": 1,
+            "combo": 2,
+            "score": 7500003,
+            "health": 58.60000228881836
+          }
+        },
+        {
+          "e": 1626,
+          "kind": "FRAME",
+          "expect": {}
+        },
+        {
+          "e": 1626,
+          "kind": "UP",
+          "expect": {
+            "contactCount": 0
+          },
+          "pointer": 43,
+          "lane": 4
+        },
+        {
+          "e": 1627,
+          "kind": "FRAME",
+          "expect": {
+            "hold": {
+              "latched": true,
+              "holding": false,
+              "resolved": [
+                1,
+                1,
+                1
+              ]
+            },
+            "finished": false,
+            "result": null,
+            "contactCount": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "E037_B",
+      "fixture": "native_mixed_hold_tap_tap_first.aff",
+      "judgmentUnits": 4,
+      "endTime": 2500,
+      "steps": [
+        {
+          "e": 1000,
+          "kind": "FRAME",
+          "expect": {}
+        },
+        {
+          "e": 1000,
+          "kind": "DOWN",
+          "expect": {
+            "pure": 1,
+            "shining": 0,
+            "score": 2500000,
+            "health": 20.200000762939453,
+            "hold": {
+              "latched": false,
+              "holding": false
+            },
+            "tap": {
+              "consumed": true,
+              "contact": 0
+            },
+            "candidates": [
+              "tap:0:950:4",
+              "hold:0:1000:2000:4"
+            ],
+            "outcomes": [
+              "PURE"
+            ]
+          },
+          "pointer": 42,
+          "lane": 4
+        },
+        {
+          "e": 1000,
+          "kind": "DOWN",
+          "expect": {
+            "pure": 1,
+            "shining": 0,
+            "hold": {
+              "latched": true,
+              "holding": false
+            },
+            "outcomes": [
+              "guard_consumed",
+              "HOLD_LATCH"
+            ],
+            "contactCount": 2,
+            "lastFrameTime": 1000
+          },
+          "pointer": 43,
+          "lane": 4
+        },
+        {
+          "e": 1001,
+          "kind": "FRAME",
+          "expect": {
+            "hold": {
+              "holding": true,
+              "activatingContacts": [
+                0,
+                1
+              ]
+            }
+          }
+        },
+        {
+          "e": 1001,
+          "kind": "UP",
+          "expect": {
+            "contactCount": 1
+          },
+          "pointer": 43,
+          "lane": 4
+        },
+        {
+          "e": 1002,
+          "kind": "FRAME",
+          "expect": {
+            "hold": {
+              "holding": true,
+              "activatingContacts": [
+                0
+              ]
+            }
+          }
+        },
+        {
+          "e": 1125,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 2,
+            "shining": 1,
+            "score": 5000001,
+            "health": 40.400001525878906
+          }
+        },
+        {
+          "e": 1126,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 2
+          }
+        },
+        {
+          "e": 1350,
+          "kind": "FRAME",
+          "expect": {}
+        },
+        {
+          "e": 1351,
+          "kind": "FRAME",
+          "expect": {
+            "lost": 0
+          }
+        },
+        {
+          "e": 1375,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 3,
+            "score": 7500002,
+            "health": 60.60000228881836
+          }
+        },
+        {
+          "e": 1376,
+          "kind": "FRAME",
+          "expect": {}
+        },
+        {
+          "e": 1625,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 4,
+            "shining": 3,
+            "lost": 0,
+            "combo": 4,
+            "score": 10000003,
+            "health": 80.80000305175781
+          }
+        },
+        {
+          "e": 1626,
+          "kind": "FRAME",
+          "expect": {}
+        },
+        {
+          "e": 1626,
+          "kind": "UP",
+          "expect": {
+            "contactCount": 0
+          },
+          "pointer": 42,
+          "lane": 4
+        },
+        {
+          "e": 1627,
+          "kind": "FRAME",
+          "expect": {
+            "hold": {
+              "latched": true,
+              "holding": false,
+              "resolved": [
+                1,
+                1,
+                1
+              ]
+            },
+            "finished": false,
+            "result": null,
+            "contactCount": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "E008_E009_overdue",
+      "fixture": "native_hold.aff",
+      "judgmentUnits": 3,
+      "endTime": 2500,
+      "steps": [
+        {
+          "e": 1000,
+          "kind": "FRAME",
+          "expect": {}
+        },
+        {
+          "e": 1000,
+          "kind": "DOWN",
+          "expect": {},
+          "pointer": 42,
+          "lane": 4
+        },
+        {
+          "e": 1001,
+          "kind": "FRAME",
+          "expect": {}
+        },
+        {
+          "e": 1124,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 0
+          }
+        },
+        {
+          "e": 1125,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 1,
+            "far": 0,
+            "lost": 0,
+            "shining": 1,
+            "score": 3333334,
+            "health": 26.866666793823242,
+            "hold": {
+              "resolved": [
+                1,
+                0,
+                0
+              ],
+              "holding": true,
+              "latched": true
+            }
+          }
+        },
+        {
+          "e": 1375,
+          "kind": "FRAME",
+          "expect": {
+            "pure": 2,
+            "far": 0,
+            "lost": 0,
+            "shining": 2,
+            "score": 6666668,
+            "health": 53.733333587646484,
+            "hold": {
+              "resolved": [
+                1,
+                1,
+                0
+              ],
+              "holding": true,
+              "latched": true
+            }
+          }
+        },
+        {
+          "e": 1375,
+          "kind": "UP",
+          "expect": {
+            "hold": {
+              "holding": true,
+              "latched": true
+            }
+          },
+          "pointer": 42,
+          "lane": 4
+        },
+        {
+          "e": 2249,
+          "kind": "FRAME",
+          "expect": {
+            "lost": 0,
+            "pure": 2,
+            "hold": {
+              "holding": false,
+              "resolved": [
+                1,
+                1,
+                0
+              ]
+            }
+          }
+        },
+        {
+          "e": 2250,
+          "kind": "FRAME",
+          "expect": {
+            "lost": 1,
+            "pure": 2,
+            "score": 6666668,
+            "health": 51.733333587646484,
+            "hold": {
+              "resolved": [
+                1,
+                1,
+                1
+              ]
+            },
+            "combo": 0
+          }
+        },
+        {
+          "e": 2500,
+          "kind": "FRAME",
+          "expect": {
+            "finished": false
+          }
+        },
+        {
+          "e": 2501,
+          "kind": "FRAME",
+          "expect": {
+            "finished": true,
+            "result": {
+              "pure": 2,
+              "far": 0,
+              "lost": 1,
+              "recordedLost": 1,
+              "score": 6666668,
+              "health": 51,
+              "category": 0
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
