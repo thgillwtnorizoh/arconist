@@ -305,3 +305,43 @@ serialization and resource-scan ignores retained. Preflight Windows export succe
 and structural verification finds all191 dependencies and all six AFF contents.
 Final clean committed-source ZIP/evidence/publication results follow; this is not
 owner launch/render/input/results/restart qualification. No R005 or Unity follows.
+
+
+## R004 complete technical delivery — 2026-11-10 Asia/Bangkok
+
+Published implementation b7971013927a318314cfa712cbd8a011d7c88ecc on main, direct non-forced
+child of authorized bc7f3b2. Full clean committed-source driver exits0:36 R001,
+three independent9/6/6-event reference CLI comparisons,15 R002 bridge,30 R003
+spatial,33 R004 core/bridge and15 R004 Godot headless groups pass,0 failures/skips.
+All six native-normalized E026/E037/overdue traces have firstDifference=null.
+Godot C# build/import/Windows ExportRelease succeed;zero compiler warnings/errors
+and zero Godot ERROR/WARNING lines. Original research/harness/old tests/reference
+expectations untouched; no new native experiment or native E026/E037 result claim.
+
+Windows archive 75221753bytes, SHA256
+fb6712fd9d46d5c7fdc818572901cf1f240679e173e6feff7f2b834aa35b1a4c.
+AMD64 official template, self-contained .NET10.0.13,all191 dependencies,all six
+AFF byte payloads verified.201 payload files plus SHA256SUMS;CRC and every extracted
+hash pass. Windows and technical evidence ZIPs delivered through final handoff.
+SOURCE.txt identifies tested implementation; final audit changes documentation only.
+
+Preservation:172 baseline blobs,159 identical,13 existing reconstruction changes,
+11 additions,zero deletion. All original research/harness/old references and
+36/15/30-test sources preserved exactly; prior17533-byte history prefix retained.
+Full inventories/build logs/native intermediate traces/integrity data are included
+in evidence and validation/R004.md. Final main SHA/receipts are supplied separately
+because a commit/artifact cannot embed its own identity without changing it.
+
+Technical PASS; READY FOR HUMAN QUALIFICATION — R004. Owner launch,visible3D,
+physical keyboard/mouse,results/restart qualification is NOT RUN/PENDING. No Windows
+launch,GUI action,OS injection,scripted graphical run or screenshot inspection
+performed. Silent ordinary tap/hold domain only; equal-start/general conflicts,
+listed extreme chart domains and all deferred systems remain outside the claim.
+Stop: no R005,new expedition or Unity; await owner feedback/Headquarters decision.
+
+R004 artifact receipt: Windows file libfile_90d1839725148191b94e32db434169ea,
+75221753bytes/SHA256fb6712fd9d46d5c7fdc818572901cf1f240679e173e6feff7f2b834aa35b1a4c;
+evidence file libfile_859d999764e88191820db4164d8bb4f6,
+58271bytes/SHA256ff5a248d9a0389faae74d198d357da813d016cd3a6b6f231a86d7681a299ee49.
+Both saved successfully; final audit only publishes this history/report and reads
+back main. No further prototype execution or next-mission work follows delivery.
