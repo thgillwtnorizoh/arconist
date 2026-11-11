@@ -1,0 +1,16 @@
+{
+  "title": "Clockwork Steps",
+  "origin": "Original score/synthesis composed for Project Arconist R005; no third-party samples",
+  "license": "CC0-1.0",
+  "rate": 22050,
+  "channels": 1,
+  "bits": 16,
+  "duration_seconds": 32,
+  "bpm": 120,
+  "count_in_beats": 4,
+  "first_chart_note_ms": 2000,
+  "frames": 705600,
+  "peak": 24000,
+  "wav_sha256": "612793dc6723570841eac96457bdd8d8c659461fcb0d177fd22e93b7cd19961c",
+  "pcm_sha256": "89f45c583387720f9d599db432426f854b38a29da9cc67e6beea80c44423dbb1"
+}

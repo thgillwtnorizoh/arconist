@@ -1,0 +1,10 @@
+{
+  "provenance": "E040 sections4-7, source0b8df72791ba3ab5c29176dbabe02f3acaf1d1ce; observations transcribed before R005 tests. Profile loading remains upstream; R005 consumes the selected user offset.",
+  "cases": [
+    {"name":"A baseline","aff":0,"selectedUser":0,"source":"regular","o":0,"requestR":1,"requestE":1,"postC":1,"postE":0,"at1500E":1500,"alignedElapsed":1500},
+    {"name":"B regular80","aff":0,"selectedUser":80,"source":"regular","o":80,"requestR":-79,"requestE":-79,"postC":1,"postE":-80,"at1500E":1420,"alignedElapsed":1580},
+    {"name":"C alternate80","aff":0,"selectedUser":80,"source":"alternate","o":80,"requestR":-79,"requestE":-79,"postC":1,"postE":-80,"at1500E":1420,"alignedElapsed":1580},
+    {"name":"D AFF120+regular80","aff":120,"selectedUser":80,"source":"regular","o":200,"requestR":-199,"requestE":-199,"postC":1,"postE":-200,"at1500E":1300,"alignedElapsed":1700}
+  ],
+  "alignedJudgment": {"pure":1,"far":0,"lost":0,"shining":1,"combo":1,"score":10000001,"health":80.19999694824219}
+}

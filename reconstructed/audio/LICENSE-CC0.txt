@@ -1,0 +1,17 @@
+Clockwork Steps — Project Arconist R005
+
+Original composition, arrangement, synthesizer and generated sound recording
+created for Project Arconist. No commercial recordings, Arcaea material, sample
+packs or other third-party audio are used.
+
+To the extent possible under law, all copyright and related or neighboring rights
+to this composition and generated recording are waived under CC0 1.0 Universal.
+You may copy, modify, perform and distribute the audio, including commercially,
+without asking permission. No warranty is provided.
+
+CC0 1.0 Universal: https://creativecommons.org/publicdomain/zero/1.0/
+Legal code: https://creativecommons.org/publicdomain/zero/1.0/legalcode.en
+
+The accompanying deterministic source score/synthesizer (compose.py) is provided
+under the same dedication. Generate locally at build time; the game never downloads
+or composes music at runtime. The qualification package includes the finished WAV.

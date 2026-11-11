@@ -1,53 +1,64 @@
-ARCONIST R004 — ordinary taps and holds / human qualification build
+ARCONIST R005 — Clockwork Steps / owner qualification build
 
 Extract the ENTIRE ZIP to a writable folder and open Arconist.exe.
 Keep Arconist.pck and data_Arconist.Godot_windows_x86_64 beside the EXE.
-No editor, SDK or separate .NET installation is needed.
+No editor, SDK, download or separate .NET installation is needed.
 Requires Windows10/11 x64 and an OpenGL3.3 compatible graphics driver.
+Use speakers/headphones and check Windows/application volume.
 
-Select R004 mixed taps + holds, then click Start chart. Wait3 seconds.
-D / F / J / K correspond to the four ground lanes from left to right.
-Cyan notes: tap and release at the green line.
-Amber bodies: press the lane key when the front meets the line and keep it held.
-Green bodies indicate core-confirmed continuous contact activity. Checkpoints
-produce feedback/counters; momentary release does not immediately cause a miss.
+Select "R005 · Clockwork Steps / 120 BPM", User offset0 and Start chart.
+Approximately3 seconds of visual preroll precede music. First four beats at
+0/.5/1/1.5 music seconds are count-in; tap D on the fifth beat (2s).
+Track duration32s; results just after30 effective seconds intentionally stop music.
 
-Mixed chart instructions (time shown by the HUD after the countdown):
-  Tap D at2s and K at3s.
-  Hold F from4–6.5s. Briefly release and press again during the body.
-  Tap K at6s while F is held.
-  Hold J from8–11s. Tap D at9.5s using the other hand.
-  Tap F at12.5s.
-  Hold D from14–16.5s; tap K at15.5s.
-  Hold K from18–20s; tap J at21s. Results follow shortly afterward.
+D / F / J / K = four ground lanes from left to right.
+Cyan: tap and release at the green line. Amber: retain the key. Green: core-confirmed
+hold activity. Checkpoints drive feedback/counters. Short release is not an instant
+miss; overdue unsupported checkpoints become LOST. No hit sounds are included.
 
-Mouse: left-click the lane ground near the green line for taps, or keep the
-button pressed to sustain a hold. A held mouse moved to another lane/outside
-the track stops sustaining its previous lane on the following frame. Moving
-back can restore hold activity; movement does not make a fresh tap judgment.
+R005 chart (HUD effective seconds; equals music time only at combined offset0):
+  Tap D/F/J/K at2/2.5/3/3.5.
+  Hold D4–6; taps K4.5, J5, F5.5, D6.5, F7, K7.5.
+  Hold J8–11; taps D9, F10, K11.5, D12, J12.5, F13, K13.5.
+  Hold F14–17; taps D15, K16, J17.5, D18, K18.5, F19, J19.5.
+  Hold K20–23; taps D21, F22, J23.5, D24, F24.5, J25, K25.5.
+  Hold D26–29; taps J27, K28, F29.5; final tap J30.
 
-Two contacts in ONE lane: while J is held, press and HOLD left mouse on J's
-ground region near the green line. Release J but keep the mouse pressed.
-The hold should continue until both contacts are removed. Try the reverse too.
-The short E026 J-hold diagnostic is also selectable. Each new key press/mouse
-press has a distinct logical identity; key repeat does not manufacture presses.
+Release/reacquire: briefly release J during8–11s, then press J again.
+Two contacts in ONE lane: keep J held, press and HOLD left mouse on J's ground
+near the green line, release J while keeping mouse down. Mouse should sustain
+it. Reverse which contact remains. Release both to clear activity next frame.
+Mouse movement away/outside removes lane support; moving back can restore activity
+without fresh tap arbitration. Ordinary clicking still supports taps.
 
-Other chart choices retain the original16-tap practice and two-tap reference.
-E037 diagnostics intentionally show native arbitration:
-  Hold-first: earlier J hold blocks the competing1.25s tap, even when already
-  latched. Expected bounded native path: PURE3 / LOST1, score7500003.
-  Tap-first: near1s first press J to judge tap950, then press mouse on J to
-  latch hold1000. Release mouse; the still-held J can sustain all checkpoints.
-  Exact native score depends on the owner's timing; the diagnostic gives only
-  one second before the hold begins after preroll.
+OFFSET TESTS (before starting or after results; next run only):
+  Combined O = AFF offset + User offset, in milliseconds.
+  Positive O delays notes/effective chart time relative to the same music.
+  Compare first chart0 with+200; notes should occur200ms later in the music.
+  Negative O advances chart time. No hidden fixed compensation.
+  Second R005 chart has AFF+120: user−120 gives O0; user−40 gives O+80.
+  Values are not persisted. Changing after results affects the next run only.
 
-After results choose Play again or Back to start. Restart must clear all hold
-records, contacts, feedback and geometry. F6 switches camera, F7 resizes.
-F8 captures the owner's viewport into the same folder as session diagnostics:
-%APPDATA%/Godot/app_userdata/Arconist R004 - 3D Tap and Hold Practice/evidence
-Focus loss releases contacts; chart time continues. Pause is not implemented.
+After results Play again: music must restart at its beginning, once.
+Back to start stops/unloads audio; choose another chart for a fresh session.
+All six older choices remain available and silent: R004 mixed holds, original16
+taps, two-tap reference and E026/E037 diagnostics. Earlier native hold blocks the
+competing E037 tap even if latched. Tap-first: near1s press J, then mouse J to latch;
+the first key can subsequently sustain it.
 
-Silent, unsigned, tap/ordinary-hold prototype with functional placeholder meshes.
-No arcs, flicks, music/SFX, special gauges, widening, Android or Unity.
-READY FOR HUMAN QUALIFICATION — R004. Human launch/render/input/results/restart
-qualification is pending. Technical checks do not declare final R004 PASS.
+MUSIC ERROR shows resource/configuration/playback failures; details appear below
+controls and in logs. Gameplay time continues independently. "Music playing" is
+an API indication, not proof of audible output. Report missing audio with chart,
+offset, Windows output device, visible error and session log. Latency unverified.
+
+F6 camera, F7 resize, F8 owner-requested viewport capture. Diagnostics/captures:
+%APPDATA%/Godot/app_userdata/Arconist R005 - Audible Tap and Hold Practice/evidence
+JSONL includes clock domains, session/chart/resource, offsets, R/C/E, request/anchor,
+backend state and authoritative judgments. No audio recording.
+Focus loss releases contacts; time/music continue. Pause is not implemented.
+
+Clockwork Steps: original synthetic composition/synthesis, CC0-1.0; see notices.
+Unsigned prototype with placeholder3D geometry. No commercial assets, SFX,
+arcs/flicks, special gauges, drift correction or native pause.
+READY FOR HUMAN QUALIFICATION — R005. Windows launch, audible output, perceived
+synchronization, physical input, results and replay require the owner's testing.

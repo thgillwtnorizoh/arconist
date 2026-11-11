@@ -345,3 +345,40 @@ evidence file libfile_859d999764e88191820db4164d8bb4f6,
 58271bytes/SHA256ff5a248d9a0389faae74d198d357da813d016cd3a6b6f231a86d7681a299ee49.
 Both saved successfully; final audit only publishes this history/report and reads
 back main. No further prototype execution or next-mission work follows delivery.
+
+
+## R005 authorization and implementation — 2026-11-11 Asia/Bangkok
+
+Headquarters authorizes R005 from verified main0b8df72791ba3ab5c29176dbabe02f3acaf1d1ce
+and explicitly records R004 accepted following owner human qualification. This
+entry records that owner acceptance from the order, not a new Work2 observation.
+Read standing reconstruction instructions/history, Scout003 audio contracts,
+E005/E040 in full, relevant E008–010/E035, existing code/tests/references/build
+records. No original research/fixture/test oracle is edited; no native expedition.
+
+Timeline now exposes immutable latch/request-before-compensation and post-anchor
+observations. Strict E>−O, C=R+O, E=−O and steady R remain unchanged; observer
+exceptions/reentry cannot displace the anchor. DOWN/UP/FRAME ordering is preserved.
+Independent bridge owns audio lifecycle, resource preparation before fresh clock
+origin, explicit AFF+selected-user offset, one request, errors and stop/unload.
+Godot AudioStreamPlayer is an engineering substitution, not FMOD DSP scheduling.
+Playhead/driver/device/mix rate are diagnostics only. No audio feedback clock.
+Judgment diagnostics snapshot authoritative events before result contact cleanup.
+
+Clockwork Steps is an original32-second120BPM CC0 instrumental with integer-only
+score/synthesis, no third-party samples or Android assets. Four count-in beats,
+then chart first tap2s. Five ordinary holds and mixed taps reuse R004 mechanics.
+A second AFF+120 choice plus per-run−500..500 user control expose offset signs;
+six existing choices/bytes stay silent and unchanged. No SFX/profile persistence/
+legacy migration/Bluetooth detection or pause implementation is claimed.
+
+Development preflights:37 portable clock/audio groups and17 real headless Godot
+node/resource groups pass, zero skips/failures. E040 expected observations were
+transcribed before execution, distinct regular80/alternate80 provenance retained.
+A real export resource failure was detected: raw imported WAV read0 bytes in PCK.
+Repaired with explicit .wav.bytes carrier, identical WAV SHA/PCM. Exported probe
+also initially attempted Play before entering tree; deferred it. Failed logs are
+preserved. Corrected actual-PCK probe reads1411244 bytes/hash, decodes32s and reports
+API playing under Dummy output. This is not audible/hardware/Windows qualification.
+Final clean committed-source regression/export/integrity/publication follows.
+No graphical automation, OS input, screenshot acceptance or Windows run performed.

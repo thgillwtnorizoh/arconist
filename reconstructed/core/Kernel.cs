@@ -1,5 +1,19 @@
 namespace Arconist.Core;
 
+// Immutable logical playback request; no engine, asset, audio playhead or input timestamp.
+public sealed class MusicStartRequest
+{
+    public long WallMilliseconds { get; }
+    public int RawTime { get; }
+    public int CompensationBefore { get; }
+    public int EffectiveTimeBefore { get; }
+    public int CombinedOffset { get; }
+    public int CompensationAfter => unchecked(RawTime + CombinedOffset);
+    public int EffectiveTimeAfter => unchecked(-CombinedOffset);
+    internal MusicStartRequest(long wall, int raw, int compensation, int offset)
+    { WallMilliseconds=wall; RawTime=raw; CompensationBefore=compensation; EffectiveTimeBefore=unchecked(raw-compensation); CombinedOffset=offset; }
+}
+
 public sealed class Timeline
 {
     private readonly long origin;
@@ -9,6 +23,21 @@ public sealed class Timeline
     public int Compensation { get; private set; }
     public int EffectiveTime => unchecked(RawTime - Compensation);
     public bool MusicStarted { get; private set; }
+    public int CombinedOffset => offset;
+    public int MusicAnchor { get; private set; }
+    public int StartRequestCount { get; private set; }
+    public MusicStartRequest? LastStartRequest { get; private set; }
+    private readonly List<string> notificationErrors = new List<string>();
+    public IReadOnlyList<string> NotificationErrors => notificationErrors.AsReadOnly();
+    public event Action<MusicStartRequest>? MusicStartRequested;
+    public event Action<MusicStartRequest>? MusicStartAnchored;
+    private bool updating;
+    private void Notify(Action<MusicStartRequest>? handlers, MusicStartRequest request)
+    {
+        if (handlers == null) return;
+        foreach (Action<MusicStartRequest> callback in handlers.GetInvocationList())
+            try { callback(request); } catch (Exception e) { notificationErrors.Add(e.GetType().Name + ": " + e.Message); }
+    }
     public Timeline(long originMs, int chartOffset, int userOffset)
     {
         origin = lastWall = originMs; offset = checked(chartOffset + userOffset);
@@ -16,13 +45,25 @@ public sealed class Timeline
     }
     public void Update(long wallMs)
     {
+        if (updating) throw new InvalidOperationException("Timeline notifications cannot reenter Update.");
         if (wallMs < lastWall) throw new ArgumentException("Wall time must be monotonic; array order resolves equal times.");
         lastWall = wallMs;
         RawTime = unchecked((int)(wallMs - origin) - 3000);
         // 005/040: strict crossing, followed by compensation anchoring back to -O.
         if (!MusicStarted && (long)EffectiveTime > -(long)offset)
         {
-            MusicStarted = true; Compensation = unchecked(RawTime + offset);
+            MusicStarted = true;
+            var request = new MusicStartRequest(wallMs, RawTime, Compensation, offset);
+            LastStartRequest = request; StartRequestCount++;
+            updating = true;
+            try
+            {
+                // E040: native latch -> request entry BEFORE compensation stores.
+                Notify(MusicStartRequested, request);
+                Compensation = request.CompensationAfter; MusicAnchor = request.EffectiveTimeAfter;
+                Notify(MusicStartAnchored, request);
+            }
+            finally { updating = false; }
         }
     }
 }

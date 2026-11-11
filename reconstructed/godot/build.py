@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""R004: logged technical checks and Windows packaging; never GUI playtesting."""
+"""R005: logged technical checks and Windows packaging; never GUI playtesting."""
 import argparse
 import hashlib
 import json
@@ -9,6 +9,7 @@ import re
 import shutil
 import struct
 import subprocess
+import sys
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -79,19 +80,26 @@ def verify(package, templates):
                 assets.append(str(relative))
     pck = (package / 'Arconist.pck').read_bytes()
     assert pck[:4] == b'GDPC'
-    for chart in ('practice.aff', 'ordinary_two_tap.aff', 'mixed_practice.aff', 'native_hold.aff', 'hold_first.aff', 'tap_first.aff'):
+    for chart in ('practice.aff', 'ordinary_two_tap.aff', 'mixed_practice.aff', 'native_hold.aff', 'hold_first.aff', 'tap_first.aff', 'audible_practice.aff', 'audible_aff120.aff'):
         assert (PROJECT / 'content' / chart).read_bytes() in pck, chart
+    music = PROJECT / 'content/audio/clockwork_steps.wav.bytes'
+    music_manifest = json.loads((ROOT / 'reconstructed/audio/manifest.json').read_text())
+    assert sha(music) == music_manifest['wav_sha256']
+    assert music.read_bytes() in pck, 'The exported PCK must contain the exact raw WAV carrier.'
     assert b'sourcelink.json' not in pck
     return {'required_files': required, 'dependency_assets_verified': len(assets), 'runtime': runtime,
             'pe_architecture': 'AMD64', 'template_executable_sha256': sha(package / 'Arconist.exe'),
-            'practice_and_reference_bytes_in_pck': True,
+            'practice_and_reference_bytes_in_pck': True, 'music_wav_sha256': music_manifest['wav_sha256'], 'music_frames': music_manifest['frames'], 'music_duration_seconds': 32,
             'windows_launch': 'NOT RUN', 'human_qualification': 'PENDING'}
 
 
 def main():
     global ENV, LOGS
+    if not __debug__:
+        raise RuntimeError('Validation requires Python assertions enabled.')
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--godot', type=Path, required=True)
+    p.add_argument('--pack-probe-godot', type=Path, required=True, help='Matching Godot4.7.2 standard executable for headless exported-PCK inspection')
     p.add_argument('--templates', type=Path, required=True, help='4.7.2 mono templates.tpz')
     p.add_argument('--notices', type=Path, required=True, help='Folder of Godot and .NET license notices')
     a = p.parse_args()
@@ -102,11 +110,19 @@ def main():
                DOTNET_CLI_TELEMETRY_OPTOUT='1', GODOT_SILENCE_ROOT_WARNING='1')
     if subprocess.check_output(['git', 'status', '--porcelain'], cwd=ROOT, text=True).strip():
         raise RuntimeError('Commit all source changes before the qualification build.')
-    LOGS = OUT / 'r004-evidence'
+    LOGS = OUT / 'r005-evidence'
     LOGS.mkdir(parents=True, exist_ok=False)  # Never overwrite an earlier attempt.
     version = run('godot-version', [godot, '--version'])
     assert version.strip().startswith('4.7.2.stable.mono.')
     run('dotnet-info', ['dotnet', '--info'])
+    probe_version = run('pack-probe-version', [a.pack_probe_godot.resolve(), '--version'])
+    assert probe_version.strip().startswith('4.7.2.stable.')
+    run('compose-original-soundtrack', [sys.executable, ROOT / 'reconstructed/audio/compose.py',
+        '--output', PROJECT / 'content/audio/clockwork_steps.wav.bytes', '--report', LOGS / 'offline-waveform.json'])
+    waveform = json.loads((LOGS / 'offline-waveform.json').read_text())
+    expected = json.loads((ROOT / 'reconstructed/audio/manifest.json').read_text())
+    assert all(waveform[key] == value for key, value in expected.items())
+    shutil.copyfile(ROOT / 'reconstructed/audio/manifest.json', PROJECT / 'content/audio/manifest.json')
     tools = OUT / 'r002-tools'
     tools.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(a.templates) as z:
@@ -132,6 +148,8 @@ def main():
                          '-c', 'Release', *common])
     run('r004-core-bridge-tests', ['dotnet', 'reconstructed/hold-tests/bin/Release/net10.0/Arconist.Hold.Tests.dll',
                                   '.', LOGS / 'r004-core'])
+    run('r005-build', ['dotnet', 'build', 'reconstructed/audio-tests/Arconist.Audio.Tests.csproj', '-c', 'Release', *common])
+    run('r005-core-audio-tests', ['dotnet', 'reconstructed/audio-tests/bin/Release/net10.0/Arconist.Audio.Tests.dll', '.', LOGS / 'r005-core'])
     run('godot-build', ['dotnet', 'build', PROJECT / 'Arconist.Godot.csproj', '-c', 'Debug', *common])
     run('bridge-build', ['dotnet', 'build', PROJECT / 'tests/Arconist.Bridge.Tests.csproj',
                          '-c', 'Debug', *common])
@@ -141,7 +159,9 @@ def main():
                            '--evidence-dir=' + str(LOGS / 'spatial')])
     run('r004-headless-tests', [godot, '--headless', '--path', PROJECT, '--', '--hold-tests',
                                 '--evidence-dir=' + str(LOGS / 'holds')])
-    package = OUT / 'r004-windows'
+    run('r005-headless-audio-tests', [godot, '--headless', '--path', PROJECT, '--', '--audio-tests',
+                                     '--evidence-dir=' + str(LOGS / 'audio')])
+    package = OUT / 'r005-windows'
     if package.exists():
         shutil.move(str(package), str(LOGS / 'previous-export'))
     package.mkdir()
@@ -152,29 +172,34 @@ def main():
     if not msbuild_logs:
         raise RuntimeError('Exporter MSBuild diagnostics were not found.')
     shutil.copyfile(max(msbuild_logs, key=lambda f: f.stat().st_mtime), LOGS / 'godot-msbuild-export.log')
+    run('exported-pck-audio-probe', [a.pack_probe_godot.resolve(), '--headless', '--main-pack',
+        package / 'Arconist.pck', '--script', ROOT / 'reconstructed/audio/export_probe.gd', '--', LOGS / 'exported-audio-probe.json'])
+    exported_audio = json.loads((LOGS / 'exported-audio-probe.json').read_text())
+    assert exported_audio['status'] == 'PASS' and exported_audio['sha256'] == expected['wav_sha256']
     report = verify(package, tools)
     assert sorted(x.name for x in a.notices.iterdir()) == [
         'DOTNET-LICENSE.txt', 'DOTNET-THIRD-PARTY-NOTICES.txt', 'GODOT-COPYRIGHT.txt', 'GODOT-LICENSE.txt']
     shutil.copytree(a.notices, package / 'notices')
+    shutil.copyfile(ROOT / 'reconstructed/audio/LICENSE-CC0.txt', package / 'notices/Clockwork-Steps-CC0.txt')
     shutil.copyfile(PROJECT / 'PLAYER.txt', package / 'README.txt')
     source = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
     (package / 'SOURCE.txt').write_text(
         'https://github.com/thgillwtnorizoh/arconist\nbranch: main\ncommit: ' + source +
         '\nGodot 4.7.2 .NET; SDK 10.0.402; bundled runtime 10.0.13\n'
-        'READY FOR HUMAN QUALIFICATION. R004 acceptance pending.\n', encoding='utf-8')
+        'READY FOR HUMAN QUALIFICATION. R005 acceptance pending. Godot audio output is not human qualification.\n', encoding='utf-8')
     files = sorted(f for f in package.rglob('*') if f.is_file())
     manifest = {f.relative_to(package).as_posix(): sha(f) for f in files}
     (package / 'SHA256SUMS.txt').write_text(''.join(f'{v}  {k}\n' for k, v in manifest.items()), encoding='utf-8')
-    archive = OUT / 'Arconist-R004-Windows-x64.zip'
+    archive = OUT / 'Arconist-R005-Windows-x64.zip'
     with zipfile.ZipFile(archive, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as z:
         for f in sorted(package.rglob('*')):
             if f.is_file():
-                z.write(f, 'Arconist-R004/' + f.relative_to(package).as_posix())
+                z.write(f, 'Arconist-R005/' + f.relative_to(package).as_posix())
     # Validate CRCs and every extracted payload hash, independently of source paths.
     with zipfile.ZipFile(archive) as z:
         assert z.testzip() is None
         z.extractall(LOGS / 'extracted')
-    extracted = LOGS / 'extracted/Arconist-R004'
+    extracted = LOGS / 'extracted/Arconist-R005'
     for name, expected in manifest.items():
         assert sha(extracted / name) == expected, name
     assert sha(extracted / 'SHA256SUMS.txt') == sha(package / 'SHA256SUMS.txt')
@@ -184,12 +209,12 @@ def main():
     (LOGS / 'package-integrity.json').write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
     shutil.copyfile(package / 'SHA256SUMS.txt', LOGS / 'WINDOWS-PAYLOAD-SHA256SUMS.txt')
     (LOGS / 'WINDOWS-ZIP-SHA256.txt').write_text(report['archive_sha256'] + '  ' + archive.name + '\n', encoding='utf-8')
-    shutil.copyfile(ROOT / 'reconstructed/validation/R004.md', LOGS / 'R004.md')
-    evidence_zip = OUT / 'Arconist-R004-Technical-Evidence.zip'
+    shutil.copyfile(ROOT / 'reconstructed/validation/R005.md', LOGS / 'R005.md')
+    evidence_zip = OUT / 'Arconist-R005-Technical-Evidence.zip'
     with zipfile.ZipFile(evidence_zip, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as z:
         for f in sorted(LOGS.rglob('*')):
             if f.is_file() and f.relative_to(LOGS).parts[0] not in ('extracted', 'previous-export'):
-                z.write(f, 'Arconist-R004-Evidence/' + f.relative_to(LOGS).as_posix())
+                z.write(f, 'Arconist-R005-Evidence/' + f.relative_to(LOGS).as_posix())
     with zipfile.ZipFile(evidence_zip) as z:
         assert z.testzip() is None
     print(json.dumps(report, indent=2))

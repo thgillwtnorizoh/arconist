@@ -1,3 +1,15 @@
+# Arconist reconstruction — R005
+
+R005 adds the original CC0 soundtrack **Clockwork Steps**, an audible tap/hold
+practice chart and an explicit per-run user offset. The independent kernel still
+owns E/R/C; Godot playback position is diagnostic only. R004 is owner-accepted
+according to the R005 authorization. R005 audible Windows qualification remains
+owner-only. See [R005 report](validation/R005.md), [audio source/license](audio/README.md)
+and [build/player guide](godot/README.md). The logged driver preserves all129 prior
+groups and adds37 portable audio-contract and17 Godot headless groups.
+
+The following R004 and R001 summaries are preserved historical context.
+
 # Arconist reconstruction — R004
 
 Current implementation adds ordinary holds to the independent core and accepted

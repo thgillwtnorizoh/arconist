@@ -1,7 +1,7 @@
 config_version=5
 
 [application]
-config/name="Arconist R004 - 3D Tap and Hold Practice"
+config/name="Arconist R005 - Audible Tap and Hold Practice"
 run/main_scene="res://Main.tscn"
 config/features=PackedStringArray("4.7", "C#", "GL Compatibility")
 

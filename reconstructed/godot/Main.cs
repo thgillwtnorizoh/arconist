@@ -7,7 +7,10 @@ namespace Arconist.GodotApp;
 public partial class Main : Control
 {
     private sealed class GodotClock : IMonotonicClock { public long Milliseconds => (long)Time.GetTicksMsec(); }
-    private readonly GameplaySession session = new(new GodotClock());
+    private GameplaySession session = null!;
+    private GodotBgmBackend bgm = null!;
+    private SpinBox userOffset = null!;
+    private Label audioStatus = null!;
     private Font font = null!;
     private SpatialTrack track = null!;
     private SubViewport viewport3D = null!;
@@ -17,13 +20,15 @@ public partial class Main : Control
     private OptionButton charts = null!;
     private Label hud = null!, status = null!, holdStatus = null!, chartInfo = null!;
     private readonly List<string> chartData = new();
-    private static readonly (string file, string title, string description)[] ChartChoices = {
-        ("mixed_practice.aff", "R004 mixed taps + holds", "F 4–6.5s: release / press again.\nJ 8–11s: key + mouse, release J.\nKeep mouse pressed near the line."),
-        ("practice.aff", "Original practice · 16 taps", "Original R002/R003 chart.\nD / F / J / K: tap and release.\nMouse: click lane near green line."),
-        ("ordinary_two_tap.aff", "Native reference · two taps", "Two taps: J at1s, F at2s.\nRelease between inputs.\nOriginal reference bytes preserved."),
-        ("native_hold.aff", "E026 · J hold 1–2 seconds", "Hold J, briefly release, press again.\nFor two contacts: J + left mouse.\nRelease one; keep the other held."),
-        ("hold_first.aff", "E037 · hold first / tap blocked", "Earlier J hold blocks the1.25s tap.\nTry J + mouse, then release one.\nNative target: PURE3 / LOST1."),
-        ("tap_first.aff", "E037 · tap first / two contacts", "Near1s: press J, then mouse on J.\nRelease mouse; keep J held.\nNative target: PURE4 / shining3.")
+    private static readonly (string file, string title, string description, string? audio)[] ChartChoices = {
+        ("audible_practice.aff", "R005 · Clockwork Steps / 120 BPM", "One bar of audible count-in, then D.\nPositive offset: notes occur later.\nHold/repress J at8–11s.", "res://content/audio/clockwork_steps.wav.bytes"),
+        ("audible_aff120.aff", "R005 · AFF +120 offset diagnostic", "Same music/chart, AFF offset +120.\nUser -120 cancels it (combined0).\nUser -40 gives combined +80.", "res://content/audio/clockwork_steps.wav.bytes"),
+        ("mixed_practice.aff", "R004 mixed taps + holds", "F 4–6.5s: release / press again.\nJ 8–11s: key + mouse, release J.\nKeep mouse pressed near the line.", null),
+        ("practice.aff", "Original practice · 16 taps", "Original R002/R003 chart.\nD / F / J / K: tap and release.\nMouse: click lane near green line.", null),
+        ("ordinary_two_tap.aff", "Native reference · two taps", "Two taps: J at1s, F at2s.\nRelease between inputs.\nOriginal reference bytes preserved.", null),
+        ("native_hold.aff", "E026 · J hold 1–2 seconds", "Hold J, briefly release, press again.\nFor two contacts: J + left mouse.\nRelease one; keep the other held.", null),
+        ("hold_first.aff", "E037 · hold first / tap blocked", "Earlier J hold blocks the1.25s tap.\nTry J + mouse, then release one.\nNative target: PURE3 / LOST1.", null),
+        ("tap_first.aff", "E037 · tap first / two contacts", "Near1s: press J, then mouse on J.\nRelease mouse; keep J held.\nNative target: PURE4 / shining3.", null)
     };
     private string evidenceDir = "";
     private StreamWriter? log;
@@ -34,6 +39,9 @@ public partial class Main : Control
     public override void _Ready()
     {
         font = ThemeDB.FallbackFont;
+        bgm = new GodotBgmBackend(); AddChild(bgm);
+        session = new GameplaySession(new GodotClock(), bgm);
+        bgm.Ended += () => session.Audio?.Finished();
         var container = new SubViewportContainer { Position=trackOrigin, Size=trackSize, Stretch=true, MouseFilter=MouseFilterEnum.Ignore };
         viewport3D = new SubViewport { Size=(Vector2I)trackSize, OwnWorld3D=true, RenderTargetUpdateMode=SubViewport.UpdateMode.Always, HandleInputLocally=false };
         container.AddChild(viewport3D); AddChild(container);
@@ -46,20 +54,30 @@ public partial class Main : Control
         Directory.CreateDirectory(evidenceDir);
         log = new StreamWriter(Path.Combine(evidenceDir, "session-" + DateTime.UtcNow.ToString("yyyyMMdd-HHmmss") + ".jsonl")) { AutoFlush = true };
         session.Changed += Log;
+        session.JudgmentsProduced += events => log?.WriteLine(JsonSerializer.Serialize(new {
+            kind="JUDGMENTS",run=session.Run,chart=session.Audio?.Session?.Chart,
+            wall=(long)Time.GetTicksMsec(),clockDomain="Godot monotonic wall ms; authoritative judgment E ms",events }));
+        session.Audio!.Diagnostic += d => log?.WriteLine(JsonSerializer.Serialize(d, new JsonSerializerOptions { PropertyNamingPolicy=JsonNamingPolicy.CamelCase }));
+        MakeLabel(692, 82, 210, 26, 16).Text="User offset (ms):";
+        userOffset = new SpinBox { Position=new Vector2(900,77),Size=new Vector2(112,32),MinValue=-500,MaxValue=500,Step=1,Value=0 };
+        userOffset.TooltipText="Applied to the next run. Positive values delay chart-effective time relative to music. AFF offset is added.";
+        AddChild(userOffset);
+        audioStatus=MakeLabel(692,162,336,23,15);
         charts = new OptionButton { Position = new Vector2(692, 440), Size = new Vector2(320, 44) };
         foreach (var choice in ChartChoices) charts.AddItem(choice.title);
         AddChild(charts);
         chartInfo = MakeLabel(692, 620, 330, 64, 16);
-        chartInfo.Text = ChartChoices[0].description;
+        chartInfo.Text = ChartChoices[0].description; chartInfo.AutowrapMode=TextServer.AutowrapMode.WordSmart;
         charts.ItemSelected += index => chartInfo.Text = ChartChoices[(int)index].description;
         holdStatus = MakeLabel(692, 402, 336, 32, 18);
         start = MakeButton("Start practice", 692, 502, () => Begin());
         home = MakeButton("Back to start", 692, 564, () => session.Home());
         hud = MakeLabel(692, 186, 336, 245, 25);
-        status = MakeLabel(692, 115, 340, 65, 24);
+        status = MakeLabel(692, 115, 340, 44, 24);
         GetWindow().FocusExited += () => { session.ReleaseAll(); mouseLane=0; };
         if (OS.GetCmdlineUserArgs().Contains("--spatial-tests")) CallDeferred(nameof(RunSpatialTests));
         if (OS.GetCmdlineUserArgs().Contains("--hold-tests")) CallDeferred(nameof(RunHoldTests));
+        if (OS.GetCmdlineUserArgs().Contains("--audio-tests")) CallDeferred(nameof(RunAudioTests));
         GD.Print("ARCONIST_READY Godot=" + Engine.GetVersionInfo()["string"] + " .NET=" + System.Environment.Version + " evidence=" + evidenceDir);
         UpdateHud();
     }
@@ -73,7 +91,13 @@ public partial class Main : Control
         var label = new Label { Position = new Vector2(x,y), Size = new Vector2(w,h), MouseFilter = MouseFilterEnum.Ignore };
         label.AddThemeFontSizeOverride("font_size",size); AddChild(label); return label;
     }
-    private void Begin() { mouseLane=0; session.Start(chartData[charts.Selected]); UpdateHud(); QueueRedraw(); }
+    private void Begin()
+    {
+        mouseLane=0;chartInfo.Text=ChartChoices[charts.Selected].description;
+        try { session.Start(chartData[charts.Selected],(int)userOffset.Value,ChartChoices[charts.Selected].file,ChartChoices[charts.Selected].audio); }
+        catch(Exception e) { chartInfo.Text="Start error: "+e.Message; GD.Print("SESSION_CONFIGURATION_ERROR "+e.Message); }
+        UpdateHud(); QueueRedraw();
+    }
     public override void _Process(double delta) { session.Frame(); track.Refresh(session.Core); UpdateHud(); QueueRedraw(); }
     public override void _Input(InputEvent ev)
     {
@@ -111,6 +135,12 @@ public partial class Main : Control
     private void UpdateHud()
     {
         var k = session.Core;
+        var audio=session.Audio!;
+        audioStatus.Text=audio.State switch {"API_PLAYING"=>"Music playing", "READY"=>"Music ready — waiting for start", "ERROR"=>"MUSIC ERROR — see guide", "STOPPED"=>"Music stopped", _=>"Silent chart"};
+        audioStatus.TooltipText=audio.Detail+"\n"+audio.LastBackendStatus?.Backend;
+        audioStatus.Modulate=new Color(audio.State=="ERROR"?"ff6985":"b9f56c");
+        if(audio.State=="ERROR") {chartInfo.Text=audio.Detail;chartInfo.TooltipText=audio.Detail;}
+        userOffset.Editable=k==null||k.Finished;
         holdStatus.Visible = k != null && !k.Finished && k.Holds.Count > 0;
         if (holdStatus.Visible)
         {
@@ -123,7 +153,7 @@ public partial class Main : Control
         if (k == null)
         {
             status.Text = "FIND YOUR RHYTHM";
-            hud.Text = "D     F     J     K\n\nCyan: tap and release.\nAmber: hold the key.\nGreen: hold contact active.\n\nKey + mouse = two contacts.\nSilent practice; see guide below.";
+            hud.Text = "D     F     J     K\n\nCyan: tap and release.\nAmber: hold the key.\nGreen: hold contact active.\n\nKey + mouse = two contacts.\nChoose audible or silent practice.";
             hud.AddThemeFontSizeOverride("font_size",21); return;
         }
         hud.AddThemeFontSizeOverride("font_size",25);
@@ -143,11 +173,12 @@ public partial class Main : Control
     {
         if (font == null) return;
         DrawRect(new Rect2(665,0,435,740),new Color("0b1020"));
-        Text("ARCONIST",72,64,32,ink); Text("TAPS + HOLDS   /   R004",692,60,17,muted);
+        Text("ARCONIST",72,64,32,ink); Text("AUDIBLE PRACTICE   /   R005",692,60,17,muted);
         Text("D  ·  F  ·  J  ·  K",72,102,19,muted);
         Text("Native coordinates / 425   |   perspective Camera3D",52,713,15,muted);
         Text("F6 view   F7 resize   F8 capture",692,686,15,muted);
     }
+    private void RunAudioTests() => AudioValidation.Run(this, evidenceDir);
     private void RunHoldTests() => HoldValidation.Run(this, track, evidenceDir);
     private void RunSpatialTests() => SpatialValidation.Run(this,track,evidenceDir);
     private void LogSpatial(string kind)
@@ -161,7 +192,9 @@ public partial class Main : Control
     {
         var k=session.Core;
         log?.WriteLine(JsonSerializer.Serialize(new { sequence=++sequence, run=session.Run, kind,
-            wall=(long)Time.GetTicksMsec(), e=k?.Timeline.EffectiveTime, lastFrame=k?.LastFrameTime,
+            wall=(long)Time.GetTicksMsec(), clockDomain="Godot monotonic ticks ms / kernel E ms", e=k?.Timeline.EffectiveTime, lastFrame=k?.LastFrameTime,
+            r=k?.Timeline.RawTime,c=k?.Timeline.Compensation,o=k?.Timeline.CombinedOffset,requests=k?.Timeline.StartRequestCount,
+            audioState=session.Audio?.State, audioDetail=session.Audio?.Detail, audioSession=session.Audio?.Session,
             pure=k?.Pure,far=k?.Far,lost=k?.Lost,shining=k?.Shining,score=k?.Score,combo=k?.Combo,maxCombo=k?.MaxCombo,
             health=k?.Health,contacts=k?.ContactCount,held=session.HeldCount,finished=k?.Finished,
             holds=k?.Holds.Select(h=>new { id=h.Data.Id, h.Active, h.Latched, h.Holding, h.ActivatingContacts, h.Records }).ToArray(),
@@ -176,5 +209,5 @@ public partial class Main : Control
         LogSpatial("CAPTURE_GEOMETRY");
         Error error=GetViewport().GetTexture().GetImage().SavePng(path); GD.Print($"VIEWPORT_CAPTURE {error} {path}");
     }
-    public override void _ExitTree() { session.ReleaseAll(); log?.Dispose(); }
+    public override void _ExitTree() { session?.Home(); log?.Dispose(); }
 }

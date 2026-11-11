@@ -5,3 +5,8 @@ export/
 NuGet.local.Config
 bridge/**/*.uid
 tests/**/*.uid
+# R005 original soundtrack is reproduced from reconstructed/audio/compose.py.
+content/audio/*.wav
+content/audio/*.wav.import
+content/audio/manifest.json
+content/audio/*.bytes

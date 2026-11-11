@@ -15,7 +15,7 @@ $env:DOTNET_PROCESSOR_COUNT = '1'
 # skips the unreachable online advisory lookup; no test or compiler gate changes.
 if ($OfflineRestore) { $env:NuGetAudit = 'false' }
 $toolsDir = Join-Path $repoRoot 'reconstructed/out/r002-tools'
-$exportDir = Join-Path $repoRoot 'reconstructed/out/r004-windows'
+$exportDir = Join-Path $repoRoot 'reconstructed/out/r005-windows'
 function Invoke-Dotnet {
     param([string[]]$Arguments)
     & dotnet @Arguments
@@ -49,6 +49,9 @@ try {
 } finally { $zip.Dispose() }
 Push-Location $repoRoot
 try {
+    & python (Join-Path $repoRoot 'reconstructed/audio/compose.py') --output (Join-Path $PSScriptRoot 'content/audio/clockwork_steps.wav.bytes') --report (Join-Path $toolsDir 'r005-waveform.json')
+    if ($LASTEXITCODE -ne 0) { throw 'Soundtrack generation failed' }
+    Copy-Item (Join-Path $repoRoot 'reconstructed/audio/manifest.json') (Join-Path $PSScriptRoot 'content/audio/manifest.json') -Force
     Invoke-Dotnet -Arguments @('restore','reconstructed/godot/Arconist.Godot.csproj','--configfile','reconstructed/godot/NuGet.Config','-m:1','-nr:false')
     Invoke-Dotnet -Arguments @('build','reconstructed/Arconist.slnx','-c','Release','--configfile','reconstructed/NuGet.Config','-m:1','-nr:false')
     Invoke-Dotnet -Arguments @('reconstructed/tests/bin/Release/net10.0/Arconist.Tests.dll','.')
@@ -58,6 +61,8 @@ try {
     }
     Invoke-Dotnet -Arguments @('build','reconstructed/hold-tests/Arconist.Hold.Tests.csproj','-c','Release','-m:1','-nr:false')
     Invoke-Dotnet -Arguments @('reconstructed/hold-tests/bin/Release/net10.0/Arconist.Hold.Tests.dll','.','reconstructed/out/r004-core')
+    Invoke-Dotnet -Arguments @('build','reconstructed/audio-tests/Arconist.Audio.Tests.csproj','-c','Release','-m:1','-nr:false')
+    Invoke-Dotnet -Arguments @('reconstructed/audio-tests/bin/Release/net10.0/Arconist.Audio.Tests.dll','.','reconstructed/out/r005-core')
     Push-Location $PSScriptRoot
     try {
         Invoke-Dotnet -Arguments @('build','Arconist.Godot.csproj','-c','Debug','-m:1','-nr:false')
@@ -67,6 +72,7 @@ try {
     Invoke-Godot -Arguments @('--headless','--editor','--path','reconstructed/godot','--import','--quit')
     Invoke-Godot -Arguments @('--headless','--path','reconstructed/godot','--','--spatial-tests')
     Invoke-Godot -Arguments @('--headless','--path','reconstructed/godot','--','--hold-tests')
+    Invoke-Godot -Arguments @('--headless','--path','reconstructed/godot','--','--audio-tests')
     Invoke-Godot -Arguments @('--headless','--path','reconstructed/godot','--export-release','Windows x64')
     if (-not (Test-Path (Join-Path $exportDir 'data_Arconist.Godot_windows_x86_64/coreclr.dll'))) { throw 'Self-contained runtime missing' }
     Write-Host ('Built Windows x64 application: '+(Join-Path $exportDir 'Arconist.exe'))
