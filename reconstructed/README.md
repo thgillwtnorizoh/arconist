@@ -1,3 +1,13 @@
+# Arconist reconstruction — R006
+
+R006 adds explicit pause/resume, frozen effective time, logical audio seeking and
+contact-state recovery to owner-accepted R005. See [R006 report](validation/R006.md),
+[build guide](godot/README.md), [owner instructions](godot/PLAYER.txt) and
+[native interruption references](../reference_traces/r006/README.md). Manual pause
+retains contacts; focus loss pauses and cancels uncertain desktop contacts. Focus
+return never resumes. The229-group technical pipeline is separate from owner
+Windows/audio/gameplay qualification. Historical summaries follow unchanged.
+
 # Arconist reconstruction — R005
 
 R005 adds the original CC0 soundtrack **Clockwork Steps**, an audible tap/hold

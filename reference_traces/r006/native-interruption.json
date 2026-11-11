@@ -1,0 +1,18 @@
+{
+  "provenance": "Manually transcribed E041 sections5-8 and E012 sections8-12 from authorized baseline3c15cec1efc9eccceae66f18d7e32a5c02b5c0d7 before R006 tests. No new native run. A=0 ordinary domain only.",
+  "fixtureSha256": "603c78c37c228436bf47e37d0826aa8b2efa0d5c93177b3fefbfb253379cee6e",
+  "origin": 6450,
+  "startWall": 9452,
+  "pauseWall": 10652,
+  "resumeWall": 70652,
+  "pause": {"r":1202,"p":1200,"c":2,"e":1200},
+  "compensated": {"r":61202,"p":1200,"c":60002,"e":1200},
+  "next": {"r":61203,"p":1200,"c":60002,"e":1201},
+  "checkpoints": [
+    {"e":1125,"record":1250,"pure":1,"shining":1,"combo":1,"score":3333334,"health":26.866666793823242},
+    {"e":1375,"record":1500,"pure":2,"shining":2,"combo":2,"score":6666668,"health":53.733333587646484},
+    {"e":1625,"record":1750,"pure":3,"shining":3,"combo":3,"score":10000003,"health":80.5999984741211}
+  ],
+  "offsetResume": {"combined":120,"e":1000,"b":-120,"seek":1120},
+  "boundaries": "E041 ends at E1627 unfinished, no native final result. Reconstruction completion comparisons are separate engineering regression checks. Native audio pause/seek/unpause were requests to supplied services, not audible playback."
+}

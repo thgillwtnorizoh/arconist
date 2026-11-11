@@ -4,14 +4,16 @@ namespace Arconist.Bridge;
 
 public sealed class BgmStatus
 {
+    public double? SeekReadbackSeconds { get; }
+    public bool Paused { get; }
     public bool Playing { get; }
     public double PositionSeconds { get; }
     public double DurationSeconds { get; }
     public string Backend { get; }
     public bool Muted { get; }
     public string ResourceSha256 { get; }
-    public BgmStatus(bool playing, double position, double duration, string backend, bool muted=false, string resourceSha256="")
-    { Playing=playing; PositionSeconds=position; DurationSeconds=duration; Backend=backend; Muted=muted; ResourceSha256=resourceSha256; }
+    public BgmStatus(bool playing, double position, double duration, string backend, bool muted=false, string resourceSha256="", bool paused=false, double? seekReadbackSeconds=null)
+    { SeekReadbackSeconds=seekReadbackSeconds; Paused=paused; Playing=playing; PositionSeconds=position; DurationSeconds=duration; Backend=backend; Muted=muted; ResourceSha256=resourceSha256; }
 }
 
 // Engineering output port. Its diagnostic playhead is never an input to Timeline.
@@ -21,6 +23,14 @@ public interface IBgmBackend
     void PlayFromStart();
     void StopAndUnload();
     BgmStatus Inspect();
+}
+
+// Optional capability preserves existing R005 test backends unchanged.
+public interface IPausableBgmBackend : IBgmBackend
+{
+    void PausePlayback();
+    void SeekMilliseconds(int position);
+    void UnpausePlayback();
 }
 
 public sealed class BgmSession
@@ -46,13 +56,17 @@ public sealed class BgmDiagnostic
     public int? RawTime { get; }
     public int? Compensation { get; }
     public int? EffectiveTime { get; }
+    public int? PauseReference { get; }
+    public int? MusicAnchor { get; }
+    public bool? TimelinePaused { get; }
+    public int? SeekMilliseconds { get; }
     public int RequestCount { get; }
     public int PlayAttempts { get; }
     public int AcceptedStarts { get; }
     public string ClockDomain => "request wall: supplied monotonic session clock ms; R/C/E: kernel ms; backend position: audio seconds (diagnostic only)";
     public BgmStatus? BackendStatus { get; }
-    public BgmDiagnostic(string kind,BgmSession session,string state,string detail,MusicStartRequest? request,Timeline? t,BgmStatus? backend,int requests,int attempts,int starts)
-    {Kind=kind;Session=session;State=state;Detail=detail;Request=request;RawTime=t?.RawTime;Compensation=t?.Compensation;EffectiveTime=t?.EffectiveTime;BackendStatus=backend;RequestCount=requests;PlayAttempts=attempts;AcceptedStarts=starts;}
+    public BgmDiagnostic(string kind,BgmSession session,string state,string detail,MusicStartRequest? request,Timeline? t,BgmStatus? backend,int requests,int attempts,int starts,int? seek=null)
+    {PauseReference=t?.PauseReference;MusicAnchor=t?.MusicAnchor;TimelinePaused=t?.Paused;SeekMilliseconds=seek;Kind=kind;Session=session;State=state;Detail=detail;Request=request;RawTime=t?.RawTime;Compensation=t?.Compensation;EffectiveTime=t?.EffectiveTime;BackendStatus=backend;RequestCount=requests;PlayAttempts=attempts;AcceptedStarts=starts;}
 }
 
 public sealed class BgmController
@@ -68,12 +82,12 @@ public sealed class BgmController
     public event Action<BgmDiagnostic>? Diagnostic;
     private bool prepared, stopped=true;
     public BgmController(IBgmBackend backend) { this.backend=backend; }
-    private void Emit(string kind,MusicStartRequest? request=null,Timeline? timeline=null)
+    private void Emit(string kind,MusicStartRequest? request=null,Timeline? timeline=null,int? seek=null)
     {
         try { LastBackendStatus=backend.Inspect(); } catch(Exception e) { Detail="Backend status unavailable: "+e.Message; }
         if(Session==null) return;
         // Observational logging cannot interrupt playback cleanup or gameplay.
-        var d=new BgmDiagnostic(kind,Session,State,Detail,request,timeline,LastBackendStatus,Requests,PlayAttempts,Starts);
+        var d=new BgmDiagnostic(kind,Session,State,Detail,request,timeline,LastBackendStatus,Requests,PlayAttempts,Starts,seek);
         if(Diagnostic!=null) foreach(Action<BgmDiagnostic> observer in Diagnostic.GetInvocationList())
             try { observer(d); } catch { /* A diagnostic sink cannot own game time. */ }
     }
@@ -113,6 +127,43 @@ public sealed class BgmController
     }
     public void Anchored(int sessionId,MusicStartRequest request,Timeline timeline)
     {if(Session?.Id==sessionId)Emit("BGM_ANCHORED",request,timeline);}
+    public bool Pause(Timeline timeline)
+    {
+        Emit("BGM_PAUSE_REQUEST",timeline:timeline);
+        if(Session?.Resource==null) {Emit("BGM_SILENT_PAUSE",timeline:timeline);return true;}
+        try
+        {
+            if(!prepared || stopped || backend is not IPausableBgmBackend p) throw new InvalidOperationException("Audio pause unavailable; return to menu to restart.");
+            p.PausePlayback();
+            if(timeline.MusicStarted && !backend.Inspect().Paused) throw new InvalidOperationException("Backend did not confirm paused state.");
+            State="PAUSED";Detail="Audio API paused; awaiting explicit resume.";Emit("BGM_PAUSE_ACCEPTED",timeline:timeline);return true;
+        }
+        catch(Exception e) {State="ERROR";Detail=e.Message;Emit("BGM_PAUSE_ERROR",timeline:timeline);End("failed pause",preserveError:true);return false;}
+    }
+    public bool Resume(Timeline timeline,int position)
+    {
+        Emit("BGM_RESUME_COMPENSATED",timeline:timeline,seek:position);
+        if(Session?.Resource==null) {Emit("BGM_SILENT_RESUME",timeline:timeline,seek:position);return true;}
+        try
+        {
+            if(!prepared || stopped || backend is not IPausableBgmBackend p) throw new InvalidOperationException("Audio unavailable; return to menu to restart.");
+            if(position<0 || position/1000.0>=backend.Inspect().DurationSeconds) throw new ArgumentOutOfRangeException(nameof(position),"Logical seek outside the bundled stream.");
+            Emit("BGM_SEEK_REQUEST",timeline:timeline,seek:position);p.SeekMilliseconds(position);Emit("BGM_SEEK_ACCEPTED",timeline:timeline,seek:position);
+            Emit("BGM_UNPAUSE_REQUEST",timeline:timeline,seek:position);p.UnpausePlayback();
+            var state=backend.Inspect();
+            if(state.Paused || !state.Playing) throw new InvalidOperationException("Backend did not confirm resumed playback.");
+            State="API_PLAYING";Detail="Seek/unpause API accepted; physical synchronization unverified.";Emit("BGM_RESUME_ACCEPTED",timeline:timeline,seek:position);return true;
+        }
+        catch(Exception e)
+        {
+            State="ERROR";Detail="Resume failed: "+e.Message;
+            // A partially successful unpause must not leave music advancing silently.
+            try {Emit("BGM_RECOVERY_PAUSE_REQUEST",timeline:timeline);if(backend is IPausableBgmBackend p)p.PausePlayback();Emit("BGM_RECOVERY_PAUSE_ACCEPTED",timeline:timeline);} catch {End("failed resume recovery",preserveError:true);}
+            Emit("BGM_RESUME_ERROR",timeline:timeline,seek:position);return false;
+        }
+    }
+    public void PrerollResumed(Timeline timeline)
+    {if(State=="PAUSED"){State="READY";Detail="Preroll resumed; waiting for strict startup.";}Emit("BGM_PREROLL_RESUME",timeline:timeline);}
     public void Finished()
     {
         if(Session==null || stopped) return;

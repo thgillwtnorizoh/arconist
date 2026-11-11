@@ -1,3 +1,56 @@
+ARCONIST R006 — pause/resume owner qualification build
+
+Extract the ENTIRE ZIP and open Arconist.exe beside its PCK/runtime directory.
+No compilation, separate .NET installation or runtime download is needed.
+Windows10/11 x64, OpenGL3.3 driver and working speakers/headphones are required.
+
+PAUSE / EXPLICIT RESUME
+  Escape or P, or the Pause button: pause gameplay and music.
+  R, or Resume on the pause panel: seek music to logical chart time+combined
+  offset, then resume. The song should continue from that position, not zero.
+  Return to start on the pause panel: stop/unload the run and return to menu.
+  Repeated pause/resume controls must not duplicate music/checkpoint awards.
+
+OWNER QUALIFICATION STEPS
+  1. Choose Clockwork Steps /120BPM, user offset0, Start.
+  2. During the visual preroll press P. Wait, then R. Music must remain unstarted
+     until the resumed strict startup boundary; four count-in beats precede D2s.
+  3. During J hold8–11s retain J and press P with another finger.
+  4. Leave it paused for AT LEAST60 seconds. HUD time/score/records must freeze.
+  5. Keep J held and press R. Music should resume at the same logical position;
+     the next running frame should recover the retained contact.
+  6. Repeat, releasing J while paused. Resume, then press J again during the body.
+     The old contact must stay released; the new press can reacquire the hold.
+  7. Hold J plus left mouse on J near the green line; pause using P. Release one
+     contact while paused, resume using R, and keep the other contact held.
+     A retained mouse is reprojected at its current position after dismissal;
+     moving away/outside must not leave stale lane support.
+  8. Switch away and back while paused: focus loss cancels uncertain desktop
+     contacts, and returning focus NEVER resumes. Resume explicitly and repress.
+     This is Windows engineering policy, not native Android finger preservation.
+  9. Compare AFF0/user+120, AFF+120/user0 and AFF+120/user−120. Seek uses E+O;
+     positive combined offset delays chart notes relative to the same music.
+ 10. Complete results, Play again, Back to start, and switch to another audible
+     or old silent chart. There must be no stale modal, contacts or overlapping BGM.
+
+The pause modal blocks new gameplay DOWN/mouse movement. Delivered key/mouse UP
+still releases retained contacts. CANCEL is used for focus-loss cleanup. Manual
+pause does not invent a release; focus loss deliberately cancels all contacts.
+Foreground restoration changes no pause state. Godot's scene tree stays running
+so UI/cleanup/compensation can work; model, timeline, modal and audio are distinct.
+
+If seek/unpause fails, the panel stays active with a visible MUSIC ERROR and
+retry/menu instructions; gameplay remains frozen. Retry Resume after a recoverable
+backend failure or use Return to start. A pause/start resource failure requires a
+fresh run. API acceptance/readback is not proof of audible synchronization.
+
+F6/F7/F8 remain camera/resize/owner capture. Diagnostics/captures are under:
+%APPDATA%/Godot/app_userdata/Arconist R006 - Pause and Audible Practice/evidence
+Logs distinguish wall milliseconds, R/P/C/E/O/B, model/timeline/modal flags,
+audio pause/seek/unpause and cursor readback, contacts/cancellation/checkpoints.
+
+The following R005 chart/offset guide is retained for the unchanged music/charts.
+
 ARCONIST R005 — Clockwork Steps / owner qualification build
 
 Extract the ENTIRE ZIP to a writable folder and open Arconist.exe.
@@ -52,13 +105,13 @@ an API indication, not proof of audible output. Report missing audio with chart,
 offset, Windows output device, visible error and session log. Latency unverified.
 
 F6 camera, F7 resize, F8 owner-requested viewport capture. Diagnostics/captures:
-%APPDATA%/Godot/app_userdata/Arconist R005 - Audible Tap and Hold Practice/evidence
+%APPDATA%/Godot/app_userdata/Arconist R006 - Pause and Audible Practice/evidence
 JSONL includes clock domains, session/chart/resource, offsets, R/C/E, request/anchor,
 backend state and authoritative judgments. No audio recording.
-Focus loss releases contacts; time/music continue. Pause is not implemented.
+Focus loss pauses and cancels contacts; explicit resume is required (see above).
 
 Clockwork Steps: original synthetic composition/synthesis, CC0-1.0; see notices.
 Unsigned prototype with placeholder3D geometry. No commercial assets, SFX,
-arcs/flicks, special gauges, drift correction or native pause.
-READY FOR HUMAN QUALIFICATION — R005. Windows launch, audible output, perceived
+arcs/flicks, special gauges, drift correction or full Android lifecycle.
+READY FOR HUMAN QUALIFICATION — R006. Windows launch, audible output, perceived
 synchronization, physical input, results and replay require the owner's testing.

@@ -6,10 +6,12 @@ using System.Security.Cryptography;
 namespace Arconist.GodotApp;
 
 // Godot output substitution; this class never receives or writes Kernel time.
-public partial class GodotBgmBackend : Node, IBgmBackend
+public partial class GodotBgmBackend : Node, IPausableBgmBackend
 {
     private AudioStreamPlayer player = null!;
     private AudioStreamWav? stream;
+    private AudioStreamPlayback? playback;
+    private double? seekReadback;
     private string resourceSha = "";
     public event Action? Ended;
     public bool Muted { get; set; }
@@ -49,18 +51,44 @@ public partial class GodotBgmBackend : Node, IBgmBackend
     {
         if(stream==null)throw new InvalidOperationException("BGM was not prepared.");
         player.Stop();player.StreamPaused=false;player.VolumeDb=Muted?-80:-3;player.Play(0);
+        playback=player.GetStreamPlayback();
+    }
+    public void PausePlayback() {player.StreamPaused=true;}
+    public void SeekMilliseconds(int position)
+    {
+        if(stream==null || !player.StreamPaused || position<0 || position/1000.0>=stream.GetLength())
+            throw new InvalidOperationException("Seek requires a paused prepared stream and a valid logical position.");
+        if(playback==null) throw new InvalidOperationException("No retained PCM playback to seek.");
+        // Godot4.7.2 player-level Seek ignores paused playbacks (is_playing guard).
+        // Seek the same PCM playback under the audio-server lock; never Play(0).
+        AudioServer.Lock();
+        try
+        {
+            playback.Seek(position/1000.0);
+            seekReadback=playback.GetPlaybackPosition();
+            if(Math.Abs(seekReadback.Value-position/1000.0)>1.0/22050)
+                throw new InvalidOperationException("PCM playback did not acknowledge logical seek.");
+            // Discard samples/interpolation history from before the interruption.
+            if(playback is AudioStreamPlaybackResampled resampled)resampled.BeginResample();
+        }
+        finally {AudioServer.Unlock();}
+    }
+    public void UnpausePlayback()
+    {
+        if(stream==null) throw new InvalidOperationException("No paused BGM stream.");
+        player.StreamPaused=false;
     }
     public void StopAndUnload()
     {
         if(player!=null && GodotObject.IsInstanceValid(player)) {player.Stop();player.Stream=null;player.StreamPaused=false;}
-        stream?.Dispose();stream=null;resourceSha="";
+        playback?.Dispose();playback=null;seekReadback=null;stream?.Dispose();stream=null;resourceSha="";
     }
     public BgmStatus Inspect()
     {
         string identity=$"Godot AudioStreamPlayer; driver={AudioServer.GetDriverName()}; device={AudioServer.OutputDevice}; mixHz={AudioServer.GetMixRate()}";
         bool masterMuted=AudioServer.IsBusMute(AudioServer.GetBusIndex("Master"));
-        return new BgmStatus(player?.Playing??false,player?.GetPlaybackPosition()??0,
-            stream?.GetLength()??0,identity,Muted||masterMuted,resourceSha);
+        return new BgmStatus(player?.Playing??false,playback?.GetPlaybackPosition()??0,
+            stream?.GetLength()??0,identity,Muted||masterMuted,resourceSha,player?.StreamPaused??false,seekReadback);
     }
     public override void _ExitTree() => StopAndUnload();
 }

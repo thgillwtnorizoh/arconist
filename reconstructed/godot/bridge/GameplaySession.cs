@@ -13,6 +13,8 @@ public sealed class GameplaySession
     public string Feedback { get; private set; } = "READY";
     public int Run { get; private set; }
     public int HeldCount => held.Count;
+    public bool PauseModalActive { get; private set; }
+    public string PauseReason { get; private set; } = "";
     public event Action<string>? Changed;
     public event Action<IReadOnlyList<JudgmentEvent>>? JudgmentsProduced;
     private void PublishJudgments()
@@ -47,7 +49,7 @@ public sealed class GameplaySession
         var chart=Chart.Parse(aff);
         _ = checked(chart.AudioOffset+userOffset);
         ReleaseAll(); DetachAudio(); Audio?.End("restart");
-        held.Clear(); Feedback = "READY"; Run++;
+        held.Clear(); PauseModalActive=false; PauseReason=""; Feedback = "READY"; Run++;
         Audio?.Begin(new BgmSession(Run,chartId,audioResource,chart.AudioOffset,userOffset,chart.EndTime));
         // Resource preparation precedes the fresh session's steady-clock origin.
         // Loading time is not hidden compensation or gameplay elapsed time.
@@ -82,7 +84,7 @@ public sealed class GameplaySession
         if (Core == null || lane < 2 || lane > 5 || echo) return false;
         if (pressed)
         {
-            if (Core.Finished || !held.Add(pointer)) return false;
+            if (Core.Finished || PauseModalActive || Core.Paused || !held.Add(pointer)) return false;
             Core.Down(clock.Milliseconds, pointer, lane);
             PublishJudgments();
             foreach (var classification in Core.Classifications)
@@ -98,13 +100,44 @@ public sealed class GameplaySession
     }
     public bool MoveContact(int pointer, int lane)
     {
-        if (Core == null || Core.Finished || !held.Contains(pointer)) return false;
+        if (Core == null || Core.Finished || PauseModalActive || Core.Paused || !held.Contains(pointer)) return false;
         Core.Move(pointer, lane); Changed?.Invoke("MOVE"); return true;
     }
+    public bool Pause(string reason="manual")
+    {
+        if(Core==null || Core.Finished || Core.Paused) return false;
+        Changed?.Invoke("PAUSE_REQUEST");PauseReason=reason;PauseModalActive=true;
+        bool accepted=Core.Pause(clock.Milliseconds,()=>Audio?.Pause(Core.Timeline));
+        Changed?.Invoke("PAUSE_ACCEPTED");return accepted;
+    }
+    public bool Resume()
+    {
+        if(Core==null || Core.Finished || !Core.Paused) return false;
+        Changed?.Invoke("RESUME_REQUEST");bool started=Core.Timeline.MusicStarted;
+        if(!started && Audio?.State=="ERROR")
+        {
+            Core.Timeline.Update(clock.Milliseconds);
+            Changed?.Invoke("RESUME_FAILED_STILL_PAUSED");return false;
+        }
+        if(!Core.Resume(clock.Milliseconds,position=>Audio?.Resume(Core.Timeline,position)??true))
+        {Changed?.Invoke("RESUME_FAILED_STILL_PAUSED");return false;}
+        if(!started) Audio?.PrerollResumed(Core.Timeline);
+        PauseModalActive=false;PauseReason="";Changed?.Invoke("PAUSE_MODAL_DISMISSED");Changed?.Invoke("RESUME_ACCEPTED");return true;
+    }
+    public bool Cancel(int pointer,string reason="cancel")
+    {
+        if(Core==null || !held.Remove(pointer)) return false;
+        Core.Cancel(pointer);Changed?.Invoke("CANCEL:"+reason);return true;
+    }
+    public void CancelAll(string reason) {foreach(int p in held.ToArray())Cancel(p,reason);}
+    // Windows policy: focus loss pauses AND cancels uncertain physical contacts.
+    // Manual pause retains contacts until actual UP/CANCEL. Focus gain never resumes.
+    public void FocusLost(){Pause("focus loss");CancelAll("focus loss");Changed?.Invoke("FOCUS_LOST");}
+    public void FocusReturned(){Changed?.Invoke("FOREGROUND_NO_AUTO_RESUME");}
     public void ReleaseAll()
     {
         if (Core != null)
             foreach (int pointer in held.ToArray()) { Core.Up(pointer); held.Remove(pointer); Changed?.Invoke("CLEANUP_UP"); }
     }
-    public void Home() { ReleaseAll(); DetachAudio(); Audio?.End("menu"); Core = null; Feedback = "READY"; Changed?.Invoke("HOME"); }
+    public void Home() { ReleaseAll(); DetachAudio(); Audio?.End("menu"); Core = null; PauseModalActive=false; PauseReason=""; Feedback = "READY"; Changed?.Invoke("HOME"); }
 }

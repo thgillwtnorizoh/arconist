@@ -9,6 +9,8 @@ public partial class Main : Control
     private sealed class GodotClock : IMonotonicClock { public long Milliseconds => (long)Time.GetTicksMsec(); }
     private GameplaySession session = null!;
     private GodotBgmBackend bgm = null!;
+    private PausePanel pausePanel = null!;
+    private Button pauseButton = null!;
     private SpinBox userOffset = null!;
     private Label audioStatus = null!;
     private Font font = null!;
@@ -54,6 +56,17 @@ public partial class Main : Control
         Directory.CreateDirectory(evidenceDir);
         log = new StreamWriter(Path.Combine(evidenceDir, "session-" + DateTime.UtcNow.ToString("yyyyMMdd-HHmmss") + ".jsonl")) { AutoFlush = true };
         session.Changed += Log;
+        pausePanel=new PausePanel();AddChild(pausePanel);pausePanel.Bind(session);
+        session.Changed += kind => {
+            pausePanel.Sync();
+            if(kind=="RESUME_ACCEPTED" && mouseLane!=0)
+            {
+                // Reproject the genuinely retained mouse at its current position;
+                // a modal move must not leave stale pre-pause lane support.
+                Vector2 local=(GetViewport().GetMousePosition()-trackOrigin)*(Vector2)viewport3D.Size/trackSize;
+                session.MoveContact(100,track.Pick(local,out _));
+            }
+        };
         session.JudgmentsProduced += events => log?.WriteLine(JsonSerializer.Serialize(new {
             kind="JUDGMENTS",run=session.Run,chart=session.Audio?.Session?.Chart,
             wall=(long)Time.GetTicksMsec(),clockDomain="Godot monotonic wall ms; authoritative judgment E ms",events }));
@@ -74,9 +87,13 @@ public partial class Main : Control
         home = MakeButton("Back to start", 692, 564, () => session.Home());
         hud = MakeLabel(692, 186, 336, 245, 25);
         status = MakeLabel(692, 115, 340, 44, 24);
-        GetWindow().FocusExited += () => { session.ReleaseAll(); mouseLane=0; };
+        pauseButton=new Button {Text="Pause (Esc/P)",Position=new Vector2(500,75),Size=new Vector2(150,36),FocusMode=FocusModeEnum.None};
+        pauseButton.Pressed+=()=>session.Pause();AddChild(pauseButton);
+        GetWindow().FocusExited += () => {session.FocusLost();mouseLane=0;};
+        GetWindow().FocusEntered += () => session.FocusReturned();
         if (OS.GetCmdlineUserArgs().Contains("--spatial-tests")) CallDeferred(nameof(RunSpatialTests));
         if (OS.GetCmdlineUserArgs().Contains("--hold-tests")) CallDeferred(nameof(RunHoldTests));
+        if (OS.GetCmdlineUserArgs().Contains("--pause-tests")) CallDeferred(nameof(RunPauseTests));
         if (OS.GetCmdlineUserArgs().Contains("--audio-tests")) CallDeferred(nameof(RunAudioTests));
         GD.Print("ARCONIST_READY Godot=" + Engine.GetVersionInfo()["string"] + " .NET=" + System.Environment.Version + " evidence=" + evidenceDir);
         UpdateHud();
@@ -107,6 +124,10 @@ public partial class Main : Control
             if (key.Pressed && !key.Echo && key.Keycode == Key.F6) { track.SetView(!track.AlternateView); LogSpatial("CAMERA"); return; }
             if (key.Pressed && !key.Echo && key.Keycode == Key.F7) { GetWindow().Size = GetWindow().Size.X == 1100 ? new Vector2I(1320,888) : new Vector2I(1100,740); LogSpatial("RESIZE"); return; }
             if (key.Pressed && !key.Echo && key.Keycode == Key.F8) { Capture(); return; }
+            if(key.Pressed && !key.Echo && (key.Keycode==Key.Escape || key.Keycode==Key.P))
+            {session.Pause();GetViewport().SetInputAsHandled();return;}
+            if(key.Pressed && !key.Echo && key.Keycode==Key.R && session.PauseModalActive)
+            {pausePanel.Resume();GetViewport().SetInputAsHandled();return;}
             char letter = GameplaySession.ResolveKey((long)key.PhysicalKeycode,(long)key.Keycode,key.Unicode);
             if (letter != '\0')
             {
@@ -114,6 +135,13 @@ public partial class Main : Control
                 session.Key(letter,key.Pressed,key.Echo);
                 GetViewport().SetInputAsHandled();
             }
+        }
+        // Cleanup is delivered even while modal; new pointer DOWN/motion stays blocked.
+        if(session.PauseModalActive)
+        {
+            if(ev is InputEventMouseButton up && up.ButtonIndex==MouseButton.Left && !up.Pressed && mouseLane!=0)
+            {session.Contact(100,mouseLane,false);mouseLane=0;}
+            return;
         }
         if (ev is InputEventMouseMotion motion && mouseLane != 0)
         {
@@ -135,8 +163,10 @@ public partial class Main : Control
     private void UpdateHud()
     {
         var k = session.Core;
+        pauseButton.Visible=k!=null&&!k.Finished&&!session.PauseModalActive;
+        pausePanel.Sync();
         var audio=session.Audio!;
-        audioStatus.Text=audio.State switch {"API_PLAYING"=>"Music playing", "READY"=>"Music ready — waiting for start", "ERROR"=>"MUSIC ERROR — see guide", "STOPPED"=>"Music stopped", _=>"Silent chart"};
+        audioStatus.Text=audio.State switch {"API_PLAYING"=>"Music playing", "READY"=>"Music ready — waiting for start", "ERROR"=>"MUSIC ERROR — see guide", "STOPPED"=>"Music stopped", "PAUSED"=>"Music paused", _=>"Silent chart"};
         audioStatus.TooltipText=audio.Detail+"\n"+audio.LastBackendStatus?.Backend;
         audioStatus.Modulate=new Color(audio.State=="ERROR"?"ff6985":"b9f56c");
         if(audio.State=="ERROR") {chartInfo.Text=audio.Detail;chartInfo.TooltipText=audio.Detail;}
@@ -164,7 +194,7 @@ public partial class Main : Control
         }
         else
         {
-            status.Text = k.Timeline.EffectiveTime < 0 ? $"READY  {Math.Ceiling(-k.Timeline.EffectiveTime/1000.0)}" : session.Feedback;
+            status.Text = k.Paused ? "PAUSED" : k.Timeline.EffectiveTime < 0 ? $"READY  {Math.Ceiling(-k.Timeline.EffectiveTime/1000.0)}" : session.Feedback;
             hud.Text = $"COMBO   {k.Combo}\nSCORE   {k.Score:N0}\nHEALTH   {k.Health:F1}\n\nPURE {k.Pure}  FAR {k.Far}  LOST {k.Lost}\nTime   {k.Timeline.EffectiveTime/1000.0:F2} s\nContacts   {k.ContactCount}";
         }
     }
@@ -173,11 +203,12 @@ public partial class Main : Control
     {
         if (font == null) return;
         DrawRect(new Rect2(665,0,435,740),new Color("0b1020"));
-        Text("ARCONIST",72,64,32,ink); Text("AUDIBLE PRACTICE   /   R005",692,60,17,muted);
+        Text("ARCONIST",72,64,32,ink); Text("PAUSE / AUDIBLE PRACTICE   /   R006",692,60,17,muted);
         Text("D  ·  F  ·  J  ·  K",72,102,19,muted);
         Text("Native coordinates / 425   |   perspective Camera3D",52,713,15,muted);
         Text("F6 view   F7 resize   F8 capture",692,686,15,muted);
     }
+    private void RunPauseTests() => PauseValidation.Run(this,evidenceDir);
     private void RunAudioTests() => AudioValidation.Run(this, evidenceDir);
     private void RunHoldTests() => HoldValidation.Run(this, track, evidenceDir);
     private void RunSpatialTests() => SpatialValidation.Run(this,track,evidenceDir);
@@ -193,7 +224,8 @@ public partial class Main : Control
         var k=session.Core;
         log?.WriteLine(JsonSerializer.Serialize(new { sequence=++sequence, run=session.Run, kind,
             wall=(long)Time.GetTicksMsec(), clockDomain="Godot monotonic ticks ms / kernel E ms", e=k?.Timeline.EffectiveTime, lastFrame=k?.LastFrameTime,
-            r=k?.Timeline.RawTime,c=k?.Timeline.Compensation,o=k?.Timeline.CombinedOffset,requests=k?.Timeline.StartRequestCount,
+            r=k?.Timeline.RawTime,p=k?.Timeline.PauseReference,c=k?.Timeline.Compensation,effective=k?.Timeline.EffectiveTime,o=k?.Timeline.CombinedOffset,b=k?.Timeline.MusicAnchor,
+            modelPaused=k?.ModelPaused,timelinePaused=k?.Timeline.Paused,modal=session.PauseModalActive,pauseReason=session.PauseReason,requests=k?.Timeline.StartRequestCount,
             audioState=session.Audio?.State, audioDetail=session.Audio?.Detail, audioSession=session.Audio?.Session,
             pure=k?.Pure,far=k?.Far,lost=k?.Lost,shining=k?.Shining,score=k?.Score,combo=k?.Combo,maxCombo=k?.MaxCombo,
             health=k?.Health,contacts=k?.ContactCount,held=session.HeldCount,finished=k?.Finished,

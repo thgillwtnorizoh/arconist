@@ -424,3 +424,34 @@ Arconist-R005-Technical-Evidence.zip: libfile_b2fe9bc1b2a881919da47e39e2ff0360, 
 SHA256 ea64f3affde4926a76a6b09b6176ffafe16cf4873cace70ffcc940897809ae34.
 Final audit publishes only report/history and reads main back; tested production
 source stays4d60b28. No further application execution or next mission follows.
+
+
+## R006 authority and implementation — 2026-11-11 Asia/Bangkok
+
+Headquarters authorizes R006 from verified main3c15cec1efc9eccceae66f18d7e32a5c02b5c0d7
+and explicitly records final R005 owner acceptance. This records the order's owner
+finding, not a new Work2 human test. Read standing instructions/history, Scout003,
+E005/E012/E041, relevant E008–011/E026/E037/E040, R001–R005 validations and code/
+tests. No original research or old fixture/oracle/assertion is changed.
+
+Added distinct model gate, timeline paused/P, session modal/reason and backend
+pause. Ordinary A0 pause updates under old state then P=E/audio.pause/flag; paused
+updates C=R−P and clear only transient hold activity. Resume refreshes while paused,
+seeks E−B=E+O/unpauses, then clears gate and dismisses modal. DOWN is blocked before
+identity allocation while paused; UP and distinct CANCEL release retained IDs,
+preserving hold latches. Manual pause retains contacts. Windows focus loss now
+pauses+Cancels all uncertain contacts; foreground never resumes. Retained mouse is
+reprojected after dismissal, not fabricated at a stale position. Godot tree remains
+running for modal/cleanup/compensation, without Director/scheduler equivalence.
+
+First compile failed on Seek double versus float; corrected API usage. Initial
+29 portable tests passed. Real Godot preflight failed4/16: preroll StreamPaused
+is not retained without a playback, and player-level Seek ignores paused playback.
+Godot4.7.2 source confirms both. Repaired preroll confirmation to distinguish no
+started stream; seek now targets same PCM playback under AudioServer lock, checks
+cursor then clears resampler history. No restart from zero, new Play or audio-clock
+feedback. Final17 headless groups include offset readback and128 PCM frames equal
+to an independent fresh decoder at1120ms. Failed logs are retained in evidence.
+Native E041 expectations were manually transcribed before testing; no new native
+experiment or E041 completed-result/audio-output claim. Full229-group clean-main
+regression/export/distribution and final publication results follow.

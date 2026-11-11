@@ -1,8 +1,8 @@
-# Arconist R005 — audible ordinary practice
+# Arconist R006 — pause and audible ordinary practice
 
-The owner accepted R004 according to Headquarters' R005 authorization. Windows
+Headquarters' R006 authorization records R005 accepted after owner qualification. Windows
 launch, audibility, perceived synchronization, physical input, results and replay
-remain owner-only qualification for R005. No graphical automation is authorized.
+remain owner-only qualification for R006. No graphical automation is authorized.
 
 ## Complete technical reproduction
 
@@ -28,7 +28,7 @@ committed. Python assertions must remain enabled.
 
 The driver generates32-second original WAV bytes, compares the published manifest,
 checks64 beat windows, runs36 R001/15 R002/30 R003/33+15 R004 and37+17 R005 groups
-plus three standalone R001 comparisons, compiles/imports/exports the real project,
+plus29 R006 portable and17 R006 Godot groups (229 total) and three standalone R001 comparisons, compiles/imports/exports the real project,
 probes music from the actual PCK and verifies self-contained dependency closure,
 PE architecture, CRCs and every extracted hash. A nonzero command or Godot ERROR
 line fails the driver. Existing evidence is never overwritten; archive it before
@@ -36,12 +36,12 @@ another complete run. No graphical Windows application is launched.
 
 Outputs under reconstructed/out:
 
-- Arconist-R005-Windows-x64.zip: EXE/PCK/complete runtime, README.txt, SOURCE.txt,
+- Arconist-R006-Windows-x64.zip: EXE/PCK/complete runtime, README.txt, SOURCE.txt,
   notices and SHA256SUMS.txt.
-- Arconist-R005-Technical-Evidence.zip: exact commands/exits, actual exporter
+- Arconist-R006-Technical-Evidence.zip: exact commands/exits, actual exporter
   MSBuild log, native comparisons, all group reports, waveform/exported-audio
   checks, integrity data and validation report.
-- r005-evidence/: logs and extracted integrity copy. A prior export is moved aside
+- r006-evidence/: logs and extracted integrity copy. A prior export is moved aside
   and excluded from the evidence ZIP.
 
 build.ps1 is the Windows build/export wrapper, including soundtrack generation and
@@ -64,5 +64,30 @@ Godot output substitutes for FMOD; hardware latency/audibility remain unverified
 Raw WAV uses a .wav.bytes carrier and explicit include_filter so export retains
 raw data. Actual-PCK hash/decoder/player checks use Dummy output, not speakers.
 See [audio source](../audio/README.md). No SFX, drift correction, profiles/legacy
-migration, Bluetooth detection, native pause, arcs/flicks, Android or Unity.
-Focus loss releases contacts while time/music continue, preserving R004 policy.
+migration, Bluetooth detection, full Android lifecycle, arcs/flicks, Android deployment or Unity.
+R006 deliberately revises focus loss: pause and CANCEL all uncertain contacts;
+focus gain never resumes. Manual pause retains contacts until delivered UP/CANCEL.
+
+## R006 interruption contract
+
+Escape/P or Pause activates a separate modal and freezes the model/timeline;
+R/Resume explicitly refreshes paused compensation, seeks E−B=E+O, unpauses audio
+and dismisses the modal. Godot's tree stays running; it is not a Director clone.
+Paused frames clear activity but preserve retained IDs/latches/resolved records.
+UP/CANCEL clean up during pause; new DOWN/mouse movement are gated. Resume samples
+the current retained mouse location through the existing camera ray before the
+next frame, preventing stale pre-pause lane support. No new DOWN is invented.
+
+Optional IPausableBgmBackend leaves old R005 fake backend contracts/tests untouched.
+The production backend retains one PCM playback. Godot4.7.2 player-level Seek is
+ignored when paused; the adapter instead locks AudioServer, seeks the retained
+playback, checks its cursor within one PCM sample and clears resampler history.
+No Play(0) is used on resume. Diagnostics distinguish requested logical cursor,
+verified pre-prefetch readback and decoder position including lookahead. This
+engineering backend substitution is not physical sample-accurate scheduling.
+
+A failed seek/unpause re-pauses audio, leaves model/timeline/modal paused and allows
+retry or menu. Failed initial/pause output stops/unloads and requires a new run.
+Audio errors do not reset E or award/expire notes. See PLAYER.txt for60-second,
+retained/released/two-contact/offset/replay owner checks. All preexisting charts,
+music, reference expectations and old test sources remain unchanged.

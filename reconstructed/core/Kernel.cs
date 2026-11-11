@@ -24,6 +24,8 @@ public sealed class Timeline
     public int EffectiveTime => unchecked(RawTime - Compensation);
     public bool MusicStarted { get; private set; }
     public int CombinedOffset => offset;
+    public bool Paused { get; private set; }
+    public int PauseReference { get; private set; }
     public int MusicAnchor { get; private set; }
     public int StartRequestCount { get; private set; }
     public MusicStartRequest? LastStartRequest { get; private set; }
@@ -49,6 +51,7 @@ public sealed class Timeline
         if (wallMs < lastWall) throw new ArgumentException("Wall time must be monotonic; array order resolves equal times.");
         lastWall = wallMs;
         RawTime = unchecked((int)(wallMs - origin) - 3000);
+        if (Paused) { Compensation = unchecked(RawTime - PauseReference); return; }
         // 005/040: strict crossing, followed by compensation anchoring back to -O.
         if (!MusicStarted && (long)EffectiveTime > -(long)offset)
         {
@@ -66,6 +69,31 @@ public sealed class Timeline
             finally { updating = false; }
         }
     }
+    // E005/012/041 ordinary A=0. Audio callbacks cannot own the clock.
+    public bool Pause(long wallMs, Action? requestPause=null)
+    {
+        if(updating) throw new InvalidOperationException("Reentrant pause transition.");
+        if(Paused) return false;
+        Update(wallMs); PauseReference=EffectiveTime; updating=true;
+        try { try { requestPause?.Invoke(); } catch(Exception e) {notificationErrors.Add(e.Message);} Paused=true; }
+        finally {updating=false;}
+        return true;
+    }
+    public bool Resume(long wallMs, Func<int,bool>? seekAndUnpause=null)
+    {
+        if(updating) throw new InvalidOperationException("Reentrant resume transition.");
+        if(!Paused) return false;
+        Update(wallMs); // MUST absorb elapsed time while still paused.
+        updating=true;
+        try
+        {
+            if(MusicStarted && seekAndUnpause!=null && !seekAndUnpause(unchecked(EffectiveTime-MusicAnchor))) return false;
+            Paused=false; return true;
+        }
+        catch(Exception e) {notificationErrors.Add(e.Message);return false;}
+        finally {updating=false;}
+    }
+
 }
 
 public abstract class RuntimeNote
@@ -204,6 +232,8 @@ public sealed class Kernel
     public int Early { get; private set; }
     public int Late { get; private set; }
     public float Health { get; private set; }
+    public bool ModelPaused { get; private set; }
+    public bool Paused => ModelPaused || Timeline.Paused;
     public bool Finished { get; private set; }
     public GameResult? Result { get; private set; }
     public int ContactCount => contacts.Count;
@@ -262,6 +292,12 @@ public sealed class Kernel
     {
         BeginEvent(); Timeline.Update(wallMs); int now = Timeline.EffectiveTime;
         LastFrameTime = now;
+        if(Paused)
+        {
+            // Native paused model resets activity, preserving latch/retained IDs.
+            foreach(var hold in Holds) {hold.Holding=false;hold.activating.Clear();}
+            return;
+        }
         float a = -DepthAt(now), b = -DepthAt(checked(now + 120));
         foreach (var note in active.ToArray())
         {
@@ -307,6 +343,7 @@ public sealed class Kernel
     public void Down(long wallMs, int pointer, int lane)
     {
         BeginEvent();
+        if (Paused) return; // Reject new contacts before allocation/time refresh.
         if (lane < 2 || lane > 5) throw new NotSupportedException("Ordinary input accepts internal lanes 2..5; widening is deferred.");
         if (contacts.ContainsKey(pointer)) throw new ArgumentException("DOWN pointer already retained.");
         int contact = nextContact++; contacts.Add(pointer, new RetainedContact(pointer, contact, lane));
@@ -359,6 +396,20 @@ public sealed class Kernel
 
     // Ordinary UP only cleans retained contacts; it does not refresh the judgment clock (035).
     public void Up(int pointer) { BeginEvent(); if (!contacts.Remove(pointer)) throw new ArgumentException("UP pointer is not retained."); }
+    public void Cancel(int pointer) { BeginEvent(); if(!contacts.Remove(pointer)) throw new ArgumentException("CANCEL pointer is not retained."); }
+    public bool Pause(long wallMs,Action? requestPause=null)
+    {
+        if(Finished || Paused) return false;
+        BeginEvent();ModelPaused=true;
+        return Timeline.Pause(wallMs,requestPause);
+    }
+    public bool Resume(long wallMs,Func<int,bool>? seekAndUnpause=null)
+    {
+        if(Finished || !Paused) return false;
+        BeginEvent();
+        if(!Timeline.Resume(wallMs,seekAndUnpause)) return false;
+        ModelPaused=false;return true;
+    }
     private void Miss(NoteState note)
     { note.Missed = true; RecordMiss(note.Id, null, Timeline.EffectiveTime); }
 
