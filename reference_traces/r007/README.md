@@ -17,3 +17,11 @@ Ordinary arc +6c0 and inactive virtual gate are distinct from the hold latch.
 Previously retained implementation notes record static consultation at178f8b8,
 8d7788,19f3d4c and95d61c, no native execution. Earlier scratch diagnostics were lost;
 this is provenance, not a fabricated raw disassembly or execution log.
+
+E009's prepared static comparison uses x0=x1=.50, y=.50, H500, speed6/base180
+and retained owner1 as published. The portable test consumes/releases a dummy ID
+before retaining1, a declared setup boundary replacing the original supplied
+identity. E028 instead creates and retains generated0 throughout its own trace.
+Overdue2249/2250 is native-executed for holds in E008/009; applying that algorithm
+with instruction-backed ordinary arc expiry flags is a reconstructed arc test,
+not a newly executed native arc-overdue experiment.
