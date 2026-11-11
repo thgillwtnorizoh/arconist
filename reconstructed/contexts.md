@@ -623,3 +623,42 @@ retained. Strict pre-roll/offset-aware seek/error recovery,60s child pause, no
 resume award, actual camera/viewport mesh alignment and replay checks pass.
 Full283 prior groups/standalone comparisons/clean committed Windows export follow.
 No fresh native execution, GUI automation, OS injection, R009 or Unity.
+
+
+## R008 complete technical delivery — 2026-11-11 Asia/Bangkok
+
+Tested/exported main7e62e4b53d64ee54ae20e90837d6612f211f73e8, direct non-forced
+child of0b52879978e72cfa7311759bbae7fe76382a07a8. Fresh complete driver exits0:
+283 preserved+41 core+12 bridge+12 Godot=348 groups,three9/6/6-event standalone
+comparisons;0 failures/skips. All37 logged commands exit0;actual C# compile,
+headless import/node/projection/audio/pause and Windows export succeed;zero final
+compiler/engine warnings/errors. E025-parent-child firstDifference=null:exact
+H0 local(0,50,−4044.5),N1/end2500,two eligible fresh DOWNs/one recorder,score10000001,
+float32 H80.19999694824219. Consumed guard—not pointer reuse/cooldown—blocks second
+award. Native E025 stops before results; complete result/mixed5-unit/replay are
+reconstructed integration. Held/MOVE/resume never awards child;60s pause passes.
+
+Windows ZIP76451175bytes SHA256
+ffc55deacca3b7e1c23d12be3ff80ead7c3a6d85938d927a60427df6f1f02364.
+202 payloads+manifest,191 dependencies,self-contained10.0.13,AMD64/template match,
+all12AFF exact bytes AND actual exported-resource SHA/access,32s music decoder/
+API/hash,ZIP CRC/all extracted hashes PASS. No Windows launch or human sound/
+click/render qualification by Work2. Full logs/native traces/preservation evidence
+and ten-step owner guide delivered. Artifact receipt/final documentation audit follow.
+
+Preservation:221 baseline files,207 identical,14 reconstruction modifications,
+13 additions,0 deletions;all135 non-reconstruction baseline files unchanged.
+All prior tests/oracles/reportsR001–R007/10charts/music sources unchanged;exact
+38335-byte earlier contexts prefix retained. Technical PASS; READY FOR HUMAN
+QUALIFICATION — R008. Only owner verifies real launch/visible child/physical
+clicks/sound/recovery/results/replay. No new native experiment,GUI automation,
+OS injection,screenshot acceptance,R009 or Unity. Stop for owner/Headquarters.
+
+R008 artifact receipt (both successful; local identity persisted):
+Arconist-R008-Windows-x64.zip: libfile_71d46d12a4cc8191a8b851f03dec5b45, 76451175bytes,
+SHA256 ffc55deacca3b7e1c23d12be3ff80ead7c3a6d85938d927a60427df6f1f02364.
+Arconist-R008-Technical-Evidence.zip: libfile_8e4a1676915481919bf1500ffd13c6b3, 113253bytes,
+SHA256 1f76b40c4a4115971526e5a9498e9216f4887d18b3c46e5494b939b1cdc1f332.
+Final audit publishes only R008 report/history and verifies main readback;tested
+application remains7e62e4b. Stop: no application operation or next milestone after
+delivery. Await owner qualification and Headquarters decision.
