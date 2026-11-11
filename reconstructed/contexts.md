@@ -455,3 +455,44 @@ to an independent fresh decoder at1120ms. Failed logs are retained in evidence.
 Native E041 expectations were manually transcribed before testing; no new native
 experiment or E041 completed-result/audio-output claim. Full229-group clean-main
 regression/export/distribution and final publication results follow.
+
+
+## R006 complete technical delivery — 2026-11-11 Asia/Bangkok
+
+Tested main fa6b9d37e04cf4d2c18c7e714de64a01bc1d3d63, gameplay implementation f2bf6a1dd00dfc78ab8e3dbf71ff2994ac1f8f72.
+Fresh full driver exits0:all183 prior groups +29 portable pause +17 Godot pause =229,
+three9/6/6-event references,0 failures/skips. E041 four histories, E012 seek1120,
+E026/E037/overdue and E040 intermediate comparisons match; no final divergence.
+Mixed audible chart interrupted twice matches all effective-frame state/results.
+Actual C# build/import/serialized Windows ExportRelease succeeds;final logs have
+zero compiler/engine warnings/errors. No automated GUI/input/Windows execution.
+
+Workspace reset after interruption removed local first preflight logs/undelivered
+archives; published source/report/history remained safe. Rebuilt pinned toolchains
+and exact committed source. Earlier failure observations remain labeled transcript
+excerpts, not fabricated raw logs. A recovery export probe shutdown warning was
+preserved raw and repaired by500ms audio-thread retirement (probe only). Three
+cleanup repeats and final full pipeline pass; no gameplay timing/assertion change.
+
+Self-contained Windows ZIP 76425981bytes SHA256
+21859ca64f8191ad0a4ec8d8e8dc84d4975792b3c7674c7883a985b500072278.
+202 payload files plus manifest,191 dependency assets,AMD64/template identity,
+included runtime10.0.13,all8 AFF and exact32s music resource verified. Actual-PCK
+hash/decoder/player checks,CRC and every extracted hash pass. Evidence includes
+fresh commands/exits/traces/API/PCM checks,diagnostics,preservation/toolchain data.
+Baseline200 files:186 identical,14 reconstruction changes,9 additions,0 deletions;
+all original research/old group tests/references/charts and exact28137-byte earlier
+history prefix preserved. Final audit updates documentation only.
+
+Technical PASS; READY FOR HUMAN QUALIFICATION — R006. Owner Windows launch,real
+60-second pause/contact retention,reacquisition,audible seek/sync,physical input,
+results/replay remain NOT RUN/PENDING. No physical latency/FMOD/Android lifecycle
+claim; managed ordinary A0 only. No R007,new native expedition or Unity follows.
+
+R006 artifact receipt (both successful):
+Arconist-R006-Windows-x64.zip: libfile_cc0cd3b656688191a65916c0baf681b0, 76425981bytes,
+SHA256 21859ca64f8191ad0a4ec8d8e8dc84d4975792b3c7674c7883a985b500072278.
+Arconist-R006-Technical-Evidence.zip: libfile_202a9a075b548191be65866a4e13773c, 91512bytes,
+SHA256 07df15ae388bb2c5902e5b89ea7d6f7d51500134f86e91741c35b535200e9b76.
+Final audit publishes report/history only, then verifies main readback. Tested
+production source staysfa6b9d3. Stop for owner qualification; no R007/new expedition/Unity.
