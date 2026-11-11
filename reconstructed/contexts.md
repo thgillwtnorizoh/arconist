@@ -539,3 +539,41 @@ assert actual new size and restore parent. Fresh13 headless groups pass without
 warnings. Earlier fresh missing-reference-pack build failed before bootstrap;
 explicit environment/project restore repaired it. These diagnostics are retained.
 All229 old groups/full export/publication remain pending at this checkpoint.
+
+
+## R007 complete technical delivery — 2026-11-11 Asia/Bangkok
+
+Exact tested/exported main b89b96cd91e8a15fe3183b2cab30913cf68d778b; gameplay source
+9d1c6fdb94a68a70b1ede05432ba8ffaef2a0426. Normal non-forced descendants of7db15c6.
+Final clean-source driver exits0:229 preserved+54 new=283 groups,three9/6/6-event
+standalone references,0 failures/skips;all actual builds/import/export pass with
+zero compiler/engine warnings/errors. E028/E009 firstDifference=null; prepared
+E009 coordinates/owner were strengthened to exact published identities before
+this complete rerun. Arc overdue2249/2250 is instruction-backed arc arithmetic
+compared with native hold boundary, not new native arc-overdue execution.
+
+Complete Windows ZIP76441870bytes SHA256
+10ec1b13c29a6500ef9d7e95c3aaa9332eff3283a3aadb52151f01179ff6fe9e.
+202 payloads+manifest,191 dependencies,AMD64/template match,self-contained10.0.13,
+all10AFF contents/exact32s WAV/PCK decoder/API checks,ZIP CRC/all extracted hashes
+PASS. No Windows launch or physical audio/input/visual qualification by Work2.
+Full technical evidence and owner instructions delivered separately. Source/history
+remain published; artifact receipt/final audit commit follow without app changes.
+
+Preservation:209 baseline files,196 identical,13 reconstruction modifications,
+12 additions,0 deletions;all133 non-reconstruction baseline files unchanged.
+All old tests/oracles/8chart bytes and exact32950-byte earlier history prefix
+preserved. Curves/traces/arc-taps/linked/crossing modes and listed deferred systems
+explicitly unsupported. No new native experiment, GUI, OS injection, screenshot
+acceptance, R008 or Unity. Technical PASS; READY FOR HUMAN QUALIFICATION — R007.
+Owner alone verifies Windows launch, visible sky trajectory, physical following,
+release/reentry, pause/camera/resize/audio/results/replay. Stop for qualification.
+
+R007 artifact receipt (both successful; local identity persisted):
+Arconist-R007-Windows-x64.zip: libfile_2800e6f851488191a7db0f9b5c4d5e10, 76441870bytes,
+SHA256 10ec1b13c29a6500ef9d7e95c3aaa9332eff3283a3aadb52151f01179ff6fe9e.
+Arconist-R007-Technical-Evidence.zip: libfile_641cf82911b48191bbda962320f25862, 207863bytes,
+SHA256 e917b4bc40304bcff85d2ee9fcdcd622acc51b5f29b7f13b2fe409c0538e2c04.
+Final audit publishes only R007 validation/history and verifies main readback;
+exact tested application remains b89b96c. No application run or next mission
+follows this delivery. Await owner human qualification and Headquarters decision.
