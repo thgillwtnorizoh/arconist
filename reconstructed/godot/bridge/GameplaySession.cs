@@ -101,7 +101,10 @@ public sealed class GameplaySession
     public bool Pointer(int pointer,int lane,SkyContact? sky,bool pressed,bool echo=false)
     {
         if(Core==null||echo||(lane!=0&&(lane<2||lane>5)))return false;
-        if(pressed){if(Core.Finished||PauseModalActive||Core.Paused||!held.Add(pointer))return false;Core.DownSpatial(clock.Milliseconds,pointer,lane,sky);PublishJudgments();Changed?.Invoke("SPATIAL_DOWN");}
+        if(pressed){if(Core.Finished||PauseModalActive||Core.Paused||!held.Add(pointer))return false;Core.DownSpatial(clock.Milliseconds,pointer,lane,sky);PublishJudgments();
+            foreach(var classification in Core.Classifications)
+                if(classification.ConsumesInput)Feedback=classification.Outcome.Replace('_',' ');
+            Changed?.Invoke("SPATIAL_DOWN");}
         else {if(!held.Remove(pointer))return false;Core.Up(pointer);Changed?.Invoke("SPATIAL_UP");}
         return true;
     }

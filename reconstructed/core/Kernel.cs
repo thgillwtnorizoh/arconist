@@ -215,6 +215,7 @@ public sealed class Kernel
     public IReadOnlyList<NoteState> Notes { get; }
     public IReadOnlyList<HoldState> Holds { get; }
     public IReadOnlyList<ArcState> Arcs {get;}
+    public IReadOnlyList<ArcTapState> ArcTaps {get;}
     private readonly Dictionary<int,ArcColorState> colors=new Dictionary<int,ArcColorState>();
     private readonly HashSet<int> claimed=new HashSet<int>();
     public IReadOnlyDictionary<int,ArcColorState> Colors=>colors;
@@ -262,7 +263,7 @@ public sealed class Kernel
             if(!colors.TryGetValue(a.Color,out var color))colors[a.Color]=color=new ArcColorState(a.Color);
             int ti=chart.Timings.ToList().FindLastIndex(t=>t.Time<=a.Start);
             return new ArcState(a,new ArcGeometry(a,scales[ti],arcHeight),color);
-        }).ToList();Arcs=arcs.AsReadOnly();
+        }).ToList();Arcs=arcs.AsReadOnly();ArcTaps=arcs.SelectMany(a=>a.Children).ToList().AsReadOnly();
         var objects = notes.Cast<RuntimeNote>().Concat(holds).Concat(arcs).OrderBy(n => n.Start).ThenBy(n => n.SourceOrder);
         foreach (var note in objects)
         {
@@ -317,7 +318,7 @@ public sealed class Kernel
             // 010 preprocessing stores integer pre-depth; the frame adds current float depth to that stored value.
             note.Depth = (int)((int)DepthAt(note.Start) + a);
             note.EndDepth = (int)((int)DepthAt(note.End) + a);
-            if(note is ArcState arc && now>arc.End&&!arc.EndReset)
+            if(note is ArcState arc && !arc.Data.Trace && now>arc.End&&!arc.EndReset)
             {arc.EndReset=true;arc.Color.PreviouslyClaimed=false;arc.Color.ReleaseTime=-1;arc.Color.Conflict=false;}
             if ((note.Terminal || Finished) && now > note.End)
             { note.Active = false; active.Remove(note); }
@@ -337,6 +338,8 @@ public sealed class Kernel
                 note.Active = true; active.Add(note);
             }
         }
+        foreach(var child in ArcTaps)
+        {child.Active=child.Parent.Active;child.Depth=(int)child.WorldPosition.Z;child.EndDepth=child.Depth;}
         if (Finished) return;
         // E026/E037: reset frame activity, then restore it through ALL retained
         // contacts. Initial DOWN never performs this frame pass or owns the hold.
@@ -349,7 +352,7 @@ public sealed class Kernel
         foreach(var arc in Arcs){arc.Holding=false;if(arc.Active)arc.UpdateCache(now);}
         foreach(var contact in contacts.Values.OrderBy(c=>c.Id))
             if(contact.Sky.HasValue)foreach(var arc in active.OfType<ArcState>())
-                if(arc.CacheEnabled&&ArcSpatial.Matches(arc.TargetX,arc.TargetY,contact.Sky.Value)&&Claim(arc.Color,contact.Id,now,(int)arc.Data.Interval))arc.Holding=true;
+                if(!arc.Data.Trace&&arc.CacheEnabled&&ArcSpatial.Matches(arc.TargetX,arc.TargetY,contact.Sky.Value)&&Claim(arc.Color,contact.Id,now,(int)arc.Data.Interval))arc.Holding=true;
         foreach (var item in active)
         {
             if (item is NoteState note && !note.Missed && !note.Consumed && now > note.Data.Time + 100)
@@ -372,11 +375,18 @@ public sealed class Kernel
         int contact = nextContact++; contacts.Add(pointer, new RetainedContact(pointer, contact, lane){Sky=sky.HasValue&&sky.Value.Valid?sky:null});
         if (Finished) return;
         Timeline.Update(wallMs); int now = Timeline.EffectiveTime;
-        if(lane==0)return;
-        // Range maintenance belongs to FRAME, never to DOWN. Guards are evaluated after collection.
-        var ordered = active.Where(n => n.Lane == lane &&
-            (n is NoteState || (n.Start < (long)now + 100 && now < n.End)))
-            .OrderBy(n => n.Start).ThenBy(n => n.SourceOrder).ToArray();
+        // FRAME owns ranges/cache. Initial children are collected by traversing their
+        // active parent, including already-consumed children for the native guard.
+        var collected=new List<RuntimeNote>();
+        foreach(var item in active)
+        {
+            if(lane!=0&&item.Lane==lane&&(item is NoteState||(item is HoldState&&item.Start<(long)now+100&&now<item.End)))collected.Add(item);
+            if(item is ArcState parent&&spatial&&sky.HasValue)
+                foreach(var child in parent.Children)
+                    if(ArcTapSpatial.Matches(child.InputTarget.X,child.InputTarget.Y,sky.Value))collected.Add(child);
+        }
+        // R008 rejects ground/child conflicts; this is not a universal mixed-note policy.
+        var ordered=collected.OrderBy(n=>n.Start).ThenBy(n=>n.SourceOrder).ToArray();
         Candidates.AddRange(ordered.Select(n => n.Id));
         foreach (var item in ordered)
         {
@@ -387,25 +397,29 @@ public sealed class Kernel
                 Classifications.Add(new Classification(hold.Id, "HOLD_LATCH", 0, true));
                 break;
             }
-            var note = (NoteState)item;
-            int error = (int)Math.Abs((long)now - note.Data.Time);
-            string outcome; bool consumes = false;
-            if (note.Missed) outcome = "guard_missed";
-            else if (note.Consumed) outcome = "guard_consumed";
-            else if (error > 120) outcome = "outside_window";
-            else if (error > 100) { outcome = "LOST"; Miss(note); consumes = true; }
-            else
-            {
-                int id = error <= 25 ? 0 : error <= 50 ? 1 : 2;
-                outcome = id == 0 ? "SHINING_PURE" : id == 1 ? "PURE" : "FAR";
-                note.Consumed = true; note.Contact = contact;
-                RecordAccepted(note.Id, null, id, now);
-                if (id != 0) { if (now < note.Data.Time) Early++; else Late++; }
-                consumes = true;
-            }
-            Classifications.Add(new Classification(note.Data.Id, outcome, error, consumes));
-            if (consumes) break;
+            if(JudgeTap(item,contact,now))break;
         }
+    }
+
+    private bool JudgeTap(RuntimeNote item,int contact,int now)
+    {
+        var ground=item as NoteState;var child=item as ArcTapState;
+        if(ground==null&&child==null)throw new InvalidOperationException("Not a tap-tier candidate.");
+        int error=(int)Math.Abs((long)now-item.Start);string outcome;bool consumes=false;
+        bool missed=ground?.Missed??child!.Missed,consumed=ground?.Consumed??child!.Consumed;
+        if(missed)outcome="guard_missed";
+        else if(consumed)outcome="guard_consumed";
+        else if(error>120)outcome="outside_window";
+        else if(error>100){outcome="LOST";Miss(item);consumes=true;}
+        else
+        {
+            int id=error<=25?0:error<=50?1:2;outcome=id==0?"SHINING_PURE":id==1?"PURE":"FAR";
+            if(ground!=null){ground.Consumed=true;ground.Contact=contact;}
+            else {child!.Consumed=true;child.Contact=contact;child.Outcome=outcome;child.ResolvedAt=now;}
+            RecordAccepted(item.Id,null,id,now);
+            if(id!=0){if(now<item.Start)Early++;else Late++;}consumes=true;
+        }
+        Classifications.Add(new Classification(item.Id,outcome,error,consumes));return consumes;
     }
 
     // Desktop retained mouse movement changes lane membership, not initial
@@ -449,8 +463,18 @@ public sealed class Kernel
         if(!Timeline.Resume(wallMs,seekAndUnpause)) return false;
         ModelPaused=false;return true;
     }
-    private void Miss(NoteState note)
-    { note.Missed = true; RecordMiss(note.Id, null, Timeline.EffectiveTime); }
+    private void Miss(RuntimeNote note)
+    {
+        if(note is NoteState ground)ground.Missed=true;
+        else if(note is ArcTapState child)
+        {
+            // E002 parent-dependent miss guard: supported parent is trace mode1.
+            if(!child.Parent.Data.Trace)throw new InvalidOperationException("Unsupported parent miss state.");
+            child.Missed=true;child.Outcome="LOST";child.ResolvedAt=Timeline.EffectiveTime;
+        }
+        else throw new InvalidOperationException("Not a tap-tier miss.");
+        RecordMiss(note.Id,null,Timeline.EffectiveTime);
+    }
 
     private void RecordAccepted(string note, int? checkpoint, int id, int now)
     {
@@ -505,6 +529,12 @@ public sealed class Kernel
     }
     private void ResolveArc(ArcState arc,int now)
     {
+        if(arc.Data.Trace)
+        {
+            foreach(var child in arc.Children)
+                if(!child.Terminal&&now>child.End+100){Miss(child);Expired.Add(child.Id);}
+            return;
+        }
         int last=-1;
         if(arc.Holding){int cutoff=(int)((float)now+arc.Data.Interval*0.5f);while(last+1<arc.Records.Count&&arc.Records[last+1].Time<=cutoff)last++;}
         else if(arc.InactiveExpiryAllowed)

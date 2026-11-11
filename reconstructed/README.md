@@ -1,3 +1,30 @@
+# Arconist reconstruction — R008
+
+R008 adds one independently judged arc-tap on a trace-mode linear parent to
+owner-accepted R007. Parent geometry/child identity are linked; initial mouse DOWN
+uses flag1 spatial selection then the same tap-tier classifier. Holding/moving
+cannot award the child. Trace parents contribute no checkpoints or color claims.
+See [R008 report](validation/R008.md), [player guide](godot/PLAYER.txt) and
+[E025 reference provenance](../reference_traces/r008/README.md).
+
+Toolchain remains Godot4.7.2.NET / SDK10.0.402 / bundled runtime10.0.13, with
+DOTNET_PROCESSOR_COUNT=1. The logged build driver requires clean committed source
+and fresh r008-evidence output; it runs all283 prior groups,65 new groups and
+three standalone reference comparisons, then Windows export, actual-PCK chart/
+audio probes, full dependency/CRC/extracted-file checks. Use the build.py command
+below (the historical guide retains older milestone output names).
+
+```sh
+python3 reconstructed/godot/build.py --godot /path/to/Godot_mono --pack-probe-godot /path/to/Godot_standard --templates /path/to/templates.tpz --notices /path/to/notices
+```
+
+Outputs: Arconist-R008-Windows-x64.zip, Arconist-R008-Technical-Evidence.zip and
+r008-evidence/. New first choice is silent R008 practice (child at HUD6s); E025
+native diagnostic is separate. All10 earlier chart choices/music are preserved.
+Only owner Windows/graphical/physical-input qualification can accept playability.
+
+Historical documentation follows; current supported scope is in R008.md.
+
 # Arconist reconstruction — R007
 
 R007 adds bounded ordinary linear sky arcs to accepted R006: typed AFF, native

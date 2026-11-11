@@ -24,6 +24,8 @@ public partial class Main : Control
     private Label hud = null!, status = null!, holdStatus = null!, chartInfo = null!;
     private readonly List<string> chartData = new();
     private static readonly (string file, string title, string description, string? audio)[] ChartChoices = {
+        ("arctap_practice.aff", "R008 · Trace parent + arc-tap practice", "D2s, K2.5s. Click gold sky child6s.\nGrey trace is not a hold. Release.\nF10s, J10.5s. Silent chart.", null),
+        ("native_arc_tap.aff", "E025 · One arc-tap / H500 diagnostic", "Click gold child at1.5s.\nTwo fresh clicks: only one award.\nOriginal fixture; Godot height500.", null),
         ("sky_practice.aff", "R007 · Ordinary sky arc practice", "D2s, K2.5s. Hold left mouse,\nfollow white sky target4–12s.\nF14s, J14.5s. Silent chart.", null),
         ("native_moving_arc.aff", "E028 · Moving arc diagnostic / H500", "Native E028 chart bytes.\nGodot reference uses height500.\nHold mouse / follow target1–2s.", null),
         ("audible_practice.aff", "R005 · Clockwork Steps / 120 BPM", "One bar of audible count-in, then D.\nPositive offset: notes occur later.\nHold/repress J at8–11s.", "res://content/audio/clockwork_steps.wav.bytes"),
@@ -94,6 +96,7 @@ public partial class Main : Control
         pauseButton.Pressed+=()=>session.Pause();AddChild(pauseButton);
         GetWindow().FocusExited += () => {session.FocusLost();mouseLane=0;};
         GetWindow().FocusEntered += () => session.FocusReturned();
+        if (OS.GetCmdlineUserArgs().Contains("--arctap-tests")) CallDeferred(nameof(RunArcTapTests));
         if (OS.GetCmdlineUserArgs().Contains("--arc-tests")) CallDeferred(nameof(RunArcTests));
         if (OS.GetCmdlineUserArgs().Contains("--spatial-tests")) CallDeferred(nameof(RunSpatialTests));
         if (OS.GetCmdlineUserArgs().Contains("--hold-tests")) CallDeferred(nameof(RunHoldTests));
@@ -189,7 +192,8 @@ public partial class Main : Control
         if (holdStatus.Visible)
         {
             var hold = k!.Holds.FirstOrDefault(h => h.Holding) ?? k.Holds.FirstOrDefault(h => h.End > k.Timeline.EffectiveTime);
-            if(k.Arcs.Count>0){var arc=k.Arcs.FirstOrDefault(a=>a.Holding)??k.Arcs.First();holdStatus.Text=$"ARC {(arc.Holding?"ON":"OFF")} owner {arc.Color.Owner} units {arc.Records.Count(r=>r.Resolved)}/{arc.Records.Count}";}
+            if(k.ArcTaps.Count>0){var child=k.ArcTaps.First();holdStatus.Text=$"ARC-TAP {(child.Consumed?"HIT":child.Missed?"MISS":"READY")}   at {child.Data.Time/1000.0:F2}s";}
+            else if(k.Arcs.Count>0){var arc=k.Arcs.FirstOrDefault(a=>a.Holding)??k.Arcs.First();holdStatus.Text=$"ARC {(arc.Holding?"ON":"OFF")} owner {arc.Color.Owner} units {arc.Records.Count(r=>r.Resolved)}/{arc.Records.Count}";}
             else holdStatus.Text = hold == null ? "HOLDS COMPLETE" : $"HOLD {(hold.Holding ? "ON" : "OFF")}   contacts {hold.ActivatingContacts.Count}   units {hold.Records.Count(r=>r.Resolved)}/{hold.Records.Count}";
         }
         charts.Visible = k == null || k.Finished; start.Visible = charts.Visible;
@@ -218,11 +222,12 @@ public partial class Main : Control
     {
         if (font == null) return;
         DrawRect(new Rect2(665,0,435,740),new Color("0b1020"));
-        Text("ARCONIST",72,64,32,ink); Text("SKY ARC PRACTICE   /   R007",692,60,17,muted);
+        Text("ARCONIST",72,64,32,ink); Text("SKY ARC / ARC-TAP   /   R008",692,60,17,muted);
         Text("D  ·  F  ·  J  ·  K",72,102,19,muted);
         Text("Native coordinates / 425   |   perspective Camera3D",52,713,15,muted);
         Text("F6 view   F7 resize   F8 capture",692,686,15,muted);
     }
+    private void RunArcTapTests()=>ArcTapValidation.Run(this,track,evidenceDir);
     private void RunArcTests()=>ArcValidation.Run(this,track,evidenceDir);
     private void RunPauseTests() => PauseValidation.Run(this,evidenceDir);
     private void RunAudioTests() => AudioValidation.Run(this, evidenceDir);
@@ -246,7 +251,7 @@ public partial class Main : Control
             pure=k?.Pure,far=k?.Far,lost=k?.Lost,shining=k?.Shining,score=k?.Score,combo=k?.Combo,maxCombo=k?.MaxCombo,
             health=k?.Health,contacts=k?.ContactCount,held=session.HeldCount,finished=k?.Finished,
             holds=k?.Holds.Select(h=>new { id=h.Data.Id, h.Active, h.Latched, h.Holding, h.ActivatingContacts, h.Records }).ToArray(),
-            arcs=k?.Arcs.Select(a=>new{a.Id,a.Active,a.Depth,a.Cache,a.CacheEnabled,a.TargetX,a.TargetY,a.Holding,a.Records}),colors=k?.Colors,claimed=k?.ClaimedIds,
+            arcs=k?.Arcs.Select(a=>new{a.Id,a.Active,a.Depth,a.Cache,a.CacheEnabled,a.TargetX,a.TargetY,a.Holding,a.Records,trace=a.Data.Trace,children=a.Children.Select(c=>new{c.Id,c.ParentId,time=c.Data.Time,c.Local,c.InputTarget,c.WorldPosition,c.Consumed,c.Missed,c.Contact,c.Outcome,c.ResolvedAt})}),colors=k?.Colors,claimed=k?.ClaimedIds,
             retained=k?.Contacts, judgments=k?.Judgments.ToArray(),
             candidates=k?.Candidates.ToArray(),classifications=k?.Classifications.ToArray(),expired=k?.Expired.ToArray(),
             notes=k?.Notes.Select(n=>new { id=n.Data.Id, consumed=n.Consumed,missed=n.Missed,active=n.Active,contact=n.Contact,depth=SpatialTrack.CurrentDepth(k!,n),visible=SpatialTrack.Present(k!,n) }).ToArray(),result=k?.Result }));

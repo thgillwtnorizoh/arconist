@@ -577,3 +577,49 @@ SHA256 e917b4bc40304bcff85d2ee9fcdcd622acc51b5f29b7f13b2fe409c0538e2c04.
 Final audit publishes only R007 validation/history and verifies main readback;
 exact tested application remains b89b96c. No application run or next mission
 follows this delivery. Await owner human qualification and Headquarters decision.
+
+## R007 owner acceptance and R008 authority — 2026-11-11 Asia/Bangkok
+
+Headquarters explicitly accepts R007 and authorizes R008 from main
+0b52879978e72cfa7311759bbae7fe76382a07a8. This records the supplied final owner
+acceptance; Work2 performed no new graphical qualification. Preserve the complete
+prior history byte prefix, all original research/old fixtures/oracles/tests/music.
+Read standing instructions/history, E025 full parent/child/JNI/duplicate evidence,
+E003/004/009/028, Scout003 and R001–R007 validation/source contracts. No fresh
+native expedition, GUI playtesting, OS injection, broad conflicts or Unity work.
+
+## R008 implementation and technical preflight — 2026-11-11 Asia/Bangkok
+
+Added parsed ArcTap and runtime ArcTapState linked to the exact typed parent.
+Trace s/none/true color0 requires one strict-interior child; no ordinary parent
+checkpoint units, no child duplication as a ground tap, no continuous color claim.
+The child's local linear geometry follows parent evaluator with native f32 stages;
+world Z scrolls with parent integer depth while initial target independently uses
+translated XY/Z0. Native E025 H0/Y50/−4044.5 is separate from playable H500/Y300.
+
+DOWN traverses active parent's children using E004 flag1 strict302-unit scale1
+bounds, Y clamp/truncation, asymmetric lower margin/depth. Shared tap-tier
+classifier preserves guards/bands/consuming LOST and E035 frame/input ordering.
+Already-consumed children remain collected so a fresh eligible duplicate reads the
+child guard, not a cooldown/pointer filter. MOVE/FRAME/resume never accept a child.
+Parent pass handles strict child+100 expiry and supported trace-mode miss guard;
+results extend existing kernel accounting as reconstructed integration, never a
+claim E025 executed native completion. E006 per-unit float32 gain/damage retained.
+
+One-child regex rejects lists/malformed/unsupported parents, curves/modes/effects,
+endpoints/outside child times. R007 arc gap/timing restrictions stay. Additional
+bounded policy rejects ground taps within240ms or holds intersecting that window;
+not presented as native arbitration. All original fixtures and old assertions stay.
+New silent5-unit practice plus exact E025 diagnostic join all10 old choices/music.
+Grey thin trace/gold child/white guide and250ms feedback are placeholder geometry.
+Renderer cannot judge. Existing actual camera projection/modal/focus/audio path
+is reused; spatial DOWN now also publishes its authoritative tier to the HUD.
+
+Preflight41 core,12 bridge and12 headless groups pass (65 total),0 failures/skips.
+E025 exact parent/child/geometry/counters/health and fresh duplicate guard match;
+reference transcribed before tests. Early bridge-test compile failed CS8602 after
+nullable flow through a custom Check; fixed annotation in new test only. Raw log
+retained. Strict pre-roll/offset-aware seek/error recovery,60s child pause, no
+resume award, actual camera/viewport mesh alignment and replay checks pass.
+Full283 prior groups/standalone comparisons/clean committed Windows export follow.
+No fresh native execution, GUI automation, OS injection, R009 or Unity.

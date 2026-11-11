@@ -74,7 +74,7 @@ public sealed class Chart
     {
         Taps = taps.AsReadOnly(); Timings = timings.AsReadOnly(); AudioOffset = offset;
         Density = density; Holds = holds.AsReadOnly(); Arcs=arcs.AsReadOnly();
-        JudgmentUnits = checked(taps.Count + holds.Sum(h => h.Checkpoints.Count)+arcs.Sum(a=>a.Checkpoints.Count));
+        JudgmentUnits = checked(taps.Count + holds.Sum(h => h.Checkpoints.Count)+arcs.Sum(a=>a.Checkpoints.Count+a.Children.Count));
         EndTime = Math.Max(taps.Count == 0 ? 0 : checked(taps.Max(t => t.Time) + 120),
                            holds.Count == 0 ? 0 : checked(holds.Max(h => h.End) + 500));
         EndTime=Math.Max(EndTime,arcs.Count==0?0:checked(arcs.Max(a=>a.End)+500));
@@ -102,7 +102,7 @@ public sealed class Chart
         if (!float.IsFinite(density) || density <= 0) throw new FormatException("Density must be positive and finite.");
         var taps = new List<Tap>(); var timings = new List<Timing>();
         var parsedHolds = new List<(int start, int end, int raw, int order)>();
-        var parsedArcs=new List<(string[] fields,int order)>();
+        var parsedArcs=new List<(string[] fields,int order,int? child)>();
         int sourceOrder = 0;
         string body = text.Substring(separator + 3);
         const string number = @"[0-9]+\.[0-9]+";
@@ -116,13 +116,16 @@ public sealed class Chart
             string s = statements[i].Trim();
             if(s.StartsWith("arc(",StringComparison.Ordinal))
             {
-                if(!s.EndsWith(")",StringComparison.Ordinal))throw new NotSupportedException("Attached arc-taps unsupported.");
-                var fields=s.Substring(4,s.Length-5).Split(',').Select(f=>f.Trim()).ToArray();
+                // One bounded child list on a trace parent. No silent stripping of suffixes.
+                var arcSyntax=Regex.Match(s,@"^arc\(([^()]*)\)(?:\[arctap\(\s*([0-9]+)\s*\)\])?$",RegexOptions.CultureInvariant);
+                if(!arcSyntax.Success)throw new NotSupportedException("Unsupported/malformed arc or child list.");
+                var fields=arcSyntax.Groups[1].Value.Split(',').Select(f=>f.Trim()).ToArray();
                 if(fields.Length!=10&&fields.Length!=11)throw new NotSupportedException("Unsupported arc field count.");
-                if(fields[4]!="s"||fields[8]!="none"||fields[9]!="false")throw new NotSupportedException("Only ordinary linear none-effect arcs supported.");
+                bool trace=fields[9]=="true";int? child=arcSyntax.Groups[2].Success?int.Parse(arcSyntax.Groups[2].Value,CultureInfo.InvariantCulture):null;
+                if(fields[4]!="s"||fields[8]!="none"||(fields[9]!="false"&&!trace)||trace!=child.HasValue)throw new NotSupportedException("Only ordinary linear arcs or trace linear parents with exactly one child supported.");
                 foreach(int f in new[]{0,1,7})if(!Regex.IsMatch(fields[f],@"^[0-9]+$"))throw new NotSupportedException("Arc integer syntax required.");
                 foreach(int f in new[]{2,3,5,6}.Concat(fields.Length==11?new[]{10}:Array.Empty<int>()))if(!Regex.IsMatch(fields[f],@"^[0-9]+\.[0-9]+$"))throw new NotSupportedException("Arc decimal syntax required.");
-                parsedArcs.Add((fields,sourceOrder++));continue;
+                parsedArcs.Add((fields,sourceOrder++,child));continue;
             }
             var tap = tapPattern.Match(s);
             if (tap.Success)
@@ -167,7 +170,9 @@ public sealed class Chart
             float x0=V(2),x1=V(3),y0=V(5),y1=V(6),extra=f.Length==11?V(10):1;
             if(start<0||(long)end-start<2||(long)end-start>600000||end>int.MaxValue-1000000||color>1||!float.IsFinite(extra)||extra<0||extra>4||new[]{x0,x1,y0,y1}.Any(v=>!float.IsFinite(v)||v<0||v>1))throw new NotSupportedException("Arc outside bounded R007 domain.");
             if(timings.Any(t=>t.Time>start&&t.Time<end))throw new NotSupportedException("Timing changes inside an arc deferred.");
-            return new Arc(i,a.order,start,end,x0,x1,y0,y1,color,extra,timings.Last(t=>t.Time<=start),density);
+            if(a.child.HasValue&&(a.child.Value<=start||a.child.Value>=end||color!=0))throw new NotSupportedException("R008 child must be strictly inside a trace color0 parent.");
+            if(a.child.HasValue&&(taps.Any(t=>Math.Abs((long)t.Time-a.child.Value)<=240)||holds.Any(h=>h.Start<=a.child.Value+240L&&h.End>=a.child.Value-240L)))throw new NotSupportedException("Ground/child candidate conflicts within240ms are deferred.");
+            return new Arc(i,a.order,start,end,x0,x1,y0,y1,color,extra,timings.Last(t=>t.Time<=start),density,f[9]=="true",a.child);
         }).OrderBy(a=>a.Start).ThenBy(a=>a.SourceOrder).ToList();
         for(int i=1;i<arcs.Count;i++)if((long)arcs[i].Start<arcs[i-1].End+1000L)throw new NotSupportedException("Overlapping/crossing/linked or closely adjacent arcs deferred.");
         return new Chart(taps, holds, arcs, timings, offset, density);

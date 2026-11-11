@@ -1,0 +1,17 @@
+{
+  "authority":"E025 native construction/JNI child hit/consumed guard; transcribed before R008 tests, never generated from reconstruction",
+  "fixture":"research_harness/fixtures/native_arc_tap.aff",
+  "parent":{"start":1000,"end":2000,"x0":0.5,"x1":0.5,"y0":0.5,"y1":0.5,"curve":"s","color":0,"effect":"none","trace":true,"mode":1,"childCount":1},
+  "child":{"time":1500,"localX":0,"localY":50,"localZ":-4044.5,"inputX":0,"inputY":50,"inputZ":0},
+  "environment":{"height":0,"speed":4,"baseBpm":178,"geometryZ":-8089,"nativeDirectorHeight":720,"jniX":640,"jniY":593.0632781982422},
+  "chart":{"units":1,"end":2500},
+  "rows":[
+    {"phase":"before","consumed":false,"pure":0,"shining":0,"far":0,"lost":0,"score":0,"health":0.0,"recorderCalls":0},
+    {"phase":"first","consumed":true,"pure":1,"shining":1,"far":0,"lost":0,"score":10000001,"health":80.19999694824219,"recorderCalls":1},
+    {"phase":"duplicate","consumed":true,"pure":1,"shining":1,"far":0,"lost":0,"score":10000001,"health":80.19999694824219,"recorderCalls":1}
+  ],
+  "attempts":{"effectiveTime":1500,"down":2,"up":2,"spatialAccepted":2,"classifiers":2,"accepted":1,"finalContacts":0},
+  "nativeCompletion":false,
+  "timingAuthority":"E002 sectionF, E004/E035: absolute error<=25 shining,<=50 PURE,<=100 FAR,101..120 LOST consumes,>120 no consumption; frame expiry strict time+100",
+  "geometryAuthority":"E003 linear evaluator plus E025 exact child writes; playable Godot H500 separate from native H0"
+}

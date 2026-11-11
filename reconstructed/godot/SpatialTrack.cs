@@ -65,11 +65,12 @@ public partial class SpatialTrack : Node3D
         var native=hit/Unit;sky=new SkyContact(new SkyPoint(native.X,native.Y,native.Z),Camera.GlobalPosition.Z/Unit,GetWindow().Size.Y);return sky.Valid;
     }
     private sealed class ArcView
-    {public Node3D Root=null!;public MeshInstance3D Target=null!;public List<MeshInstance3D> Segments=new();public List<MeshInstance3D> Markers=new();}
+    {public Node3D Root=null!;public MeshInstance3D Target=null!;public List<MeshInstance3D> Segments=new();public List<MeshInstance3D> Markers=new();public Dictionary<string,MeshInstance3D> Children=new();}
     private readonly Dictionary<string,ArcView> arcs=new();
     public int ArcVisualCount=>arcs.Count;
     public Node3D? ArcVisual(string id)=>arcs.TryGetValue(id,out var v)?v.Root:null;
     public MeshInstance3D? ArcTarget(string id)=>arcs.TryGetValue(id,out var v)?v.Target:null;
+    public MeshInstance3D? ArcTapVisual(ArcTapState child)=>arcs.TryGetValue(child.ParentId,out var v)&&v.Children.TryGetValue(child.Id,out var mesh)?mesh:null;
     private void RefreshArcs(Kernel core)
     {
         foreach(var arc in core.Arcs)
@@ -80,22 +81,43 @@ public partial class SpatialTrack : Node3D
                 for(int i=1;i<arc.Geometry.DetailSamples.Count;i++)v.Segments.Add(Box(Vector3.Zero,World(60,16,1),new Color("79b6ff"),true,v.Root));
                 v.Target=Box(Vector3.Zero,World(115,45,45),new Color("f4f7ff"),true,v.Root);v.Target.Name="CurrentTarget";
                 foreach(var record in arc.Records){var m=Box(Vector3.Zero,World(85,24,25),new Color("f4f7ff"),true,v.Root);m.Name="Checkpoint"+record.Time;v.Markers.Add(m);}
+                foreach(var child in arc.Children)
+                {
+                    var mesh=Box(Vector3.Zero,World(180,45,75),new Color("ffd36f"),true,v.Root);
+                    mesh.Name="ArcTap"+child.Data.Time;v.Children.Add(child.Id,mesh);
+                }
                 arcs.Add(arc.Id,v);
             }
             int now=core.Timeline.EffectiveTime,depth=HoldDepth(core,arc.Start);var g=arc.Geometry;
             v.Root.Visible=!core.Finished&&now<=arc.End+300;
-            var color=new Color(arc.Holding?"a5f56d":arc.Data.Color==0?"79b6ff":"ff9de1");
+            var color=new Color(arc.Data.Trace?"98a4ba":arc.Holding?"a5f56d":arc.Data.Color==0?"79b6ff":"ff9de1");
             for(int i=0;i<v.Segments.Count;i++)
             {
                 var a=g.DetailSamples[i];var b=g.DetailSamples[i+1];var m=v.Segments[i];
                 var from=World(g.X0+a.X,a.Y,depth+a.Z);var to=World(g.X0+b.X,b.Y,depth+b.Z);float length=from.DistanceTo(to);
                 m.Visible=length>0.000001f&&Math.Max(from.Z,to.Z)>=-9500*Unit&&Math.Min(from.Z,to.Z)<=1000*Unit;
-                m.Position=(from+to)*0.5f;((BoxMesh)m.Mesh).Size=new Vector3(60*Unit,16*Unit,Math.Max(length,0.000001f));
+                m.Position=(from+to)*0.5f;((BoxMesh)m.Mesh).Size=new Vector3((arc.Data.Trace?18:60)*Unit,(arc.Data.Trace?6:16)*Unit,Math.Max(length,0.000001f));
                 if(length>0.000001f)m.LookAt(to,Vector3.Up);
                 ((StandardMaterial3D)m.MaterialOverride).AlbedoColor=color;
             }
             v.Target.Position=World(arc.TargetX,arc.TargetY,0);v.Target.Visible=now>=arc.Start-1500&&now<=arc.End;
             ((StandardMaterial3D)v.Target.MaterialOverride).AlbedoColor=arc.Holding?new Color("a5f56d"):new Color("f4f7ff");
+            if(arc.Data.Trace)
+            {
+                var child=arc.Children.Single();var target=child.InputTarget;
+                // Thin judgment-plane guide is presentation, never a second score object.
+                v.Target.Position=World(target.X,target.Y-50,0);
+                ((BoxMesh)v.Target.Mesh).Size=World(220,4,10);
+                v.Target.Visible=!child.Terminal&&now>=arc.Start-1500&&now<=arc.End;
+                foreach(var c in arc.Children)
+                {
+                    var mesh=v.Children[c.Id];var position=c.WorldPosition;
+                    bool feedback=c.ResolvedAt.HasValue&&now-c.ResolvedAt.Value<=250;
+                    mesh.Position=World(position.X,position.Y,c.Terminal?0:position.Z);
+                    mesh.Visible=position.Z>=-9500&&(c.Terminal?feedback:position.Z<=1000);
+                    ((StandardMaterial3D)mesh.MaterialOverride).AlbedoColor=new Color(!c.Terminal?"ffd36f":c.Missed?"ff6985":"a5f56d");
+                }
+            }
             for(int i=0;i<arc.Records.Count;i++)
             {
                 var r=arc.Records[i];float u=(float)(r.Time-arc.Start)/(arc.End-arc.Start);var m=v.Markers[i];int z=HoldDepth(core,r.Time);
