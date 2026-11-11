@@ -34,5 +34,5 @@ func probe():
     stream = null
     hash = null
     # Let the headless audio thread retire its stopped playback references.
-    await create_timer(0.1).timeout
+    await create_timer(0.5).timeout
     quit(0 if valid else 1)
