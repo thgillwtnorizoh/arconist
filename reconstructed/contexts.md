@@ -496,3 +496,46 @@ Arconist-R006-Technical-Evidence.zip: libfile_202a9a075b548191be65866a4e13773c, 
 SHA256 07df15ae388bb2c5902e5b89ea7d6f7d51500134f86e91741c35b535200e9b76.
 Final audit publishes report/history only, then verifies main readback. Tested
 production source staysfa6b9d3. Stop for owner qualification; no R007/new expedition/Unity.
+
+## R006 owner acceptance and R007 authority — 2026-11-11 Asia/Bangkok
+
+Headquarters records R006 accepted following the owner's six successful human
+qualification checks. This is the supplied owner finding, not a Work2 GUI test.
+R007 authorized from main7db15c6a86b343a170074bcd4eafa3e4dcbc9b88. Ordinary linear
+sky arcs only; no new native experiments, GUI automation or OS input injection.
+Workspace reset removed the first uncommitted R007 implementation and preflight
+logs. Reconstructing from retained implementation notes; all tests must run afresh.
+Earlier observations are not fresh logs. All original research/old assertions stay.
+
+## R007 restored implementation and preflight — 2026-11-11 Asia/Bangkok
+
+Added typed ordinary s/none/false color0/1 arcs, positive2..600000ms durations,
+finite normalized0..1 decimal endpoints, optional extra0..4 clamped>=1 for detail
+samples. Reject curves/traces/arctaps, timing changes inside arcs, overlap/linked
+or <1000ms-gap arcs; no crossing bypass claimed. Same mapped color is shared among
+separated arcs. Ordinary records have explicit weight1/no head or tail; N/end and
+arc700 range admission extend the existing index without altering tap/hold gates.
+
+E003 f32 integer geometry and double sample loop produce9 E028 samples including
+repeated endpoint. Current cache uses adjacent base samples plus integer scrolling
+depth before spatial comparison; detail vector is rendering only. Read-only
+static consultation at already cited addresses was recorded before workspace
+reset; no ARM64 execution/new experiment. Ordinary derived expiry flags are
+separate, 2HP miss path and once-per-unit recorder stages retain old accounting.
+
+Godot H500/native425/FOV65 is declared presentation environment; E028 H0/Y50 and
+E009 H500/Y300 comparisons stay separate. Actual current Camera3D ray into Z0,
+viewport clipping/finite/parallel/backwards safety and native190-unit strict
+spatial predicate; Y0 ground mapping unchanged. Mouse DOWN retains distinct ID,
+MOVE updates sky/previous data without frames; running frames reproject real
+current pointer under current camera/viewport. Keyboard has no invented sky data.
+Region exit retains color owner; UP/CANCEL releases and respects native gate.
+Manual pause freezes cache/records and retains ID; focus policy stays cancel.
+
+Fresh31 core/10 bridge tests pass. E028 intermediate X, exact score/health/owner,
+E0092199/2200 and overdue2249/2250 agree. First Godot test passed assertions but
+warned that stretch blocked viewport resize; corrected test to disable stretch,
+assert actual new size and restore parent. Fresh13 headless groups pass without
+warnings. Earlier fresh missing-reference-pack build failed before bootstrap;
+explicit environment/project restore repaired it. These diagnostics are retained.
+All229 old groups/full export/publication remain pending at this checkpoint.

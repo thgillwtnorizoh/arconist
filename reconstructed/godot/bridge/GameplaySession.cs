@@ -44,7 +44,7 @@ public sealed class GameplaySession
                 return char.ToUpperInvariant((char)code);
         return '\0';
     }
-    public void Start(string aff, int userOffset=0, string chartId="ordinary", string? audioResource=null)
+    public void Start(string aff, int userOffset=0, string chartId="ordinary", string? audioResource=null,int arcHeight=500)
     {
         var chart=Chart.Parse(aff);
         _ = checked(chart.AudioOffset+userOffset);
@@ -53,7 +53,7 @@ public sealed class GameplaySession
         Audio?.Begin(new BgmSession(Run,chartId,audioResource,chart.AudioOffset,userOffset,chart.EndTime));
         // Resource preparation precedes the fresh session's steady-clock origin.
         // Loading time is not hidden compensation or gameplay elapsed time.
-        Core = new Kernel(chart, clock.Milliseconds, userOffset);
+        Core = new Kernel(chart, clock.Milliseconds, userOffset,arcHeight:arcHeight);
         var current=Core;int currentRun=Run;
         requestHandler=request => {if(ReferenceEquals(Core,current))Audio?.Request(currentRun,request,current.Timeline);};
         anchorHandler=request => {if(ReferenceEquals(Core,current))Audio?.Anchored(currentRun,request,current.Timeline);};
@@ -98,6 +98,15 @@ public sealed class GameplaySession
         }
         return true;
     }
+    public bool Pointer(int pointer,int lane,SkyContact? sky,bool pressed,bool echo=false)
+    {
+        if(Core==null||echo||(lane!=0&&(lane<2||lane>5)))return false;
+        if(pressed){if(Core.Finished||PauseModalActive||Core.Paused||!held.Add(pointer))return false;Core.DownSpatial(clock.Milliseconds,pointer,lane,sky);PublishJudgments();Changed?.Invoke("SPATIAL_DOWN");}
+        else {if(!held.Remove(pointer))return false;Core.Up(pointer);Changed?.Invoke("SPATIAL_UP");}
+        return true;
+    }
+    public bool MovePointer(int pointer,int lane,SkyContact? sky)
+    {if(Core==null||Core.Finished||PauseModalActive||Core.Paused||!held.Contains(pointer))return false;Core.MoveSpatial(pointer,lane,sky);Changed?.Invoke("SPATIAL_MOVE");return true;}
     public bool MoveContact(int pointer, int lane)
     {
         if (Core == null || Core.Finished || PauseModalActive || Core.Paused || !held.Contains(pointer)) return false;

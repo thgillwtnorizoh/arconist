@@ -1,3 +1,47 @@
+ARCONIST R007 — ordinary sky arc owner qualification build
+
+Extract the ENTIRE ZIP; open Arconist.exe beside Arconist.pck and its runtime
+folder. Windows10/11 x64 and OpenGL3.3 driver required. No compilation needed.
+
+ 1. Select R007 Ordinary sky arc practice (first choice), offset0, Start chart.
+ 2. Tap D at2s, K at2.5s as cyan notes cross the green ground line.
+ 3. The blue3D ribbon approaches above the lanes. A white target appears before
+    the arc starts. At4s hold LEFT MOUSE over it and follow it until12s.
+ 4. Move from left to right and upward with the target. Green target/ARC ON
+    means authoritative spatial acceptance. Checkpoint units resolve repeatedly.
+ 5. Keep mouse DOWN, move well outside the target, then return. Activity should
+    turn OFF/ON while owner/contact identity remains. Avoid long gaps for score.
+ 6. Release then press again. This creates a NEW contact: color reacquisition is
+    blocked for up to1000 effective ms from the last refreshed release time.
+    Equality permits it. This differs from same-contact movement out/back.
+ 7. Release mouse after12s. Tap F at14s, J at14.5s. Chart ends just after14.62s.
+    Perfect integration target: PURE35, shining35, score10000035, max combo35.
+    These totals describe the synthetic chart, not promised human performance.
+ 8. Inspect results, Play again, Back to start. Fresh run must reset contacts,
+    color ownership, checkpoints, ribbons and score. All eight earlier choices
+    and the separate E028 short diagnostic remain selectable.
+ 9. Test F6 camera and F7 resize while following; F8 captures only on your request.
+    Press P/Escape to pause, keep mouse held, wait60s then R/Resume. Time/cache/
+    records must freeze. Paused UP releases; focus loss pauses AND cancels all
+    uncertain contacts. Focus return never resumes. New DOWN works after Resume.
+10. Choose preserved R005 Clockwork Steps, offset0; check music, holds, pause/seek,
+    results/replay. AFF+120/user-120 cancels; positive combined offset delays
+    chart time relative to music. Controls below remain available.
+
+Sky input uses the actual camera ray intersecting Z0, separately from Y0 ground
+lanes. D/F/J/K never fabricate a sky contact. Mouse can support ground gameplay;
+R007 practice deliberately separates ground taps from arc times. Silent R007
+practice requires no music. It uses geometry-height500 and existing perspective
+cameras; the native E028 H0/Y50 environment remains a separate technical oracle.
+
+Diagnostics: %APPDATA%/Godot/app_userdata/Arconist R007 - Sky Arc Practice/evidence
+Logs include current cache, per-frame activity, retained/previous sky positions,
+colors/owners, claimed IDs, checkpoints, pause/audio clock domains and results.
+READY FOR HUMAN QUALIFICATION — R007. Only you verify Windows launch, rendering,
+physical input, following/recovery, audio and results/replay.
+
+PRESERVED EARLIER CONTROL/CHART GUIDE (historical milestone headings follow)
+
 ARCONIST R006 — pause/resume owner qualification build
 
 Extract the ENTIRE ZIP and open Arconist.exe beside its PCK/runtime directory.
@@ -45,7 +89,7 @@ backend failure or use Return to start. A pause/start resource failure requires 
 fresh run. API acceptance/readback is not proof of audible synchronization.
 
 F6/F7/F8 remain camera/resize/owner capture. Diagnostics/captures are under:
-%APPDATA%/Godot/app_userdata/Arconist R006 - Pause and Audible Practice/evidence
+%APPDATA%/Godot/app_userdata/Arconist R007 - Sky Arc Practice/evidence
 Logs distinguish wall milliseconds, R/P/C/E/O/B, model/timeline/modal flags,
 audio pause/seek/unpause and cursor readback, contacts/cancellation/checkpoints.
 
@@ -105,13 +149,13 @@ an API indication, not proof of audible output. Report missing audio with chart,
 offset, Windows output device, visible error and session log. Latency unverified.
 
 F6 camera, F7 resize, F8 owner-requested viewport capture. Diagnostics/captures:
-%APPDATA%/Godot/app_userdata/Arconist R006 - Pause and Audible Practice/evidence
+%APPDATA%/Godot/app_userdata/Arconist R007 - Sky Arc Practice/evidence
 JSONL includes clock domains, session/chart/resource, offsets, R/C/E, request/anchor,
 backend state and authoritative judgments. No audio recording.
 Focus loss pauses and cancels contacts; explicit resume is required (see above).
 
 Clockwork Steps: original synthetic composition/synthesis, CC0-1.0; see notices.
 Unsigned prototype with placeholder3D geometry. No commercial assets, SFX,
-arcs/flicks, special gauges, drift correction or full Android lifecycle.
+special arc modes/flicks, special gauges, drift correction or full Android lifecycle.
 READY FOR HUMAN QUALIFICATION — R006. Windows launch, audible output, perceived
 synchronization, physical input, results and replay require the owner's testing.

@@ -1,0 +1,17 @@
+{
+  "authority":"E028 single moving control, E009 prepared static arc; manually transcribed published native observations, not reconstructed goldens",
+  "geometry":{"height":0,"x0":-255,"x1":255,"y":50,"z":-8089,"samples":9,"interval":250,"records":[1250,1500,1750],"units":3,"end":2500},
+  "rows":[
+    {"e":1000,"x":-255.0,"pure":0,"score":0,"health":0.0},
+    {"e":1125,"x":-191.1948357,"pure":1,"score":3333334,"health":26.866666793823242},
+    {"e":1300,"x":-101.9810944,"pure":1,"score":3333334,"health":26.866666793823242},
+    {"e":1375,"x":-63.7106018,"pure":2,"score":6666668,"health":53.733333587646484},
+    {"e":1500,"x":0.0315247,"pure":2,"score":6666668,"health":53.733333587646484},
+    {"e":1625,"x":63.8367004,"pure":3,"score":10000003,"health":80.5999984741211},
+    {"e":1875,"x":191.3209229,"pure":3,"score":10000003,"health":80.5999984741211}
+  ],
+  "awards":[1125,1375,1625],"owner":0,"release":1875,
+  "prepared":{"height":500,"y":300,"pure":3,"shining":3,"score":10000003,"health":80.5999984741211,"category":3},
+  "longRelease":{"release":1200,"blocked":2199,"allowed":2200,"blockedPure":1,"blockedLost":1,"allowedPure":4,"allowedLost":1},
+  "overdue":{"notMissed":2249,"missed":2250}
+}

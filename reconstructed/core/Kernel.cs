@@ -160,6 +160,8 @@ public sealed class RetainedContact
     public int Pointer { get; }
     public int Id { get; }
     public int Lane { get; internal set; }
+    public SkyContact? Sky {get;internal set;}
+    public SkyContact? PreviousSky {get;internal set;}
     internal RetainedContact(int pointer, int id, int lane) { Pointer = pointer; Id = id; Lane = lane; }
 }
 
@@ -212,6 +214,11 @@ public sealed class Kernel
     public Timeline Timeline { get; }
     public IReadOnlyList<NoteState> Notes { get; }
     public IReadOnlyList<HoldState> Holds { get; }
+    public IReadOnlyList<ArcState> Arcs {get;}
+    private readonly Dictionary<int,ArcColorState> colors=new Dictionary<int,ArcColorState>();
+    private readonly HashSet<int> claimed=new HashSet<int>();
+    public IReadOnlyDictionary<int,ArcColorState> Colors=>colors;
+    public IReadOnlyList<int> ClaimedIds=>claimed.OrderBy(i=>i).ToArray();
     private readonly List<RuntimeNote> active = new List<RuntimeNote>();
     private readonly Dictionary<int, List<RuntimeNote>> buckets = new Dictionary<int, List<RuntimeNote>>();
     private readonly Dictionary<int, RetainedContact> contacts = new Dictionary<int, RetainedContact>();
@@ -241,7 +248,7 @@ public sealed class Kernel
     public List<Classification> Classifications { get; } = new List<Classification>();
     public List<string> Expired { get; } = new List<string>();
 
-    public Kernel(Chart chart, long originMs = 0, int userOffset = 0, float requestedSpeed = 4, int baseBpm = 178)
+    public Kernel(Chart chart, long originMs = 0, int userOffset = 0, float requestedSpeed = 4, int baseBpm = 178, int arcHeight=500)
     {
         if (!float.IsFinite(requestedSpeed) || requestedSpeed <= 0 || baseBpm <= 0)
             throw new ArgumentException("Positive finite speed and metadata BPM required.");
@@ -251,7 +258,12 @@ public sealed class Kernel
         if (scales.Any(s => !float.IsFinite(s) || s <= 0)) throw new ArgumentException("Unsupported timing scale.");
         var notes = chart.Taps.Select(t => new NoteState(t)).ToList(); Notes = notes.AsReadOnly();
         var holds = chart.Holds.Select(h => new HoldState(h)).ToList(); Holds = holds.AsReadOnly();
-        var objects = notes.Cast<RuntimeNote>().Concat(holds).OrderBy(n => n.Start).ThenBy(n => n.SourceOrder);
+        var arcs=chart.Arcs.Select(a=>{
+            if(!colors.TryGetValue(a.Color,out var color))colors[a.Color]=color=new ArcColorState(a.Color);
+            int ti=chart.Timings.ToList().FindLastIndex(t=>t.Time<=a.Start);
+            return new ArcState(a,new ArcGeometry(a,scales[ti],arcHeight),color);
+        }).ToList();Arcs=arcs.AsReadOnly();
+        var objects = notes.Cast<RuntimeNote>().Concat(holds).Concat(arcs).OrderBy(n => n.Start).ThenBy(n => n.SourceOrder);
         foreach (var note in objects)
         {
             note.Bucket = (int)(DepthAt(note.Start) / -10000f);
@@ -296,6 +308,7 @@ public sealed class Kernel
         {
             // Native paused model resets activity, preserving latch/retained IDs.
             foreach(var hold in Holds) {hold.Holding=false;hold.activating.Clear();}
+            foreach(var arc in Arcs)arc.Holding=false;
             return;
         }
         float a = -DepthAt(now), b = -DepthAt(checked(now + 120));
@@ -304,6 +317,8 @@ public sealed class Kernel
             // 010 preprocessing stores integer pre-depth; the frame adds current float depth to that stored value.
             note.Depth = (int)((int)DepthAt(note.Start) + a);
             note.EndDepth = (int)((int)DepthAt(note.End) + a);
+            if(note is ArcState arc && now>arc.End&&!arc.EndReset)
+            {arc.EndReset=true;arc.Color.PreviouslyClaimed=false;arc.Color.ReleaseTime=-1;arc.Color.Conflict=false;}
             if ((note.Terminal || Finished) && now > note.End)
             { note.Active = false; active.Remove(note); }
         }
@@ -318,7 +333,7 @@ public sealed class Kernel
                 if (note.Active) continue;
                 note.Depth = (int)((int)DepthAt(note.Start) + a);
                 note.EndDepth = (int)((int)DepthAt(note.End) + a);
-                if (Math.Min(note.Depth, note.EndDepth) >= 300 || note.Terminal || Finished) continue;
+                if (Math.Min(note.Depth, note.EndDepth) >= (note is ArcState?700:300) || note.Terminal || Finished) continue;
                 note.Active = true; active.Add(note);
             }
         }
@@ -330,25 +345,34 @@ public sealed class Kernel
             foreach (var hold in active.OfType<HoldState>())
                 if (hold.Latched && hold.Start < now && now < hold.End && contact.Lane == hold.Lane)
                 { hold.Holding = true; hold.activating.Add(contact.Id); }
+        foreach(var color in colors.Values){color.Accepted=false;color.Conflict=false;}
+        foreach(var arc in Arcs){arc.Holding=false;if(arc.Active)arc.UpdateCache(now);}
+        foreach(var contact in contacts.Values.OrderBy(c=>c.Id))
+            if(contact.Sky.HasValue)foreach(var arc in active.OfType<ArcState>())
+                if(arc.CacheEnabled&&ArcSpatial.Matches(arc.TargetX,arc.TargetY,contact.Sky.Value)&&Claim(arc.Color,contact.Id,now,(int)arc.Data.Interval))arc.Holding=true;
         foreach (var item in active)
         {
             if (item is NoteState note && !note.Missed && !note.Consumed && now > note.Data.Time + 100)
             { Miss(note); Expired.Add(note.Data.Id); }
             else if (item is HoldState hold) ResolveHold(hold, now);
+            else if(item is ArcState arc)ResolveArc(arc,now);
         }
         if (now > Chart.EndTime)
         { Finished = true; Result = new GameResult(this); }
     }
 
-    public void Down(long wallMs, int pointer, int lane)
+    public void Down(long wallMs, int pointer, int lane)=>DownContact(wallMs,pointer,lane,null,false);
+    public void DownSpatial(long wallMs,int pointer,int lane,SkyContact? sky)=>DownContact(wallMs,pointer,lane,sky,true);
+    private void DownContact(long wallMs,int pointer,int lane,SkyContact? sky,bool spatial)
     {
         BeginEvent();
         if (Paused) return; // Reject new contacts before allocation/time refresh.
-        if (lane < 2 || lane > 5) throw new NotSupportedException("Ordinary input accepts internal lanes 2..5; widening is deferred.");
+        if ((!spatial||lane!=0)&&(lane < 2 || lane > 5)) throw new NotSupportedException("Ordinary input accepts internal lanes 2..5; widening is deferred.");
         if (contacts.ContainsKey(pointer)) throw new ArgumentException("DOWN pointer already retained.");
-        int contact = nextContact++; contacts.Add(pointer, new RetainedContact(pointer, contact, lane));
+        int contact = nextContact++; contacts.Add(pointer, new RetainedContact(pointer, contact, lane){Sky=sky.HasValue&&sky.Value.Valid?sky:null});
         if (Finished) return;
         Timeline.Update(wallMs); int now = Timeline.EffectiveTime;
+        if(lane==0)return;
         // Range maintenance belongs to FRAME, never to DOWN. Guards are evaluated after collection.
         var ordered = active.Where(n => n.Lane == lane &&
             (n is NoteState || (n.Start < (long)now + 100 && now < n.End)))
@@ -394,9 +418,24 @@ public sealed class Kernel
         contact.Lane = lane;
     }
 
+    public void MoveSpatial(int pointer,int lane,SkyContact? sky)
+    {Move(pointer,lane);var contact=contacts[pointer];contact.PreviousSky=contact.Sky;contact.Sky=sky.HasValue&&sky.Value.Valid?sky:null;}
+    private bool Claim(ArcColorState color,int id,int now,int interval)
+    {
+        color.IntervalInteger=interval;
+        if(color.ReleaseTime!=-1){if((long)now-color.ReleaseTime<(int)Math.Min(4L*interval,1000)){if(!color.Accepted)color.Conflict=true;return false;}color.ReleaseTime=-1;}
+        if(color.Owner==id){color.Accepted=true;return true;}
+        if(color.Owner!=-1||claimed.Contains(id)){if(!color.Accepted)color.Conflict=true;return false;}
+        color.Owner=id;color.Accepted=color.PreviouslyClaimed=true;claimed.Add(id);return true;
+    }
+    private void ReleaseArcContact(int pointer)
+    {
+        if(!contacts.TryGetValue(pointer,out var contact))return;
+        foreach(var color in colors.Values)if(color.Owner==contact.Id){color.Owner=-1;if(claimed.Remove(contact.Id)&&color.PreviouslyClaimed)color.ReleaseTime=Timeline.EffectiveTime;}
+    }
     // Ordinary UP only cleans retained contacts; it does not refresh the judgment clock (035).
-    public void Up(int pointer) { BeginEvent(); if (!contacts.Remove(pointer)) throw new ArgumentException("UP pointer is not retained."); }
-    public void Cancel(int pointer) { BeginEvent(); if(!contacts.Remove(pointer)) throw new ArgumentException("CANCEL pointer is not retained."); }
+    public void Up(int pointer) { BeginEvent(); ReleaseArcContact(pointer); if (!contacts.Remove(pointer)) throw new ArgumentException("UP pointer is not retained."); }
+    public void Cancel(int pointer) { BeginEvent(); ReleaseArcContact(pointer); if(!contacts.Remove(pointer)) throw new ArgumentException("CANCEL pointer is not retained."); }
     public bool Pause(long wallMs,Action? requestPause=null)
     {
         if(Finished || Paused) return false;
@@ -463,6 +502,23 @@ public sealed class Kernel
                 if (hold.Holding) RecordAccepted(hold.Id, r.Time, 0, now);
                 else { RecordMiss(hold.Id, r.Time, now); Expired.Add(hold.Id + ":checkpoint:" + r.Time); }
             }
+    }
+    private void ResolveArc(ArcState arc,int now)
+    {
+        int last=-1;
+        if(arc.Holding){int cutoff=(int)((float)now+arc.Data.Interval*0.5f);while(last+1<arc.Records.Count&&arc.Records[last+1].Time<=cutoff)last++;}
+        else if(arc.InactiveExpiryAllowed)
+        {
+            int halfCutoff=(int)((double)now-Math.Min((double)arc.Data.Interval*0.5,500.0));
+            int count=arc.Records.Count(r=>r.Time<=halfCutoff);
+            if(count==1&&arc.FirstRecordEarlyExpiry)last=0;
+            else {int cutoff=(int)((float)now-Math.Min(arc.Data.Interval*2f,500f));while(last+1<arc.Records.Count&&arc.Records[last+1].Time<=cutoff)last++;}
+        }
+        for(int i=last;i>=0&&!arc.Records[i].Resolved;i--)
+        {
+            var r=arc.Records[i];r.Resolved=true;r.ResolvedAt=now;r.Outcome=arc.Holding?"SHINING_PURE":"LOST";
+            for(int unit=0;unit<r.Weight;unit++)if(arc.Holding)RecordAccepted(arc.Id,r.Time,0,now);else{RecordMiss(arc.Id,r.Time,now);Expired.Add(arc.Id+":checkpoint:"+r.Time);}
+        }
     }
     private void ApplyHealth(float gain, float damage)
     { float sum = Health + gain; float value = sum - damage; Health = Math.Max(0f, Math.Min(100f, value)); }

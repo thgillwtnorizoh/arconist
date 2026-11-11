@@ -1,3 +1,28 @@
+# Arconist reconstruction — R007
+
+R007 adds bounded ordinary linear sky arcs to accepted R006: typed AFF, native
+sample/cache geometry, camera-ray Z0 input, continuous retained mouse contacts,
+shared color ownership and checkpoint accounting. See [R007 report](validation/R007.md),
+[owner guide](godot/PLAYER.txt) and
+[reference provenance](../reference_traces/r007/README.md).
+
+Full logged packaging uses Godot4.7.2.NET / SDK10.0.402, DOTNET_PROCESSOR_COUNT=1:
+
+```sh
+python3 reconstructed/godot/build.py --godot /path/to/Godot_mono --pack-probe-godot /path/to/Godot_standard --templates /path/to/templates.tpz --notices /path/to/notices
+```
+
+Set DOTNET_ROOT/PATH and GODOT_NUPKGS to the chosen toolchain. Fresh hosts restore
+with the project NuGet.Config first; no personal absolute NuGet paths are committed.
+The full driver requires a clean committed tree and fresh r007-evidence output.
+It executes all229 prior groups,54 new groups and three standalone comparisons,
+then exports/verifies the actual PCK/runtime, ZIP CRCs and extracted-file hashes.
+The new first choice is silent sky practice; all8 earlier charts/music remain.
+Technical checks never qualify visible rendering or physical gameplay.
+
+Historical documentation below remains for provenance; the R007 guide/report
+specify current build paths and supported arc scope.
+
 # Arconist reconstruction — R006
 
 R006 adds explicit pause/resume, frozen effective time, logical audio seeking and

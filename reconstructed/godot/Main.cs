@@ -1,5 +1,6 @@
 using Godot;
 using Arconist.Bridge;
+using Arconist.Core;
 using System.Text.Json;
 
 namespace Arconist.GodotApp;
@@ -23,6 +24,8 @@ public partial class Main : Control
     private Label hud = null!, status = null!, holdStatus = null!, chartInfo = null!;
     private readonly List<string> chartData = new();
     private static readonly (string file, string title, string description, string? audio)[] ChartChoices = {
+        ("sky_practice.aff", "R007 · Ordinary sky arc practice", "D2s, K2.5s. Hold left mouse,\nfollow white sky target4–12s.\nF14s, J14.5s. Silent chart.", null),
+        ("native_moving_arc.aff", "E028 · Moving arc diagnostic / H500", "Native E028 chart bytes.\nGodot reference uses height500.\nHold mouse / follow target1–2s.", null),
         ("audible_practice.aff", "R005 · Clockwork Steps / 120 BPM", "One bar of audible count-in, then D.\nPositive offset: notes occur later.\nHold/repress J at8–11s.", "res://content/audio/clockwork_steps.wav.bytes"),
         ("audible_aff120.aff", "R005 · AFF +120 offset diagnostic", "Same music/chart, AFF offset +120.\nUser -120 cancels it (combined0).\nUser -40 gives combined +80.", "res://content/audio/clockwork_steps.wav.bytes"),
         ("mixed_practice.aff", "R004 mixed taps + holds", "F 4–6.5s: release / press again.\nJ 8–11s: key + mouse, release J.\nKeep mouse pressed near the line.", null),
@@ -64,7 +67,7 @@ public partial class Main : Control
                 // Reproject the genuinely retained mouse at its current position;
                 // a modal move must not leave stale pre-pause lane support.
                 Vector2 local=(GetViewport().GetMousePosition()-trackOrigin)*(Vector2)viewport3D.Size/trackSize;
-                session.MoveContact(100,track.Pick(local,out _));
+                ReprojectMouse(GetViewport().GetMousePosition());
             }
         };
         session.JudgmentsProduced += events => log?.WriteLine(JsonSerializer.Serialize(new {
@@ -91,6 +94,7 @@ public partial class Main : Control
         pauseButton.Pressed+=()=>session.Pause();AddChild(pauseButton);
         GetWindow().FocusExited += () => {session.FocusLost();mouseLane=0;};
         GetWindow().FocusEntered += () => session.FocusReturned();
+        if (OS.GetCmdlineUserArgs().Contains("--arc-tests")) CallDeferred(nameof(RunArcTests));
         if (OS.GetCmdlineUserArgs().Contains("--spatial-tests")) CallDeferred(nameof(RunSpatialTests));
         if (OS.GetCmdlineUserArgs().Contains("--hold-tests")) CallDeferred(nameof(RunHoldTests));
         if (OS.GetCmdlineUserArgs().Contains("--pause-tests")) CallDeferred(nameof(RunPauseTests));
@@ -115,7 +119,16 @@ public partial class Main : Control
         catch(Exception e) { chartInfo.Text="Start error: "+e.Message; GD.Print("SESSION_CONFIGURATION_ERROR "+e.Message); }
         UpdateHud(); QueueRedraw();
     }
-    public override void _Process(double delta) { session.Frame(); track.Refresh(session.Core); UpdateHud(); QueueRedraw(); }
+    private bool HasArcs=>session.Core?.Arcs.Count>0;
+    private void ReprojectMouse(Vector2 screen)
+    {
+        if(mouseLane==0)return;
+        Vector2 local=(screen-trackOrigin)*(Vector2)viewport3D.Size/trackSize;int lane=track.Pick(local,out _);
+        if(HasArcs){SkyContact? sky=track.PickSky(local,out var point)?point:null;session.MovePointer(100,lane,sky);}
+        else session.MoveContact(100,lane);
+    }
+    private void ReleaseMouse(){if(mouseLane==0)return;if(HasArcs)session.Pointer(100,0,null,false);else session.Contact(100,mouseLane,false);mouseLane=0;}
+    public override void _Process(double delta) { if(HasArcs&&mouseLane!=0&&!session.PauseModalActive)ReprojectMouse(GetViewport().GetMousePosition());session.Frame(); track.Refresh(session.Core); UpdateHud(); QueueRedraw(); }
     public override void _Input(InputEvent ev)
     {
         if (ev is InputEventKey key)
@@ -140,13 +153,13 @@ public partial class Main : Control
         if(session.PauseModalActive)
         {
             if(ev is InputEventMouseButton up && up.ButtonIndex==MouseButton.Left && !up.Pressed && mouseLane!=0)
-            {session.Contact(100,mouseLane,false);mouseLane=0;}
+            {ReleaseMouse();}
             return;
         }
         if (ev is InputEventMouseMotion motion && mouseLane != 0)
         {
             Vector2 local = (motion.Position-trackOrigin) * (Vector2)viewport3D.Size / trackSize;
-            session.MoveContact(100, track.Pick(local, out _));
+            ReprojectMouse(motion.Position);
         }
         if (ev is InputEventMouseButton mouse && mouse.ButtonIndex == MouseButton.Left)
         {
@@ -155,9 +168,10 @@ public partial class Main : Control
                 Vector2 local=(mouse.Position-trackOrigin) * (Vector2)viewport3D.Size / trackSize;
                 int lane=track.Pick(local,out var point);
                 log?.WriteLine(JsonSerializer.Serialize(new { kind="MOUSE_PROJECTION", run=session.Run, x=mouse.Position.X,y=mouse.Position.Y, lane, world=new[]{point.X,point.Y,point.Z} }));
-                if (lane != 0 && session.Contact(100,lane,true)) mouseLane=lane;
+                if(HasArcs){SkyContact? sky=track.PickSky(local,out var skyPoint)?skyPoint:null;if((lane!=0||sky.HasValue)&&session.Pointer(100,lane,sky,true))mouseLane=lane==0?-1:lane;}
+                else if (lane != 0 && session.Contact(100,lane,true)) mouseLane=lane;
             }
-            else if (!mouse.Pressed && mouseLane != 0) { session.Contact(100,mouseLane,false); mouseLane = 0; }
+            else if (!mouse.Pressed && mouseLane != 0) { ReleaseMouse(); }
         }
     }
     private void UpdateHud()
@@ -171,11 +185,12 @@ public partial class Main : Control
         audioStatus.Modulate=new Color(audio.State=="ERROR"?"ff6985":"b9f56c");
         if(audio.State=="ERROR") {chartInfo.Text=audio.Detail;chartInfo.TooltipText=audio.Detail;}
         userOffset.Editable=k==null||k.Finished;
-        holdStatus.Visible = k != null && !k.Finished && k.Holds.Count > 0;
+        holdStatus.Visible = k != null && !k.Finished && (k.Holds.Count > 0||k.Arcs.Count>0);
         if (holdStatus.Visible)
         {
             var hold = k!.Holds.FirstOrDefault(h => h.Holding) ?? k.Holds.FirstOrDefault(h => h.End > k.Timeline.EffectiveTime);
-            holdStatus.Text = hold == null ? "HOLDS COMPLETE" : $"HOLD {(hold.Holding ? "ON" : "OFF")}   contacts {hold.ActivatingContacts.Count}   units {hold.Records.Count(r=>r.Resolved)}/{hold.Records.Count}";
+            if(k.Arcs.Count>0){var arc=k.Arcs.FirstOrDefault(a=>a.Holding)??k.Arcs.First();holdStatus.Text=$"ARC {(arc.Holding?"ON":"OFF")} owner {arc.Color.Owner} units {arc.Records.Count(r=>r.Resolved)}/{arc.Records.Count}";}
+            else holdStatus.Text = hold == null ? "HOLDS COMPLETE" : $"HOLD {(hold.Holding ? "ON" : "OFF")}   contacts {hold.ActivatingContacts.Count}   units {hold.Records.Count(r=>r.Resolved)}/{hold.Records.Count}";
         }
         charts.Visible = k == null || k.Finished; start.Visible = charts.Visible;
         home.Visible = k != null && k.Finished;
@@ -203,11 +218,12 @@ public partial class Main : Control
     {
         if (font == null) return;
         DrawRect(new Rect2(665,0,435,740),new Color("0b1020"));
-        Text("ARCONIST",72,64,32,ink); Text("PAUSE / AUDIBLE PRACTICE   /   R006",692,60,17,muted);
+        Text("ARCONIST",72,64,32,ink); Text("SKY ARC PRACTICE   /   R007",692,60,17,muted);
         Text("D  ·  F  ·  J  ·  K",72,102,19,muted);
         Text("Native coordinates / 425   |   perspective Camera3D",52,713,15,muted);
         Text("F6 view   F7 resize   F8 capture",692,686,15,muted);
     }
+    private void RunArcTests()=>ArcValidation.Run(this,track,evidenceDir);
     private void RunPauseTests() => PauseValidation.Run(this,evidenceDir);
     private void RunAudioTests() => AudioValidation.Run(this, evidenceDir);
     private void RunHoldTests() => HoldValidation.Run(this, track, evidenceDir);
@@ -230,6 +246,7 @@ public partial class Main : Control
             pure=k?.Pure,far=k?.Far,lost=k?.Lost,shining=k?.Shining,score=k?.Score,combo=k?.Combo,maxCombo=k?.MaxCombo,
             health=k?.Health,contacts=k?.ContactCount,held=session.HeldCount,finished=k?.Finished,
             holds=k?.Holds.Select(h=>new { id=h.Data.Id, h.Active, h.Latched, h.Holding, h.ActivatingContacts, h.Records }).ToArray(),
+            arcs=k?.Arcs.Select(a=>new{a.Id,a.Active,a.Depth,a.Cache,a.CacheEnabled,a.TargetX,a.TargetY,a.Holding,a.Records}),colors=k?.Colors,claimed=k?.ClaimedIds,
             retained=k?.Contacts, judgments=k?.Judgments.ToArray(),
             candidates=k?.Candidates.ToArray(),classifications=k?.Classifications.ToArray(),expired=k?.Expired.ToArray(),
             notes=k?.Notes.Select(n=>new { id=n.Data.Id, consumed=n.Consumed,missed=n.Missed,active=n.Active,contact=n.Contact,depth=SpatialTrack.CurrentDepth(k!,n),visible=SpatialTrack.Present(k!,n) }).ToArray(),result=k?.Result }));

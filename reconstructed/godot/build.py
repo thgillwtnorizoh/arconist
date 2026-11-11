@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""R006: logged technical checks and Windows packaging; never GUI playtesting."""
+"""R007: logged technical checks and Windows packaging; never GUI playtesting."""
 import argparse
 import hashlib
 import json
@@ -80,7 +80,7 @@ def verify(package, templates):
                 assets.append(str(relative))
     pck = (package / 'Arconist.pck').read_bytes()
     assert pck[:4] == b'GDPC'
-    for chart in ('practice.aff', 'ordinary_two_tap.aff', 'mixed_practice.aff', 'native_hold.aff', 'hold_first.aff', 'tap_first.aff', 'audible_practice.aff', 'audible_aff120.aff'):
+    for chart in ('practice.aff', 'ordinary_two_tap.aff', 'mixed_practice.aff', 'native_hold.aff', 'hold_first.aff', 'tap_first.aff', 'audible_practice.aff', 'audible_aff120.aff', 'sky_practice.aff', 'native_moving_arc.aff'):
         assert (PROJECT / 'content' / chart).read_bytes() in pck, chart
     music = PROJECT / 'content/audio/clockwork_steps.wav.bytes'
     music_manifest = json.loads((ROOT / 'reconstructed/audio/manifest.json').read_text())
@@ -110,7 +110,7 @@ def main():
                DOTNET_CLI_TELEMETRY_OPTOUT='1', GODOT_SILENCE_ROOT_WARNING='1')
     if subprocess.check_output(['git', 'status', '--porcelain'], cwd=ROOT, text=True).strip():
         raise RuntimeError('Commit all source changes before the qualification build.')
-    LOGS = OUT / 'r006-evidence'
+    LOGS = OUT / 'r007-evidence'
     LOGS.mkdir(parents=True, exist_ok=False)  # Never overwrite an earlier attempt.
     version = run('godot-version', [godot, '--version'])
     assert version.strip().startswith('4.7.2.stable.mono.')
@@ -152,6 +152,10 @@ def main():
     run('r005-core-audio-tests', ['dotnet', 'reconstructed/audio-tests/bin/Release/net10.0/Arconist.Audio.Tests.dll', '.', LOGS / 'r005-core'])
     run('r006-build', ['dotnet', 'build', 'reconstructed/pause-tests/Arconist.Pause.Tests.csproj', '-c', 'Release', *common])
     run('r006-core-pause-tests', ['dotnet', 'reconstructed/pause-tests/bin/Release/net10.0/Arconist.Pause.Tests.dll', '.', LOGS / 'r006-core'])
+    run('r007-core-build', ['dotnet', 'build', 'reconstructed/arc-tests/Arconist.Arc.Tests.csproj', '-c', 'Release', *common])
+    run('r007-core-tests', ['dotnet', 'reconstructed/arc-tests/bin/Release/net10.0/Arconist.Arc.Tests.dll', '.', LOGS / 'r007-core'])
+    run('r007-bridge-build', ['dotnet', 'build', 'reconstructed/arc-bridge-tests/Arconist.Arc.Bridge.Tests.csproj', '-c', 'Release', *common])
+    run('r007-bridge-tests', ['dotnet', 'reconstructed/arc-bridge-tests/bin/Release/net10.0/Arconist.Arc.Bridge.Tests.dll', '.', LOGS / 'r007-bridge'])
     run('godot-build', ['dotnet', 'build', PROJECT / 'Arconist.Godot.csproj', '-c', 'Debug', *common])
     run('bridge-build', ['dotnet', 'build', PROJECT / 'tests/Arconist.Bridge.Tests.csproj',
                          '-c', 'Debug', *common])
@@ -165,7 +169,11 @@ def main():
                                      '--evidence-dir=' + str(LOGS / 'audio')])
     run('r006-headless-pause-tests', [godot, '--headless', '--path', PROJECT, '--', '--pause-tests',
                                      '--evidence-dir=' + str(LOGS / 'pause')])
-    package = OUT / 'r006-windows'
+    run('r007-headless-arc-tests', [godot, '--headless', '--path', PROJECT, '--', '--arc-tests', '--evidence-dir=' + str(LOGS / 'arcs')])
+    for path, count in [('r007-core/core-tests.json',31), ('r007-bridge/bridge-tests.json',10), ('arcs/arc-tests.json',13)]:
+        result = json.loads((LOGS / path).read_text())
+        assert result['passed'] == count and result['failed'] == 0 and result['skipped'] == 0, path
+    package = OUT / 'r007-windows'
     if package.exists():
         shutil.move(str(package), str(LOGS / 'previous-export'))
     package.mkdir()
@@ -190,20 +198,20 @@ def main():
     (package / 'SOURCE.txt').write_text(
         'https://github.com/thgillwtnorizoh/arconist\nbranch: main\ncommit: ' + source +
         '\nGodot 4.7.2 .NET; SDK 10.0.402; bundled runtime 10.0.13\n'
-        'READY FOR HUMAN QUALIFICATION. R006 acceptance pending. Godot audio output is not human qualification.\n', encoding='utf-8')
+        'READY FOR HUMAN QUALIFICATION. R007 acceptance pending. Godot audio output is not human qualification.\n', encoding='utf-8')
     files = sorted(f for f in package.rglob('*') if f.is_file())
     manifest = {f.relative_to(package).as_posix(): sha(f) for f in files}
     (package / 'SHA256SUMS.txt').write_text(''.join(f'{v}  {k}\n' for k, v in manifest.items()), encoding='utf-8')
-    archive = OUT / 'Arconist-R006-Windows-x64.zip'
+    archive = OUT / 'Arconist-R007-Windows-x64.zip'
     with zipfile.ZipFile(archive, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as z:
         for f in sorted(package.rglob('*')):
             if f.is_file():
-                z.write(f, 'Arconist-R006/' + f.relative_to(package).as_posix())
+                z.write(f, 'Arconist-R007/' + f.relative_to(package).as_posix())
     # Validate CRCs and every extracted payload hash, independently of source paths.
     with zipfile.ZipFile(archive) as z:
         assert z.testzip() is None
         z.extractall(LOGS / 'extracted')
-    extracted = LOGS / 'extracted/Arconist-R006'
+    extracted = LOGS / 'extracted/Arconist-R007'
     for name, expected in manifest.items():
         assert sha(extracted / name) == expected, name
     assert sha(extracted / 'SHA256SUMS.txt') == sha(package / 'SHA256SUMS.txt')
@@ -213,12 +221,30 @@ def main():
     (LOGS / 'package-integrity.json').write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
     shutil.copyfile(package / 'SHA256SUMS.txt', LOGS / 'WINDOWS-PAYLOAD-SHA256SUMS.txt')
     (LOGS / 'WINDOWS-ZIP-SHA256.txt').write_text(report['archive_sha256'] + '  ' + archive.name + '\n', encoding='utf-8')
-    shutil.copyfile(ROOT / 'reconstructed/validation/R006.md', LOGS / 'R006.md')
-    evidence_zip = OUT / 'Arconist-R006-Technical-Evidence.zip'
+    shutil.copyfile(ROOT / 'reconstructed/validation/R007.md', LOGS / 'R007.md')
+    baseline = '7db15c6a86b343a170074bcd4eafa3e4dcbc9b88'
+    changed = subprocess.check_output(['git','diff','--name-status',baseline,source],cwd=ROOT,text=True)
+    (LOGS / 'changed-files.txt').write_text(changed)
+    baseline_files = subprocess.check_output(['git','ls-tree','-r','--name-only',baseline],cwd=ROOT,text=True).splitlines()
+    inventory=[]
+    for name in baseline_files:
+        old=subprocess.check_output(['git','rev-parse',baseline+':'+name],cwd=ROOT,text=True).strip()
+        new=subprocess.check_output(['git','rev-parse',source+':'+name],cwd=ROOT,text=True).strip()
+        protected=not name.startswith('reconstructed/')
+        if protected: assert old==new,name
+        inventory.append(dict(path=name,before=old,after=new,identical=old==new,protected=protected))
+    prior=subprocess.check_output(['git','show',baseline+':reconstructed/contexts.md'],cwd=ROOT)
+    assert (ROOT/'reconstructed/contexts.md').read_bytes().startswith(prior)
+    (LOGS/'preservation.json').write_text(json.dumps(dict(baseline=baseline,source=source,all_research_preserved=True,history_prefix_bytes=len(prior),inventory=inventory),indent=2))
+    development=Path(ENV.get('ARCONIST_DEVELOPMENT_EVIDENCE',''))
+    if str(development)!='.' and development.is_dir(): shutil.copytree(development, LOGS/'development',ignore=shutil.ignore_patterns('extracted'))
+    toolchain = {str(f.resolve()):sha(f) for f in [a.templates,godot,a.pack_probe_godot.resolve()]}
+    (LOGS/'toolchain-sha256.json').write_text(json.dumps(toolchain,indent=2))
+    evidence_zip = OUT / 'Arconist-R007-Technical-Evidence.zip'
     with zipfile.ZipFile(evidence_zip, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as z:
         for f in sorted(LOGS.rglob('*')):
             if f.is_file() and f.relative_to(LOGS).parts[0] not in ('extracted', 'previous-export'):
-                z.write(f, 'Arconist-R006-Evidence/' + f.relative_to(LOGS).as_posix())
+                z.write(f, 'Arconist-R007-Evidence/' + f.relative_to(LOGS).as_posix())
     with zipfile.ZipFile(evidence_zip) as z:
         assert z.testzip() is None
     print(json.dumps(report, indent=2))

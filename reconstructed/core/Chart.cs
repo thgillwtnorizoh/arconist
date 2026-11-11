@@ -65,17 +65,19 @@ public sealed class Chart
     public IReadOnlyList<Tap> Taps { get; }
     public IReadOnlyList<Timing> Timings { get; }
     public IReadOnlyList<Hold> Holds { get; }
+    public IReadOnlyList<Arc> Arcs { get; }
     public int AudioOffset { get; }
     public float Density { get; }
     public int JudgmentUnits { get; }
     public int EndTime { get; }
-    private Chart(List<Tap> taps, List<Hold> holds, List<Timing> timings, int offset, float density)
+    private Chart(List<Tap> taps, List<Hold> holds, List<Arc> arcs, List<Timing> timings, int offset, float density)
     {
         Taps = taps.AsReadOnly(); Timings = timings.AsReadOnly(); AudioOffset = offset;
-        Density = density; Holds = holds.AsReadOnly();
-        JudgmentUnits = checked(taps.Count + holds.Sum(h => h.Checkpoints.Count));
+        Density = density; Holds = holds.AsReadOnly(); Arcs=arcs.AsReadOnly();
+        JudgmentUnits = checked(taps.Count + holds.Sum(h => h.Checkpoints.Count)+arcs.Sum(a=>a.Checkpoints.Count));
         EndTime = Math.Max(taps.Count == 0 ? 0 : checked(taps.Max(t => t.Time) + 120),
                            holds.Count == 0 ? 0 : checked(holds.Max(h => h.End) + 500));
+        EndTime=Math.Max(EndTime,arcs.Count==0?0:checked(arcs.Max(a=>a.End)+500));
     }
 
     // Deliberately bounded grammar: no silent omission of unsupported AFF constructs.
@@ -100,6 +102,7 @@ public sealed class Chart
         if (!float.IsFinite(density) || density <= 0) throw new FormatException("Density must be positive and finite.");
         var taps = new List<Tap>(); var timings = new List<Timing>();
         var parsedHolds = new List<(int start, int end, int raw, int order)>();
+        var parsedArcs=new List<(string[] fields,int order)>();
         int sourceOrder = 0;
         string body = text.Substring(separator + 3);
         const string number = @"[0-9]+\.[0-9]+";
@@ -111,6 +114,16 @@ public sealed class Chart
         for (int i = 0; i < statements.Length - 1; i++)
         {
             string s = statements[i].Trim();
+            if(s.StartsWith("arc(",StringComparison.Ordinal))
+            {
+                if(!s.EndsWith(")",StringComparison.Ordinal))throw new NotSupportedException("Attached arc-taps unsupported.");
+                var fields=s.Substring(4,s.Length-5).Split(',').Select(f=>f.Trim()).ToArray();
+                if(fields.Length!=10&&fields.Length!=11)throw new NotSupportedException("Unsupported arc field count.");
+                if(fields[4]!="s"||fields[8]!="none"||fields[9]!="false")throw new NotSupportedException("Only ordinary linear none-effect arcs supported.");
+                foreach(int f in new[]{0,1,7})if(!Regex.IsMatch(fields[f],@"^[0-9]+$"))throw new NotSupportedException("Arc integer syntax required.");
+                foreach(int f in new[]{2,3,5,6}.Concat(fields.Length==11?new[]{10}:Array.Empty<int>()))if(!Regex.IsMatch(fields[f],@"^[0-9]+\.[0-9]+$"))throw new NotSupportedException("Arc decimal syntax required.");
+                parsedArcs.Add((fields,sourceOrder++));continue;
+            }
             var tap = tapPattern.Match(s);
             if (tap.Success)
             {
@@ -141,13 +154,22 @@ public sealed class Chart
                 throw new NotSupportedException("Only finite positive ordinary timing is supported.");
             timings.Add(new Timing(at, bpm, beats));
         }
-        if ((taps.Count == 0 && parsedHolds.Count == 0) || timings.Count == 0) throw new FormatException("At least one timing and one supported note required.");
+        if ((taps.Count == 0 && parsedHolds.Count == 0 && parsedArcs.Count==0) || timings.Count == 0) throw new FormatException("At least one timing and one supported note required.");
         timings.Sort((a, b) => a.Time.CompareTo(b.Time));
         if (timings[0].Time != 0 || timings.Select(t => t.Time).Distinct().Count() != timings.Count)
             throw new NotSupportedException("Timing must start at zero, with distinct timing times.");
         taps.Sort((a, b) => { int c = a.Time.CompareTo(b.Time); return c != 0 ? c : a.Ordinal.CompareTo(b.Ordinal); });
         var holds = parsedHolds.Select((h, i) => new Hold(i, h.order, h.start, h.end, h.raw,
             timings.Last(t => t.Time <= h.start).Bpm, density)).OrderBy(h => h.Start).ThenBy(h => h.SourceOrder).ToList();
-        return new Chart(taps, holds, timings, offset, density);
+        var arcs=parsedArcs.Select((a,i)=>{
+            var f=a.fields;int start=int.Parse(f[0],CultureInfo.InvariantCulture),end=int.Parse(f[1],CultureInfo.InvariantCulture),color=int.Parse(f[7],CultureInfo.InvariantCulture);
+            float V(int k)=>float.Parse(f[k],CultureInfo.InvariantCulture);
+            float x0=V(2),x1=V(3),y0=V(5),y1=V(6),extra=f.Length==11?V(10):1;
+            if(start<0||(long)end-start<2||(long)end-start>600000||end>int.MaxValue-1000000||color>1||!float.IsFinite(extra)||extra<0||extra>4||new[]{x0,x1,y0,y1}.Any(v=>!float.IsFinite(v)||v<0||v>1))throw new NotSupportedException("Arc outside bounded R007 domain.");
+            if(timings.Any(t=>t.Time>start&&t.Time<end))throw new NotSupportedException("Timing changes inside an arc deferred.");
+            return new Arc(i,a.order,start,end,x0,x1,y0,y1,color,extra,timings.Last(t=>t.Time<=start),density);
+        }).OrderBy(a=>a.Start).ThenBy(a=>a.SourceOrder).ToList();
+        for(int i=1;i<arcs.Count;i++)if((long)arcs[i].Start<arcs[i-1].End+1000L)throw new NotSupportedException("Overlapping/crossing/linked or closely adjacent arcs deferred.");
+        return new Chart(taps, holds, arcs, timings, offset, density);
     }
 }

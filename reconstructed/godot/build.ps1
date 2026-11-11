@@ -15,7 +15,7 @@ $env:DOTNET_PROCESSOR_COUNT = '1'
 # skips the unreachable online advisory lookup; no test or compiler gate changes.
 if ($OfflineRestore) { $env:NuGetAudit = 'false' }
 $toolsDir = Join-Path $repoRoot 'reconstructed/out/r002-tools'
-$exportDir = Join-Path $repoRoot 'reconstructed/out/r006-windows'
+$exportDir = Join-Path $repoRoot 'reconstructed/out/r007-windows'
 function Invoke-Dotnet {
     param([string[]]$Arguments)
     & dotnet @Arguments
@@ -65,6 +65,10 @@ try {
     Invoke-Dotnet -Arguments @('reconstructed/audio-tests/bin/Release/net10.0/Arconist.Audio.Tests.dll','.','reconstructed/out/r005-core')
     Invoke-Dotnet -Arguments @('build','reconstructed/pause-tests/Arconist.Pause.Tests.csproj','-c','Release','-m:1','-nr:false')
     Invoke-Dotnet -Arguments @('reconstructed/pause-tests/bin/Release/net10.0/Arconist.Pause.Tests.dll','.','reconstructed/out/r006-core')
+    Invoke-Dotnet -Arguments @('build','reconstructed/arc-tests/Arconist.Arc.Tests.csproj','-c','Release','-m:1','-nr:false')
+    Invoke-Dotnet -Arguments @('reconstructed/arc-tests/bin/Release/net10.0/Arconist.Arc.Tests.dll','.','reconstructed/out/r007-core')
+    Invoke-Dotnet -Arguments @('build','reconstructed/arc-bridge-tests/Arconist.Arc.Bridge.Tests.csproj','-c','Release','-m:1','-nr:false')
+    Invoke-Dotnet -Arguments @('reconstructed/arc-bridge-tests/bin/Release/net10.0/Arconist.Arc.Bridge.Tests.dll','.','reconstructed/out/r007-bridge')
     Push-Location $PSScriptRoot
     try {
         Invoke-Dotnet -Arguments @('build','Arconist.Godot.csproj','-c','Debug','-m:1','-nr:false')
@@ -76,6 +80,7 @@ try {
     Invoke-Godot -Arguments @('--headless','--path','reconstructed/godot','--','--hold-tests')
     Invoke-Godot -Arguments @('--headless','--path','reconstructed/godot','--','--audio-tests')
     Invoke-Godot -Arguments @('--headless','--path','reconstructed/godot','--','--pause-tests')
+    Invoke-Godot -Arguments @('--headless','--path','reconstructed/godot','--','--arc-tests')
     Invoke-Godot -Arguments @('--headless','--path','reconstructed/godot','--export-release','Windows x64')
     if (-not (Test-Path (Join-Path $exportDir 'data_Arconist.Godot_windows_x86_64/coreclr.dll'))) { throw 'Self-contained runtime missing' }
     Write-Host ('Built Windows x64 application: '+(Join-Path $exportDir 'Arconist.exe'))

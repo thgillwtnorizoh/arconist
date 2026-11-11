@@ -52,6 +52,59 @@ public partial class SpatialTrack : Node3D
         if (!screen.IsFinite() || !GetViewport().GetVisibleRect().HasPoint(screen)) return 0;
         return GroundIntersection(Camera.ProjectRayOrigin(screen),Camera.ProjectRayNormal(screen),out hit) ? LaneAt(hit) : 0;
     }
+    public static bool SkyIntersection(Vector3 origin,Vector3 direction,out Vector3 hit)
+    {
+        hit=default;if(!origin.IsFinite()||!direction.IsFinite()||Math.Abs(direction.Z)<1e-6f)return false;
+        float t=-origin.Z/direction.Z;if(!float.IsFinite(t)||t<0)return false;
+        hit=origin+direction*t;return hit.IsFinite();
+    }
+    public bool PickSky(Vector2 screen,out SkyContact sky)
+    {
+        sky=default;if(!screen.IsFinite()||!GetViewport().GetVisibleRect().HasPoint(screen))return false;
+        if(!SkyIntersection(Camera.ProjectRayOrigin(screen),Camera.ProjectRayNormal(screen),out var hit))return false;
+        var native=hit/Unit;sky=new SkyContact(new SkyPoint(native.X,native.Y,native.Z),Camera.GlobalPosition.Z/Unit,GetWindow().Size.Y);return sky.Valid;
+    }
+    private sealed class ArcView
+    {public Node3D Root=null!;public MeshInstance3D Target=null!;public List<MeshInstance3D> Segments=new();public List<MeshInstance3D> Markers=new();}
+    private readonly Dictionary<string,ArcView> arcs=new();
+    public int ArcVisualCount=>arcs.Count;
+    public Node3D? ArcVisual(string id)=>arcs.TryGetValue(id,out var v)?v.Root:null;
+    public MeshInstance3D? ArcTarget(string id)=>arcs.TryGetValue(id,out var v)?v.Target:null;
+    private void RefreshArcs(Kernel core)
+    {
+        foreach(var arc in core.Arcs)
+        {
+            if(!arcs.TryGetValue(arc.Id,out var v))
+            {
+                v=new ArcView{Root=new Node3D()};AddChild(v.Root);
+                for(int i=1;i<arc.Geometry.DetailSamples.Count;i++)v.Segments.Add(Box(Vector3.Zero,World(60,16,1),new Color("79b6ff"),true,v.Root));
+                v.Target=Box(Vector3.Zero,World(115,45,45),new Color("f4f7ff"),true,v.Root);v.Target.Name="CurrentTarget";
+                foreach(var record in arc.Records){var m=Box(Vector3.Zero,World(85,24,25),new Color("f4f7ff"),true,v.Root);m.Name="Checkpoint"+record.Time;v.Markers.Add(m);}
+                arcs.Add(arc.Id,v);
+            }
+            int now=core.Timeline.EffectiveTime,depth=HoldDepth(core,arc.Start);var g=arc.Geometry;
+            v.Root.Visible=!core.Finished&&now<=arc.End+300;
+            var color=new Color(arc.Holding?"a5f56d":arc.Data.Color==0?"79b6ff":"ff9de1");
+            for(int i=0;i<v.Segments.Count;i++)
+            {
+                var a=g.DetailSamples[i];var b=g.DetailSamples[i+1];var m=v.Segments[i];
+                var from=World(g.X0+a.X,a.Y,depth+a.Z);var to=World(g.X0+b.X,b.Y,depth+b.Z);float length=from.DistanceTo(to);
+                m.Visible=length>0.000001f&&Math.Max(from.Z,to.Z)>=-9500*Unit&&Math.Min(from.Z,to.Z)<=1000*Unit;
+                m.Position=(from+to)*0.5f;((BoxMesh)m.Mesh).Size=new Vector3(60*Unit,16*Unit,Math.Max(length,0.000001f));
+                if(length>0.000001f)m.LookAt(to,Vector3.Up);
+                ((StandardMaterial3D)m.MaterialOverride).AlbedoColor=color;
+            }
+            v.Target.Position=World(arc.TargetX,arc.TargetY,0);v.Target.Visible=now>=arc.Start-1500&&now<=arc.End;
+            ((StandardMaterial3D)v.Target.MaterialOverride).AlbedoColor=arc.Holding?new Color("a5f56d"):new Color("f4f7ff");
+            for(int i=0;i<arc.Records.Count;i++)
+            {
+                var r=arc.Records[i];float u=(float)(r.Time-arc.Start)/(arc.End-arc.Start);var m=v.Markers[i];int z=HoldDepth(core,r.Time);
+                m.Position=World(g.X0+(g.X1-g.X0)*u,g.Y0+(g.Y1-g.Y0)*u,r.Resolved?0:z);
+                m.Visible=z>=-9500&&(r.Resolved?now-r.ResolvedAt!.Value<=300:z<=1000);
+                ((StandardMaterial3D)m.MaterialOverride).AlbedoColor=new Color(!r.Resolved?"f4f7ff":r.Outcome=="LOST"?"ff6985":"a5f56d");
+            }
+        }
+    }
     public override void _Ready()
     {
         Camera = new Camera3D { Projection = Camera3D.ProjectionType.Perspective, Fov = 65, Near = Unit, Far = 10000 * Unit, Current = true };
@@ -89,11 +142,13 @@ public partial class SpatialTrack : Node3D
         {
             foreach (var mesh in notes.Values) { RemoveChild(mesh); mesh.QueueFree(); }
             foreach (var view in holds.Values) { RemoveChild(view.Root); view.Root.QueueFree(); }
-            notes.Clear(); holds.Clear(); displayedCore = core;
+            foreach(var view in arcs.Values){RemoveChild(view.Root);view.Root.QueueFree();}
+            notes.Clear(); holds.Clear(); arcs.Clear(); displayedCore = core;
         }
         var ids=core?.Notes.Select(n=>n.Data.Id).ToHashSet() ?? new HashSet<string>();
         foreach (string id in notes.Keys.Where(id=>!ids.Contains(id)).ToArray()) { notes[id].QueueFree(); notes.Remove(id); }
         if (core == null) return;
+        RefreshArcs(core);
         foreach (var note in core.Notes)
         {
             if (!notes.TryGetValue(note.Data.Id,out var mesh))
