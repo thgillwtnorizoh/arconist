@@ -382,3 +382,45 @@ preserved. Corrected actual-PCK probe reads1411244 bytes/hash, decodes32s and re
 API playing under Dummy output. This is not audible/hardware/Windows qualification.
 Final clean committed-source regression/export/integrity/publication follows.
 No graphical automation, OS input, screenshot acceptance or Windows run performed.
+
+
+## R005 complete technical delivery — 2026-11-11 Asia/Bangkok
+
+Tested main implementation 4d60b28ec307b127ddebbb164216f466012c36f3; non-forced descendant of
+0b8df72791ba3ab5c29176dbabe02f3acaf1d1ce. Final clean-source full driver exits0:
+129 preserved groups +37 portable audio +17 real headless Godot =183 groups,
+three9/6/6-event standalone references;0 failures/skips. Four E040 and six R004
+native-normalized comparisons match all expected intermediate states, no first
+divergence. Every-frame86-unit mixed-chart trace is equal under available/missing/
+rejected/muted/hostile-playhead audio states. Compile/import/ExportRelease pass.
+
+Final package contains202 payload files plus manifest; all191 dependencies, AMD64
+headers/template identity, included10.0.13 runtime,8 AFF contents and exact WAV
+carrier/hash/decoder/player state verified. CRC/all extracted hashes PASS.
+Windows ZIP 76413491bytes SHA256
+0bd8c4ba2e6208f33500828b2a82ab87d3031affb1415db46272b6e6378020df.
+Full technical evidence includes native traces, commands/exits, offline waveform,
+actual export MSBuild log, PCK audio probe, toolchain/import/preservation inventories.
+
+Final probe cleanup repair permits100ms audio-thread retirement after stop to
+avoid shutdown-owned WAV/playback refs; this belongs only to the external probe,
+never the application timeline. Earlier raw-WAV export failure/tree-entry error/
+shutdown warning logs are preserved. Final complete run has0 warnings/errors.
+Original183 baseline blobs:171 identical,12 reconstruction paths modified,17 added,
+0 deleted. All original research, prior fixtures/oracles/test sources and exact
+22876-byte earlier history prefix retained. Final audit only updates documentation.
+
+Technical PASS; READY FOR HUMAN QUALIFICATION — R005. Windows launch/audibility/
+perceived synchronization/physical input/results/replay remain NOT RUN/PENDING.
+No GUI, injected OS input, screenshot acceptance or Windows execution performed.
+Godot backend is an engineering substitution; latency UNVERIFIED. No SFX/drift
+loop/profile migration/Bluetooth detection/native pause/arc/flick/Unity. No R006 or
+new expedition begun. Await owner qualification and Headquarters' decision.
+
+R005 artifact receipt (both successful; identity persisted):
+Arconist-R005-Windows-x64.zip: libfile_e1aa1ee6c3008191b7025714b54f5845, 76413491bytes,
+SHA256 0bd8c4ba2e6208f33500828b2a82ab87d3031affb1415db46272b6e6378020df.
+Arconist-R005-Technical-Evidence.zip: libfile_b2fe9bc1b2a881919da47e39e2ff0360, 4006228bytes,
+SHA256 ea64f3affde4926a76a6b09b6176ffafe16cf4873cace70ffcc940897809ae34.
+Final audit publishes only report/history and reads main back; tested production
+source stays4d60b28. No further application execution or next mission follows.
