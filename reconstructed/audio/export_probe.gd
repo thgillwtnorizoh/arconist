@@ -30,4 +30,9 @@ func probe():
         var file = FileAccess.open(args[0], FileAccess.WRITE)
         file.store_string(JSON.stringify(report, "  "))
     print(JSON.stringify(report))
+    # Release probe-owned RefCounted decoder/hash objects before engine shutdown.
+    stream = null
+    hash = null
+    # Let the headless audio thread retire its stopped playback references.
+    await create_timer(0.1).timeout
     quit(0 if valid else 1)
