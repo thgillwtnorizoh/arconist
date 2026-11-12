@@ -1,3 +1,26 @@
+# Arconist reconstruction — R009
+
+R009 adds one exact, unambiguous constant ordinary two-segment pair to accepted
+R008. Explicit predecessor/successor links and a shared group remain separate
+from shared color ownership. Root0/successor1 generation and arc folding derive
+six records/seven units for E038; weight2 makes two genuine recorder calls.
+See [R009 report](validation/R009.md), [owner guide](godot/PLAYER.txt) and [reference boundary](../reference_traces/r009/README.md).
+
+Pinned Godot4.7.2.NET/.NET10 toolchain and DOTNET_PROCESSOR_COUNT=1 remain. Full
+logged build requires clean committed source and fresh r009-evidence output:
+
+```sh
+python3 reconstructed/godot/build.py --godot /path/to/Godot_mono --pack-probe-godot /path/to/Godot_standard --templates /path/to/templates.tpz --notices /path/to/notices
+```
+
+Runs348 prior+47 new=395 groups and three standalone comparisons, then actual
+Windows export/PCK14-chart/audio/runtime/dependency/CRC/extracted-hash validation.
+Outputs Arconist-R009-Windows-x64.zip and Arconist-R009-Technical-Evidence.zip.
+The first selection is extendedN31 practice with junction8.001s. Separate exact
+E038N7 diagnostic has junction2.001s; do not confuse the two outcomes. All12 earlier
+charts/music remain unchanged. Owner alone qualifies actual Windows/input/visual/
+audio continuity. Historical guides follow; R009 report specifies current scope.
+
 # Arconist reconstruction — R008
 
 R008 adds one independently judged arc-tap on a trace-mode linear parent to

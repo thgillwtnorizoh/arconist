@@ -1,0 +1,31 @@
+{
+ "authority":"E038 natural linked pair, manually transcribed before R009 tests; scores before final are E002 integer-formula deductions, not new native observations",
+ "fixtureSha256":"c0abe4ca157ea34888c27571081383284df5b7ca61e58cce3815ac41ecedd527",
+ "flags":[0,1],"geometryZ":[-8097,-8089],"samples":[9,9],"height":0,"y":50,"units":7,"end":3501,
+ "base":[[{"time":1250,"weight":1},{"time":1500,"weight":1},{"time":1750,"weight":1}],[{"time":2001,"weight":1},{"time":2251,"weight":1},{"time":2501,"weight":1},{"time":2751,"weight":1}]],
+ "final":[[{"time":1250,"weight":1},{"time":1500,"weight":2}],[{"time":2001,"weight":1},{"time":2251,"weight":1},{"time":2501,"weight":1},{"time":2751,"weight":1}]],
+ "frames":[
+  {"e":1000,"root":false,"next":false,"pure":0,"health":0.0},
+  {"e":1001,"root":true,"next":false,"pure":0,"health":0.0},
+  {"e":1125,"root":true,"next":false,"pure":1,"health":11.628571510314941},
+  {"e":1375,"root":true,"next":false,"pure":3,"health":34.88571548461914},
+  {"e":1876,"root":true,"next":false,"pure":3,"health":34.88571548461914},
+  {"e":2000,"root":true,"next":false,"pure":3,"health":34.88571548461914},
+  {"e":2001,"root":false,"next":true,"pure":4,"health":46.514286041259766},
+  {"e":2002,"root":false,"next":true,"pure":4,"health":46.514286041259766},
+  {"e":2126,"root":false,"next":true,"pure":5,"health":58.14285659790039},
+  {"e":2376,"root":false,"next":true,"pure":6,"health":69.77143096923828},
+  {"e":2626,"root":false,"next":true,"pure":7,"health":81.4000015258789},
+  {"e":2876,"root":false,"next":true,"pure":7,"health":81.4000015258789}
+ ],
+ "callbacks":[
+  {"e":1125,"time":1250,"pure":1,"score":1428572,"health":11.628571510314941},
+  {"e":1375,"time":1500,"pure":2,"score":2857144,"health":23.257143020629883},
+  {"e":1375,"time":1500,"pure":3,"score":4285717,"health":34.88571548461914},
+  {"e":2001,"time":2001,"pure":4,"score":5714289,"health":46.514286041259766},
+  {"e":2126,"time":2251,"pure":5,"score":7142862,"health":58.14285659790039},
+  {"e":2376,"time":2501,"pure":6,"score":8571434,"health":69.77143096923828},
+  {"e":2626,"time":2751,"pure":7,"score":10000007,"health":81.4000015258789}
+ ],
+ "release":2876,"following":2877,"ownerBefore":0,"ownerAfter":-1,"groupBefore":[true,true,true],"groupAfter":[false,true,false],"nativeCompletion":false
+}

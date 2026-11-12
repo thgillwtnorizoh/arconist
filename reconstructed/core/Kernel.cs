@@ -129,11 +129,11 @@ public sealed class NoteState : RuntimeNote
 public sealed class CheckpointState
 {
     public int Time { get; }
-    public int Weight => 1; // Ordinary hold flag0 records, E001/026.
+    public int Weight { get; } // E038 arc weights; ordinary holds remain1.
     public bool Resolved { get; internal set; }
     public string? Outcome { get; internal set; }
     public int? ResolvedAt { get; internal set; }
-    internal CheckpointState(int time) { Time = time; }
+    internal CheckpointState(int time,int weight=1) { Time = time; Weight=weight; }
 }
 
 public sealed class HoldState : RuntimeNote
@@ -216,6 +216,9 @@ public sealed class Kernel
     public IReadOnlyList<HoldState> Holds { get; }
     public IReadOnlyList<ArcState> Arcs {get;}
     public IReadOnlyList<ArcTapState> ArcTaps {get;}
+    public IReadOnlyList<ArcGroupState> ArcGroups {get;}
+    public List<RecorderObservation> RecorderTrace {get;}=new List<RecorderObservation>();
+    public int RecorderCalls {get;private set;}
     private readonly Dictionary<int,ArcColorState> colors=new Dictionary<int,ArcColorState>();
     private readonly HashSet<int> claimed=new HashSet<int>();
     public IReadOnlyDictionary<int,ArcColorState> Colors=>colors;
@@ -264,6 +267,15 @@ public sealed class Kernel
             int ti=chart.Timings.ToList().FindLastIndex(t=>t.Time<=a.Start);
             return new ArcState(a,new ArcGeometry(a,scales[ti],arcHeight),color);
         }).ToList();Arcs=arcs.AsReadOnly();ArcTaps=arcs.SelectMany(a=>a.Children).ToList().AsReadOnly();
+        var byDefinition=arcs.ToDictionary(a=>a.Data);var groups=new List<ArcGroupState>();
+        foreach(var arc in arcs)
+        {
+            if(arc.Data.Predecessor!=null)arc.Predecessor=byDefinition[arc.Data.Predecessor];
+            foreach(var next in arc.Data.Successors)arc.successors.Add(byDefinition[next]);
+            if(arc.Data.Group!=null&&arc.Data.Predecessor==null)
+            {var group=new ArcGroupState(arc.Data.Group,arc,byDefinition[arc.Data.Group.Successor]);foreach(var member in group.Members)member.Group=group;groups.Add(group);}
+        }
+        ArcGroups=groups.AsReadOnly();
         var objects = notes.Cast<RuntimeNote>().Concat(holds).Concat(arcs).OrderBy(n => n.Start).ThenBy(n => n.SourceOrder);
         foreach (var note in objects)
         {
@@ -299,7 +311,7 @@ public sealed class Kernel
         return depth;
     }
 
-    private void BeginEvent() { Candidates.Clear(); Classifications.Clear(); Expired.Clear(); Judgments.Clear(); }
+    private void BeginEvent() { Candidates.Clear(); Classifications.Clear(); Expired.Clear(); Judgments.Clear(); RecorderTrace.Clear(); }
 
     public void Frame(long wallMs)
     {
@@ -310,6 +322,7 @@ public sealed class Kernel
             // Native paused model resets activity, preserving latch/retained IDs.
             foreach(var hold in Holds) {hold.Holding=false;hold.activating.Clear();}
             foreach(var arc in Arcs)arc.Holding=false;
+            foreach(var group in ArcGroups){group.Active=false;group.Accepted=false;}
             return;
         }
         float a = -DepthAt(now), b = -DepthAt(checked(now + 120));
@@ -319,7 +332,11 @@ public sealed class Kernel
             note.Depth = (int)((int)DepthAt(note.Start) + a);
             note.EndDepth = (int)((int)DepthAt(note.End) + a);
             if(note is ArcState arc && !arc.Data.Trace && now>arc.End&&!arc.EndReset)
-            {arc.EndReset=true;arc.Color.PreviouslyClaimed=false;arc.Color.ReleaseTime=-1;arc.Color.Conflict=false;}
+            {
+                arc.EndReset=true;
+                if(arc.Successors.Any(next=>!next.Data.Trace))arc.SuccessorCleanupPreserved=true;
+                else {arc.Color.PreviouslyClaimed=false;arc.Color.ReleaseTime=-1;arc.Color.Conflict=false;}
+            }
             if ((note.Terminal || Finished) && now > note.End)
             { note.Active = false; active.Remove(note); }
         }
@@ -349,10 +366,12 @@ public sealed class Kernel
                 if (hold.Latched && hold.Start < now && now < hold.End && contact.Lane == hold.Lane)
                 { hold.Holding = true; hold.activating.Add(contact.Id); }
         foreach(var color in colors.Values){color.Accepted=false;color.Conflict=false;}
-        foreach(var arc in Arcs){arc.Holding=false;if(arc.Active)arc.UpdateCache(now);}
+        foreach(var group in ArcGroups){group.Active=false;group.Accepted=false;}
+        foreach(var arc in Arcs)
+        {arc.Holding=false;if(arc.Active)arc.UpdateCache(now);else if(arc.Group!=null)arc.ClearEligibility();if(arc.CacheEnabled&&arc.Group!=null)arc.Group.CacheRelated=true;}
         foreach(var contact in contacts.Values.OrderBy(c=>c.Id))
             if(contact.Sky.HasValue)foreach(var arc in active.OfType<ArcState>())
-                if(!arc.Data.Trace&&arc.CacheEnabled&&ArcSpatial.Matches(arc.TargetX,arc.TargetY,contact.Sky.Value)&&Claim(arc.Color,contact.Id,now,(int)arc.Data.Interval))arc.Holding=true;
+                if(!arc.Data.Trace&&arc.CacheEnabled&&ArcSpatial.Matches(arc.TargetX,arc.TargetY,contact.Sky.Value)&&Claim(arc.Color,contact.Id,now,(int)arc.Data.Interval)){arc.Holding=true;arc.Group?.Accept(arc);}
         foreach (var item in active)
         {
             if (item is NoteState note && !note.Missed && !note.Consumed && now > note.Data.Time + 100)
@@ -484,12 +503,14 @@ public sealed class Kernel
         Score = CalculateScore(Pure, Far, Shining, Chart.JudgmentUnits);
         Combo++; MaxCombo = Math.Max(MaxCombo, Combo);
         Judgments.Add(new JudgmentEvent(note, checkpoint, id == 0 ? "SHINING_PURE" : id == 1 ? "PURE" : "FAR", now));
+        RecorderTrace.Add(new RecorderObservation(++RecorderCalls,note,checkpoint,id==0?"SHINING_PURE":id==1?"PURE":"FAR",now,this));
     }
     private void RecordMiss(string note, int? checkpoint, int now)
     {
         Lost++; ApplyHealth(0, 2); Combo = 0;
         // E008/009: derived ordinary LogicHoldNote takes the 2HP branch.
         Judgments.Add(new JudgmentEvent(note, checkpoint, "LOST", now));
+        RecorderTrace.Add(new RecorderObservation(++RecorderCalls,note,checkpoint,"LOST",now,this));
     }
     private void ResolveHold(HoldState hold, int now)
     {
@@ -546,7 +567,7 @@ public sealed class Kernel
         }
         for(int i=last;i>=0&&!arc.Records[i].Resolved;i--)
         {
-            var r=arc.Records[i];r.Resolved=true;r.ResolvedAt=now;r.Outcome=arc.Holding?"SHINING_PURE":"LOST";
+            var r=arc.Records[i];arc.ResolutionWrites++;r.Resolved=true;r.ResolvedAt=now;r.Outcome=arc.Holding?"SHINING_PURE":"LOST";
             for(int unit=0;unit<r.Weight;unit++)if(arc.Holding)RecordAccepted(arc.Id,r.Time,0,now);else{RecordMiss(arc.Id,r.Time,now);Expired.Add(arc.Id+":checkpoint:"+r.Time);}
         }
     }

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""R008: logged technical checks and Windows packaging; never GUI playtesting."""
+"""R009: logged technical checks and Windows packaging; never GUI playtesting."""
 import argparse
 import hashlib
 import json
@@ -80,7 +80,7 @@ def verify(package, templates):
                 assets.append(str(relative))
     pck = (package / 'Arconist.pck').read_bytes()
     assert pck[:4] == b'GDPC'
-    for chart in ('practice.aff', 'ordinary_two_tap.aff', 'mixed_practice.aff', 'native_hold.aff', 'hold_first.aff', 'tap_first.aff', 'audible_practice.aff', 'audible_aff120.aff', 'sky_practice.aff', 'native_moving_arc.aff', 'arctap_practice.aff', 'native_arc_tap.aff'):
+    for chart in ('practice.aff', 'ordinary_two_tap.aff', 'mixed_practice.aff', 'native_hold.aff', 'hold_first.aff', 'tap_first.aff', 'audible_practice.aff', 'audible_aff120.aff', 'sky_practice.aff', 'native_moving_arc.aff', 'arctap_practice.aff', 'native_arc_tap.aff', 'linked_practice.aff', 'native_linked_arc_successors.aff'):
         assert (PROJECT / 'content' / chart).read_bytes() in pck, chart
     music = PROJECT / 'content/audio/clockwork_steps.wav.bytes'
     music_manifest = json.loads((ROOT / 'reconstructed/audio/manifest.json').read_text())
@@ -110,7 +110,7 @@ def main():
                DOTNET_CLI_TELEMETRY_OPTOUT='1', GODOT_SILENCE_ROOT_WARNING='1')
     if subprocess.check_output(['git', 'status', '--porcelain'], cwd=ROOT, text=True).strip():
         raise RuntimeError('Commit all source changes before the qualification build.')
-    LOGS = OUT / 'r008-evidence'
+    LOGS = OUT / 'r009-evidence'
     LOGS.mkdir(parents=True, exist_ok=False)  # Never overwrite an earlier attempt.
     version = run('godot-version', [godot, '--version'])
     assert version.strip().startswith('4.7.2.stable.mono.')
@@ -160,6 +160,10 @@ def main():
     run('r008-core-tests', ['dotnet', 'reconstructed/arctap-tests/bin/Release/net10.0/Arconist.ArcTap.Tests.dll', '.', LOGS / 'r008-core'])
     run('r008-bridge-build', ['dotnet', 'build', 'reconstructed/arctap-bridge-tests/Arconist.ArcTap.Bridge.Tests.csproj', '-c', 'Release', *common])
     run('r008-bridge-tests', ['dotnet', 'reconstructed/arctap-bridge-tests/bin/Release/net10.0/Arconist.ArcTap.Bridge.Tests.dll', '.', LOGS / 'r008-bridge'])
+    run('r009-core-build', ['dotnet', 'build', 'reconstructed/linked-tests/Arconist.Linked.Tests.csproj', '-c', 'Release', *common])
+    run('r009-core-tests', ['dotnet', 'reconstructed/linked-tests/bin/Release/net10.0/Arconist.Linked.Tests.dll', '.', LOGS / 'r009-core'])
+    run('r009-bridge-build', ['dotnet', 'build', 'reconstructed/linked-bridge-tests/Arconist.Linked.Bridge.Tests.csproj', '-c', 'Release', *common])
+    run('r009-bridge-tests', ['dotnet', 'reconstructed/linked-bridge-tests/bin/Release/net10.0/Arconist.Linked.Bridge.Tests.dll', '.', LOGS / 'r009-bridge'])
     run('godot-build', ['dotnet', 'build', PROJECT / 'Arconist.Godot.csproj', '-c', 'Debug', *common])
     run('bridge-build', ['dotnet', 'build', PROJECT / 'tests/Arconist.Bridge.Tests.csproj',
                          '-c', 'Debug', *common])
@@ -175,10 +179,11 @@ def main():
                                      '--evidence-dir=' + str(LOGS / 'pause')])
     run('r007-headless-arc-tests', [godot, '--headless', '--path', PROJECT, '--', '--arc-tests', '--evidence-dir=' + str(LOGS / 'arcs')])
     run('r008-headless-arctap-tests', [godot, '--headless', '--path', PROJECT, '--', '--arctap-tests', '--evidence-dir=' + str(LOGS / 'arctaps')])
-    for path, count in [('r007-core/core-tests.json',31), ('r007-bridge/bridge-tests.json',10), ('arcs/arc-tests.json',13), ('r008-core/arctap-core-tests.json',41), ('r008-bridge/arctap-bridge-tests.json',12), ('arctaps/arctap-tests.json',12)]:
+    run('r009-headless-linked-tests', [godot, '--headless', '--path', PROJECT, '--', '--linked-tests', '--evidence-dir=' + str(LOGS / 'linked')])
+    for path, count in [('r007-core/core-tests.json',31), ('r007-bridge/bridge-tests.json',10), ('arcs/arc-tests.json',13), ('r008-core/arctap-core-tests.json',41), ('r008-bridge/arctap-bridge-tests.json',12), ('arctaps/arctap-tests.json',12), ('r009-core/linked-core-tests.json',25), ('r009-bridge/linked-bridge-tests.json',10), ('linked/linked-tests.json',12)]:
         result = json.loads((LOGS / path).read_text())
         assert result['passed'] == count and result['failed'] == 0 and result['skipped'] == 0, path
-    package = OUT / 'r008-windows'
+    package = OUT / 'r009-windows'
     if package.exists():
         shutil.move(str(package), str(LOGS / 'previous-export'))
     package.mkdir()
@@ -194,11 +199,11 @@ def main():
     exported_audio = json.loads((LOGS / 'exported-audio-probe.json').read_text())
     assert exported_audio['status'] == 'PASS' and exported_audio['sha256'] == expected['wav_sha256']
     expected_charts = {f.name:sha(f) for f in sorted((PROJECT/'content').glob('*.aff'))}
-    assert len(expected_charts) == 12
+    assert len(expected_charts) == 14
     (LOGS/'expected-content.json').write_text(json.dumps(expected_charts,indent=2))
     run('exported-pck-chart-probe', [a.pack_probe_godot.resolve(), '--headless', '--main-pack', package/'Arconist.pck', '--script', ROOT/'reconstructed/arctap/export_probe.gd', '--', LOGS/'expected-content.json', LOGS/'exported-chart-probe.json'])
     exported_charts=json.loads((LOGS/'exported-chart-probe.json').read_text())
-    assert exported_charts['status']=='PASS' and len(exported_charts['resources'])==12
+    assert exported_charts['status']=='PASS' and len(exported_charts['resources'])==14
     report = verify(package, tools)
     assert sorted(x.name for x in a.notices.iterdir()) == [
         'DOTNET-LICENSE.txt', 'DOTNET-THIRD-PARTY-NOTICES.txt', 'GODOT-COPYRIGHT.txt', 'GODOT-LICENSE.txt']
@@ -209,20 +214,20 @@ def main():
     (package / 'SOURCE.txt').write_text(
         'https://github.com/thgillwtnorizoh/arconist\nbranch: main\ncommit: ' + source +
         '\nGodot 4.7.2 .NET; SDK 10.0.402; bundled runtime 10.0.13\n'
-        'READY FOR HUMAN QUALIFICATION. R008 acceptance pending. Godot audio output is not human qualification.\n', encoding='utf-8')
+        'READY FOR HUMAN QUALIFICATION. R009 acceptance pending. Godot audio output is not human qualification.\n', encoding='utf-8')
     files = sorted(f for f in package.rglob('*') if f.is_file())
     manifest = {f.relative_to(package).as_posix(): sha(f) for f in files}
     (package / 'SHA256SUMS.txt').write_text(''.join(f'{v}  {k}\n' for k, v in manifest.items()), encoding='utf-8')
-    archive = OUT / 'Arconist-R008-Windows-x64.zip'
+    archive = OUT / 'Arconist-R009-Windows-x64.zip'
     with zipfile.ZipFile(archive, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as z:
         for f in sorted(package.rglob('*')):
             if f.is_file():
-                z.write(f, 'Arconist-R008/' + f.relative_to(package).as_posix())
+                z.write(f, 'Arconist-R009/' + f.relative_to(package).as_posix())
     # Validate CRCs and every extracted payload hash, independently of source paths.
     with zipfile.ZipFile(archive) as z:
         assert z.testzip() is None
         z.extractall(LOGS / 'extracted')
-    extracted = LOGS / 'extracted/Arconist-R008'
+    extracted = LOGS / 'extracted/Arconist-R009'
     for name, expected in manifest.items():
         assert sha(extracted / name) == expected, name
     assert sha(extracted / 'SHA256SUMS.txt') == sha(package / 'SHA256SUMS.txt')
@@ -232,8 +237,8 @@ def main():
     (LOGS / 'package-integrity.json').write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
     shutil.copyfile(package / 'SHA256SUMS.txt', LOGS / 'WINDOWS-PAYLOAD-SHA256SUMS.txt')
     (LOGS / 'WINDOWS-ZIP-SHA256.txt').write_text(report['archive_sha256'] + '  ' + archive.name + '\n', encoding='utf-8')
-    shutil.copyfile(ROOT / 'reconstructed/validation/R008.md', LOGS / 'R008.md')
-    baseline = '0b52879978e72cfa7311759bbae7fe76382a07a8'
+    shutil.copyfile(ROOT / 'reconstructed/validation/R009.md', LOGS / 'R009.md')
+    baseline = 'fd92f2dc0240cddb0ba20b9c4693b7f050cd3912'
     changed = subprocess.check_output(['git','diff','--name-status',baseline,source],cwd=ROOT,text=True)
     (LOGS / 'changed-files.txt').write_text(changed)
     baseline_files = subprocess.check_output(['git','ls-tree','-r','--name-only',baseline],cwd=ROOT,text=True).splitlines()
@@ -251,11 +256,11 @@ def main():
     if str(development)!='.' and development.is_dir(): shutil.copytree(development, LOGS/'development',ignore=shutil.ignore_patterns('extracted'))
     toolchain = {str(f.resolve()):sha(f) for f in [a.templates,godot,a.pack_probe_godot.resolve()]}
     (LOGS/'toolchain-sha256.json').write_text(json.dumps(toolchain,indent=2))
-    evidence_zip = OUT / 'Arconist-R008-Technical-Evidence.zip'
+    evidence_zip = OUT / 'Arconist-R009-Technical-Evidence.zip'
     with zipfile.ZipFile(evidence_zip, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as z:
         for f in sorted(LOGS.rglob('*')):
             if f.is_file() and f.relative_to(LOGS).parts[0] not in ('extracted', 'previous-export'):
-                z.write(f, 'Arconist-R008-Evidence/' + f.relative_to(LOGS).as_posix())
+                z.write(f, 'Arconist-R009-Evidence/' + f.relative_to(LOGS).as_posix())
     with zipfile.ZipFile(evidence_zip) as z:
         assert z.testzip() is None
     print(json.dumps(report, indent=2))

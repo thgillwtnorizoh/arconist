@@ -36,10 +36,22 @@ public sealed class Arc
     public string Curve=>"s";public string Effect=>"none";public bool Trace {get;}public int Mode=>Trace?1:0;
     public IReadOnlyList<ArcTap> Children {get;}
     public int TimingTime {get;} public float Bpm {get;} public float Density {get;}
-    public float Interval {get;} public IReadOnlyList<int> Checkpoints {get;}
+    public float Interval {get;}
+    public IReadOnlyList<int> Checkpoints {get;private set;}=Array.Empty<int>();
+    public IReadOnlyList<ArcRecordDefinition> BaseRecords {get;private set;}=Array.Empty<ArcRecordDefinition>();
+    public IReadOnlyList<ArcRecordDefinition> RecordDefinitions {get;private set;}=Array.Empty<ArcRecordDefinition>();
+    public int GenerationFlag {get;internal set;}
+    public int GeneratedWithFlag {get;private set;}=-1;
+    public Arc? Predecessor {get;internal set;}
+    internal readonly List<Arc> successors=new List<Arc>();
+    public IReadOnlyList<Arc> Successors=>successors.AsReadOnly();
+    public ArcGroupDefinition? Group {get;internal set;}
+    public bool RecordsGenerated {get;private set;}
+    public bool Folded {get;private set;}
     public string Id=>$"arc:{Ordinal}:{Start}:{End}:{Color}";
     internal Arc(int ordinal,int order,int start,int end,float x0,float x1,float y0,float y1,int color,float extra,Timing timing,float density,bool trace=false,int? childTime=null)
     {
+        GenerationFlag=0; // Explicit native factory default, E038178f8fc.
         Trace=trace;
         if(trace!=childTime.HasValue)throw new NotSupportedException("Trace parents require exactly one child; ordinary arcs cannot have children in R008.");
         Children=Array.AsReadOnly(childTime.HasValue?new[]{new ArcTap(this,0,childTime.Value)}:Array.Empty<ArcTap>());
@@ -47,14 +59,30 @@ public sealed class Arc
         // E009 ordinary flag0 generation, same literal f32 stages as E001/010.
         Interval=((60000f/Bpm)/(Bpm>=255f?1f:2f))/density;
         if(!float.IsFinite(Interval)||Interval<1||Interval>int.MaxValue/4f)throw new NotSupportedException("Arc interval outside supported domain.");
-        if(Trace){Checkpoints=Array.Empty<int>();return;}
-        float quotient=(float)(end-start)/Interval;
+    }
+    internal void GenerateRecords()
+    {
+        if(RecordsGenerated)throw new InvalidOperationException("Arc records already generated.");
+        RecordsGenerated=true;GeneratedWithFlag=GenerationFlag;
+        if(Trace)return;
+        float quotient=(float)(End-Start)/Interval;
         if(quotient>100000)throw new NotSupportedException("Excessive arc records.");
-        var records=new List<int>();
-        for(int i=1;i<(int)quotient;i++){float step=Interval*(float)i;int t=(int)((float)start+step);if(t<end)records.Add(t);}
-        if(records.Count==0)records.Add((int)((float)start+(float)(end-start)*0.5f));
-        if(records.Any(t=>t<=start||t>=end)||records.Distinct().Count()!=records.Count)throw new NotSupportedException("Arc records must be distinct interior times.");
-        Checkpoints=records.AsReadOnly();
+        var records=new List<ArcRecordDefinition>();
+        // Native initializer loads factory0 or linker-produced successor1, E038.
+        for(int i=(~GenerationFlag)&1;i<(int)quotient;i++)
+        {float step=Interval*(float)i;int t=(int)((float)Start+step);if(t<End)records.Add(new ArcRecordDefinition(t,1));}
+        if(records.Count==0)records.Add(new ArcRecordDefinition((int)((float)Start+(float)(End-Start)*0.5f),1));
+        if(records.Any(r=>r.Time<Start||(GenerationFlag==0&&r.Time==Start)||r.Time>=End)||records.Select(r=>r.Time).Distinct().Count()!=records.Count)throw new NotSupportedException("Arc record times outside supported domain.");
+        BaseRecords=records.AsReadOnly();
+        var final=records.ToList();
+        if(successors.Any(a=>!a.Trace)&&final.Count>=2&&
+           (int)((float)(End-Start)/Interval)-1==(int)((float)(End-Start-2)/Interval))
+        {
+            // ba8274 shortens logical range; ba8278 writes previous weight2.
+            final.RemoveAt(final.Count-1);var previous=final[final.Count-1];
+            final[final.Count-1]=new ArcRecordDefinition(previous.Time,2);Folded=true;
+        }
+        RecordDefinitions=final.AsReadOnly();Checkpoints=final.Select(r=>r.Time).ToList().AsReadOnly();
     }
 }
 public sealed class ArcGeometry
@@ -98,10 +126,18 @@ public sealed class ArcState:RuntimeNote
     public override bool Terminal=>Data.Trace?Children.All(c=>c.Terminal):Records.All(r=>r.Resolved);
     public SkyPoint Cache {get;private set;}public bool CacheEnabled {get;private set;}public float TargetX=>Geometry.X0+Cache.X;public float TargetY=>Cache.Y;
     public bool Holding {get;internal set;}public bool EndReset {get;internal set;}
+    public ArcState? Predecessor {get;internal set;}
+    internal readonly List<ArcState> successors=new List<ArcState>();
+    public IReadOnlyList<ArcState> Successors=>successors.AsReadOnly();
+    public ArcGroupState? Group {get;internal set;}
+    public ArcLinkScan? LastLinkScan {get;internal set;}
+    public bool SuccessorCleanupPreserved {get;internal set;}
+    public int ResolutionWrites {get;internal set;}
     public bool FirstRecordEarlyExpiry=>false;public bool InactiveExpiryAllowed=>true;
     public IReadOnlyList<CheckpointState> Records {get;}
     public IReadOnlyList<ArcTapState> Children {get;}
-    internal ArcState(Arc data,ArcGeometry geometry,ArcColorState color){Data=data;Geometry=geometry;Color=color;Children=data.Children.Select(c=>new ArcTapState(c,this,geometry.ChildPoint(c))).ToList().AsReadOnly();Records=data.Checkpoints.Select(t=>new CheckpointState(t)).ToList().AsReadOnly();Cache=geometry.Samples[0];}
+    internal ArcState(Arc data,ArcGeometry geometry,ArcColorState color){Data=data;Geometry=geometry;Color=color;Children=data.Children.Select(c=>new ArcTapState(c,this,geometry.ChildPoint(c))).ToList().AsReadOnly();Records=data.RecordDefinitions.Select(r=>new CheckpointState(r.Time,r.Weight)).ToList().AsReadOnly();Cache=geometry.Samples[0];}
+    internal void ClearEligibility(){CacheEnabled=false;}
     internal void UpdateCache(int now)
     {
         CacheEnabled=false;

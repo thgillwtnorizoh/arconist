@@ -74,7 +74,7 @@ public sealed class Chart
     {
         Taps = taps.AsReadOnly(); Timings = timings.AsReadOnly(); AudioOffset = offset;
         Density = density; Holds = holds.AsReadOnly(); Arcs=arcs.AsReadOnly();
-        JudgmentUnits = checked(taps.Count + holds.Sum(h => h.Checkpoints.Count)+arcs.Sum(a=>a.Checkpoints.Count+a.Children.Count));
+        JudgmentUnits = checked(taps.Count + holds.Sum(h => h.Checkpoints.Count)+arcs.Sum(a=>a.RecordDefinitions.Sum(r=>r.Weight)+a.Children.Count));
         EndTime = Math.Max(taps.Count == 0 ? 0 : checked(taps.Max(t => t.Time) + 120),
                            holds.Count == 0 ? 0 : checked(holds.Max(h => h.End) + 500));
         EndTime=Math.Max(EndTime,arcs.Count==0?0:checked(arcs.Max(a=>a.End)+500));
@@ -174,7 +174,7 @@ public sealed class Chart
             if(a.child.HasValue&&(taps.Any(t=>Math.Abs((long)t.Time-a.child.Value)<=240)||holds.Any(h=>h.Start<=a.child.Value+240L&&h.End>=a.child.Value-240L)))throw new NotSupportedException("Ground/child candidate conflicts within240ms are deferred.");
             return new Arc(i,a.order,start,end,x0,x1,y0,y1,color,extra,timings.Last(t=>t.Time<=start),density,f[9]=="true",a.child);
         }).OrderBy(a=>a.Start).ThenBy(a=>a.SourceOrder).ToList();
-        for(int i=1;i<arcs.Count;i++)if((long)arcs[i].Start<arcs[i-1].End+1000L)throw new NotSupportedException("Overlapping/crossing/linked or closely adjacent arcs deferred.");
+        OrdinaryPairLinker.LinkAndGenerate(arcs);
         return new Chart(taps, holds, arcs, timings, offset, density);
     }
 }

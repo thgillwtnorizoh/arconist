@@ -1,0 +1,6 @@
+AudioOffset:0
+TimingPointDensityFactor:1.0
+-
+timing(0,120.00,4.00);
+arc(4000,8001,0.50,0.50,s,0.50,0.50,0,none,false);
+arc(8001,12001,0.50,0.50,s,0.50,0.50,0,none,false);

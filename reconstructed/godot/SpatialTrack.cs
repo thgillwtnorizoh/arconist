@@ -65,12 +65,13 @@ public partial class SpatialTrack : Node3D
         var native=hit/Unit;sky=new SkyContact(new SkyPoint(native.X,native.Y,native.Z),Camera.GlobalPosition.Z/Unit,GetWindow().Size.Y);return sky.Valid;
     }
     private sealed class ArcView
-    {public Node3D Root=null!;public MeshInstance3D Target=null!;public List<MeshInstance3D> Segments=new();public List<MeshInstance3D> Markers=new();public Dictionary<string,MeshInstance3D> Children=new();}
+    {public Node3D Root=null!;public MeshInstance3D Target=null!;public MeshInstance3D? Junction;public List<MeshInstance3D> Segments=new();public List<MeshInstance3D> Markers=new();public Dictionary<string,MeshInstance3D> Children=new();}
     private readonly Dictionary<string,ArcView> arcs=new();
     public int ArcVisualCount=>arcs.Count;
     public Node3D? ArcVisual(string id)=>arcs.TryGetValue(id,out var v)?v.Root:null;
     public MeshInstance3D? ArcTarget(string id)=>arcs.TryGetValue(id,out var v)?v.Target:null;
     public MeshInstance3D? ArcTapVisual(ArcTapState child)=>arcs.TryGetValue(child.ParentId,out var v)&&v.Children.TryGetValue(child.Id,out var mesh)?mesh:null;
+    public MeshInstance3D? JunctionVisual(string id)=>arcs.TryGetValue(id,out var view)?view.Junction:null;
     private void RefreshArcs(Kernel core)
     {
         foreach(var arc in core.Arcs)
@@ -80,17 +81,18 @@ public partial class SpatialTrack : Node3D
                 v=new ArcView{Root=new Node3D()};AddChild(v.Root);
                 for(int i=1;i<arc.Geometry.DetailSamples.Count;i++)v.Segments.Add(Box(Vector3.Zero,World(60,16,1),new Color("79b6ff"),true,v.Root));
                 v.Target=Box(Vector3.Zero,World(115,45,45),new Color("f4f7ff"),true,v.Root);v.Target.Name="CurrentTarget";
-                foreach(var record in arc.Records){var m=Box(Vector3.Zero,World(85,24,25),new Color("f4f7ff"),true,v.Root);m.Name="Checkpoint"+record.Time;v.Markers.Add(m);}
+                foreach(var record in arc.Records){var m=Box(Vector3.Zero,World(record.Weight==2?150:85,record.Weight==2?36:24,25),new Color(record.Weight==2?"ffd36f":"f4f7ff"),true,v.Root);m.Name="Checkpoint"+record.Time;v.Markers.Add(m);}
                 foreach(var child in arc.Children)
                 {
                     var mesh=Box(Vector3.Zero,World(180,45,75),new Color("ffd36f"),true,v.Root);
                     mesh.Name="ArcTap"+child.Data.Time;v.Children.Add(child.Id,mesh);
                 }
+                if(arc.Successors.Count==1){v.Junction=Box(Vector3.Zero,World(100,28,16),new Color("65d9f0"),true,v.Root);v.Junction.Name="LinkedJunction";}
                 arcs.Add(arc.Id,v);
             }
             int now=core.Timeline.EffectiveTime,depth=HoldDepth(core,arc.Start);var g=arc.Geometry;
             v.Root.Visible=!core.Finished&&now<=arc.End+300;
-            var color=new Color(arc.Data.Trace?"98a4ba":arc.Holding?"a5f56d":arc.Data.Color==0?"79b6ff":"ff9de1");
+            var color=new Color(arc.Data.Trace?"98a4ba":arc.Holding||(arc.Group?.Active==true&&now>=arc.End)?"a5f56d":arc.Predecessor!=null?"96d3ff":arc.Data.Color==0?"79b6ff":"ff9de1");
             for(int i=0;i<v.Segments.Count;i++)
             {
                 var a=g.DetailSamples[i];var b=g.DetailSamples[i+1];var m=v.Segments[i];
@@ -102,6 +104,12 @@ public partial class SpatialTrack : Node3D
             }
             v.Target.Position=World(arc.TargetX,arc.TargetY,0);v.Target.Visible=now>=arc.Start-1500&&now<=arc.End;
             ((StandardMaterial3D)v.Target.MaterialOverride).AlbedoColor=arc.Holding?new Color("a5f56d"):new Color("f4f7ff");
+            if(arc.Group!=null)
+            {
+                v.Target.Visible=!core.Finished&&(arc.CacheEnabled||(arc.Predecessor==null&&now<arc.Start&&now>=arc.Start-1500));
+                ((StandardMaterial3D)v.Target.MaterialOverride).AlbedoColor=new Color(arc.Group.Active?"a5f56d":"f4f7ff");
+                if(v.Junction!=null){float z=depth+g.Z;v.Junction.Position=World(g.X1,g.Y1,z);v.Junction.Visible=z>=-9500&&z<=1000&&now<=arc.End+250;}
+            }
             if(arc.Data.Trace)
             {
                 var child=arc.Children.Single();var target=child.InputTarget;
@@ -123,7 +131,7 @@ public partial class SpatialTrack : Node3D
                 var r=arc.Records[i];float u=(float)(r.Time-arc.Start)/(arc.End-arc.Start);var m=v.Markers[i];int z=HoldDepth(core,r.Time);
                 m.Position=World(g.X0+(g.X1-g.X0)*u,g.Y0+(g.Y1-g.Y0)*u,r.Resolved?0:z);
                 m.Visible=z>=-9500&&(r.Resolved?now-r.ResolvedAt!.Value<=300:z<=1000);
-                ((StandardMaterial3D)m.MaterialOverride).AlbedoColor=new Color(!r.Resolved?"f4f7ff":r.Outcome=="LOST"?"ff6985":"a5f56d");
+                ((StandardMaterial3D)m.MaterialOverride).AlbedoColor=new Color(!r.Resolved?(r.Weight==2?"ffd36f":"f4f7ff"):r.Outcome=="LOST"?"ff6985":"a5f56d");
             }
         }
     }

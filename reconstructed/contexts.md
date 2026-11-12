@@ -662,3 +662,42 @@ SHA256 1f76b40c4a4115971526e5a9498e9216f4887d18b3c46e5494b939b1cdc1f332.
 Final audit publishes only R008 report/history and verifies main readback;tested
 application remains7e62e4b. Stop: no application operation or next milestone after
 delivery. Await owner qualification and Headquarters decision.
+
+## R008 owner acceptance and R009 authority — 2026-11-12 Asia/Bangkok
+
+Headquarters supplies final November12 R008 owner acceptance and authorizes R009
+from fd92f2dc0240cddb0ba20b9c4693b7f050cd3912. This records owner authority, not a
+new Work2 GUI test. Earlier history remains an exact byte prefix. Reused standing
+instructions/history, prior validation/source contracts and E003/004/009/028;
+read E038's full natural-link/flag/folding/group/junction/cleanup evidence. No
+new native expedition, GUI automation, OS injection, R010 or Unity authorized.
+
+## R009 implementation and preflight — 2026-11-12 Asia/Bangkok
+
+Added strict parsed pair linker before final generation: root factory flag0,
+linker sets successor1; explicit successor vector/single predecessor/shared group.
+Only one exact adjacent ordinary constant same-position color0 pair, same timing
+record120BPM/density1, source root first, root250*k+1/successor250*m ms with k,m>=4.
+All other near layouts keep rejecting; no approximation of9ms/.1 native tolerance,
+branch/cycle/triple/trace/child links. Human4001/4000 pair is engineering extension.
+
+Records derive from flag-dependent first index; root's native duration predicate
+removes logical last record and sets previous weight2. N sums weights, not records.
+Six guards/seven actual operations for E038. RecorderTrace snapshots each genuine
+unit AFTER existing score/f32 gauge operation; no multiplied-gain shortcut. Shared
+color owner survives root successor-aware cleanup; group activity/cache/accepted
+fields and empty history/window0 are separate. Link inspections consume real
+predecessor/successor references; E2000/E2001 fields compared, not broad window logic.
+
+Existing sampled geometry/integer depth naturally yields exclusive root/successor
+cache at2001; no forced overlap or extra DOWN. UP preserves prior frame activity,
+next frame clears transient group/activity but cache byte remains set. Paused
+transient reset is a bounded engineering composition of accepted R006 policy.
+New junction band, wider gold weight2 marker and one continuous green target read
+core only. Ordinary/trace-child/source fixtures and prior tests remain untouched.
+
+Preflight25 core/10 bridge/12 Godot=47 groups pass,0 failures/skips. Full E038
+health/counter/ownership/cache/record trace matches; two1375 callbacks separately
+produce H23.257143020629883 and H34.88571548461914. Reference transcribed before
+new tests. No fresh native execution or graphical playtesting. Full348 prior/
+standalone comparisons/clean committed-source Windows export/publication follow.

@@ -1,3 +1,53 @@
+ARCONIST R009 — connected ordinary arc owner qualification build
+
+Extract the ENTIRE ZIP and open Arconist.exe beside Arconist.pck and its runtime
+folder. Windows10/11 x64/OpenGL3.3 driver. No SDK/editor/separate .NET download.
+
+OWNER QUALIFICATION (HUD effective seconds after approximately3s preroll)
+ 1. Select R009 Connected ordinary arc practice (first choice), offset0, Start.
+ 2. Observe two constant-position blue segments and cyan junction band.
+ 3. At HUD4s press and HOLD LEFT MOUSE over the white sky target. It turns green
+    when the core accepts the retained spatial contact.
+ 4. Keep holding until12s. Junction is8.001s: NO release or second press needed.
+    HUD switches SEG1 to SEG2; same target remains accepted through the junction.
+ 5. The wider GOLD record at7.5s resolves at7.375s as two genuine PURE units;
+    combo/PURE increases by2 although one checkpoint visual resolves once.
+ 6. Complete after12.501s. This extended practice has30records/N31, perfect
+    score10000031/maxcombo31. It is not the E038 N7 fixture.
+ 7. Separate E038 Natural linked pair selection: hold mouse1–3s, junction2.001s,
+    weighted first record resolution1.375s;6records/N7, perfect10000007. Results
+    after3.501s are reconstructed integration; native E038 stopped2.877s.
+ 8. In a separate run release BEFORE the junction. Successor must not retain
+    phantom activity. Fresh contact still obeys the ordinary release gate (up to
+    1000 effective ms); region exit/re-entry while still held is different.
+ 9. Replay and Return to Start/Menu: contacts, shared color/group, records and
+    junction visuals must be fresh. P/Escape pauses; R/Resume explicitly resumes.
+    Test before/during/at junction with AT LEAST60s pause. Paused UP/CANCEL cleans
+    contacts. Focus loss pauses+cancels uncertain contacts; focus return never resumes.
+10. F6 camera/F7 resize/F8 owner capture remain. Adjust mouse to the visible
+    target under the current view. Check old R007 moving arcs, R008 clicked
+    arc-taps and audible Clockwork Steps/offset/seek/replay choices remain functional.
+
+Manual pause retains genuinely held contacts; resume never invents a new DOWN.
+Both segments use ordinary190-internal-unit spatial bounds at scale1, actual
+camera-ray Z0 projection, and shared color ownership. Group activity/cache state
+is separate from ownership. Keyboard ground input does not fabricate sky contact.
+The player must still point inside the ordinary spatial region while holding.
+
+Supported links: one exact adjacent, constant same-position color0 linear pair,
+root-before-successor source order, same120BPM/density1 timing; root duration
+250*k+1ms and successor250*mms, k,m>=4. No general9ms/.1 tolerance, triple/branch/
+cycle, trace/child links, curves or nonempty group timestamp/window support.
+
+Diagnostics: %APPDATA%/Godot/app_userdata/Arconist R009 - Connected Arc Practice/evidence
+Logs include flags/links/group state, per-segment cache/activity, ownership/IDs,
+record weights/guards, individual recorder counters/health, pause/audio clocks.
+Playable H500 differs from native E038 H0. Meshes/feedback are placeholders.
+READY FOR HUMAN QUALIFICATION — R009. Only the owner verifies Windows launch,
+visible junction, physical continuous contact, sound, recovery and replay.
+
+PRESERVED EARLIER CHART/CONTROL GUIDES (historical headings follow)
+
 ARCONIST R008 — trace parent + independent arc-tap qualification build
 
 Extract the ENTIRE ZIP and open Arconist.exe. Keep the PCK and runtime folder
@@ -41,7 +91,7 @@ parents, curved/special modes and simultaneous parent/ground candidate conflicts
 The parser rejects ground taps within240ms of a child, or holds intersecting
 that interval; this is a bounded engineering domain, not a native timing rule.
 
-Diagnostics: %APPDATA%/Godot/app_userdata/Arconist R008 - Arc-Tap Practice/evidence
+Diagnostics: %APPDATA%/Godot/app_userdata/Arconist R009 - Connected Arc Practice/evidence
 JSONL separates session IDs, wall/E/R/C/pause/audio clocks, parent/child IDs,
 local geometry/input target/world position, classifications/guards and recording.
 READY FOR HUMAN QUALIFICATION — R008. Owner alone verifies Windows launch,
@@ -85,7 +135,7 @@ R007 practice deliberately separates ground taps from arc times. Silent R007
 practice requires no music. It uses geometry-height500 and existing perspective
 cameras; the native E028 H0/Y50 environment remains a separate technical oracle.
 
-Diagnostics: %APPDATA%/Godot/app_userdata/Arconist R008 - Arc-Tap Practice/evidence
+Diagnostics: %APPDATA%/Godot/app_userdata/Arconist R009 - Connected Arc Practice/evidence
 Logs include current cache, per-frame activity, retained/previous sky positions,
 colors/owners, claimed IDs, checkpoints, pause/audio clock domains and results.
 READY FOR HUMAN QUALIFICATION — R007. Only you verify Windows launch, rendering,
@@ -140,7 +190,7 @@ backend failure or use Return to start. A pause/start resource failure requires 
 fresh run. API acceptance/readback is not proof of audible synchronization.
 
 F6/F7/F8 remain camera/resize/owner capture. Diagnostics/captures are under:
-%APPDATA%/Godot/app_userdata/Arconist R008 - Arc-Tap Practice/evidence
+%APPDATA%/Godot/app_userdata/Arconist R009 - Connected Arc Practice/evidence
 Logs distinguish wall milliseconds, R/P/C/E/O/B, model/timeline/modal flags,
 audio pause/seek/unpause and cursor readback, contacts/cancellation/checkpoints.
 
@@ -200,7 +250,7 @@ an API indication, not proof of audible output. Report missing audio with chart,
 offset, Windows output device, visible error and session log. Latency unverified.
 
 F6 camera, F7 resize, F8 owner-requested viewport capture. Diagnostics/captures:
-%APPDATA%/Godot/app_userdata/Arconist R008 - Arc-Tap Practice/evidence
+%APPDATA%/Godot/app_userdata/Arconist R009 - Connected Arc Practice/evidence
 JSONL includes clock domains, session/chart/resource, offsets, R/C/E, request/anchor,
 backend state and authoritative judgments. No audio recording.
 Focus loss pauses and cancels contacts; explicit resume is required (see above).
