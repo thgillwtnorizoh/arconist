@@ -701,3 +701,41 @@ health/counter/ownership/cache/record trace matches; two1375 callbacks separatel
 produce H23.257143020629883 and H34.88571548461914. Reference transcribed before
 new tests. No fresh native execution or graphical playtesting. Full348 prior/
 standalone comparisons/clean committed-source Windows export/publication follow.
+
+
+## R009 complete technical delivery — 2026-11-12 Asia/Bangkok
+
+Tested/exported main518278b18c2f35e7e110581edf15e6262014d48c, non-forced direct
+child of authorizedfd92f2dc0240cddb0ba20b9c4693b7f050cd3912. Complete clean-source
+driver exits0:348 preserved+25core+10bridge+12Godot=395 groups,three9/6/6-event
+standalone references,0 failures/skips;all42 logged commands exit0. Actual .NET/
+Godot build/import/headless/Windows export pass,zero final compiler/engine warnings
+or errors. E038-linked firstDifference=null; seven recorder health/score states
+and six guard resolutions match. E2001 exclusive eligibility/activity, shared
+owner and successor-aware cleanup, UP2876/next2877 cache-related byte all pass.
+
+Windows ZIP76464316bytes SHA256
+2321c258e4ce5f48d8d0c0165b3265d9a8ee7f150d010d31b36b9aa88f43b224.
+202 payloads+manifest,191 dependencies,AMD64/template identity,self-contained
+10.0.13,all14 exact AFF payloads AND actual PCK resource/hash access,32s music/
+decoder/API/hash,ZIP CRC/every extracted hash PASS. Evidence includes actual
+commands/native-normalized frame/unit comparisons,logs,preservation and guide.
+
+Baseline234 files:221 identical,13 reconstruction changes,12 additions,0 deletions;
+all137 non-reconstruction baseline blobs and old tests/oracles/reports/12charts/
+music preserved. Exact44040-byte earlier history prefix retained. Native E038
+stops2877; completed N7 results/N31 practice/pause/negative schedules remain
+RECONSTRUCTED INTEGRATION. Strict two-segment subset only; no generalized graph/
+tolerances/nonempty group windows. Technical PASS; READY FOR HUMAN QUALIFICATION
+— R009. Owner Windows launch,visual continuity,physical held contact,audibility,
+recovery/results/replay remain pending. No GUI/OS injection/screenshot acceptance,
+new native experiment,R010 or Unity. Artifact receipt/final audit follow, then stop.
+
+R009 artifact receipt (both successful; local identity persisted):
+Arconist-R009-Windows-x64.zip: libfile_86c9c573cebc81918781bdc76fdaf27c, 76464316bytes,
+SHA256 2321c258e4ce5f48d8d0c0165b3265d9a8ee7f150d010d31b36b9aa88f43b224.
+Arconist-R009-Technical-Evidence.zip: libfile_7125241cfc1c8191ae2945cf11071789, 120399bytes,
+SHA256 2ccaf0aeb142028a9a789dd2f03d5c68e3db24434e130f4f08317df515b64c5d.
+Final audit publishes only R009 validation/history and verifies main readback;
+tested application remains518278b. Stop after delivery: no further application
+operation,R010,new expedition or Unity. Await owner and Headquarters decision.
