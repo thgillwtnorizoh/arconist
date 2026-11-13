@@ -15,7 +15,7 @@ notes1.5s, N2/end1.620s. These silent charts do not reverse BGM or effective E.
 
 Pinned Godot4.7.2.NET/.NET10 and DOTNET_PROCESSOR_COUNT=1 remain. Full pipeline
 requires clean committed source and fresh r010-evidence; all395 prior groups,
-28new core/11bridge/14Godot groups and three standalone references. Actual Windows
+29new core/11bridge/14Godot groups and three standalone references. Actual Windows
 compile/import/export/PCK/runtime/CRC/extracted hashes are required. Camera is
 moved back only for grouped charts, with an extra ground apron to keep the native
 positive1213-depth excursion inspectable; old arc geometry/cameras remain unchanged.

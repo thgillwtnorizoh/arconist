@@ -189,7 +189,7 @@ def main():
     run('r008-headless-arctap-tests', [godot, '--headless', '--path', PROJECT, '--', '--arctap-tests', '--evidence-dir=' + str(LOGS / 'arctaps')])
     run('r009-headless-linked-tests', [godot, '--headless', '--path', PROJECT, '--', '--linked-tests', '--evidence-dir=' + str(LOGS / 'linked')])
     run('r010-headless-group-tests', [godot,'--headless','--path',PROJECT,'--','--group-tests','--evidence-dir='+str(LOGS/'timing-groups')])
-    for path, count in [('r007-core/core-tests.json',31), ('r007-bridge/bridge-tests.json',10), ('arcs/arc-tests.json',13), ('r008-core/arctap-core-tests.json',41), ('r008-bridge/arctap-bridge-tests.json',12), ('arctaps/arctap-tests.json',12), ('r009-core/linked-core-tests.json',25), ('r009-bridge/linked-bridge-tests.json',10), ('linked/linked-tests.json',12),('r010-core/group-core-tests.json',28),('r010-bridge/group-bridge-tests.json',11),('timing-groups/group-tests.json',14)]:
+    for path, count in [('r007-core/core-tests.json',31), ('r007-bridge/bridge-tests.json',10), ('arcs/arc-tests.json',13), ('r008-core/arctap-core-tests.json',41), ('r008-bridge/arctap-bridge-tests.json',12), ('arctaps/arctap-tests.json',12), ('r009-core/linked-core-tests.json',25), ('r009-bridge/linked-bridge-tests.json',10), ('linked/linked-tests.json',12),('r010-core/group-core-tests.json',29),('r010-bridge/group-bridge-tests.json',11),('timing-groups/group-tests.json',14)]:
         result = json.loads((LOGS / path).read_text())
         assert result['passed'] == count and result['failed'] == 0 and result['skipped'] == 0, path
     package = OUT / 'r010-windows'

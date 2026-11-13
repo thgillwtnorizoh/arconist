@@ -773,3 +773,19 @@ restored exact manifest soundtrack, retry14/14. Prior36R001/30spatial/25R009core
 12R009Godot preflight pass unchanged. Full395prior/three references/clean-source
 Windows export/package/publication remain pending. No native experiment, GUI,
 OS injection, physical qualification or next milestone work.
+
+## R010 intermediate-evidence repair — 2026-11-13 Asia/Bangkok
+
+First complete committed-source run at f11acdc396187e2efd17e6b9d004c9156fe315f7
+passes448 groups,three standalone comparisons,47commands0 and complete Windows
+export/runtime/PCK18charts/audio/CRC/hashes. During evidence audit, deferred LINQ
+and live candidate lists in NEW R010 test diagnostics were found to serialize
+later state. First evidence divergence: E029 E0 row displayed[0,0] rather than
+native[-12134,-3640], although immediate assertions had passed the correct state.
+No kernel or reference expectation diverged. This first build is not handed off.
+
+Materialized per-event depth/activity/query/candidate arrays in new tests, added
+an independent serialized-evidence comparison against the unchanged native oracle.
+New core count29 (one extra evidence assertion group); no prior assertion changed.
+Raw first full run and faulty diagnostic rows are retained separately. Full449
+suite/export rerun from the corrected committed source is required for delivery.
