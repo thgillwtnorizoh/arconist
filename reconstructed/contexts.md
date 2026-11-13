@@ -789,3 +789,39 @@ an independent serialized-evidence comparison against the unchanged native oracl
 New core count29 (one extra evidence assertion group); no prior assertion changed.
 Raw first full run and faulty diagnostic rows are retained separately. Full449
 suite/export rerun from the corrected committed source is required for delivery.
+
+
+## R010 complete technical delivery — 2026-11-13 Asia/Bangkok
+
+Exact tested/exported main ab349d441dfa02f3c1ff97d6d0b8837c6ebb8f0e, normal non-forced descendant of
+8f351b77b2a247497f2062c786cca09842c78ea3. Corrected clean-source full pipeline
+passes395prior+29core+11bridge+14Godot=449groups,three9/6/6event comparisons,
+0failures/skips,all47commands0 and zero final compiler/engine warnings/errors.
+E029/E036 firstDifference=null; serialized rows/candidates now retain each event.
+Exact f32 depths/integrator/health, signed group queries/admission/retention and
+native E036 cached result/disabled active state match. No fresh native execution.
+
+Windows ZIP76479895bytes SHA256
+138de03787ec1d10c7b0005feede8efd4c8339b6997ea8ac6f9d7ea97edbbd55.
+Complete AMD64/self-contained10.0.13,191dependencies,202payloads+manifest,
+all18AFFactual-PCKhash/access,exact32s music/API/decoder,CRC/every extracted hash
+PASS. Evidence retains all47commands/native comparisons/geometry/logs/first faulty
+trace diagnostics/preservation. E029 completed results and shifted5.2/5.5s practice
+are RECONSTRUCTED INTEGRATION; E036 reaches native result cache only,not results UI.
+
+246baseline files:234identical,12reconstruction changes,14additions,0deletions;
+all139non-reconstruction and188protected paths unchanged,49112-byte earlier history
+prefix intact. R009 acceptance appended by Headquarters authority. Final audit is
+report/history only; artifact receipts/final main readback follow. Technical PASS;
+READY FOR HUMAN QUALIFICATION — R010. Windows launch/visual direction change/
+physical input/sound/perceptual sync/results/replay remain owner pending. No GUI,
+OS injection,screenshot acceptance,R011/new expedition/fidelity milestone/Unity.
+
+R010 artifact receipts (both succeeded; local identities persisted):
+Arconist-R010-Windows-x64.zip: libfile_2d62ce9122ac8191b443031a3486f4fd, 76479895bytes,
+SHA256 138de03787ec1d10c7b0005feede8efd4c8339b6997ea8ac6f9d7ea97edbbd55.
+Arconist-R010-Technical-Evidence.zip: libfile_c07206bebf3481919c66450086a78c0f, 350184bytes,
+SHA256 434a95c4b4833df393f46f068557e8ac17ededfae7fdd8f07e8918ee9b75141d.
+Final audit publishes only R010 report/history and verifies main readback;
+tested application remains ab349d4. Stop: owner Windows/visual/physical input/
+sound/results/replay qualification pending. No R011/new expedition/Unity.
