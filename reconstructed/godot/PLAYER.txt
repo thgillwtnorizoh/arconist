@@ -1,3 +1,59 @@
+ARCONIST R010 — independent timing groups / reverse-scroll qualification build
+
+Extract the ENTIRE ZIP. Launch Arconist.exe beside its PCK/runtime directory.
+Windows10/11 x64/OpenGL3.3; no SDK/editor/separate .NET download is required.
+HUD shows effective chart seconds after approximately3s preroll. New charts silent.
+
+OWNER QUALIFICATION
+ 1. Select E029 Independent +120/+60 control. At HUD1.5s press K then D, release
+    each. Cyan K follows group0; pink D follows its separate group1 tempo.
+    Both reach the green judgment line at1.5s. Perfect N2/score10000002.
+ 2. Select E029 Reverse +60/-60. Observe pink D move past the judgment line,
+    turn at1.2s, then return to Z0 at1.5s. Cyan K keeps its ordinary approach.
+    Press K then D at1.5s. Direction does not reverse the judgment clock.
+ 3. First choice R010 Independent reverse practice gives more observation time:
+    pink D turns at5.2s; press K then D at5.5s. N2/end5.620s, perfect10000002.
+    It is a shifted engineering practice, not a different E029 native experiment.
+ 4. E036 noinput comparison: try D then K at1.5s. Grey D cannot score or miss,
+    although it is rendered/indexed/active. Only K counts: N1/perfect10000001.
+    E029 positive control is byte-identical to E036 enabled control.
+ 5. Inspect results; completion is strict after1.620s for exact fixtures, after
+    5.620s for practice. Play again and Back to start must reset both groups.
+ 6. In practice pause with P/Escape around5.1–5.2s for AT LEAST60 seconds.
+    HUD time and both positions must freeze. R/Resume explicitly restores play;
+    resume alone must not award any tap. Then judge both notes at5.5s.
+ 7. Test F6 camera/F7 resize. Pink note's positive-depth excursion must stay
+    inspectable. F8 remains owner capture only. Ground clicks near the green
+    line can replace keys; hold/movement never manufactures tap DOWN.
+ 8. Recheck old R007 moving arc, R008 fresh-click arc-tap and R009 connected arc
+    (one continuously held mouse through junction). Their14 choices are preserved.
+ 9. Check Clockwork Steps audibility, user/AFF offsets, pause/seek and replay.
+    Positive offset still delays chart time relative to music; no reverse audio.
+10. Check missing inputs in a separate run: eligible taps expire once; grey
+    noinput never contributes LOST. Replay/menu must not retain contacts/audio.
+
+For exact native comparisons two independent inputs run in documented sequence;
+no general simultaneous same-lane/mixed-note arbitration is claimed. Manual pause
+retains actual contacts; delivered UP/CANCEL removes them. Focus loss pauses and
+cancels uncertain desktop contacts; focus gain never resumes. All audio latency
+and Windows rendering/physical timing remain subject to owner qualification.
+
+Supported new domain: one nonnested independent group, empty or exact noinput
+attribute, default timing120/group60 at0, density1/4beats. Reverse only one +60 to
+-60 section and grouped taps300ms after it; no reverse noinput, grouped long notes,
+curves, extra groups/attributes/zero BPM. Grouped charts tap-only, <=10000taps,
+<=600000ms. Signed spatial arithmetic explicitly bounded. General frame jumps or
+fresh admission at reversed positions are not native-proven.
+
+Diagnostics: %APPDATA%/Godot/app_userdata/Arconist R010 - Independent Timing Groups/evidence
+Logs distinguish E/R/C and group IDs/attributes/lifetimes/timing tokens/scales,
+pre/current depths, keys/query ranges, membership, eligibility and recorder events.
+Placeholder colors/geometry and grouped camera/apron are engineering presentation.
+READY FOR HUMAN QUALIFICATION — R010. Only owner verifies actual Windows launch,
+visible direction change, physical input, sound, results/replay and compatibility.
+
+PRESERVED EARLIER GUIDES (historical headings/first-choice labels follow)
+
 ARCONIST R009 — connected ordinary arc owner qualification build
 
 Extract the ENTIRE ZIP and open Arconist.exe beside Arconist.pck and its runtime

@@ -1,3 +1,28 @@
+# R010 — Independent timing groups and bounded reverse scrolling
+
+R009 owner acceptance on November12,2026 is recorded from Headquarters. R010 is
+READY FOR HUMAN QUALIFICATION only after complete technical execution/delivery.
+See [R010 validation](../validation/R010.md), [player guide](PLAYER.txt) and
+[native oracle provenance](../../reference_traces/r010/README.md).
+
+One shared judgment timeline; independent group timing/scales/depth/maps/range
+membership. Default120 and separate60, optional single -60 section, ordinary taps
+only. `noinput` remains indexed/visible but cannot judge, miss, count or extend
+chart end; group lifetime still includes it. Old14 charts/music remain available.
+Four new choices include exact E029 control/reverse, E036 noinput and a shifted
+human practice (reverse5.2s, both K/D5.5s, N2/end5.620s). Exact E029 reverse1.2s,
+notes1.5s, N2/end1.620s. These silent charts do not reverse BGM or effective E.
+
+Pinned Godot4.7.2.NET/.NET10 and DOTNET_PROCESSOR_COUNT=1 remain. Full pipeline
+requires clean committed source and fresh r010-evidence; all395 prior groups,
+28new core/11bridge/14Godot groups and three standalone references. Actual Windows
+compile/import/export/PCK/runtime/CRC/extracted hashes are required. Camera is
+moved back only for grouped charts, with an extra ground apron to keep the native
+positive1213-depth excursion inspectable; old arc geometry/cameras remain unchanged.
+No GUI/OS input automation, native expedition or claim of physical qualification.
+
+Historical milestone documentation follows unchanged.
+
 # Arconist reconstruction — R009
 
 R009 adds one exact, unambiguous constant ordinary two-segment pair to accepted

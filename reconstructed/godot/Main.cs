@@ -24,6 +24,10 @@ public partial class Main : Control
     private Label hud = null!, status = null!, holdStatus = null!, chartInfo = null!;
     private readonly List<string> chartData = new();
     private static readonly (string file, string title, string description, string? audio)[] ChartChoices = {
+        ("grouped_practice.aff", "R010 · Independent reverse practice", "K + D at HUD5.5s. Pink D reverses5.2s.\nCyan K: default group. Pink D: group1.\nSilent N2; release after each input.", null),
+        ("native_timing_group.aff", "E029 · Independent +120/+60 control", "K then D at HUD1.5s. N2.\nIndependent timing, shared judgment E.\nCyan K / pink D reach line together.", null),
+        ("native_reverse_scroll.aff", "E029 · Reverse +60/-60 comparison", "K then D at HUD1.5s. N2.\nPink D reverses direction at1.2s.\nExisting admission survives depth>300.", null),
+        ("native_noinput_group.aff", "E036 · noinput comparison / N1", "Grey D is visible but cannot judge/miss.\nTry D then K at HUD1.5s. Only K scores.\nTwo runtime taps; one judgment unit.", null),
         ("linked_practice.aff", "R009 · Connected ordinary arc practice", "Hold left mouse4–12s, same target.\nJunction8.001s: keep it held.\nGold x2 record resolves7.375s. N31.", null),
         ("native_linked_arc_successors.aff", "E038 · Natural linked pair / N7", "Hold mouse1–3s. Junction2.001s.\nNo second DOWN. Weight2 at1.375s.\nNative N7; Godot referenceH500.", null),
         ("arctap_practice.aff", "R008 · Trace parent + arc-tap practice", "D2s, K2.5s. Click gold sky child6s.\nGrey trace is not a hold. Release.\nF10s, J10.5s. Silent chart.", null),
@@ -98,6 +102,7 @@ public partial class Main : Control
         pauseButton.Pressed+=()=>session.Pause();AddChild(pauseButton);
         GetWindow().FocusExited += () => {session.FocusLost();mouseLane=0;};
         GetWindow().FocusEntered += () => session.FocusReturned();
+        if (OS.GetCmdlineUserArgs().Contains("--group-tests")) CallDeferred(nameof(RunGroupTests));
         if (OS.GetCmdlineUserArgs().Contains("--linked-tests")) CallDeferred(nameof(RunLinkedTests));
         if (OS.GetCmdlineUserArgs().Contains("--arctap-tests")) CallDeferred(nameof(RunArcTapTests));
         if (OS.GetCmdlineUserArgs().Contains("--arc-tests")) CallDeferred(nameof(RunArcTests));
@@ -195,7 +200,8 @@ public partial class Main : Control
         if (holdStatus.Visible)
         {
             var hold = k!.Holds.FirstOrDefault(h => h.Holding) ?? k.Holds.FirstOrDefault(h => h.End > k.Timeline.EffectiveTime);
-            if(k.ArcGroups.Count>0){var group=k.ArcGroups[0];int junction=group.Members[1].Start;holdStatus.Text=$"CHAIN {(group.Active?"ON":"OFF")} · SEG {(k.Timeline.EffectiveTime<junction?1:2)} · JUNCTION {junction/1000.0:F3}s";}
+            if(k.Chart.TimingGroups.Count>1){var n=k.Notes.First(t=>t.TimingGroupId==1);holdStatus.Text=$"G0 K / G1 D · {(n.InputEnabled?"INPUT ON":"NOINPUT")} · Z {n.Depth}";}
+            else if(k.ArcGroups.Count>0){var group=k.ArcGroups[0];int junction=group.Members[1].Start;holdStatus.Text=$"CHAIN {(group.Active?"ON":"OFF")} · SEG {(k.Timeline.EffectiveTime<junction?1:2)} · JUNCTION {junction/1000.0:F3}s";}
             else if(k.ArcTaps.Count>0){var child=k.ArcTaps.First();holdStatus.Text=$"ARC-TAP {(child.Consumed?"HIT":child.Missed?"MISS":"READY")}   at {child.Data.Time/1000.0:F2}s";}
             else if(k.Arcs.Count>0){var arc=k.Arcs.FirstOrDefault(a=>a.Holding)??k.Arcs.First();holdStatus.Text=$"ARC {(arc.Holding?"ON":"OFF")} owner {arc.Color.Owner} units {arc.Records.Count(r=>r.Resolved)}/{arc.Records.Count}";}
             else holdStatus.Text = hold == null ? "HOLDS COMPLETE" : $"HOLD {(hold.Holding ? "ON" : "OFF")}   contacts {hold.ActivatingContacts.Count}   units {hold.Records.Count(r=>r.Resolved)}/{hold.Records.Count}";
@@ -226,11 +232,12 @@ public partial class Main : Control
     {
         if (font == null) return;
         DrawRect(new Rect2(665,0,435,740),new Color("0b1020"));
-        Text("ARCONIST",72,64,32,ink); Text("CONNECTED ARCS   /   R009",692,60,17,muted);
+        Text("ARCONIST",72,64,32,ink); Text("TIMING GROUPS   /   R010",692,60,17,muted);
         Text("D  ·  F  ·  J  ·  K",72,102,19,muted);
         Text("Native coordinates / 425   |   perspective Camera3D",52,713,15,muted);
         Text("F6 view   F7 resize   F8 capture",692,686,15,muted);
     }
+    private void RunGroupTests()=>GroupValidation.Run(this,track,evidenceDir);
     private void RunLinkedTests()=>LinkedValidation.Run(this,track,evidenceDir);
     private void RunArcTapTests()=>ArcTapValidation.Run(this,track,evidenceDir);
     private void RunArcTests()=>ArcValidation.Run(this,track,evidenceDir);
@@ -258,9 +265,10 @@ public partial class Main : Control
             holds=k?.Holds.Select(h=>new { id=h.Data.Id, h.Active, h.Latched, h.Holding, h.ActivatingContacts, h.Records }).ToArray(),
             arcs=k?.Arcs.Select(a=>new{a.Id,a.Active,a.Depth,a.Cache,a.CacheEnabled,a.TargetX,a.TargetY,a.Holding,a.Records,a.ResolutionWrites,generationFlag=a.Data.GenerationFlag,predecessor=a.Predecessor?.Id,successors=a.Successors.Select(next=>next.Id),group=a.Group?.Id,a.SuccessorCleanupPreserved,a.LastLinkScan,trace=a.Data.Trace,children=a.Children.Select(c=>new{c.Id,c.ParentId,time=c.Data.Time,c.Local,c.InputTarget,c.WorldPosition,c.Consumed,c.Missed,c.Contact,c.Outcome,c.ResolvedAt})}),colors=k?.Colors,claimed=k?.ClaimedIds,
             groups=k?.ArcGroups.Select(g=>new{g.Id,g.Active,g.CacheRelated,g.Accepted,g.Window,g.TimestampHistory,g.WindowBehavior,members=g.Members.Select(a=>a.Id)}),recorder=k?.RecorderTrace,recorderCalls=k?.RecorderCalls,
+            timingGroups=k?.TimingGroups.Select(g=>new{g.Id,g.Definition.SourceOrder,g.Definition.Attribute,g.Definition.InputEnabled,g.Definition.LifetimeEnd,g.Active,g.QueryLow,g.QueryHigh,g.FrameOffset,g.Records,g.Index}),requestedSpeed=k?.RequestedSpeed,metadataBpm=k?.MetadataBpm,effectiveSpeed=k?.EffectiveSpeed,
             retained=k?.Contacts, judgments=k?.Judgments.ToArray(),
             candidates=k?.Candidates.ToArray(),classifications=k?.Classifications.ToArray(),expired=k?.Expired.ToArray(),
-            notes=k?.Notes.Select(n=>new { id=n.Data.Id, consumed=n.Consumed,missed=n.Missed,active=n.Active,contact=n.Contact,depth=SpatialTrack.CurrentDepth(k!,n),visible=SpatialTrack.Present(k!,n) }).ToArray(),result=k?.Result }));
+            notes=k?.Notes.Select(n=>new { id=n.Data.Id,group=n.TimingGroupId,n.InputEnabled,timing=n.Data.Timing.SourceOrder,n.PreDepth,n.Bucket, consumed=n.Consumed,missed=n.Missed,active=n.Active,contact=n.Contact,depth=SpatialTrack.CurrentDepth(k!,n),visible=SpatialTrack.Present(k!,n) }).ToArray(),result=k?.Result }));
     }
     private async void Capture()
     {

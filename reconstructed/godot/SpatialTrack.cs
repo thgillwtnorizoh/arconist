@@ -17,6 +17,8 @@ public partial class SpatialTrack : Node3D
     }
     private readonly Dictionary<string, HoldView> holds = new();
     private Kernel? displayedCore;
+    private Node3D reverseApron=null!;
+    public MeshInstance3D? TapVisual(string id)=>notes.TryGetValue(id,out var mesh)?mesh:null;
     public int HoldVisualCount => holds.Count;
     public Node3D? HoldVisual(string id) => holds.TryGetValue(id, out var view) ? view.Root : null;
     public bool AlternateView { get; private set; }
@@ -25,8 +27,8 @@ public partial class SpatialTrack : Node3D
     public static Vector3 NotePosition(Kernel core, NoteState note) => World(NativeX(note.Data.Lane), 4, CurrentDepth(core,note));
     // Same pre-depth truncation and float-add/truncation as 010/035. Read-only,
     // including notes not currently admitted to the gameplay active vector.
-    public static int CurrentDepth(Kernel core, NoteState note) => (int)((int)core.DepthAt(note.Data.Time) - core.DepthAt(core.Timeline.EffectiveTime));
-    public static bool Present(Kernel core, NoteState note) => !core.Finished && !note.Consumed && !note.Missed && CurrentDepth(core,note) >= -9500 && CurrentDepth(core,note) <= 1000;
+    public static int CurrentDepth(Kernel core, NoteState note) => core.CurrentDepth(note);
+    public static bool Present(Kernel core, NoteState note) => !core.Finished && !note.Consumed && !note.Missed && CurrentDepth(core,note) >= -9500 && CurrentDepth(core,note) <= (core.Chart.TimingGroups.Count>1?1600:1000);
     public static int LaneAt(Vector3 world)
     {
         if (!world.IsFinite()) return 0;
@@ -146,6 +148,9 @@ public partial class SpatialTrack : Node3D
             Box(World(NativeX(lane),-15,-4450),World(418,24,9900),new Color(lane%2==0 ? "253b59" : "304869"));
         for (int i=0;i<=4;i++) Box(World(-850+i*425,1,-4450),World(5,3,9900),new Color("6386a5"),true);
         for (int z=-9000;z<0;z+=1000) Box(World(0,1,z),World(1700,3,5),new Color("47617c"),true);
+        reverseApron=new Node3D{Visible=false};AddChild(reverseApron);
+        Box(World(0,-15,1000),World(1700,24,1000),new Color("253b59"),false,reverseApron);
+        for(int i=0;i<=4;i++)Box(World(-850+i*425,1,1000),World(5,3,1000),new Color("6386a5"),true,reverseApron);
         Box(World(-0.5f,4,0),World(1700,5,20),new Color("c3fa7d"),true);
         for (int i=0;i<4;i++)
         {
@@ -163,6 +168,9 @@ public partial class SpatialTrack : Node3D
     public void SetView(bool alternate)
     {
         AlternateView=alternate;
+        if(displayedCore?.Chart.TimingGroups.Count>1)
+        {Camera.Far=16000*Unit;Camera.Position=alternate?World(220,1800,2800):World(0,1600,2600);Camera.LookAt(World(0,-550,-2000),Vector3.Up);return;}
+        Camera.Far=10000*Unit;
         Camera.Position = alternate ? World(220,1100,1050) : World(0,900,900);
         Camera.LookAt(World(0,-550,-2000),Vector3.Up);
     }
@@ -174,6 +182,7 @@ public partial class SpatialTrack : Node3D
             foreach (var view in holds.Values) { RemoveChild(view.Root); view.Root.QueueFree(); }
             foreach(var view in arcs.Values){RemoveChild(view.Root);view.Root.QueueFree();}
             notes.Clear(); holds.Clear(); arcs.Clear(); displayedCore = core;
+            reverseApron.Visible=core?.Chart.TimingGroups.Count>1;SetView(AlternateView);
         }
         var ids=core?.Notes.Select(n=>n.Data.Id).ToHashSet() ?? new HashSet<string>();
         foreach (string id in notes.Keys.Where(id=>!ids.Contains(id)).ToArray()) { notes[id].QueueFree(); notes.Remove(id); }
@@ -183,6 +192,7 @@ public partial class SpatialTrack : Node3D
         {
             if (!notes.TryGetValue(note.Data.Id,out var mesh))
             { mesh=Box(Vector3.Zero,World(382,8,95),new Color("69e1f7")); notes.Add(note.Data.Id,mesh); }
+            ((StandardMaterial3D)mesh.MaterialOverride).AlbedoColor=new Color(!note.InputEnabled?"8794b0":note.TimingGroupId==1?"ffb5e8":"69e1f7");
             mesh.Position=NotePosition(core,note); mesh.Visible=Present(core,note);
         }
         foreach (var hold in core.Holds)

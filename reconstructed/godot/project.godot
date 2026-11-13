@@ -1,7 +1,7 @@
 config_version=5
 
 [application]
-config/name="Arconist R009 - Connected Arc Practice"
+config/name="Arconist R010 - Independent Timing Groups"
 run/main_scene="res://Main.tscn"
 config/features=PackedStringArray("4.7", "C#", "GL Compatibility")
 

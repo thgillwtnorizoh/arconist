@@ -12,7 +12,10 @@ public sealed class Tap
     public string Id => $"tap:{Ordinal}:{Time}:{Lane}";
     public float NormalizedX => 0.5f * (Lane - 2);
     public int SourceOrder { get; }
-    internal Tap(int ordinal, int time, int rawLane, int sourceOrder) { Ordinal = ordinal; Time = time; RawLane = rawLane; SourceOrder = sourceOrder; }
+    public TimingGroup Group { get; }
+    public Timing Timing => Group.Timings.Last(t=>t.Time<=Time);
+    public bool InputEnabled => Group.InputEnabled;
+    internal Tap(int ordinal, int time, int rawLane, int sourceOrder, TimingGroup group) { Ordinal = ordinal; Time = time; RawLane = rawLane; SourceOrder = sourceOrder; Group=group; }
 }
 
 public sealed class Hold
@@ -57,12 +60,16 @@ public sealed class Timing
     public int Time { get; }
     public float Bpm { get; }
     public float Beats { get; }
-    internal Timing(int time, float bpm, float beats) { Time = time; Bpm = bpm; Beats = beats; }
+    public string RawBpmToken { get; }
+    public string RawBeatsToken { get; }
+    public int SourceOrder { get; }
+    internal Timing(int time, float bpm, float beats, string bpmToken, string beatsToken, int order) { Time = time; Bpm = bpm; Beats = beats; RawBpmToken=bpmToken;RawBeatsToken=beatsToken;SourceOrder=order; }
 }
 
 public sealed class Chart
 {
     public IReadOnlyList<Tap> Taps { get; }
+    public IReadOnlyList<TimingGroup> TimingGroups { get; }
     public IReadOnlyList<Timing> Timings { get; }
     public IReadOnlyList<Hold> Holds { get; }
     public IReadOnlyList<Arc> Arcs { get; }
@@ -70,12 +77,15 @@ public sealed class Chart
     public float Density { get; }
     public int JudgmentUnits { get; }
     public int EndTime { get; }
-    private Chart(List<Tap> taps, List<Hold> holds, List<Arc> arcs, List<Timing> timings, int offset, float density)
+    private Chart(List<Tap> taps, List<Hold> holds, List<Arc> arcs, List<Timing> timings, List<TimingGroup> groups, int offset, float density)
     {
-        Taps = taps.AsReadOnly(); Timings = timings.AsReadOnly(); AudioOffset = offset;
+        TimingGroups=groups.AsReadOnly();
+        foreach(var group in groups.Where(g=>g.Id!=0))group.LifetimeEnd=checked(taps.Where(t=>t.Group==group).Max(t=>t.Time)+1200);
+        Taps = taps.AsReadOnly(); Timings = groups[0].Timings; AudioOffset = offset;
         Density = density; Holds = holds.AsReadOnly(); Arcs=arcs.AsReadOnly();
-        JudgmentUnits = checked(taps.Count + holds.Sum(h => h.Checkpoints.Count)+arcs.Sum(a=>a.RecordDefinitions.Sum(r=>r.Weight)+a.Children.Count));
-        EndTime = Math.Max(taps.Count == 0 ? 0 : checked(taps.Max(t => t.Time) + 120),
+        JudgmentUnits = checked(taps.Count(t=>t.InputEnabled) + holds.Sum(h => h.Checkpoints.Count)+arcs.Sum(a=>a.RecordDefinitions.Sum(r=>r.Weight)+a.Children.Count));
+        var enabled=taps.Where(t=>t.InputEnabled).ToArray();
+        EndTime = Math.Max(enabled.Length == 0 ? 0 : checked(enabled.Max(t => t.Time) + 120),
                            holds.Count == 0 ? 0 : checked(holds.Max(h => h.End) + 500));
         EndTime=Math.Max(EndTime,arcs.Count==0?0:checked(arcs.Max(a=>a.End)+500));
     }
@@ -101,6 +111,7 @@ public sealed class Chart
         }
         if (!float.IsFinite(density) || density <= 0) throw new FormatException("Density must be positive and finite.");
         var taps = new List<Tap>(); var timings = new List<Timing>();
+        var lists=new List<List<Timing>>{timings};var groups=new List<TimingGroup>{new TimingGroup(0,-1,"",timings)};
         var parsedHolds = new List<(int start, int end, int raw, int order)>();
         var parsedArcs=new List<(string[] fields,int order,int? child)>();
         int sourceOrder = 0;
@@ -108,12 +119,13 @@ public sealed class Chart
         const string number = @"[0-9]+\.[0-9]+";
         var tapPattern = new Regex(@"^\(\s*([0-9]+)\s*,\s*([0-9]+)\s*\)$", RegexOptions.CultureInvariant);
         var holdPattern = new Regex(@"^hold\(\s*([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9]+)\s*\)$", RegexOptions.CultureInvariant);
-        var timingPattern = new Regex(@"^timing\(\s*([0-9]+)\s*,\s*(" + number + @")\s*,\s*(" + number + @")\s*\)$", RegexOptions.CultureInvariant);
-        var statements = body.Split(';');
-        if (!string.IsNullOrWhiteSpace(statements[statements.Length - 1])) throw new FormatException("AFF statement requires semicolon.");
-        for (int i = 0; i < statements.Length - 1; i++)
+        var timingPattern = new Regex(@"^timing\(\s*([0-9]+)\s*,\s*(-?" + number + @")\s*,\s*(" + number + @")\s*\)$", RegexOptions.CultureInvariant);
+        var statements = GroupBodyParser.Read(body,groups,lists);
+        foreach(var statement in statements)
         {
-            string s = statements[i].Trim();
+            string s = statement.Text;
+            int groupId=statement.Group;
+            if(groupId!=0&&(s.StartsWith("hold(",StringComparison.Ordinal)||s.StartsWith("arc(",StringComparison.Ordinal)))throw new NotSupportedException("Independent groups support taps only.");
             if(s.StartsWith("arc(",StringComparison.Ordinal))
             {
                 // One bounded child list on a trace parent. No silent stripping of suffixes.
@@ -134,7 +146,7 @@ public sealed class Chart
                 int raw = int.Parse(tap.Groups[2].Value, CultureInfo.InvariantCulture);
                 if (raw > 5) throw new NotSupportedException("Supported raw integer lanes are 0..5.");
                 if (time > int.MaxValue - 1000000) throw new NotSupportedException("Timestamp outside supported arithmetic domain.");
-                taps.Add(new Tap(taps.Count, time, raw, sourceOrder++)); continue;
+                taps.Add(new Tap(taps.Count, time, raw, sourceOrder++,groups[groupId])); continue;
             }
             var hold = holdPattern.Match(s);
             if (hold.Success)
@@ -153,14 +165,26 @@ public sealed class Chart
             int at = int.Parse(timing.Groups[1].Value, CultureInfo.InvariantCulture);
             float bpm = float.Parse(timing.Groups[2].Value, CultureInfo.InvariantCulture);
             float beats = float.Parse(timing.Groups[3].Value, CultureInfo.InvariantCulture);
-            if (!float.IsFinite(bpm) || !float.IsFinite(beats) || bpm <= 0 || beats <= 0)
-                throw new NotSupportedException("Only finite positive ordinary timing is supported.");
-            timings.Add(new Timing(at, bpm, beats));
+            if (!float.IsFinite(bpm) || !float.IsFinite(beats) || bpm == 0 || beats <= 0)
+                throw new NotSupportedException("Timing requires finite nonzero BPM and positive beats; negative BPM is validated in the bounded group domain.");
+            lists[groupId].Add(new Timing(at, bpm, beats,timing.Groups[2].Value,timing.Groups[3].Value,statement.TokenOrder));
         }
         if ((taps.Count == 0 && parsedHolds.Count == 0 && parsedArcs.Count==0) || timings.Count == 0) throw new FormatException("At least one timing and one supported note required.");
-        timings.Sort((a, b) => a.Time.CompareTo(b.Time));
-        if (timings[0].Time != 0 || timings.Select(t => t.Time).Distinct().Count() != timings.Count)
-            throw new NotSupportedException("Timing must start at zero, with distinct timing times.");
+        foreach(var list in lists)
+        {
+            list.Sort((a,b)=>a.Time.CompareTo(b.Time));
+            if(list.Count==0||list[0].Time!=0||list.Select(t=>t.Time).Distinct().Count()!=list.Count)
+                throw new NotSupportedException("Every group needs timing at zero and distinct timing times.");
+        }
+        if(timings.Any(t=>t.Bpm<=0))throw new NotSupportedException("Default-group reverse is deferred.");
+        if(groups.Count>1)
+        {
+            var separate=lists[1];var members=taps.Where(t=>t.Group.Id==1).ToArray();
+            if(parsedHolds.Count!=0||parsedArcs.Count!=0||members.Length==0||!taps.Any(t=>t.Group.Id==0)||taps.Count>10000||taps.Any(t=>t.Time>600000)||density!=1||timings.Count!=1||timings[0].Bpm!=120||timings[0].Beats!=4||separate[0].Bpm!=60||separate[0].Beats!=4||separate.Count>2)
+                throw new NotSupportedException("R010 grouped domain: default120, separate60, density1, ordinary taps in both groups only.");
+            if(separate.Count==2&&(groups[1].Attribute!=""||separate[1].Bpm!=-60||separate[1].Beats!=4||separate[1].Time<=0||members.Any(t=>t.Time!=separate[1].Time+300)))
+                throw new NotSupportedException("Reverse subset requires +60/-60 and grouped taps300ms after the single reversal; no reverse noinput.");
+        }
         taps.Sort((a, b) => { int c = a.Time.CompareTo(b.Time); return c != 0 ? c : a.Ordinal.CompareTo(b.Ordinal); });
         var holds = parsedHolds.Select((h, i) => new Hold(i, h.order, h.start, h.end, h.raw,
             timings.Last(t => t.Time <= h.start).Bpm, density)).OrderBy(h => h.Start).ThenBy(h => h.SourceOrder).ToList();
@@ -175,6 +199,6 @@ public sealed class Chart
             return new Arc(i,a.order,start,end,x0,x1,y0,y1,color,extra,timings.Last(t=>t.Time<=start),density,f[9]=="true",a.child);
         }).OrderBy(a=>a.Start).ThenBy(a=>a.SourceOrder).ToList();
         OrdinaryPairLinker.LinkAndGenerate(arcs);
-        return new Chart(taps, holds, arcs, timings, offset, density);
+        return new Chart(taps, holds, arcs, timings, groups, offset, density);
     }
 }

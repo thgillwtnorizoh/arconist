@@ -739,3 +739,37 @@ SHA256 2ccaf0aeb142028a9a789dd2f03d5c68e3db24434e130f4f08317df515b64c5d.
 Final audit publishes only R009 validation/history and verifies main readback;
 tested application remains518278b. Stop after delivery: no further application
 operation,R010,new expedition or Unity. Await owner and Headquarters decision.
+
+## R009 owner acceptance and R010 authority — 2026-11-13 Asia/Bangkok
+
+Headquarters supplies final November12,2026 R009 owner acceptance and authorizes
+R010 from main8f351b77b2a247497f2062c786cca09842c78ea3. This records the supplied
+owner decision, not Work2 physical testing. Earlier history is an exact byte
+prefix. E029/E036/E010 original reports/fixtures define independent group timing,
+f32 depth, signed queries, retention and tap-only noinput. All original research,
+prior tests/oracles/charts/music remain read-only. No native experiment/GUI/OS
+input injection/new expedition or Unity is authorized.
+
+## R010 implementation and preflight — 2026-11-13 Asia/Bangkok
+
+Typed default/one-independent group descriptors retain timing tokens/source order,
+own scales/lifetimes/index/query/depth. No separate judgment clock. Native f32
+normalization/integration/predepth/offset and signed truncation match E029. Group
+preroll firstINT_MIN timing admits group1 before default; retention bypasses fresh
+300depth admission even at1213. Default-only legacy negative-time behavior stays0.
+No general signed/frame-jump/reversal/long-note expansion is inferred.
+
+Tap-only noinput gates N/end/candidates/expiry, while retaining indexed/runtime/
+active tap and group lifetime. Native E036 result and disabled final state match.
+E029 completion is separately reconstructed integration. All original fixtures,
+expectations/tests/charts/music remain unchanged. Four new silent choices add
+exact E029/E036 and shifted5.2/5.5s human practice. Grouped camera/apron/colors
+are read-only engineering presentation; old cameras/arc geometry stay intact.
+
+New28core/11bridge/14Godot preflight pass; E029 depth/query/health trace and E036
+native result compare without divergence. First Godot12/14 had no generated music
+resource in fresh checkout; explicit errors preserved. Unchanged compose.py
+restored exact manifest soundtrack, retry14/14. Prior36R001/30spatial/25R009core/
+12R009Godot preflight pass unchanged. Full395prior/three references/clean-source
+Windows export/package/publication remain pending. No native experiment, GUI,
+OS injection, physical qualification or next milestone work.

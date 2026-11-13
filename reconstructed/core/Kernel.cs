@@ -104,6 +104,10 @@ public abstract class RuntimeNote
     public abstract int Lane { get; }
     public abstract int SourceOrder { get; }
     public abstract bool Terminal { get; }
+    public virtual int TimingGroupId => 0;
+    public virtual bool InputEnabled => true;
+    public int PreDepth { get; internal set; }
+    public int PreEndDepth { get; internal set; }
     public bool Active { get; internal set; }
     public int Depth { get; internal set; }
     public int EndDepth { get; internal set; }
@@ -120,6 +124,8 @@ public sealed class NoteState : RuntimeNote
     public override int Lane => Data.Lane;
     public override int SourceOrder => Data.SourceOrder;
     public override bool Terminal => Missed || Consumed;
+    public override int TimingGroupId => Data.Group.Id;
+    public override bool InputEnabled => Data.InputEnabled;
     public bool Missed { get; internal set; }
     public bool Consumed { get; internal set; }
     public int Contact { get; internal set; } = -1;
@@ -224,12 +230,14 @@ public sealed class Kernel
     public IReadOnlyDictionary<int,ArcColorState> Colors=>colors;
     public IReadOnlyList<int> ClaimedIds=>claimed.OrderBy(i=>i).ToArray();
     private readonly List<RuntimeNote> active = new List<RuntimeNote>();
-    private readonly Dictionary<int, List<RuntimeNote>> buckets = new Dictionary<int, List<RuntimeNote>>();
+    public IReadOnlyList<TimingGroupState> TimingGroups { get; }
     private readonly Dictionary<int, RetainedContact> contacts = new Dictionary<int, RetainedContact>();
     public IReadOnlyList<RetainedContact> Contacts => contacts.Values.OrderBy(c => c.Id).ToList().AsReadOnly();
     public List<JudgmentEvent> Judgments { get; } = new List<JudgmentEvent>();
     private readonly float[] scales;
     private int nextContact;
+    public float RequestedSpeed { get; }
+    public int MetadataBpm { get; }
     public float EffectiveSpeed { get; }
     public float BaseGain { get; }
     public int LastFrameTime { get; private set; } = -3000;
@@ -256,9 +264,11 @@ public sealed class Kernel
     {
         if (!float.IsFinite(requestedSpeed) || requestedSpeed <= 0 || baseBpm <= 0)
             throw new ArgumentException("Positive finite speed and metadata BPM required.");
+        RequestedSpeed=requestedSpeed;MetadataBpm=baseBpm;
         Chart = chart; Timeline = new Timeline(originMs, chart.AudioOffset, userOffset);
         EffectiveSpeed = (requestedSpeed * 180f) / baseBpm;
-        scales = chart.Timings.Select(t => (1f / (t.Bpm * EffectiveSpeed)) * 60f).ToArray();
+        TimingGroups=chart.TimingGroups.Select(g=>new TimingGroupState(g,EffectiveSpeed,chart.EndTime,chart.TimingGroups.Count>1)).ToArray();
+        scales = TimingGroups[0].Records.Select(t=>t.Scale).ToArray();
         if (scales.Any(s => !float.IsFinite(s) || s <= 0)) throw new ArgumentException("Unsupported timing scale.");
         var notes = chart.Taps.Select(t => new NoteState(t)).ToList(); Notes = notes.AsReadOnly();
         var holds = chart.Holds.Select(h => new HoldState(h)).ToList(); Holds = holds.AsReadOnly();
@@ -277,39 +287,16 @@ public sealed class Kernel
         }
         ArcGroups=groups.AsReadOnly();
         var objects = notes.Cast<RuntimeNote>().Concat(holds).Concat(arcs).OrderBy(n => n.Start).ThenBy(n => n.SourceOrder);
-        foreach (var note in objects)
-        {
-            note.Bucket = (int)(DepthAt(note.Start) / -10000f);
-            note.EndBucket = (int)(DepthAt(note.End) / -10000f);
-            note.Depth = (int)DepthAt(note.Start); note.EndDepth = (int)DepthAt(note.End);
-            // E009 endpoint-only index: one long note can occupy several buckets.
-            if ((long)note.EndBucket - note.Bucket > 100000)
-                throw new NotSupportedException("Hold index exceeds the supported bucket span.");
-            for (int key = note.Bucket; key <= note.EndBucket; key++)
-            {
-                if (!buckets.TryGetValue(key, out var list)) buckets[key] = list = new List<RuntimeNote>();
-                list.Add(note);
-            }
-        }
+        foreach (var note in objects) TimingGroups[note.TimingGroupId].Insert(note);
         int n = chart.JudgmentUnits;
         float total = n < 400 ? 200f + n * 0.5f : n < 600 ? 280f + (n - 400) * 0.5f : 360f + (n - 600) / 5f;
         BaseGain = (total / 2.5f) / n;
     }
 
     // 009: float timing integration before truncation; auxiliary bars are omitted.
-    public float DepthAt(int time)
-    {
-        float depth = 0;
-        for (int i = 0; i < Chart.Timings.Count; i++)
-        {
-            int start = Chart.Timings[i].Time;
-            if (start >= time) break;
-            int end = i + 1 < scales.Length ? Chart.Timings[i + 1].Time : int.MaxValue;
-            int bound = Math.Min(end, time);
-            depth -= (bound - Math.Max(start, 0)) / scales[i];
-        }
-        return depth;
-    }
+    public float DepthAt(int time) => DepthAt(time,0);
+    public float DepthAt(int time,int group) => TimingGroups[group].DepthAt(time);
+    public int CurrentDepth(RuntimeNote note) => (int)(note.PreDepth-DepthAt(Timeline.EffectiveTime,note.TimingGroupId));
 
     private void BeginEvent() { Candidates.Clear(); Classifications.Clear(); Expired.Clear(); Judgments.Clear(); RecorderTrace.Clear(); }
 
@@ -325,34 +312,35 @@ public sealed class Kernel
             foreach(var group in ArcGroups){group.Active=false;group.Accepted=false;}
             return;
         }
-        float a = -DepthAt(now), b = -DepthAt(checked(now + 120));
+        foreach(var group in TimingGroups)group.Update(now);
         foreach (var note in active.ToArray())
         {
             // 010 preprocessing stores integer pre-depth; the frame adds current float depth to that stored value.
-            note.Depth = (int)((int)DepthAt(note.Start) + a);
-            note.EndDepth = (int)((int)DepthAt(note.End) + a);
+            var group=TimingGroups[note.TimingGroupId];group.UpdateDepth(note);
             if(note is ArcState arc && !arc.Data.Trace && now>arc.End&&!arc.EndReset)
             {
                 arc.EndReset=true;
                 if(arc.Successors.Any(next=>!next.Data.Trace))arc.SuccessorCleanupPreserved=true;
                 else {arc.Color.PreviouslyClaimed=false;arc.Color.ReleaseTime=-1;arc.Color.Conflict=false;}
             }
-            if ((note.Terminal || Finished) && now > note.End)
+            if (!group.Active || ((note.Terminal || Finished) && now > note.End))
             { note.Active = false; active.Remove(note); }
         }
-        int low = Math.Min((int)((a - 700f) / 10000f), (int)((b - 700f) / 10000f));
-        int high = Math.Max((int)((a + 10000f) / 10000f), (int)((b - 700f) / 10000f));
-        // Enumerate only existing keys; native insertion of empty buckets has no gameplay effect.
-        foreach (var pair in buckets.OrderBy(p => p.Key))
+        // One spatial map/query per timing group. Retention above never reapplies
+        // fresh-admission depth limits (E029 reverse excursion hysteresis).
+        foreach(var group in TimingGroups)
         {
-            if (pair.Key < low || pair.Key > high) continue;
-            foreach (var note in pair.Value)
+            if(!group.Active)continue;
+            foreach(var pair in group.Buckets)
             {
-                if (note.Active) continue;
-                note.Depth = (int)((int)DepthAt(note.Start) + a);
-                note.EndDepth = (int)((int)DepthAt(note.End) + a);
-                if (Math.Min(note.Depth, note.EndDepth) >= (note is ArcState?700:300) || note.Terminal || Finished) continue;
-                note.Active = true; active.Add(note);
+                if(pair.Key<group.QueryLow||pair.Key>group.QueryHigh)continue;
+                foreach(var note in pair.Value)
+                {
+                    if(note.Active)continue;
+                    group.UpdateDepth(note);
+                    if(Math.Min(note.Depth,note.EndDepth)>=(note is ArcState?700:300)||note.Terminal||Finished)continue;
+                    note.Active=true;active.Add(note);
+                }
             }
         }
         foreach(var child in ArcTaps)
@@ -374,7 +362,7 @@ public sealed class Kernel
                 if(!arc.Data.Trace&&arc.CacheEnabled&&ArcSpatial.Matches(arc.TargetX,arc.TargetY,contact.Sky.Value)&&Claim(arc.Color,contact.Id,now,(int)arc.Data.Interval)){arc.Holding=true;arc.Group?.Accept(arc);}
         foreach (var item in active)
         {
-            if (item is NoteState note && !note.Missed && !note.Consumed && now > note.Data.Time + 100)
+            if (item is NoteState note && note.InputEnabled && !note.Missed && !note.Consumed && now > note.Data.Time + 100)
             { Miss(note); Expired.Add(note.Data.Id); }
             else if (item is HoldState hold) ResolveHold(hold, now);
             else if(item is ArcState arc)ResolveArc(arc,now);
@@ -399,7 +387,7 @@ public sealed class Kernel
         var collected=new List<RuntimeNote>();
         foreach(var item in active)
         {
-            if(lane!=0&&item.Lane==lane&&(item is NoteState||(item is HoldState&&item.Start<(long)now+100&&now<item.End)))collected.Add(item);
+            if(item.InputEnabled&&lane!=0&&item.Lane==lane&&(item is NoteState||(item is HoldState&&item.Start<(long)now+100&&now<item.End)))collected.Add(item);
             if(item is ArcState parent&&spatial&&sky.HasValue)
                 foreach(var child in parent.Children)
                     if(ArcTapSpatial.Matches(child.InputTarget.X,child.InputTarget.Y,sky.Value))collected.Add(child);
