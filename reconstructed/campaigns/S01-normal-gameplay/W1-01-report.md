@@ -144,3 +144,5 @@ Stop at the disclosed execution blocker and published partial delivery. This is 
 - `reconstructed/campaigns/S01-normal-gameplay/independent-corpus/results/preflight.json`
 - `reconstructed/campaigns/S01-normal-gameplay/independent-corpus/run.py`
 - `reconstructed/contexts.md`
+
+Publication verification correction: first remote88-file content/ancestry/prefix checks succeeded, but full-tree whitespace check caught a redundant blank line in the newly authored w1-cross.aff (the earlier unstaged check omitted untracked files). Removed only that generated-fixture blank line and refreshed its checksum; original native fixture is untouched. No runtime expectation changed. Final publication readback/checks are rerun on the corrected child.

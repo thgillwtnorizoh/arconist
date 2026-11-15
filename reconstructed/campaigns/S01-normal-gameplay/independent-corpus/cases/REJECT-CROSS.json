@@ -2,7 +2,7 @@
   "id": "REJECT-CROSS",
   "classification": "EXPECTED REJECTION",
   "aff": "fixtures/w1-cross.aff",
-  "affSha256": "382b0b0b1cd1071f985a130da2463d865eb0437dd99fea94406e6dd14b67d025",
+  "affSha256": "61ceca28008f6fb3e27473b859e4302d042ed3fc70f3d7779c194c93bebaff9d",
   "requirements": [
     "S01-14.90"
   ],
