@@ -857,3 +857,12 @@ NOT AUTHORIZED. S01 closes only upon complete declared coverage, development and
 independent production QA, real-owner platform qualification, explicit discrepancy
 decisions and owner acceptance. Original research and historical regression suites
 remain immutable. UEP-001 checkpoint reporting is mandatory going forward.
+
+
+## S01 / Work1 / A01 audit checkpoint — 2026-11-15
+
+VERIFIED CHECKPOINT for source/documentation audit only; S01 OPEN. Starting main 618fb55dc987c9bc4b172c5d7038b8b4bfae4b21 matched remote. Production assessed ab349d441dfa02f3c1ff97d6d0b8837c6ebb8f0e; only campaign/history/R010 report documentation changed since tested source. No independent runtime-tested SHA in A01.
+
+Four campaign documents published under reconstructed/campaigns/S01-normal-gameplay/: coverage-register.md, dependency-register.md, discrepancy-register.md and A01-audit.md. All61 original inventory features refined into stable domain children, plus accuracy/corpus/independent closure requirements. D01–D16 preserve restrictions and unknown applicability. Historical449 development groups and owner qualification are not relabeled Work1 independent QA.
+
+Critical path: integrated chart/group/curve/contact support and independent corpus; not automatic R011. Existing original evidence supports crossing bypass and widening. G006/007/009/010 remain scope/producer gates, not exclusions. Next proposed tasks: HQ scope decisions and Work1 independent baseline/corpus, then authorized coherent implementation and exact-SHA verification. No production change, native experiment, runtime/build rerun, GUI qualification or input injection. Prior history bytes preserved. Publication SHA/readback/preservation in final handoff. Stop at A01; subsystem OPEN.
