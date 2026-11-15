@@ -866,3 +866,32 @@ VERIFIED CHECKPOINT for source/documentation audit only; S01 OPEN. Starting main
 Four campaign documents published under reconstructed/campaigns/S01-normal-gameplay/: coverage-register.md, dependency-register.md, discrepancy-register.md and A01-audit.md. All61 original inventory features refined into stable domain children, plus accuracy/corpus/independent closure requirements. D01–D16 preserve restrictions and unknown applicability. Historical449 development groups and owner qualification are not relabeled Work1 independent QA.
 
 Critical path: integrated chart/group/curve/contact support and independent corpus; not automatic R011. Existing original evidence supports crossing bypass and widening. G006/007/009/010 remain scope/producer gates, not exclusions. Next proposed tasks: HQ scope decisions and Work1 independent baseline/corpus, then authorized coherent implementation and exact-SHA verification. No production change, native experiment, runtime/build rerun, GUI qualification or input injection. Prior history bytes preserved. Publication SHA/readback/preservation in final handoff. Stop at A01; subsystem OPEN.
+
+## S01 Headquarters A01 acceptance / W1-01 authorization — 2026-11-15
+
+Headquarters reviewed the Work1 A01 original-to-reconstruction source audit published at
+bdc0fdfb087a3f26a44ae4ef03de65cffced268c. Five changed documentation paths
+were observed on the direct descendant of 618fb55dc987c9bc4b172c5d7038b8b4bfae4b21;
+A01 issue #2 was closed as completed. A01 is accepted as a VERIFIED CHECKPOINT
+of research/documentation ONLY, not a production runtime or whole-subsystem test.
+Audit classifies 61 inherited original feature requirements plus three additional
+accuracy/integration-corpus/independent-acceptance requirements, with D01-D16 and
+G-006/G-007/G-009/G-010 dependencies preserved OPEN/BLOCKED. Work1 did not run
+new native experiments, development regressions, Windows GUI or independent
+production runtime tests. Historical 449 R010 groups remain Work2 evidence.
+
+Headquarters authorizes the next **bounded Work1 execution W1-01**: independent
+R010 production baseline, original-derived executable oracles and integrated
+normal-gameplay corpus preparation. Work1 must test exact source SHA, distinguish
+actually executable supported-profile cases from forward-looking not-yet-supported
+mandatory S01 combinations, preserve original/normalized/prepared provenance and
+first-divergence evidence, and publish independently verifiable results. Complete
+current-profile QA before treating future integration proposals as tested.
+If runtime toolchain is unavailable, clearly report NOT RUN/BLOCKED and publish
+only independently supported fixture/evidence material, never invent test PASS.
+No automated graphical qualification, new original-native experiment, Work2
+production edit, scope exclusion, R011, other campaign or S01 closure authorized.
+Headquarters applicability decisions HQ-01 remain pending; no H row is excluded
+through this authorization. Owner acceptance of R001-R010 stays bounded.
+UEP-001 Rev2.1 reporting, non-forced main publication and append-only history
+remain mandatory. S01 subsystem OPEN.
