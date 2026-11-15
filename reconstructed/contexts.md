@@ -902,3 +902,34 @@ remain mandatory. S01 subsystem OPEN.
 Starting remote main7ea3024c9ad07f8b9e27f660786f08b28ceee92b verified; exact production target ab349d441dfa02f3c1ff97d6d0b8837c6ebb8f0e. New detached worktree preserves earlier work.50 independent corpus specifications and new C# driver/first-field comparator prepared from original ledgers, not production outputs.38 RUNNABLE,8 EXPECTED REJECTION,4 RESEARCH BLOCKED. Source/checksum preflight validates50cases/10core-bridge files but exits2/BLOCKED: no dotnet SDK10; installed Godot4.6.3 standard is not required4.7.2.NET. C# driver NOT COMPILED; production runtime pass0/fail0/skip0, all50 NOT RUN; no independent tested SHA/no first production divergence. Historical449 groups not rerun or relabeled independent QA.
 
 W1-01-report.md and independent-corpus/ published under S01; campaign notes appended without upgrading coverage. Exact prior history retained. No production/test/reference/research change, native experiment, GUI/OS injection, Windows qualification or Work2 implementation. Next: Work1 execute pinned suite with matching toolchain; W2-01 integrated group/curve/contact work requires HQ authority/reference dependencies. Status BLOCKED; S01 OPEN. Publication SHA/readback/preservation in handoff. Stop.
+
+## S01 Headquarters W1-01 BLOCKED review / C01 recovery authorization — 2026-11-15
+
+Headquarters verified Work1's W1-01 partial delivery at
+8efecf48638ecd7d963277a644501594e41b0636 against starting
+7ea3024c9ad07f8b9e27f660786f08b28ceee92b. Work1 produced a
+50-case independent normal gameplay corpus (38 runnable specifications,
+8 expected-rejection cases, 4 research-blocked cases), standalone C#
+driver, schema/hash/schedule preflight, and append-only reports.
+No independent production runtime-tested SHA exists; preflight exited2,
+and all50 corpus cases were NOT RUN at the production runtime level.
+No gameplay source changes or first production divergence were established.
+This BLOCKED handoff is preserved as partial evidence, not promoted to PASS.
+
+Headquarters' bounded corrective execution W1-01-C01 is AUTHORIZED for
+Work1 only: obtain a verified .NET SDK10.0.402 toolchain or use a tightly
+limited CI runner, compile the existing independent driver, execute the
+pinned source comparisons and accepted negative tests, preserve first
+divergences, and report exact independently tested SHA/results. The
+driver references only netstandard2.1 core/bridge (Driver.csproj targets
+net10.0); Godot4.7.2.NET is not a prerequisite for these core/bridge
+comparisons, though Godot validation remains future work. No user
+physical Windows qualification is required for this corrective scope.
+The independent expectations must remain unchanged; harness-only compile
+repairs may be considered with explicit provenance and no weakening.
+If installation/CI or compilation fails, retain BLOCKED/FAILED evidence.
+
+S01 remains OPEN. W1-01 parent issue remains unresolved until an actual
+independent production baseline is verified. No Work2 production changes,
+new native experiment, scope exclusion, automatic R011, or S01 acceptance.
+UEP-001 Rev2.1 exact SHA/publication/history/independence boundaries apply.
