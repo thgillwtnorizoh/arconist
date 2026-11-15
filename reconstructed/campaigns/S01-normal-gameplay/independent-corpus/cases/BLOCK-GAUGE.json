@@ -1,0 +1,72 @@
+{
+  "id": "BLOCK-GAUGE",
+  "classification": "RESEARCH BLOCKED",
+  "aff": "fixtures/ordinary_two_tap.aff",
+  "affSha256": "5cb2fbd1e9e5646b89f72f1b85b9315852db394ef1bb12bf0ee38ad97c44d026",
+  "requirements": [
+    "S01-16.90"
+  ],
+  "evidence": [
+    "E034 producer gate unresolved"
+  ],
+  "normalizedObjects": {
+    "sourceObjects": [
+      {
+        "kind": "timing",
+        "typedRawFields": [
+          "0",
+          "120.00",
+          "4.00"
+        ]
+      },
+      {
+        "kind": "tap",
+        "time": 1000,
+        "rawLane": 3,
+        "nativeLane": 4
+      },
+      {
+        "kind": "tap",
+        "time": 2000,
+        "rawLane": 2,
+        "nativeLane": 3
+      }
+    ],
+    "semanticExpectation": {
+      "status": "native owning producer unresolved; no fabricated output"
+    },
+    "normalizationConfidence": "Lexical source object inventory; native runtime fields/records only asserted where independently established. Not parser output from production."
+  },
+  "events": [],
+  "confidence": "CONFIRMED ORIGINAL within cited fixture; engineering adapter uses wall epoch0 and already projected coordinates",
+  "independentQA": "NOT RUN: missing dotnet; driver is not yet compile-verified",
+  "humanQualification": "Owner Windows corpus qualification required; no automated GUI",
+  "dependencies": [
+    "G-010"
+  ],
+  "futureLedger": {
+    "status": "NOT ESTABLISHED",
+    "stop": "first missing justified producer; no permission/vtable/entitlement/health patch"
+  },
+  "futureSchedule": [
+    {
+      "e": 1000,
+      "op": "DOWN/MOVE as chart requires",
+      "expected": "Unestablished mixed arbitration; known components do not prove combined outcome"
+    },
+    {
+      "e": 1200,
+      "op": "PAUSE"
+    },
+    {
+      "wallDelay": 60000,
+      "op": "RESUME",
+      "expected": "E freeze/seek request required; native combined fixture NOT RUN"
+    },
+    {
+      "e": "chartEnd+1",
+      "op": "FRAME then replay",
+      "expected": "Unit conservation/cleanup must be independently established; no invented score"
+    }
+  ]
+}

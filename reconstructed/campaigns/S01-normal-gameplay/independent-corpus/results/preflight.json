@@ -1,0 +1,18 @@
+{
+  "status": "BLOCKED",
+  "productionSha": "ab349d441dfa02f3c1ff97d6d0b8837c6ebb8f0e",
+  "productionRuntimeTested": false,
+  "environment": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "python": "3.12.14",
+  "dotnet": null,
+  "sdks": null,
+  "structuralCasesValidated": 50,
+  "protectedProductionFiles": 10,
+  "runtimePassed": 0,
+  "runtimeFailed": 0,
+  "runtimeSkipped": 0,
+  "runtimeNotRun": 50,
+  "firstDifference": null,
+  "blocker": "dotnet SDK10.x not installed/on PATH; C# driver NOT COMPILED/NOT RUN",
+  "independence": "Expectations unchanged; no production output used to create expected values"
+}

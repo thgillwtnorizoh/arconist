@@ -895,3 +895,10 @@ Headquarters applicability decisions HQ-01 remain pending; no H row is excluded
 through this authorization. Owner acceptance of R001-R010 stays bounded.
 UEP-001 Rev2.1 reporting, non-forced main publication and append-only history
 remain mandatory. S01 subsystem OPEN.
+
+
+## S01 / Work1 / W1-01 — blocked independent baseline preparation — 2026-11-15
+
+Starting remote main7ea3024c9ad07f8b9e27f660786f08b28ceee92b verified; exact production target ab349d441dfa02f3c1ff97d6d0b8837c6ebb8f0e. New detached worktree preserves earlier work.50 independent corpus specifications and new C# driver/first-field comparator prepared from original ledgers, not production outputs.38 RUNNABLE,8 EXPECTED REJECTION,4 RESEARCH BLOCKED. Source/checksum preflight validates50cases/10core-bridge files but exits2/BLOCKED: no dotnet SDK10; installed Godot4.6.3 standard is not required4.7.2.NET. C# driver NOT COMPILED; production runtime pass0/fail0/skip0, all50 NOT RUN; no independent tested SHA/no first production divergence. Historical449 groups not rerun or relabeled independent QA.
+
+W1-01-report.md and independent-corpus/ published under S01; campaign notes appended without upgrading coverage. Exact prior history retained. No production/test/reference/research change, native experiment, GUI/OS injection, Windows qualification or Work2 implementation. Next: Work1 execute pinned suite with matching toolchain; W2-01 integrated group/curve/contact work requires HQ authority/reference dependencies. Status BLOCKED; S01 OPEN. Publication SHA/readback/preservation in handoff. Stop.

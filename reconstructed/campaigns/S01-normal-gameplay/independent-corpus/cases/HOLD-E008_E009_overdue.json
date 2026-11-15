@@ -1,0 +1,221 @@
+{
+  "id": "HOLD-E008_E009_overdue",
+  "classification": "RUNNABLE",
+  "aff": "fixtures/native_hold.aff",
+  "affSha256": "603c78c37c228436bf47e37d0826aa8b2efa0d5c93177b3fefbfb253379cee6e",
+  "requirements": [
+    "S01-03.01",
+    "S01-03.02",
+    "S01-03.03"
+  ],
+  "evidence": [
+    "E026/E037 native ledgers; E008\u00a712/E009\u00a710 overdue",
+    "reference_traces/r004/native-cases.json, existing pre-execution transcription; only field normalization"
+  ],
+  "normalizedObjects": {
+    "sourceObjects": [
+      {
+        "kind": "timing",
+        "typedRawFields": [
+          "0",
+          "120.00",
+          "4.00"
+        ]
+      },
+      {
+        "kind": "hold",
+        "typedRawFields": [
+          "1000",
+          "2000",
+          "3"
+        ]
+      }
+    ],
+    "semanticExpectation": {
+      "n": 3,
+      "end": 2500,
+      "records": [
+        1250,
+        1500,
+        1750
+      ]
+    },
+    "normalizationConfidence": "Lexical source object inventory; native runtime fields/records only asserted where independently established. Not parser output from production."
+  },
+  "events": [
+    {
+      "op": "FRAME",
+      "wall": 3002,
+      "expect": {
+        "e": 0
+      }
+    },
+    {
+      "e": 1000,
+      "op": "FRAME",
+      "expect": {},
+      "pointer": 42,
+      "lane": 4
+    },
+    {
+      "e": 1000,
+      "op": "DOWN",
+      "expect": {},
+      "pointer": 42,
+      "lane": 4
+    },
+    {
+      "e": 1001,
+      "op": "FRAME",
+      "expect": {},
+      "pointer": 42,
+      "lane": 4
+    },
+    {
+      "e": 1124,
+      "op": "FRAME",
+      "expect": {
+        "pure": 0
+      },
+      "pointer": 42,
+      "lane": 4
+    },
+    {
+      "e": 1125,
+      "op": "FRAME",
+      "expect": {
+        "pure": 1,
+        "far": 0,
+        "lost": 0,
+        "shining": 1,
+        "score": 3333334,
+        "healthBits": 1104604911,
+        "holds": [
+          {
+            "resolved": [
+              1,
+              0,
+              0
+            ],
+            "holding": true,
+            "latched": true
+          }
+        ]
+      },
+      "pointer": 42,
+      "lane": 4
+    },
+    {
+      "e": 1375,
+      "op": "FRAME",
+      "expect": {
+        "pure": 2,
+        "far": 0,
+        "lost": 0,
+        "shining": 2,
+        "score": 6666668,
+        "healthBits": 1112993519,
+        "holds": [
+          {
+            "resolved": [
+              1,
+              1,
+              0
+            ],
+            "holding": true,
+            "latched": true
+          }
+        ]
+      },
+      "pointer": 42,
+      "lane": 4
+    },
+    {
+      "e": 1375,
+      "op": "UP",
+      "expect": {
+        "holds": [
+          {
+            "holding": true,
+            "latched": true
+          }
+        ]
+      },
+      "pointer": 42,
+      "lane": 4
+    },
+    {
+      "e": 2249,
+      "op": "FRAME",
+      "expect": {
+        "lost": 0,
+        "pure": 2,
+        "holds": [
+          {
+            "holding": false,
+            "resolved": [
+              1,
+              1,
+              0
+            ]
+          }
+        ]
+      },
+      "pointer": 42,
+      "lane": 4
+    },
+    {
+      "e": 2250,
+      "op": "FRAME",
+      "expect": {
+        "lost": 1,
+        "pure": 2,
+        "score": 6666668,
+        "combo": 0,
+        "healthBits": 1112469231,
+        "holds": [
+          {
+            "resolved": [
+              1,
+              1,
+              1
+            ]
+          }
+        ]
+      },
+      "pointer": 42,
+      "lane": 4
+    },
+    {
+      "e": 2500,
+      "op": "FRAME",
+      "expect": {
+        "finished": false
+      },
+      "pointer": 42,
+      "lane": 4
+    },
+    {
+      "e": 2501,
+      "op": "FRAME",
+      "expect": {
+        "finished": true,
+        "result": {
+          "pure": 2,
+          "far": 0,
+          "lost": 1,
+          "recordedLost": 1,
+          "score": 6666668,
+          "health": 51,
+          "category": 0
+        }
+      },
+      "pointer": 42,
+      "lane": 4
+    }
+  ],
+  "confidence": "CONFIRMED ORIGINAL within cited fixture; engineering adapter uses wall epoch0 and already projected coordinates",
+  "independentQA": "NOT RUN: missing dotnet; driver is not yet compile-verified",
+  "humanQualification": "Owner Windows corpus qualification required; no automated GUI",
+  "dependencies": []
+}

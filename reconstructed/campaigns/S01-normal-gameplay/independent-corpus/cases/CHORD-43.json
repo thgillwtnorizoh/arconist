@@ -1,0 +1,117 @@
+{
+  "id": "CHORD-43",
+  "classification": "RUNNABLE",
+  "aff": "fixtures/native_chord.aff",
+  "affSha256": "bd639fe540dd57874f3cff589c60f31373c02b3511c08efe8f5190a617754209",
+  "requirements": [
+    "S01-02.02"
+  ],
+  "evidence": [
+    "E027 both orders atE1500"
+  ],
+  "normalizedObjects": {
+    "sourceObjects": [
+      {
+        "kind": "timing",
+        "typedRawFields": [
+          "0",
+          "120.00",
+          "4.00"
+        ]
+      },
+      {
+        "kind": "tap",
+        "time": 1500,
+        "rawLane": 1,
+        "nativeLane": 2
+      },
+      {
+        "kind": "tap",
+        "time": 1500,
+        "rawLane": 4,
+        "nativeLane": 5
+      }
+    ],
+    "semanticExpectation": {
+      "taps": [
+        [
+          1500,
+          2
+        ],
+        [
+          1500,
+          5
+        ]
+      ],
+      "n": 2,
+      "end": 1620
+    },
+    "normalizationConfidence": "Lexical source object inventory; native runtime fields/records only asserted where independently established. Not parser output from production."
+  },
+  "events": [
+    {
+      "op": "FRAME",
+      "wall": 3002,
+      "expect": {
+        "e": 0
+      }
+    },
+    {
+      "e": 1500,
+      "op": "FRAME",
+      "expect": {}
+    },
+    {
+      "e": 1500,
+      "op": "DOWN",
+      "expect": {
+        "pure": 1,
+        "contacts": 1,
+        "ids": [
+          0
+        ],
+        "score": 5000001,
+        "healthBits": 1109445837
+      },
+      "pointer": 43,
+      "lane": 5
+    },
+    {
+      "e": 1500,
+      "op": "DOWN",
+      "expect": {
+        "pure": 2,
+        "contacts": 2,
+        "ids": [
+          0,
+          1
+        ],
+        "score": 10000002,
+        "healthBits": 1117834445
+      },
+      "pointer": 42,
+      "lane": 2
+    },
+    {
+      "e": 1500,
+      "op": "UP",
+      "expect": {},
+      "pointer": 43,
+      "lane": 5
+    },
+    {
+      "e": 1500,
+      "op": "UP",
+      "expect": {
+        "contacts": 0,
+        "pure": 2
+      },
+      "pointer": 42,
+      "lane": 2
+    }
+  ],
+  "confidence": "CONFIRMED ORIGINAL within cited fixture; engineering adapter uses wall epoch0 and already projected coordinates",
+  "independentQA": "NOT RUN: missing dotnet; driver is not yet compile-verified",
+  "humanQualification": "Owner Windows corpus qualification required; no automated GUI",
+  "dependencies": []
+}

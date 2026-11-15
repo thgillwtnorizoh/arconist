@@ -100,3 +100,8 @@ Affected requirements: S01-06.01. Next owner: W1-03. Acceptance: original-derive
 
 ## Historical conflicts retained
 E002 b/s and depth corrections already authorized: use b1/s0 and strict z>-1000. E002 continuous hold120ms is superseded for the ordinary branch by initial strict100ms latch versus start<E<end activation. E009 supplied flag1/N8 does not contradict E038 natural0/1/N7. E034 corrects13b5c2c factory versus actual selector ee264c. E041 requires real dismissal for fresh DOWN, beyond E012's supplied hide boundary. R010's earlier deferred-LINQ evidence showed late-state rows; corrected tested source materializes snapshots, preserved faulty evidence is not a kernel failure. None of these histories is rewritten.
+
+
+## W1-01 preparation update — 2026-11-15
+
+Independent corpus/driver prepared:50 scenarios,38 RUNNABLE specifications,8 EXPECTED REJECTION,4 RESEARCH BLOCKED. Actual source/checksum preflight exit2/BLOCKED: SDK10.x absent; Godot4.6.3 standard does not satisfy4.7.2.NET. No production test executed; no requirement upgraded to INDEPENDENTLY VERIFIED. W1-01-B01/B02 must be resolved before baseline verification. G006/007/009/010 and D01–D16 unchanged. See [W1-01-report.md](W1-01-report.md). S01 OPEN.

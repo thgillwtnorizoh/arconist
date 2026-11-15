@@ -61,3 +61,8 @@ Minimum: prepare a selected compatible chart/audio/metadata set, play it through
 
 ### W1-04 / Owner — final campaign verification gate
 Dependencies: every mandatory requirement implemented, all H decisions recorded, no unresolved unapproved required discrepancy. Work1 runs entire independent corpus and preserved suites at exact release SHA, verifies candidate/record/contact/clock/gauge intermediate results, full-session resource failures and replay. Work2 supplies reproducible build/export and package integrity. Owner alone performs physical Windows full-corpus qualification. Exclusions: none from declared mandatory scope. Stop at first unresolved required difference or reviewed G1–G8 acceptance evidence; only owner decides OWNER-ACCEPTED. Coverage: S01 as a subsystem, not a checkpoint count.
+
+
+## W1-01 preparation update — 2026-11-15
+
+Independent corpus/driver prepared:50 scenarios,38 RUNNABLE specifications,8 EXPECTED REJECTION,4 RESEARCH BLOCKED. Actual source/checksum preflight exit2/BLOCKED: SDK10.x absent; Godot4.6.3 standard does not satisfy4.7.2.NET. No production test executed; no requirement upgraded to INDEPENDENTLY VERIFIED. W1-01-B01/B02 must be resolved before baseline verification. G006/007/009/010 and D01–D16 unchanged. See [W1-01-report.md](W1-01-report.md). S01 OPEN.

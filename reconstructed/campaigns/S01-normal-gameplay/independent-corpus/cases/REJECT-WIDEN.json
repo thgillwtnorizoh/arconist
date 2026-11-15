@@ -1,0 +1,75 @@
+{
+  "id": "REJECT-WIDEN",
+  "classification": "EXPECTED REJECTION",
+  "aff": "fixtures/w1-widen.aff",
+  "affSha256": "3ef1410c64d212933d2f33fbc9b19208ab595c2b92183d962b5e4101ec36fb10",
+  "requirements": [
+    "S01-14.90"
+  ],
+  "evidence": [
+    "ENGINEERING production declared parser boundary; original feature evidence E003/E025/E028/E029/E036/E038/E039 as applicable; full mixed outcome NOT ESTABLISHED"
+  ],
+  "normalizedObjects": {
+    "sourceObjects": [
+      {
+        "kind": "timing",
+        "typedRawFields": [
+          "0",
+          "120.00",
+          "4.00"
+        ]
+      },
+      {
+        "kind": "scenecontrol",
+        "typedRawFields": [
+          "500",
+          "enwidenlanes",
+          "500.00",
+          "1"
+        ]
+      },
+      {
+        "kind": "tap",
+        "time": 1500,
+        "rawLane": 5,
+        "nativeLane": 6
+      }
+    ],
+    "semanticExpectation": {
+      "status": "specified AFF objects; no production normalization asserted after rejection"
+    },
+    "normalizationConfidence": "Lexical source object inventory; native runtime fields/records only asserted where independently established. Not parser output from production."
+  },
+  "events": [],
+  "confidence": "CONFIRMED ORIGINAL within cited fixture; engineering adapter uses wall epoch0 and already projected coordinates",
+  "independentQA": "NOT RUN: missing dotnet; driver is not yet compile-verified",
+  "humanQualification": "Owner Windows corpus qualification required; no automated GUI",
+  "dependencies": [
+    "D03"
+  ],
+  "futureLedger": {
+    "status": "NOT ESTABLISHED for new combinations; do not invent result",
+    "acceptance": "typed object conservation; original-derived unit weights and per-event interaction expectations required before implementation QA"
+  },
+  "futureSchedule": [
+    {
+      "e": 1000,
+      "op": "DOWN/MOVE as chart requires",
+      "expected": "Unestablished mixed arbitration; known components do not prove combined outcome"
+    },
+    {
+      "e": 1200,
+      "op": "PAUSE"
+    },
+    {
+      "wallDelay": 60000,
+      "op": "RESUME",
+      "expected": "E freeze/seek request required; native combined fixture NOT RUN"
+    },
+    {
+      "e": "chartEnd+1",
+      "op": "FRAME then replay",
+      "expected": "Unit conservation/cleanup must be independently established; no invented score"
+    }
+  ]
+}

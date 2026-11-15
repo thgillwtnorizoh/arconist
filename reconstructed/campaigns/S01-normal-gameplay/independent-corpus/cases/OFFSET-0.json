@@ -1,0 +1,84 @@
+{
+  "id": "OFFSET-0",
+  "classification": "RUNNABLE",
+  "aff": "fixtures/w1-offset0.aff",
+  "affSha256": "4c9f14dd5a7f8a1f019a243e7bd2bc283a79b2ec268be44fce8f16e51b6376da",
+  "requirements": [
+    "S01-12.01"
+  ],
+  "evidence": [
+    "E040 equality/no-request then request anchor; source equations and published O0/80/200"
+  ],
+  "normalizedObjects": {
+    "sourceObjects": [
+      {
+        "kind": "timing",
+        "typedRawFields": [
+          "0",
+          "120.00",
+          "4.00"
+        ]
+      },
+      {
+        "kind": "tap",
+        "time": 1500,
+        "rawLane": 3,
+        "nativeLane": 4
+      }
+    ],
+    "semanticExpectation": {},
+    "normalizationConfidence": "Lexical source object inventory; native runtime fields/records only asserted where independently established. Not parser output from production."
+  },
+  "events": [
+    {
+      "op": "FRAME",
+      "wall": 3000,
+      "expect": {
+        "e": 0,
+        "c": 0
+      }
+    },
+    {
+      "op": "FRAME",
+      "wall": 3001,
+      "expect": {
+        "e": 0,
+        "c": 1,
+        "b": 0
+      }
+    },
+    {
+      "op": "FRAME",
+      "wall": 4501,
+      "expect": {
+        "e": 1500
+      }
+    },
+    {
+      "op": "DOWN",
+      "wall": 4501,
+      "expect": {
+        "e": 1500,
+        "pure": 1,
+        "score": 10000001,
+        "healthBits": 1117808230
+      },
+      "pointer": 42,
+      "lane": 4
+    },
+    {
+      "op": "UP",
+      "wall": 4501,
+      "expect": {
+        "contacts": 0
+      },
+      "pointer": 42,
+      "lane": 4
+    }
+  ],
+  "confidence": "CONFIRMED ORIGINAL within cited fixture; engineering adapter uses wall epoch0 and already projected coordinates",
+  "independentQA": "NOT RUN: missing dotnet; driver is not yet compile-verified",
+  "humanQualification": "Owner Windows corpus qualification required; no automated GUI",
+  "dependencies": [],
+  "userOffset": 0
+}

@@ -629,3 +629,8 @@ MANDATORY; OPEN. Work1 must run production at exact SHA against independently es
 
 ### Campaign-boundary decisions
 HQ-01 must classify characters/gauges/mirror, special chart permissions, flick applicability, accuracy UI, configuration/local records, exact native outro, platform capacity and native artistic fidelity. Native Android queue/hardware and online progression may be separate engineering/platform campaigns; their functional dependencies on accepted S01 scope must be recorded. No exclusions are approved here. All16 provisional domains map to children above or S01-16.90.
+
+
+## W1-01 preparation update — 2026-11-15
+
+Independent corpus/driver prepared:50 scenarios,38 RUNNABLE specifications,8 EXPECTED REJECTION,4 RESEARCH BLOCKED. Actual source/checksum preflight exit2/BLOCKED: SDK10.x absent; Godot4.6.3 standard does not satisfy4.7.2.NET. No production test executed; no requirement upgraded to INDEPENDENTLY VERIFIED. W1-01-B01/B02 must be resolved before baseline verification. G006/007/009/010 and D01–D16 unchanged. See [W1-01-report.md](W1-01-report.md). S01 OPEN.

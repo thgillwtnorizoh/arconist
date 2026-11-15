@@ -1,0 +1,75 @@
+{
+  "id": "BLOCK-FADE",
+  "classification": "RESEARCH BLOCKED",
+  "aff": "fixtures/native_track_fade.aff",
+  "affSha256": "f0aca8d19dc9466c04c843dfc2cf69a0f531a1bec84c7bfb145579012386c0b5",
+  "requirements": [
+    "S01-16.90"
+  ],
+  "evidence": [
+    "E031 producer gate unresolved"
+  ],
+  "normalizedObjects": {
+    "sourceObjects": [
+      {
+        "kind": "timing",
+        "typedRawFields": [
+          "0",
+          "120.00",
+          "4.00"
+        ]
+      },
+      {
+        "kind": "scenecontrol",
+        "typedRawFields": [
+          "600",
+          "trackdisplay",
+          "2.00",
+          "0"
+        ]
+      },
+      {
+        "kind": "tap",
+        "time": 1500,
+        "rawLane": 3,
+        "nativeLane": 4
+      }
+    ],
+    "semanticExpectation": {
+      "status": "native owning producer unresolved; no fabricated output"
+    },
+    "normalizationConfidence": "Lexical source object inventory; native runtime fields/records only asserted where independently established. Not parser output from production."
+  },
+  "events": [],
+  "confidence": "CONFIRMED ORIGINAL within cited fixture; engineering adapter uses wall epoch0 and already projected coordinates",
+  "independentQA": "NOT RUN: missing dotnet; driver is not yet compile-verified",
+  "humanQualification": "Owner Windows corpus qualification required; no automated GUI",
+  "dependencies": [
+    "G-007"
+  ],
+  "futureLedger": {
+    "status": "NOT ESTABLISHED",
+    "stop": "first missing justified producer; no permission/vtable/entitlement/health patch"
+  },
+  "futureSchedule": [
+    {
+      "e": 1000,
+      "op": "DOWN/MOVE as chart requires",
+      "expected": "Unestablished mixed arbitration; known components do not prove combined outcome"
+    },
+    {
+      "e": 1200,
+      "op": "PAUSE"
+    },
+    {
+      "wallDelay": 60000,
+      "op": "RESUME",
+      "expected": "E freeze/seek request required; native combined fixture NOT RUN"
+    },
+    {
+      "e": "chartEnd+1",
+      "op": "FRAME then replay",
+      "expected": "Unit conservation/cleanup must be independently established; no invented score"
+    }
+  ]
+}

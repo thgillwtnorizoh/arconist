@@ -1,0 +1,88 @@
+{
+  "id": "ORDER-input-first",
+  "classification": "RUNNABLE",
+  "aff": "fixtures/native_late_input_expiry.aff",
+  "affSha256": "6171b14b3abd096e494183206ac7465adf6ab694a573f14b1b55b9ba0ed85f71",
+  "requirements": [
+    "S01-02.04"
+  ],
+  "evidence": [
+    "E035 original native commonE1000 and twoE1110 interleavings; normalized pointer IDs from original construction"
+  ],
+  "confidence": "CONFIRMED ORIGINAL; engineering relative clock origin",
+  "normalizedObjects": {
+    "taps": [
+      [
+        1000,
+        4
+      ],
+      [
+        1109,
+        4
+      ]
+    ],
+    "n": 2,
+    "end": 1229
+  },
+  "events": [
+    {
+      "op": "FRAME",
+      "wall": 3002,
+      "expect": {
+        "e": 0
+      }
+    },
+    {
+      "op": "FRAME",
+      "e": 1000,
+      "expect": {
+        "notes": [
+          {
+            "depth": 0
+          },
+          {
+            "depth": -881
+          }
+        ]
+      }
+    },
+    {
+      "op": "DOWN",
+      "e": 1110,
+      "pointer": 42,
+      "lane": 4,
+      "expect": {
+        "candidates": [
+          "tap:0:1000:4",
+          "tap:1:1109:4"
+        ],
+        "lost": 1,
+        "pure": 0,
+        "score": 0,
+        "healthBits": 0,
+        "outcomes": [
+          "LOST"
+        ]
+      }
+    },
+    {
+      "op": "FRAME",
+      "e": 1110,
+      "expect": {
+        "lost": 1
+      }
+    },
+    {
+      "op": "UP",
+      "e": 1110,
+      "pointer": 42,
+      "lane": 4,
+      "expect": {
+        "contacts": 0
+      }
+    }
+  ],
+  "independentQA": "NOT RUN: missing SDK",
+  "humanQualification": "Owner input/expiry/replay; no automated GUI",
+  "dependencies": []
+}

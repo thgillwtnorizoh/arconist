@@ -1,0 +1,71 @@
+{
+  "id": "TAP-m100",
+  "classification": "RUNNABLE",
+  "aff": "fixtures/w1-single.aff",
+  "affSha256": "3928005cd8a2160b4895fa0932068d7acbe99549ffc5773424979e54a88d2c23",
+  "requirements": [
+    "S01-11.01",
+    "S01-02.01"
+  ],
+  "evidence": [
+    "E002 F; original0x160ce28 classifier boundaries; NX sweep, no intermediate expiry frame"
+  ],
+  "normalizedObjects": {
+    "sourceObjects": [
+      {
+        "kind": "timing",
+        "typedRawFields": [
+          "0",
+          "120.00",
+          "4.00"
+        ]
+      },
+      {
+        "kind": "tap",
+        "time": 1000,
+        "rawLane": 3,
+        "nativeLane": 4
+      }
+    ],
+    "semanticExpectation": {},
+    "normalizationConfidence": "Lexical source object inventory; native runtime fields/records only asserted where independently established. Not parser output from production."
+  },
+  "events": [
+    {
+      "op": "FRAME",
+      "wall": 3002,
+      "expect": {
+        "e": 0
+      }
+    },
+    {
+      "e": 900,
+      "op": "DOWN",
+      "expect": {
+        "outcomes": [
+          "FAR"
+        ],
+        "pure": 0,
+        "far": 1,
+        "lost": 0,
+        "notes": [
+          {
+            "consumed": true,
+            "missed": false
+          }
+        ]
+      }
+    },
+    {
+      "e": 900,
+      "op": "UP",
+      "expect": {
+        "contacts": 0
+      }
+    }
+  ],
+  "confidence": "CONFIRMED ORIGINAL within cited fixture; engineering adapter uses wall epoch0 and already projected coordinates",
+  "independentQA": "NOT RUN: missing dotnet; driver is not yet compile-verified",
+  "humanQualification": "Owner Windows corpus qualification required; no automated GUI",
+  "dependencies": []
+}

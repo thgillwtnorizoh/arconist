@@ -1,0 +1,276 @@
+{
+  "id": "ARC-moving",
+  "classification": "RUNNABLE",
+  "aff": "fixtures/native_moving_arc.aff",
+  "affSha256": "8f47dda5f94f3f553709be131c9f0470f4bf89e9faf34e14f215dd6195a084cc",
+  "requirements": [
+    "S01-04.01",
+    "S01-04.02"
+  ],
+  "evidence": [
+    "E028 moving control; input XY from published native cache, not production cache",
+    "E009 prepared geometry differs; height0 retained here"
+  ],
+  "normalizedObjects": {
+    "sourceObjects": [
+      {
+        "kind": "timing",
+        "typedRawFields": [
+          "0",
+          "120.00",
+          "4.00"
+        ]
+      },
+      {
+        "kind": "arc",
+        "typedRawFields": [
+          "1000",
+          "2000",
+          "0.20",
+          "0.80",
+          "s",
+          "0.50",
+          "0.50",
+          "0",
+          "none",
+          "false"
+        ]
+      }
+    ],
+    "semanticExpectation": {
+      "n": 3,
+      "records": [
+        1250,
+        1500,
+        1750
+      ],
+      "height": 0
+    },
+    "normalizationConfidence": "Lexical source object inventory; native runtime fields/records only asserted where independently established. Not parser output from production."
+  },
+  "events": [
+    {
+      "op": "FRAME",
+      "wall": 3002,
+      "expect": {
+        "e": 0
+      }
+    },
+    {
+      "e": 1000,
+      "op": "FRAME",
+      "expect": {}
+    },
+    {
+      "e": 1000,
+      "op": "SPATIAL",
+      "expect": {
+        "contacts": 1,
+        "ids": [
+          0
+        ]
+      },
+      "lane": 0,
+      "sky": [
+        -255,
+        50,
+        0
+      ]
+    },
+    {
+      "e": 1001,
+      "op": "FRAME",
+      "expect": {
+        "arcs": [
+          {
+            "holding": true,
+            "owner": 0
+          }
+        ]
+      }
+    },
+    {
+      "e": 1125,
+      "op": "MOVE",
+      "expect": {},
+      "lane": 0,
+      "sky": [
+        -191.1948357,
+        50,
+        0
+      ]
+    },
+    {
+      "e": 1125,
+      "op": "FRAME",
+      "expect": {
+        "pure": 1,
+        "score": 3333334,
+        "healthBits": 1104604911,
+        "arcs": [
+          {
+            "holding": true,
+            "owner": 0
+          }
+        ]
+      }
+    },
+    {
+      "e": 1300,
+      "op": "MOVE",
+      "expect": {},
+      "lane": 0,
+      "sky": [
+        -101.9810944,
+        50,
+        0
+      ]
+    },
+    {
+      "e": 1300,
+      "op": "FRAME",
+      "expect": {
+        "pure": 1,
+        "score": 3333334,
+        "healthBits": 1104604911,
+        "arcs": [
+          {
+            "holding": true,
+            "owner": 0
+          }
+        ]
+      }
+    },
+    {
+      "e": 1375,
+      "op": "MOVE",
+      "expect": {},
+      "lane": 0,
+      "sky": [
+        -63.7106018,
+        50,
+        0
+      ]
+    },
+    {
+      "e": 1375,
+      "op": "FRAME",
+      "expect": {
+        "pure": 2,
+        "score": 6666668,
+        "healthBits": 1112993519,
+        "arcs": [
+          {
+            "holding": true,
+            "owner": 0
+          }
+        ]
+      }
+    },
+    {
+      "e": 1500,
+      "op": "MOVE",
+      "expect": {},
+      "lane": 0,
+      "sky": [
+        0.0315247,
+        50,
+        0
+      ]
+    },
+    {
+      "e": 1500,
+      "op": "FRAME",
+      "expect": {
+        "pure": 2,
+        "score": 6666668,
+        "healthBits": 1112993519,
+        "arcs": [
+          {
+            "holding": true,
+            "owner": 0
+          }
+        ]
+      }
+    },
+    {
+      "e": 1625,
+      "op": "MOVE",
+      "expect": {},
+      "lane": 0,
+      "sky": [
+        63.8367004,
+        50,
+        0
+      ]
+    },
+    {
+      "e": 1625,
+      "op": "FRAME",
+      "expect": {
+        "pure": 3,
+        "score": 10000003,
+        "healthBits": 1117860659,
+        "arcs": [
+          {
+            "holding": true,
+            "owner": 0
+          }
+        ]
+      }
+    },
+    {
+      "e": 1875,
+      "op": "MOVE",
+      "expect": {},
+      "lane": 0,
+      "sky": [
+        191.3209229,
+        50,
+        0
+      ]
+    },
+    {
+      "e": 1875,
+      "op": "FRAME",
+      "expect": {
+        "pure": 3,
+        "score": 10000003,
+        "healthBits": 1117860659,
+        "arcs": [
+          {
+            "holding": true,
+            "owner": 0
+          }
+        ]
+      }
+    },
+    {
+      "e": 1875,
+      "op": "UP",
+      "expect": {
+        "contacts": 0,
+        "arcs": [
+          {
+            "owner": -1
+          }
+        ]
+      }
+    },
+    {
+      "e": 1876,
+      "op": "FRAME",
+      "expect": {
+        "arcs": [
+          {
+            "holding": false
+          }
+        ]
+      }
+    }
+  ],
+  "confidence": "CONFIRMED ORIGINAL within cited fixture; engineering adapter uses wall epoch0 and already projected coordinates",
+  "independentQA": "NOT RUN: missing dotnet; driver is not yet compile-verified",
+  "humanQualification": "Owner Windows corpus qualification required; no automated GUI",
+  "dependencies": []
+}

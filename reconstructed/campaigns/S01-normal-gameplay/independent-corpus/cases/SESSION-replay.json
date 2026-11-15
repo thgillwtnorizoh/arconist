@@ -1,0 +1,103 @@
+{
+  "id": "SESSION-replay",
+  "classification": "RUNNABLE",
+  "aff": "fixtures/w1-single.aff",
+  "affSha256": "3928005cd8a2160b4895fa0932068d7acbe99549ffc5773424979e54a88d2c23",
+  "requirements": [
+    "S01-14.01"
+  ],
+  "evidence": [
+    "E006/E024 ordinary result; E005 strict startup; replay fresh-state invariant ENGINEERING integration, not original native replay execution"
+  ],
+  "normalizedObjects": {
+    "sourceObjects": [
+      {
+        "kind": "timing",
+        "typedRawFields": [
+          "0",
+          "120.00",
+          "4.00"
+        ]
+      },
+      {
+        "kind": "tap",
+        "time": 1000,
+        "rawLane": 3,
+        "nativeLane": 4
+      }
+    ],
+    "semanticExpectation": {},
+    "normalizationConfidence": "Lexical source object inventory; native runtime fields/records only asserted where independently established. Not parser output from production."
+  },
+  "events": [
+    {
+      "op": "FRAME",
+      "wall": 3002,
+      "expect": {
+        "e": 0
+      }
+    },
+    {
+      "e": 1000,
+      "op": "DOWN",
+      "expect": {
+        "pure": 1
+      }
+    },
+    {
+      "e": 1000,
+      "op": "UP",
+      "expect": {}
+    },
+    {
+      "e": 1120,
+      "op": "FRAME",
+      "expect": {
+        "finished": false
+      }
+    },
+    {
+      "e": 1121,
+      "op": "FRAME",
+      "expect": {
+        "finished": true,
+        "result": {
+          "pure": 1,
+          "lost": 0,
+          "score": 10000001,
+          "health": 80,
+          "category": 3
+        }
+      }
+    },
+    {
+      "e": 1200,
+      "op": "RESTART",
+      "expect": {
+        "pure": 0,
+        "score": 0,
+        "contacts": 0,
+        "finished": false,
+        "e": -3000,
+        "notes": [
+          {
+            "consumed": false,
+            "missed": false
+          }
+        ]
+      }
+    },
+    {
+      "e": 1200,
+      "op": "HOME",
+      "expect": {
+        "sessionHome": true,
+        "sessionHeld": 0
+      }
+    }
+  ],
+  "confidence": "CONFIRMED ORIGINAL within cited fixture; engineering adapter uses wall epoch0 and already projected coordinates",
+  "independentQA": "NOT RUN: missing dotnet; driver is not yet compile-verified",
+  "humanQualification": "Owner Windows corpus qualification required; no automated GUI",
+  "dependencies": []
+}
