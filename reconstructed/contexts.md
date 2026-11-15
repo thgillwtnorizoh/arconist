@@ -825,3 +825,35 @@ SHA256 434a95c4b4833df393f46f068557e8ac17ededfae7fdd8f07e8918ee9b75141d.
 Final audit publishes only R010 report/history and verifies main readback;
 tested application remains ab349d4. Stop: owner Windows/visual/physical input/
 sound/results/replay qualification pending. No R011/new expedition/Unity.
+
+## R010 owner acceptance and S01 campaign transition — 2026-11-15 (Headquarters)
+
+Owner explicitly reported successful physical Windows qualification of all six R010 checks:
+independent timing groups, visible reverse scrolling and physical judgments,
+E036 noinput, results/replay, pause/camera/focus handling, and R001–R009 gameplay/audio
+regressions. Headquarters formally accepted R010 within its declared bounded
+implementation profile; S01 ordinary gameplay as a whole is **NOT** declared complete.
+R010 tested/exported source ab349d441dfa02f3c1ff97d6d0b8837c6ebb8f0e;
+R010 published main baseline 1274b60d56cf20f95c3c354f362d779eb566268b.
+Historical R001–R010 technical/owner-qualified checkpoint evidence is preserved as
+reported, not reclassified as independent whole-system QA.
+
+Headquarters and Owner agreed to reorganize remaining reconstruction into
+**completeness campaigns** under UEP-001 Revision 2.1: a campaign/stage is the
+acceptance unit, with bounded executions and verified checkpoints inside it.
+S01 — Normal Gameplay is **OPEN**; one complete ordinary-play subsystem is the
+goal, not a fixed number of new mechanics. Initial charter:
+reconstructed/campaigns/S01-normal-gameplay/README.md.
+Provisional coverage/inventory:
+reconstructed/campaigns/S01-normal-gameplay/coverage-register.md.
+The provisional matrix is deliberately NOT independent QA or a final scope freeze.
+
+Next bounded assignment: Work 1 independent original-to-R010 completeness audit
+and finished coverage/dependency/discrepancy registers with native-source confidence,
+production paths, exact SHA, tests, cross-mechanic dependencies, uncovered requirements,
+and prioritized next execution candidates. No new native experiment or Work 2 coding
+is authorized by the S01 charter. R011 lane widening remains a proposed execution,
+NOT AUTHORIZED. S01 closes only upon complete declared coverage, development and
+independent production QA, real-owner platform qualification, explicit discrepancy
+decisions and owner acceptance. Original research and historical regression suites
+remain immutable. UEP-001 checkpoint reporting is mandatory going forward.
