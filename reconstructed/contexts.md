@@ -1021,3 +1021,43 @@ Arconist-S01-W2-01-Windows-x64.zip 76495407bytes SHA25668abe40fc49583324c62a1f08
 Arconist-S01-W2-01-Technical-Evidence.zip 378951bytes SHA2561542259af21114cad2884933d6a7148238bf91b8aae70ca7b80f9d3e0a418d87 https://chatgpt.com/library?file_id=libfile_53fc7d8b60d08191b6bb7e2a9c39235b&account_id=personal
 
 Full report reconstructed/validation/S01-W2-01.md; all33changed paths and reproduction commands recorded. Final audit child modifies documentation only. Next actor: Headquarters arrange separate Work1 exact-source QA and owner Windows qualification under their authorization. No W2-02/W1-02/new campaign begun. S01/subsystem OPEN.
+
+## S01 Headquarters W2-01 technical readiness review and Work1 QA authorization — 2026-11-16
+
+Headquarters reviewed W2-01 source/report publication
+6b84bf3e9766948a4507e8c2c44939dc912b8414 against its authorized starting
+SHA 72b320260c50cb7b2e5d3a7fcc9cf1d09a17ec43. Exact final tested/exported
+production is 49e7c263a36aebcc0316e010a629c6bfdf205f6d; final publication
+is its documentation-only child. W2-01 technical execution reports 449/449
+historical plus 35/35 new development groups, 46/46 unchanged Work1 baseline
+re-executed by Work2 (development attribution only), three 9/6/6-event
+standalone comparisons and 52/52 build-driver commands exit0. Godot
+4.7.2.NET Windows x64 export/PCK dependency/hash/CRC checks and 38-unit
+mixed chart/audio/results/replay are documented. Original E003 sine curves
+remain native-isolated and the complete mixed session is RECONSTRUCTED
+INTEGRATION, not independently observed native whole-gameplay proof.
+No fresh owner Windows launch/visual/input/audible qualification or separate
+Work1 new-production verification is claimed. The original four blocked
+G-006/G-007/G-009/G-010 cases remain NOT VERIFIED; S01 remains OPEN.
+
+Headquarters recognizes W2-01 as TECHNICAL PASS / READY FOR HUMAN
+QUALIFICATION, not final owner-accepted implementation nor S01 closure.
+Owner must physically qualify the entire 38-unit mixed Windows session,
+crossing and arc junction, mouse/keyboard targets, music, 60-second
+pause/resume, focus/cancel, results/replay and old chart regressions
+against the packaged exact exported source. The owner has not yet reported
+this build's physical result. W2-01 GitHub issue stays OPEN pending this
+qualification and independent Work1 QA.
+
+Headquarters authorizes a bounded **Work1 QA-W2-01** independent verification
+assignment: inspect exact new production, independently derive/execute
+discriminating original-derived new-source expectations for grouped mixed
+note construction, six E003 curves (native-isolated provenance),
+E028 crossing/ownership, E025 one-child guard, E038 link weights,
+shared input/recorder conservation, audio/pause/results/replay boundaries;
+preserve the old pinned R010 independent baseline and old test assertions.
+No native experiments, Work2 production edits, original oracle adjustment,
+scope exclusion, physical GUI automation or S01 acceptance are authorized.
+Independent QA and owner qualification can proceed separately; negative
+or blocked tests must be reported explicitly. Report UEP-001 checkpoint
+at exact tested SHA, with first differences and preservation.
