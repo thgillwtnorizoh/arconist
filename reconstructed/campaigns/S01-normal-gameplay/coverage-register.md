@@ -634,3 +634,8 @@ HQ-01 must classify characters/gauges/mirror, special chart permissions, flick a
 ## W1-01 preparation update — 2026-11-15
 
 Independent corpus/driver prepared:50 scenarios,38 RUNNABLE specifications,8 EXPECTED REJECTION,4 RESEARCH BLOCKED. Actual source/checksum preflight exit2/BLOCKED: SDK10.x absent; Godot4.6.3 standard does not satisfy4.7.2.NET. No production test executed; no requirement upgraded to INDEPENDENTLY VERIFIED. W1-01-B01/B02 must be resolved before baseline verification. G006/007/009/010 and D01–D16 unchanged. See [W1-01-report.md](W1-01-report.md). S01 OPEN.
+
+
+## W1-01-C01 executed CLI checkpoint — 2026-11-16
+
+Pinned production ab349d441dfa02f3c1ff97d6d0b8837c6ebb8f0e now independently executed:38 baseline+8 rejection cases pass,0fail/skip; repeat byte-identical. Four producer-blocked cases remain NOT VERIFIED. Official SDK10.0.402/runtime10.0.13 plus reference pack2.1.0 installed in isolated workspace. Historical13 CLI suites319checks and three standalone comparisons pass separately with Work2 provenance. See [W1-01-C01-report.md](W1-01-C01-report.md) and results/c01/receipt.json. Only asserted fields in this bounded corpus gain independent verification; broad requirement statuses remain OPEN. W1-01-B01 recovered for CLI; Godot4.7.2.NET is not needed for this driver. G006/007/009/010, D01–D16 completeness gaps remain. Next recommendation: authorized coherent Work2 W2-01 integration plus Work1 graph/child reference closure. No implementation begun; S01 OPEN.

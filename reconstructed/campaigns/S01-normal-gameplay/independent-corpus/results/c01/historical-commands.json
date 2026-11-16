@@ -1,0 +1,389 @@
+[
+  {
+    "suite": "arc-bridge-tests",
+    "logs": [
+      {
+        "command": [
+          "/workspace/scratch/e83b3992fd3d/toolchain-c01/dotnet/dotnet",
+          "build",
+          "/workspace/scratch/e83b3992fd3d/c01/reconstructed/arc-bridge-tests/Arconist.Arc.Bridge.Tests.csproj",
+          "-c",
+          "Release",
+          "-m:1",
+          "-nr:false"
+        ],
+        "exit": 0,
+        "stdout": "  Determining projects to restore...\n  Restored /workspace/scratch/e83b3992fd3d/c01/reconstructed/arc-bridge-tests/Arconist.Arc.Bridge.Tests.csproj (in 97 ms).\n  2 of 3 projects are up-to-date for restore.\n  Arconist.Core -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/core/bin/Release/netstandard2.1/Arconist.Core.dll\n  Arconist.Bridge -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/godot/bridge/bin/Release/netstandard2.1/Arconist.Bridge.dll\n  Arconist.Arc.Bridge.Tests -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/arc-bridge-tests/bin/Release/net10.0/Arconist.Arc.Bridge.Tests.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:03.55\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/workspace/scratch/e83b3992fd3d/toolchain-c01/dotnet/dotnet",
+          "/workspace/scratch/e83b3992fd3d/c01/reconstructed/arc-bridge-tests/bin/Release/net10.0/Arconist.Arc.Bridge.Tests.dll",
+          "/workspace/scratch/e83b3992fd3d/c01",
+          "/tmp/c01-historical/arc-bridge-tests"
+        ],
+        "exit": 0,
+        "stdout": "PASS retained pointer identity and echo guard\nPASS MOVE retains ID previous location and never judges\nPASS pointer UP removes owner and next DOWN fresh ID\nPASS invalid position clears activity while preserving identity\nPASS pause modal blocks DOWN MOVE; UP delivered\nPASS 60second arc interruption retains real contact\nPASS focus cancellation removes arc ownership without auto resume\nPASS keyboard ground input has no fabricated sky position\nPASS home restart clears ownership contacts modal and checkpoints\nPASS complete production bridge mixed chart and event identities\nR007 bridge: 10; passed:10; failed:0; skipped:0\n",
+        "stderr": ""
+      }
+    ]
+  },
+  {
+    "suite": "arc-tests",
+    "logs": [
+      {
+        "command": [
+          "/workspace/scratch/e83b3992fd3d/toolchain-c01/dotnet/dotnet",
+          "build",
+          "/workspace/scratch/e83b3992fd3d/c01/reconstructed/arc-tests/Arconist.Arc.Tests.csproj",
+          "-c",
+          "Release",
+          "-m:1",
+          "-nr:false"
+        ],
+        "exit": 0,
+        "stdout": "  Determining projects to restore...\n  Restored /workspace/scratch/e83b3992fd3d/c01/reconstructed/arc-tests/Arconist.Arc.Tests.csproj (in 82 ms).\n  1 of 2 projects are up-to-date for restore.\n  Arconist.Core -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/core/bin/Release/netstandard2.1/Arconist.Core.dll\n  Arconist.Arc.Tests -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/arc-tests/bin/Release/net10.0/Arconist.Arc.Tests.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:03.05\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/workspace/scratch/e83b3992fd3d/toolchain-c01/dotnet/dotnet",
+          "/workspace/scratch/e83b3992fd3d/c01/reconstructed/arc-tests/bin/Release/net10.0/Arconist.Arc.Tests.dll",
+          "/workspace/scratch/e83b3992fd3d/c01",
+          "/tmp/c01-historical/arc-tests"
+        ],
+        "exit": 0,
+        "stdout": "PASS typed AFF provenance, units and chart end\nPASS unsupported AFF rejection 0\nPASS unsupported AFF rejection 1\nPASS unsupported AFF rejection 2\nPASS unsupported AFF rejection 3\nPASS unsupported AFF rejection 4\nPASS unsupported AFF rejection 5\nPASS unsupported AFF rejection 6\nPASS unsupported AFF rejection 7\nPASS unsupported AFF rejection 8\nPASS unsupported AFF rejection 9\nPASS unsupported AFF rejection 10\nPASS unsupported AFF rejection 11\nPASS crossing and linked layouts explicitly excluded\nPASS native geometry H0 and prepared H500 distinct\nPASS sampling rate and geometry extra do not change checkpoints\nPASS E028 moving cache, ownership and exact recorder trace\nPASS E009 prepared static complete result separate from E028\nPASS cache precedes continuous activation; input never runs frame\nPASS strict ordinary internal extent190 and Y truncation\nPASS region exit retains owner and same identity reentry\nPASS foreign contact cannot steal established owner\nPASS E009 recorded release blocks2199 accepts2200\nPASS CANCEL removes contact claimed vector and owner\nPASS temporally separated arcs share mapped color object\nPASS inactive overdue2249/2250 and derived2HP\nPASS arc pause60seconds preserves cache owner and records\nPASS paused UP cleanup cannot resurrect old owner\nPASS timing change inside arc rejected\nPASS complete moving mixed chart and fresh replay\nPASS stale fixed point negative is engineering integration\nR007 core: 31; passed:31; failed:0; skipped:0\n",
+        "stderr": ""
+      }
+    ]
+  },
+  {
+    "suite": "arctap-bridge-tests",
+    "logs": [
+      {
+        "command": [
+          "/workspace/scratch/e83b3992fd3d/toolchain-c01/dotnet/dotnet",
+          "build",
+          "/workspace/scratch/e83b3992fd3d/c01/reconstructed/arctap-bridge-tests/Arconist.ArcTap.Bridge.Tests.csproj",
+          "-c",
+          "Release",
+          "-m:1",
+          "-nr:false"
+        ],
+        "exit": 0,
+        "stdout": "  Determining projects to restore...\n  Restored /workspace/scratch/e83b3992fd3d/c01/reconstructed/arctap-bridge-tests/Arconist.ArcTap.Bridge.Tests.csproj (in 99 ms).\n  2 of 3 projects are up-to-date for restore.\n  Arconist.Core -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/core/bin/Release/netstandard2.1/Arconist.Core.dll\n  Arconist.Bridge -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/godot/bridge/bin/Release/netstandard2.1/Arconist.Bridge.dll\n  Arconist.ArcTap.Bridge.Tests -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/arctap-bridge-tests/bin/Release/net10.0/Arconist.ArcTap.Bridge.Tests.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:03.14\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/workspace/scratch/e83b3992fd3d/toolchain-c01/dotnet/dotnet",
+          "/workspace/scratch/e83b3992fd3d/c01/reconstructed/arctap-bridge-tests/bin/Release/net10.0/Arconist.ArcTap.Bridge.Tests.dll",
+          "/workspace/scratch/e83b3992fd3d/c01",
+          "/tmp/c01-historical/arctap-bridge-tests"
+        ],
+        "exit": 0,
+        "stdout": "PASS two fresh mouse DOWN pairs publish exactly one child event\nPASS held pointer and MOVE crossing due do not judge child\nPASS echo duplicate physical DOWN and keyboard remain separate\nPASS invalid retained position cannot create a child judgment\nPASS pause60seconds modal blocks DOWN and dismissal restores delivery\nPASS retained pre-pause contact UP during modal is genuine cleanup\nPASS focus loss cancels contacts and never auto resumes\nPASS completion home replay replace child and contacts\nPASS mixed chart event order score and replay\nPASS audio strict startup offset and seek preserve child clock\nPASS failed audio seek preserves paused unconsumed child for retry\nPASS selecting old charts after child result has fresh state\nR008 bridge: 12; passed:12; failed:0; skipped:0\n",
+        "stderr": ""
+      }
+    ]
+  },
+  {
+    "suite": "arctap-tests",
+    "logs": [
+      {
+        "command": [
+          "/workspace/scratch/e83b3992fd3d/toolchain-c01/dotnet/dotnet",
+          "build",
+          "/workspace/scratch/e83b3992fd3d/c01/reconstructed/arctap-tests/Arconist.ArcTap.Tests.csproj",
+          "-c",
+          "Release",
+          "-m:1",
+          "-nr:false"
+        ],
+        "exit": 0,
+        "stdout": "  Determining projects to restore...\n  Restored /workspace/scratch/e83b3992fd3d/c01/reconstructed/arctap-tests/Arconist.ArcTap.Tests.csproj (in 80 ms).\n  1 of 2 projects are up-to-date for restore.\n  Arconist.Core -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/core/bin/Release/netstandard2.1/Arconist.Core.dll\n  Arconist.ArcTap.Tests -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/arctap-tests/bin/Release/net10.0/Arconist.ArcTap.Tests.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:02.97\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/workspace/scratch/e83b3992fd3d/toolchain-c01/dotnet/dotnet",
+          "/workspace/scratch/e83b3992fd3d/c01/reconstructed/arctap-tests/bin/Release/net10.0/Arconist.ArcTap.Tests.dll",
+          "/workspace/scratch/e83b3992fd3d/c01",
+          "/tmp/c01-historical/arctap-tests"
+        ],
+        "exit": 0,
+        "stdout": "PASS exact E025 native fixture bytes preserved\nPASS typed parsed parent child relationship and retained metadata\nPASS child alone contributes N1 and parent end2500\nPASS runtime child links exact parent and is not independently indexed tap\nPASS E025 local geometry H0 separate from Godot H500\nPASS linear child geometry uses own normalized time and parent translation\nPASS E025 first eligible DOWN then fresh duplicate consumed guard\nPASS DOWN classifies without running frame geometry or expiry\nPASS held contact MOVE FRAME never substitutes for initial DOWN\nPASS ground keyboard contacts cannot select sky children\nPASS spatial miss retains unconsumed child and permits fresh valid click\nPASS arc-tap strict extent302 differs from ordinary190\nPASS arc-tap lower margin Y clamp and integer truncation\nPASS camera frame scale depth and invalid positions\nPASS E002 tap-tier child error -121\nPASS E002 tap-tier child error -120\nPASS E002 tap-tier child error -101\nPASS E002 tap-tier child error -100\nPASS E002 tap-tier child error -51\nPASS E002 tap-tier child error -50\nPASS E002 tap-tier child error -26\nPASS E002 tap-tier child error -25\nPASS E002 tap-tier child error 0\nPASS E002 tap-tier child error 25\nPASS E002 tap-tier child error 26\nPASS E002 tap-tier child error 50\nPASS E002 tap-tier child error 51\nPASS E002 tap-tier child error 100\nPASS E002 tap-tier child error 101\nPASS E002 tap-tier child error 120\nPASS E002 tap-tier child error 121\nPASS child strict expiry1600/1601 and completed LOST\nPASS late DOWN input-first versus frame-first child guards\nPASS repeated frames do not duplicate accepted or missed units\nPASS completed reconstructed E025 chart uses existing results\nPASS mixed noncompeting chart N5 results and event order\nPASS 60second pause freezes child and resumes fresh click\nPASS retained pre-pause contact does not autojudge on resume\nPASS paused UP and CANCEL clean distinct contacts without child mutation\nPASS 100 independent sessions reset consumption and contact IDs\nPASS unsupported child lists modes domains and conflicts reject\nR008 core: 41; passed:41; failed:0; skipped:0\n",
+        "stderr": ""
+      }
+    ]
+  },
+  {
+    "suite": "audio-tests",
+    "logs": [
+      {
+        "command": [
+          "/workspace/scratch/e83b3992fd3d/toolchain-c01/dotnet/dotnet",
+          "build",
+          "/workspace/scratch/e83b3992fd3d/c01/reconstructed/audio-tests/Arconist.Audio.Tests.csproj",
+          "-c",
+          "Release",
+          "-m:1",
+          "-nr:false"
+        ],
+        "exit": 0,
+        "stdout": "  Determining projects to restore...\n  Restored /workspace/scratch/e83b3992fd3d/c01/reconstructed/headless/Arconist.Headless.csproj (in 101 ms).\n  Restored /workspace/scratch/e83b3992fd3d/c01/reconstructed/audio-tests/Arconist.Audio.Tests.csproj (in 5 ms).\n  2 of 4 projects are up-to-date for restore.\n  Arconist.Core -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/core/bin/Release/netstandard2.1/Arconist.Core.dll\n  Arconist.Headless -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/headless/bin/Release/net10.0/Arconist.Headless.dll\n  Arconist.Bridge -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/godot/bridge/bin/Release/netstandard2.1/Arconist.Bridge.dll\n  Arconist.Audio.Tests -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/audio-tests/bin/Release/net10.0/Arconist.Audio.Tests.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:04.81\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/workspace/scratch/e83b3992fd3d/toolchain-c01/dotnet/dotnet",
+          "/workspace/scratch/e83b3992fd3d/c01/reconstructed/audio-tests/bin/Release/net10.0/Arconist.Audio.Tests.dll",
+          "/workspace/scratch/e83b3992fd3d/c01",
+          "/tmp/c01-historical/audio-tests"
+        ],
+        "exit": 0,
+        "stdout": "PASS R005 native E040 A baseline\nPASS R005 native E040 B regular80\nPASS R005 native E040 C alternate80\nPASS R005 native E040 D AFF120+regular80\nPASS R005 E005 strict threshold offset -500\nPASS R005 E005 strict threshold offset -100\nPASS R005 E005 strict threshold offset 0\nPASS R005 E005 strict threshold offset 100\nPASS R005 E005 strict threshold offset 500\nPASS R005 large startup jump discards overshoot once\nPASS R005 request and anchor observer order preserves native moments\nPASS R005 throwing callback cannot change clock or suppress other observers\nPASS R005 callback timeline reentry is rejected without moving anchor\nPASS R005 DOWN can trigger BGM start without running FRAME\nPASS R005 UP and MOVE never refresh music-start clock\nPASS R005 resource loading occurs before the fresh clock origin\nPASS R005 invalid combined offset rejects before altering current run\nPASS R005 load before preroll has no premature play\nPASS R005 repeated frames and contacts never double-start audio\nPASS R005 explicit AFF120 user-40 yields80; user-120 cancels\nPASS R005 missing resource reports error while gameplay still judges\nPASS R005 invalid nonbundled resource rejected\nPASS R005 short soundtrack is rejected without changing timeline\nPASS R005 backend Play rejection does not claim acceptance\nPASS R005 backend Play exception is stopped and clock still anchored\nPASS R005 consecutive runs have fresh latch and no audio overlap\nPASS R005 menu detaches old timeline and stops audio\nPASS R005 replay detaches prior session even if old kernel advanced\nPASS R005 cleanup failure blocks new playback and remains visible\nPASS R005 diagnostic observer failures cannot corrupt lifecycle\nPASS R005 silent legacy chart has request but no backend playback\nPASS R005 backend playhead is diagnostic and never feedback\nPASS R005 BGM end reports error without replacing chart results\nPASS R005 completion stops before replay and result identity remains stable\nPASS R005 audible chart full trace independent of unavailable muted and hostile playhead output\nPASS R005 judgment diagnostics survive result contact cleanup without duplicates\nPASS R005 audio diagnostics capture session offset and pre/post clock domains\nR005 core/audio tests: 37; passed: 37; failed: 0; skipped: 0\n",
+        "stderr": ""
+      }
+    ]
+  },
+  {
+    "suite": "group-bridge-tests",
+    "logs": [
+      {
+        "command": [
+          "/workspace/scratch/e83b3992fd3d/toolchain-c01/dotnet/dotnet",
+          "build",
+          "/workspace/scratch/e83b3992fd3d/c01/reconstructed/group-bridge-tests/Arconist.Group.Bridge.Tests.csproj",
+          "-c",
+          "Release",
+          "-m:1",
+          "-nr:false"
+        ],
+        "exit": 0,
+        "stdout": "  Determining projects to restore...\n  Restored /workspace/scratch/e83b3992fd3d/c01/reconstructed/group-bridge-tests/Arconist.Group.Bridge.Tests.csproj (in 102 ms).\n  2 of 3 projects are up-to-date for restore.\n  Arconist.Core -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/core/bin/Release/netstandard2.1/Arconist.Core.dll\n  Arconist.Bridge -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/godot/bridge/bin/Release/netstandard2.1/Arconist.Bridge.dll\n  Arconist.Group.Bridge.Tests -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/group-bridge-tests/bin/Release/net10.0/Arconist.Group.Bridge.Tests.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:03.19\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/workspace/scratch/e83b3992fd3d/toolchain-c01/dotnet/dotnet",
+          "/workspace/scratch/e83b3992fd3d/c01/reconstructed/group-bridge-tests/bin/Release/net10.0/Arconist.Group.Bridge.Tests.dll",
+          "/workspace/scratch/e83b3992fd3d/c01",
+          "/tmp/c01-historical/group-bridge-tests"
+        ],
+        "exit": 0,
+        "stdout": "PASS actual keyboard mapping and separate mouse contact judge proper groups\nPASS E036 disabled DOWN retains contact but yields no candidate\nPASS repeat held key cannot manufacture duplicate DOWN\nPASS group MOVE does not judge or advance frame time\nPASS positive and negative offsets keep one clock and forward BGM\nPASS 60second pause freezes both groups and dismiss restores DOWN\nPASS failed seek preserves paused group caches and supports retry\nPASS preroll interruption does not start music early\nPASS focus cancels contacts but never resumes grouped chart\nPASS audio unavailable does not change grouped judgments and results\nPASS result menu replay and different chart discard old groups and audio\nR010 bridge: 11; passed:11; failed:0; skipped:0\n",
+        "stderr": ""
+      }
+    ]
+  },
+  {
+    "suite": "group-tests",
+    "logs": [
+      {
+        "command": [
+          "/workspace/scratch/e83b3992fd3d/toolchain-c01/dotnet/dotnet",
+          "build",
+          "/workspace/scratch/e83b3992fd3d/c01/reconstructed/group-tests/Arconist.Group.Tests.csproj",
+          "-c",
+          "Release",
+          "-m:1",
+          "-nr:false"
+        ],
+        "exit": 0,
+        "stdout": "  Determining projects to restore...\n  Restored /workspace/scratch/e83b3992fd3d/c01/reconstructed/group-tests/Arconist.Group.Tests.csproj (in 103 ms).\n  1 of 2 projects are up-to-date for restore.\n  Arconist.Core -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/core/bin/Release/netstandard2.1/Arconist.Core.dll\n  Arconist.Group.Tests -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/group-tests/bin/Release/net10.0/Arconist.Group.Tests.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:03.01\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/workspace/scratch/e83b3992fd3d/toolchain-c01/dotnet/dotnet",
+          "/workspace/scratch/e83b3992fd3d/c01/reconstructed/group-tests/bin/Release/net10.0/Arconist.Group.Tests.dll",
+          "/workspace/scratch/e83b3992fd3d/c01",
+          "/tmp/c01-historical/group-tests"
+        ],
+        "exit": 0,
+        "stdout": "PASS three exact original fixture payloads and E036 control identity\nPASS typed group identity own timing lists and source metadata\nPASS requested metadata speed and three exact native scale stages\nPASS selected timing pointer and group lifetimes independent of chart end\nPASS E029 intermediate depth query admission and recording native_timing_group.aff\nPASS E029 intermediate depth query admission and recording native_reverse_scroll.aff\nPASS three original integrator f32 returns\nPASS separate endpoint indexes keys1 and0 without contamination\nPASS retained reverse depth exceeds300 and1200 without new admission\nPASS reversal changes depth direction without reversing E\nPASS repeated bucket queries deduplicate active references\nPASS consumed grouped tap guard survives fresh pointer identities\nPASS E036 paired lifecycle noinput=False\nPASS E036 paired lifecycle noinput=True\nPASS serialized native evidence preserves per-event depths queries and candidates\nPASS noinput does not extend chart end but still sets group lifetime\nPASS disabled tap never records even on late frame\nPASS missing enabled notes expire once and result usesN\nPASS complete reconstructed session and fresh replay native_timing_group.aff\nPASS complete reconstructed session and fresh replay native_reverse_scroll.aff\nPASS complete reconstructed session and fresh replay native_noinput_group.aff\nPASS complete reconstructed session and fresh replay grouped_practice.aff\nPASS 60second interruption preserves both depths atE1100\nPASS 60second interruption preserves both depths atE1200\nPASS 60second interruption preserves both depths atE1201\nPASS group lifetime does not defer completed session to2700\nPASS unsupported braces attributes groups reverse and note types reject\nPASS extreme signed index arithmetic fails safely\nPASS old charts retain one group and original source/scale behavior\nR010 core: 29; passed:29; failed:0; skipped:0\n",
+        "stderr": ""
+      }
+    ]
+  },
+  {
+    "suite": "hold-tests",
+    "logs": [
+      {
+        "command": [
+          "/workspace/scratch/e83b3992fd3d/toolchain-c01/dotnet/dotnet",
+          "build",
+          "/workspace/scratch/e83b3992fd3d/c01/reconstructed/hold-tests/Arconist.Hold.Tests.csproj",
+          "-c",
+          "Release",
+          "-m:1",
+          "-nr:false"
+        ],
+        "exit": 0,
+        "stdout": "  Determining projects to restore...\n  Restored /workspace/scratch/e83b3992fd3d/c01/reconstructed/hold-tests/Arconist.Hold.Tests.csproj (in 101 ms).\n  3 of 4 projects are up-to-date for restore.\n  Arconist.Core -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/core/bin/Release/netstandard2.1/Arconist.Core.dll\n  Arconist.Headless -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/headless/bin/Release/net10.0/Arconist.Headless.dll\n  Arconist.Bridge -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/godot/bridge/bin/Release/netstandard2.1/Arconist.Bridge.dll\n  Arconist.Hold.Tests -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/hold-tests/bin/Release/net10.0/Arconist.Hold.Tests.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:03.20\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/workspace/scratch/e83b3992fd3d/toolchain-c01/dotnet/dotnet",
+          "/workspace/scratch/e83b3992fd3d/c01/reconstructed/hold-tests/bin/Release/net10.0/Arconist.Hold.Tests.dll",
+          "/workspace/scratch/e83b3992fd3d/c01",
+          "/tmp/c01-historical/hold-tests"
+        ],
+        "exit": 0,
+        "stdout": "PASS R004 native E026_uninterrupted\nPASS R004 native E026_reacquisition\nPASS R004 native E037_A1\nPASS R004 native E037_A2\nPASS R004 native E037_B\nPASS R004 native E008_E009_overdue\nPASS R004 typed integer hold, pure hold chart and no invented head/tail\nPASS R004 E010 density2 interval125 seven units end2500\nPASS R004 E001 tempo255 divisor boundary and midpoint fallback\nPASS R004 interval selected at hold start; later timing changes depth\nPASS R004 unsupported hold domain and grammar fail explicitly\nPASS R004 hold endpoint buckets and min endpoint admission\nPASS R004 initial strict100ms and continuous strict start/end boundaries\nPASS R004 release preserves latch until next frame clears activity\nPASS R004 all contacts release and reused pointer gets fresh generated identity\nPASS R004 wrong lane cannot latch or sustain\nPASS R004 unlatched hold cannot activate from retained earlier contact\nPASS R004 temporary release around due time allows later successful catchup\nPASS R004 due cutoff uses truncating float addition for fractional interval\nPASS R004 inactive overdue boundary inclusive and repeated frames never duplicate\nPASS R004 missed checkpoints cannot later be awarded on reacquisition\nPASS R004 hold completion equality and cached result\nPASS R004 E027 independent chord contacts False\nPASS R004 E027 independent chord contacts True\nPASS R004 bridge held key and echoes do not create duplicate DOWN\nPASS R004 bridge keyboard plus mouse same lane survives keyboard release\nPASS R004 bridge key reacquisition has new identity and checkpoint feedback\nPASS R004 bridge cleanup resets activity next frame and restart makes fresh records\nPASS R004 bridge mouse MOVE changes retained lane without input or frame judgment\nPASS R004 mouse MOVE never creates a fresh tap or contact\nPASS R004 bridge completed hold results release contacts and replay/home\nPASS R004 R004 bundled mixed chart completes with held/released/reacquired contacts\nPASS R004 native oracle detects first intermediate divergence\nR004 core/bridge tests: 33; passed: 33; failed: 0; skipped: 0\n",
+        "stderr": ""
+      }
+    ]
+  },
+  {
+    "suite": "linked-bridge-tests",
+    "logs": [
+      {
+        "command": [
+          "/workspace/scratch/e83b3992fd3d/toolchain-c01/dotnet/dotnet",
+          "build",
+          "/workspace/scratch/e83b3992fd3d/c01/reconstructed/linked-bridge-tests/Arconist.Linked.Bridge.Tests.csproj",
+          "-c",
+          "Release",
+          "-m:1",
+          "-nr:false"
+        ],
+        "exit": 0,
+        "stdout": "  Determining projects to restore...\n  Restored /workspace/scratch/e83b3992fd3d/c01/reconstructed/linked-bridge-tests/Arconist.Linked.Bridge.Tests.csproj (in 112 ms).\n  2 of 3 projects are up-to-date for restore.\n  Arconist.Core -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/core/bin/Release/netstandard2.1/Arconist.Core.dll\n  Arconist.Bridge -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/godot/bridge/bin/Release/netstandard2.1/Arconist.Bridge.dll\n  Arconist.Linked.Bridge.Tests -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/linked-bridge-tests/bin/Release/net10.0/Arconist.Linked.Bridge.Tests.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:02.87\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/workspace/scratch/e83b3992fd3d/toolchain-c01/dotnet/dotnet",
+          "/workspace/scratch/e83b3992fd3d/c01/reconstructed/linked-bridge-tests/bin/Release/net10.0/Arconist.Linked.Bridge.Tests.dll",
+          "/workspace/scratch/e83b3992fd3d/c01",
+          "/tmp/c01-historical/linked-bridge-tests"
+        ],
+        "exit": 0,
+        "stdout": "PASS one bridge DOWN retains ID through exact junction\nPASS weighted bridge events are seven units from six record identities\nPASS release before junction prevents stale successor contact\nPASS foreign pointer cannot steal shared ownership\nPASS manual junction pause60seconds retains actual contact\nPASS paused UP and CANCEL deliver cleanup and no phantom resume\nPASS focus loss cancels shared contact and never automatically resumes\nPASS native terminal UP leaves activity until next frame and cache group byte\nPASS complete result menu and replay reset group owner and records\nPASS extended practice production bridge completes N31\nR009 bridge: 10; passed:10; failed:0; skipped:0\n",
+        "stderr": ""
+      }
+    ]
+  },
+  {
+    "suite": "linked-tests",
+    "logs": [
+      {
+        "command": [
+          "/workspace/scratch/e83b3992fd3d/toolchain-c01/dotnet/dotnet",
+          "build",
+          "/workspace/scratch/e83b3992fd3d/c01/reconstructed/linked-tests/Arconist.Linked.Tests.csproj",
+          "-c",
+          "Release",
+          "-m:1",
+          "-nr:false"
+        ],
+        "exit": 0,
+        "stdout": "  Determining projects to restore...\n  Restored /workspace/scratch/e83b3992fd3d/c01/reconstructed/linked-tests/Arconist.Linked.Tests.csproj (in 104 ms).\n  1 of 2 projects are up-to-date for restore.\n  Arconist.Core -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/core/bin/Release/netstandard2.1/Arconist.Core.dll\n  Arconist.Linked.Tests -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/linked-tests/bin/Release/net10.0/Arconist.Linked.Tests.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:03.04\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/workspace/scratch/e83b3992fd3d/toolchain-c01/dotnet/dotnet",
+          "/workspace/scratch/e83b3992fd3d/c01/reconstructed/linked-tests/bin/Release/net10.0/Arconist.Linked.Tests.dll",
+          "/workspace/scratch/e83b3992fd3d/c01",
+          "/tmp/c01-historical/linked-tests"
+        ],
+        "exit": 0,
+        "stdout": "PASS exact E038 original fixture SHA and content\nPASS typed root successor and shared group/color identities\nPASS factory0 linker1 provenance before record generation\nPASS folded six records seven units and natural chart end\nPASS geometry H0 native depths and distinct H500\nPASS successor active-range membership before cache eligibility\nPASS DOWN does not activate claim or manufacture a frame\nPASS E038 complete intermediate frame recorder owner group trace\nPASS weight2 produces two independent score/gauge operations once\nPASS junction has exclusive cache/activity and no new DOWN\nPASS foreign contact cannot replace shared owner\nPASS release before successor cannot leave stale support\nPASS reacquisition obeys inherited release gate across successor\nPASS weighted missed record costs two separate damage operations\nPASS completed N7 result is reconstructed integration\nPASS extended visible practice derives its own N31 and 30 guards\nPASS pause60seconds atE900 preserves chain progression\nPASS pause60seconds atE1200 preserves chain progression\nPASS pause60seconds atE2000 preserves chain progression\nPASS pause60seconds atE2001 preserves chain progression\nPASS pause60seconds atE2002 preserves chain progression\nPASS paused UP and CANCEL clear shared contact without resetting history\nPASS new sessions reset group cache links guards and owner\nPASS group empty timestamps and unsupported window explicitly retained\nPASS ambiguous branching triple tolerance trace color timing layouts reject\nR009 core: 25; passed:25; failed:0; skipped:0\n",
+        "stderr": ""
+      }
+    ]
+  },
+  {
+    "suite": "pause-tests",
+    "logs": [
+      {
+        "command": [
+          "/workspace/scratch/e83b3992fd3d/toolchain-c01/dotnet/dotnet",
+          "build",
+          "/workspace/scratch/e83b3992fd3d/c01/reconstructed/pause-tests/Arconist.Pause.Tests.csproj",
+          "-c",
+          "Release",
+          "-m:1",
+          "-nr:false"
+        ],
+        "exit": 0,
+        "stdout": "  Determining projects to restore...\n  Restored /workspace/scratch/e83b3992fd3d/c01/reconstructed/pause-tests/Arconist.Pause.Tests.csproj (in 107 ms).\n  3 of 4 projects are up-to-date for restore.\n  Arconist.Core -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/core/bin/Release/netstandard2.1/Arconist.Core.dll\n  Arconist.Bridge -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/godot/bridge/bin/Release/netstandard2.1/Arconist.Bridge.dll\n  Arconist.Headless -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/headless/bin/Release/net10.0/Arconist.Headless.dll\n  Arconist.Pause.Tests -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/pause-tests/bin/Release/net10.0/Arconist.Pause.Tests.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:03.85\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/workspace/scratch/e83b3992fd3d/toolchain-c01/dotnet/dotnet",
+          "/workspace/scratch/e83b3992fd3d/c01/reconstructed/pause-tests/bin/Release/net10.0/Arconist.Pause.Tests.dll",
+          "/workspace/scratch/e83b3992fd3d/c01",
+          "/tmp/c01-historical/pause-tests"
+        ],
+        "exit": 0,
+        "stdout": "PASS R006 A E041 uninterrupted control\nPASS R006 E041 retained sixty-second interruption\nPASS R006 E041 up sixty-second interruption\nPASS R006 E041 cancel sixty-second interruption\nPASS R006 fixture identity remains the original native hold\nPASS R006 paused frame prevents expiry checkpoint result and counters\nPASS R006 paused core DOWN rejects before identity and timeline refresh\nPASS R006 paused adapter rejects echo new keyboard mouse and movement\nPASS R006 UP during pause reuses pointer with fresh logical identity\nPASS R006 CANCEL is distinct idempotent cleanup without judgment\nPASS R006 two contacts partial release during pause retains other identity\nPASS R006 both released contacts never resurrect on resume\nPASS R006 offset-aware seek O-120\nPASS R006 offset-aware seek O0\nPASS R006 offset-aware seek O120\nPASS R006 offset-aware seek O200\nPASS R006 E preroll pause no seek unpause or premature start\nPASS R006 pause itself may cross ordinary startup before audio pause\nPASS R006 duplicate transitions add no operations or chart advance\nPASS R006 negative modal control remains blocked after model-only resume\nPASS R006 positive explicit dismissal restores fresh DOWN\nPASS R006 focus loss cancels contacts and foreground never resumes\nPASS R006 seek failure preserves frozen clock modal and supports retry\nPASS R006 unpause failure re-pauses backend and leaves gameplay frozen\nPASS R006 pause backend failure stops sound and freezes gameplay\nPASS R006 missing music cannot masquerade as synchronized resume\nPASS R006 full mixed chart two pauses matches every effective frame\nPASS R006 menu restart after paused run clears every pause state\nPASS R006 finished cached result cannot be paused or resumed\nR006 pause tests: 29; passed: 29; failed: 0; skipped: 0\n",
+        "stderr": ""
+      }
+    ]
+  },
+  {
+    "suite": "tests",
+    "logs": [
+      {
+        "command": [
+          "/workspace/scratch/e83b3992fd3d/toolchain-c01/dotnet/dotnet",
+          "build",
+          "/workspace/scratch/e83b3992fd3d/c01/reconstructed/tests/Arconist.Tests.csproj",
+          "-c",
+          "Release",
+          "-m:1",
+          "-nr:false"
+        ],
+        "exit": 0,
+        "stdout": "  Determining projects to restore...\n  Restored /workspace/scratch/e83b3992fd3d/c01/reconstructed/tests/Arconist.Tests.csproj (in 118 ms).\n  2 of 3 projects are up-to-date for restore.\n  Arconist.Core -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/core/bin/Release/netstandard2.1/Arconist.Core.dll\n  Arconist.Headless -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/headless/bin/Release/net10.0/Arconist.Headless.dll\n  Arconist.Tests -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/tests/bin/Release/net10.0/Arconist.Tests.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:03.05\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/workspace/scratch/e83b3992fd3d/toolchain-c01/dotnet/dotnet",
+          "/workspace/scratch/e83b3992fd3d/c01/reconstructed/tests/bin/Release/net10.0/Arconist.Tests.dll",
+          "/workspace/scratch/e83b3992fd3d/c01"
+        ],
+        "exit": 0,
+        "stdout": "PASS native reference ordinary\nPASS deterministic replay ordinary x100\nPASS native reference input-first\nPASS deterministic replay input-first x100\nPASS native reference frame-first\nPASS deterministic replay frame-first x100\nPASS parser LF/CRLF, whitespace, typed lanes and dynamic end\nPASS parser rejects unsupported types and malformed AFF\nPASS classifier delta -121\nPASS classifier delta -120\nPASS classifier delta -101\nPASS classifier delta -100\nPASS classifier delta -51\nPASS classifier delta -50\nPASS classifier delta -26\nPASS classifier delta -25\nPASS classifier delta 0\nPASS classifier delta 25\nPASS classifier delta 26\nPASS classifier delta 50\nPASS classifier delta 51\nPASS classifier delta 100\nPASS classifier delta 101\nPASS classifier delta 120\nPASS classifier delta 121\nPASS strict expiry equality and one miss only\nPASS strict completion equality and cached result\nPASS consumed candidate guard and UP do not score\nPASS chronological candidates beat nearest timing error\nPASS outside-window candidate continues to later note\nPASS lane eligibility\nPASS timeline startup equality, offsets and independent touch timestamp\nPASS never-admitted old tap versus retained expiry\nPASS negative schedules and invalid contact lifecycle fail\nPASS comparator catches first divergent intermediate despite correct final\nPASS integer score arithmetic matches published mixed-count examples\nTests: 36; passed: 36; failed: 0; skipped: 0\n",
+        "stderr": ""
+      }
+    ]
+  },
+  {
+    "suite": "godot-bridge-tests",
+    "logs": [
+      {
+        "command": [
+          "/workspace/scratch/e83b3992fd3d/toolchain-c01/dotnet/dotnet",
+          "build",
+          "/workspace/scratch/e83b3992fd3d/c01/reconstructed/godot/tests/Arconist.Bridge.Tests.csproj",
+          "-c",
+          "Release",
+          "-m:1",
+          "-nr:false"
+        ],
+        "exit": 0,
+        "stdout": "  Determining projects to restore...\n  Restored /workspace/scratch/e83b3992fd3d/c01/reconstructed/godot/tests/Arconist.Bridge.Tests.csproj (in 103 ms).\n  2 of 3 projects are up-to-date for restore.\n  Arconist.Core -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/core/bin/Release/netstandard2.1/Arconist.Core.dll\n  Arconist.Bridge -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/godot/bridge/bin/Release/netstandard2.1/Arconist.Bridge.dll\n  Arconist.Bridge.Tests -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/godot/tests/bin/Release/net10.0/Arconist.Bridge.Tests.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:02.94\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/workspace/scratch/e83b3992fd3d/toolchain-c01/dotnet/dotnet",
+          "/workspace/scratch/e83b3992fd3d/c01/reconstructed/godot/tests/bin/Release/net10.0/Arconist.Bridge.Tests.dll"
+        ],
+        "exit": 0,
+        "stdout": "PASS physical D/F/J/K map to internal 2/3/4/5\nPASS Godot physical/logical/Unicode key fallback\nPASS Godot callbacks keep input-first035 order\nPASS Godot callbacks keep frame-first035 order\nPASS correct versus incorrect key changes actual judgment\nPASS echo and repeated DOWN do not manufacture input\nPASS UP does not advance E or frame\nPASS focus-loss release cleans multiple contacts\nPASS mouse contacts use separate identity and same lane core\nPASS complete two-tap result propagates same core instance\nPASS frame miss feedback is core-produced once\nPASS results release held contacts without mutating cached result\nPASS restart has fresh counters/notes/contacts/result/epoch\nPASS callback ledger preserves DOWN/UP before subsequent frame\nPASS home cleans contacts and removes result\nBridge tests: 15; passed: 15; failed: 0; skipped: 0\n",
+        "stderr": ""
+      }
+    ]
+  }
+]

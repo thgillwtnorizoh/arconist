@@ -933,3 +933,10 @@ S01 remains OPEN. W1-01 parent issue remains unresolved until an actual
 independent production baseline is verified. No Work2 production changes,
 new native experiment, scope exclusion, automatic R011, or S01 acceptance.
 UEP-001 Rev2.1 exact SHA/publication/history/independence boundaries apply.
+
+
+## S01 / Work1 / W1-01-C01 — executed independent CLI baseline — 2026-11-16
+
+Starting main34d489ebcc9167f6f10a64be833a2226ced6d412 verified. Exact independently runtime-tested production ab349d441dfa02f3c1ff97d6d0b8837c6ebb8f0e unchanged. Official SHA512-verified SDK10.0.402/runtime10.0.13 and NETStandard.Library.Ref2.1.0 (from verifiedSDK6 archive, pack only) installed non-system-wide. Driver Release build0/zero warnings/errors;46case comparisons pass (38baseline/8expected rejection),0fail/skip; confirmatory output byte-identical. Four research-blocked NOT RUN/NOT VERIFIED. No first divergence or harness correction. Historical13 CLI suites319checks plus three9/6/6-event standalone references pass separately, retaining Work2 provenance. Godot/Windows/audio-output qualification NOT RUN and not required for CLI baseline.
+
+VERIFIED CHECKPOINT for asserted bounded fields, not full S01 requirements. C01 report and separate machine/log receipts preserve old preflight, all cases/AFF/reference/test/production bytes. Coverage/dependency/discrepancy progress appended. Next: HQ-authorized Work2 integrated group/curve/contact behavior and Work1 graph/child expectations; nothing new started. No original native experiment or GUI automation. S01 OPEN. Exact publication/readback preservation in handoff.

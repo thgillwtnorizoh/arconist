@@ -1,0 +1,47 @@
+{
+  "parentSha": "34d489ebcc9167f6f10a64be833a2226ced6d412",
+  "unchangedParentFiles": 345,
+  "exactPrefixes": {
+    "reconstructed/campaigns/S01-normal-gameplay/coverage-register.md": 125062,
+    "reconstructed/campaigns/S01-normal-gameplay/dependency-register.md": 11324,
+    "reconstructed/campaigns/S01-normal-gameplay/discrepancy-register.md": 8592,
+    "reconstructed/contexts.md": 63501
+  },
+  "changedPaths": [
+    "reconstructed/campaigns/S01-normal-gameplay/W1-01-C01-report.md",
+    "reconstructed/campaigns/S01-normal-gameplay/coverage-register.md",
+    "reconstructed/campaigns/S01-normal-gameplay/dependency-register.md",
+    "reconstructed/campaigns/S01-normal-gameplay/discrepancy-register.md",
+    "reconstructed/campaigns/S01-normal-gameplay/independent-corpus/results/c01/build.log",
+    "reconstructed/campaigns/S01-normal-gameplay/independent-corpus/results/c01/dotnet-info.log",
+    "reconstructed/campaigns/S01-normal-gameplay/independent-corpus/results/c01/historical-commands.json",
+    "reconstructed/campaigns/S01-normal-gameplay/independent-corpus/results/c01/preservation.json",
+    "reconstructed/campaigns/S01-normal-gameplay/independent-corpus/results/c01/receipt.json",
+    "reconstructed/campaigns/S01-normal-gameplay/independent-corpus/results/c01/reference-pack-provenance.json",
+    "reconstructed/campaigns/S01-normal-gameplay/independent-corpus/results/c01/repeat.json",
+    "reconstructed/campaigns/S01-normal-gameplay/independent-corpus/results/c01/runtime.json",
+    "reconstructed/campaigns/S01-normal-gameplay/independent-corpus/results/c01/runtime.log",
+    "reconstructed/campaigns/S01-normal-gameplay/independent-corpus/results/c01/sdk-provenance.json",
+    "reconstructed/campaigns/S01-normal-gameplay/independent-corpus/results/c01/standalone-commands.json",
+    "reconstructed/contexts.md"
+  ],
+  "productionHarnessFixturesExpectedAndOldPreflight": "unchanged",
+  "sha256": {
+    "reconstructed/campaigns/S01-normal-gameplay/coverage-register.md": "73a523931cdf1b0f66878a2a08ae4e9ae54411a1bace5757d9138c1ead2dffa9",
+    "reconstructed/campaigns/S01-normal-gameplay/dependency-register.md": "a52da115a33b48c78bbda0577a2ae2463b27f84836af636b6ef3e4bad1332359",
+    "reconstructed/campaigns/S01-normal-gameplay/discrepancy-register.md": "673888fd3800034f1f0bf3c9708e6e2e41501face5308953833b4f20760a2b06",
+    "reconstructed/contexts.md": "02a2c075258eb2e292c8043a117736f3b422f0f4c28a05f76ee7edee58863251",
+    "reconstructed/campaigns/S01-normal-gameplay/W1-01-C01-report.md": "30d65967913f839e6f6a49dc7a4d7ae65797da05b667764429e9e50747b472a1",
+    "reconstructed/campaigns/S01-normal-gameplay/independent-corpus/results/c01/build.log": "4e6f9116b8e73bec2b841fe2afb2642fbf9f9a98d2811199784a83720041285c",
+    "reconstructed/campaigns/S01-normal-gameplay/independent-corpus/results/c01/dotnet-info.log": "d751bcfb020f2c1a52e966da0486c4fdb0ed9494a87a578ccd9783adf802cf79",
+    "reconstructed/campaigns/S01-normal-gameplay/independent-corpus/results/c01/historical-commands.json": "e9519001fc713597aab162c2d7f2e1aa8a5e3d770c09e341c98e3b42fd29e3f7",
+    "reconstructed/campaigns/S01-normal-gameplay/independent-corpus/results/c01/receipt.json": "fdd97f58abf6a8ab0c0a7fd494b19fa682450b63ef4bbc1a59b3728b1c75fb39",
+    "reconstructed/campaigns/S01-normal-gameplay/independent-corpus/results/c01/reference-pack-provenance.json": "180d6fb4a3e6f576aebef0821086b470e478b37557e20bd61c97f39fea527129",
+    "reconstructed/campaigns/S01-normal-gameplay/independent-corpus/results/c01/repeat.json": "1c29158b658e25a39002fa7d70651292f09760e835850eef598d119619269aa6",
+    "reconstructed/campaigns/S01-normal-gameplay/independent-corpus/results/c01/runtime.json": "a7816b10e0b1f594811b7f5fea6e591967495a735e82de6dd648a0be32e768d0",
+    "reconstructed/campaigns/S01-normal-gameplay/independent-corpus/results/c01/runtime.log": "bcd57b970653c6251f3035fe3c9d2b95d07fea0fc933cf0c221bee5a3d579639",
+    "reconstructed/campaigns/S01-normal-gameplay/independent-corpus/results/c01/sdk-provenance.json": "0926831912e73ca7fdf1e03e6b26f299825edded76bb5abb40ab9c89eb41fa17",
+    "reconstructed/campaigns/S01-normal-gameplay/independent-corpus/results/c01/standalone-commands.json": "ad0a48deb1d398ef69bd6f2dab8399068d39ea249f368febf5949665fd8fba08"
+  },
+  "logNormalization": "runtime.log omits trailing empty output line; command and diagnostic content retained; original /tmp log unchanged"
+}

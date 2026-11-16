@@ -1,0 +1,58 @@
+[
+  {
+    "command": [
+      "/workspace/scratch/e83b3992fd3d/toolchain-c01/dotnet/dotnet",
+      "build",
+      "reconstructed/headless/Arconist.Headless.csproj",
+      "-c",
+      "Release",
+      "-m:1",
+      "-nr:false"
+    ],
+    "exit": 0,
+    "stdout": "  Determining projects to restore...\n  All projects are up-to-date for restore.\n  Arconist.Core -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/core/bin/Release/netstandard2.1/Arconist.Core.dll\n  Arconist.Headless -> /workspace/scratch/e83b3992fd3d/c01/reconstructed/headless/bin/Release/net10.0/Arconist.Headless.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.23\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/workspace/scratch/e83b3992fd3d/toolchain-c01/dotnet/dotnet",
+      "reconstructed/headless/bin/Release/net10.0/Arconist.Headless.dll",
+      "research_harness/fixtures/ordinary_two_tap.aff",
+      "reference_traces/r001/ordinary.schedule.json",
+      "/tmp/c01-historical/ordinary.json",
+      "--reference",
+      "reference_traces/r001/ordinary.reference.json"
+    ],
+    "exit": 0,
+    "stdout": "Computed 9 events; validation pass; output /tmp/c01-historical/ordinary.json\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/workspace/scratch/e83b3992fd3d/toolchain-c01/dotnet/dotnet",
+      "reconstructed/headless/bin/Release/net10.0/Arconist.Headless.dll",
+      "research_harness/fixtures/native_late_input_expiry.aff",
+      "reference_traces/r001/input-first.schedule.json",
+      "/tmp/c01-historical/input-first.json",
+      "--reference",
+      "reference_traces/r001/input-first.reference.json"
+    ],
+    "exit": 0,
+    "stdout": "Computed 6 events; validation pass; output /tmp/c01-historical/input-first.json\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/workspace/scratch/e83b3992fd3d/toolchain-c01/dotnet/dotnet",
+      "reconstructed/headless/bin/Release/net10.0/Arconist.Headless.dll",
+      "research_harness/fixtures/native_late_input_expiry.aff",
+      "reference_traces/r001/frame-first.schedule.json",
+      "/tmp/c01-historical/frame-first.json",
+      "--reference",
+      "reference_traces/r001/frame-first.reference.json"
+    ],
+    "exit": 0,
+    "stdout": "Computed 6 events; validation pass; output /tmp/c01-historical/frame-first.json\n",
+    "stderr": ""
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "command": [
+    "python",
+    "reconstructed/campaigns/S01-normal-gameplay/independent-corpus/run.py",
+    "--production-root",
+    ".",
+    "--output",
+    "/tmp/w1-01-c01-runtime.json"
+  ],
+  "exit": 0,
+  "stdout": "",
+  "stderr": "",
+  "firstAndRepeatByteIdentical": true,
+  "runtimeSha256": "a7816b10e0b1f594811b7f5fea6e591967495a735e82de6dd648a0be32e768d0",
+  "runs": 2
+}

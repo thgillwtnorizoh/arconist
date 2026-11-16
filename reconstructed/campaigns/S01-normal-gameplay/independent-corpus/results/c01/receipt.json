@@ -1,0 +1,154 @@
+{
+  "status": "VERIFIED CHECKPOINT",
+  "assignment": "S01/W1-01-C01",
+  "startingSha": "34d489ebcc9167f6f10a64be833a2226ced6d412",
+  "independentlyRuntimeTestedProductionSha": "ab349d441dfa02f3c1ff97d6d0b8837c6ebb8f0e",
+  "sdk": "10.0.402",
+  "runtime": "10.0.13",
+  "referencePack": "NETStandard.Library.Ref2.1.0",
+  "baseline": {
+    "passed": 46,
+    "failed": 0,
+    "skipped": 0,
+    "blocked": 4,
+    "notRun": 4,
+    "categories": {
+      "TAP": {
+        "passed": 17,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0
+      },
+      "CHORD": {
+        "passed": 2,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0
+      },
+      "HOLD": {
+        "passed": 6,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0
+      },
+      "ARC": {
+        "passed": 1,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0
+      },
+      "CHILD": {
+        "passed": 1,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0
+      },
+      "LINK": {
+        "passed": 1,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0
+      },
+      "GROUP": {
+        "passed": 2,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0
+      },
+      "NOINPUT": {
+        "passed": 1,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0
+      },
+      "PAUSE": {
+        "passed": 1,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0
+      },
+      "REJECT": {
+        "passed": 8,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0
+      },
+      "BLOCK": {
+        "passed": 0,
+        "failed": 0,
+        "blocked": 4,
+        "notRun": 4
+      },
+      "OFFSET": {
+        "passed": 3,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0
+      },
+      "SESSION": {
+        "passed": 1,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0
+      },
+      "ORDER": {
+        "passed": 2,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0
+      }
+    }
+  },
+  "blockedCases": [
+    {
+      "id": "BLOCK-CAMERA",
+      "status": "NOT VERIFIED",
+      "dependencies": [
+        "G-006"
+      ]
+    },
+    {
+      "id": "BLOCK-FADE",
+      "status": "NOT VERIFIED",
+      "dependencies": [
+        "G-007"
+      ]
+    },
+    {
+      "id": "BLOCK-FLICK",
+      "status": "NOT VERIFIED",
+      "dependencies": [
+        "G-009"
+      ]
+    },
+    {
+      "id": "BLOCK-GAUGE",
+      "status": "NOT VERIFIED",
+      "dependencies": [
+        "G-010"
+      ]
+    }
+  ],
+  "firstDivergences": [],
+  "historical": {
+    "provenance": "Work2 tests run separately by Work1; not added to independent count",
+    "suites": 13,
+    "passed": 319,
+    "failed": 0,
+    "skipped": 0,
+    "standaloneComparisons": 3,
+    "events": [
+      9,
+      6,
+      6
+    ]
+  },
+  "repeat": "two complete serialized independent outputs byte-identical",
+  "limitations": [
+    "only specified fields/profile independent",
+    "fake audio and projected coordinates, not actual Godot projection",
+    "no original native experiment",
+    "no GUI/device/Windows/audio-output qualification",
+    "S01 OPEN"
+  ]
+}
