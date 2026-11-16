@@ -33,7 +33,9 @@ public sealed class Arc
 {
     public int Ordinal {get;} public int Start {get;} public int End {get;} public int SourceOrder {get;}
     public float X0 {get;} public float X1 {get;} public float Y0 {get;} public float Y1 {get;} public int Color {get;} public float Extra {get;}
-    public string Curve=>"s";public string Effect=>"none";public bool Trace {get;}public int Mode=>Trace?1:0;
+    public TimingGroup TimingGroup {get;}
+    public Arc? CrossingPartner {get;internal set;}
+    public string Curve {get;}public string Effect=>"none";public bool Trace {get;}public int Mode=>Trace?1:0;
     public IReadOnlyList<ArcTap> Children {get;}
     public int TimingTime {get;} public float Bpm {get;} public float Density {get;}
     public float Interval {get;}
@@ -49,8 +51,9 @@ public sealed class Arc
     public bool RecordsGenerated {get;private set;}
     public bool Folded {get;private set;}
     public string Id=>$"arc:{Ordinal}:{Start}:{End}:{Color}";
-    internal Arc(int ordinal,int order,int start,int end,float x0,float x1,float y0,float y1,int color,float extra,Timing timing,float density,bool trace=false,int? childTime=null)
+    internal Arc(int ordinal,int order,int start,int end,float x0,float x1,float y0,float y1,int color,float extra,Timing timing,float density,bool trace=false,int? childTime=null,TimingGroup? timingGroup=null,string curve="s")
     {
+        TimingGroup=timingGroup??throw new ArgumentNullException(nameof(timingGroup));Curve=curve;
         GenerationFlag=0; // Explicit native factory default, E038178f8fc.
         Trace=trace;
         if(trace!=childTime.HasValue)throw new NotSupportedException("Trace parents require exactly one child; ordinary arcs cannot have children in R008.");
@@ -111,10 +114,22 @@ public sealed class ArcGeometry
         if(!ReferenceEquals(child.Parent,data))throw new ArgumentException("Child belongs to another parent.");
         return Point((float)(child.Time-data.Start)/(data.End-data.Start));
     }
-    private SkyPoint Point(float u)=>new SkyPoint((X1-X0)*u,Y0+(Y1-Y0)*u,Z*u);
+    public SkyPoint Point(float u)
+    {
+        if(!float.IsFinite(u)||u<0||u>1)throw new ArgumentOutOfRangeException(nameof(u));
+        if(data.Curve=="s")return new SkyPoint((X1-X0)*u,Y0+(Y1-Y0)*u,Z*u);
+        // E003180a190: six sine families, local displacement plus absolute Y.
+        // Native-isolated math evidence; cubic rotation b remains unsupported.
+        float input=(float)Math.Sin((double)u*(Math.PI/2));
+        float output=1f-(float)Math.Sin(((double)u+1)*(Math.PI/2));
+        float ex=data.Curve=="si"||data.Curve=="sisi"||data.Curve=="siso"?input:output;
+        float ey=data.Curve=="sisi"||data.Curve=="sosi"?input:data.Curve=="siso"||data.Curve=="soso"?output:u;
+        return new SkyPoint((X1-X0)*ex,Y0+(Y1-Y0)*ey,Z*u);
+    }
 }
 public sealed class ArcColorState
 {
+    public bool Bypass {get;internal set;}public int BypassTime {get;internal set;}=-1;
     public int Color {get;} public int Owner {get;internal set;}=-1;public int ReleaseTime {get;internal set;}=-1;
     public int IntervalInteger {get;internal set;}public bool PreviouslyClaimed {get;internal set;}public bool Accepted {get;internal set;}public bool Conflict {get;internal set;}
     internal ArcColorState(int color){Color=color;}
@@ -122,6 +137,7 @@ public sealed class ArcColorState
 public sealed class ArcState:RuntimeNote
 {
     public Arc Data {get;}public ArcGeometry Geometry {get;}public ArcColorState Color {get;}
+    public override int TimingGroupId=>Data.TimingGroup.Id;
     public override string Id=>Data.Id;public override int Start=>Data.Start;public override int End=>Data.End;public override int Lane=>0;public override int SourceOrder=>Data.SourceOrder;
     public override bool Terminal=>Data.Trace?Children.All(c=>c.Terminal):Records.All(r=>r.Resolved);
     public SkyPoint Cache {get;private set;}public bool CacheEnabled {get;private set;}public float TargetX=>Geometry.X0+Cache.X;public float TargetY=>Cache.Y;

@@ -1,0 +1,312 @@
+{
+  "provenance": "E003 isolated equations; E028 original two-contact rows; E038 unit construction; mixed totals are independently counted RECONSTRUCTED composition, never a native whole mixed-session observation",
+  "crossing": [
+    [
+      1000,
+      -255,
+      0,
+      0
+    ],
+    [
+      1125,
+      -191.1948357,
+      2,
+      27.066665649414062
+    ],
+    [
+      1250,
+      -127.45272065,
+      2,
+      27.066665649414062
+    ],
+    [
+      1300,
+      -101.9810944,
+      2,
+      27.066665649414062
+    ],
+    [
+      1375,
+      -63.7106018,
+      4,
+      54.133331298828125
+    ],
+    [
+      1500,
+      0.0315247,
+      4,
+      54.133331298828125
+    ],
+    [
+      1625,
+      63.8367004,
+      6,
+      81.19999694824219
+    ],
+    [
+      1750,
+      127.5787963867,
+      6,
+      81.19999694824219
+    ],
+    [
+      1875,
+      191.3209229,
+      6,
+      81.19999694824219
+    ]
+  ],
+  "mixed": {
+    "units": 38,
+    "end": 24120,
+    "taps": 12,
+    "groundEnabled": 11,
+    "holds": 1,
+    "holdRecords": 4,
+    "arcs": 6,
+    "arcRecords": 21,
+    "children": 1,
+    "groups": 5,
+    "weightedTime": 12500,
+    "rootRecords": [
+      12250,
+      12500
+    ],
+    "successorRecords": [
+      13001,
+      13251,
+      13501,
+      13751
+    ]
+  },
+  "sine": [
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      0.125,
+      0.19509032201612825,
+      0.01921471959676957
+    ],
+    [
+      0.25,
+      0.3826834323650898,
+      0.07612046748871326
+    ],
+    [
+      0.5,
+      0.7071067811865475,
+      0.2928932188134524
+    ],
+    [
+      0.75,
+      0.9238795325112867,
+      0.6173165676349102
+    ],
+    [
+      0.875,
+      0.9807852804032304,
+      0.8049096779838717
+    ],
+    [
+      1,
+      1,
+      1
+    ]
+  ],
+  "mixedPerUnit": [
+    {
+      "pure": 1,
+      "healthBits": 1075022190,
+      "score": 263158
+    },
+    {
+      "pure": 2,
+      "healthBits": 1083410798,
+      "score": 526317
+    },
+    {
+      "pure": 3,
+      "healthBits": 1088245285,
+      "score": 789476
+    },
+    {
+      "pure": 4,
+      "healthBits": 1091799406,
+      "score": 1052635
+    },
+    {
+      "pure": 5,
+      "healthBits": 1094216650,
+      "score": 1315794
+    },
+    {
+      "pure": 6,
+      "healthBits": 1096633894,
+      "score": 1578953
+    },
+    {
+      "pure": 7,
+      "healthBits": 1098979393,
+      "score": 1842112
+    },
+    {
+      "pure": 8,
+      "healthBits": 1100188015,
+      "score": 2105271
+    },
+    {
+      "pure": 9,
+      "healthBits": 1101396637,
+      "score": 2368430
+    },
+    {
+      "pure": 10,
+      "healthBits": 1102605259,
+      "score": 2631588
+    },
+    {
+      "pure": 11,
+      "healthBits": 1103813881,
+      "score": 2894747
+    },
+    {
+      "pure": 12,
+      "healthBits": 1105022503,
+      "score": 3157906
+    },
+    {
+      "pure": 13,
+      "healthBits": 1106231125,
+      "score": 3421065
+    },
+    {
+      "pure": 14,
+      "healthBits": 1107368001,
+      "score": 3684224
+    },
+    {
+      "pure": 15,
+      "healthBits": 1107972312,
+      "score": 3947383
+    },
+    {
+      "pure": 16,
+      "healthBits": 1108576623,
+      "score": 4210542
+    },
+    {
+      "pure": 17,
+      "healthBits": 1109180934,
+      "score": 4473701
+    },
+    {
+      "pure": 18,
+      "healthBits": 1109785245,
+      "score": 4736860
+    },
+    {
+      "pure": 19,
+      "healthBits": 1110389556,
+      "score": 5000019
+    },
+    {
+      "pure": 20,
+      "healthBits": 1110993867,
+      "score": 5263177
+    },
+    {
+      "pure": 21,
+      "healthBits": 1111598178,
+      "score": 5526336
+    },
+    {
+      "pure": 22,
+      "healthBits": 1112202489,
+      "score": 5789495
+    },
+    {
+      "pure": 23,
+      "healthBits": 1112806800,
+      "score": 6052654
+    },
+    {
+      "pure": 24,
+      "healthBits": 1113411111,
+      "score": 6315813
+    },
+    {
+      "pure": 25,
+      "healthBits": 1114015422,
+      "score": 6578972
+    },
+    {
+      "pure": 26,
+      "healthBits": 1114619733,
+      "score": 6842131
+    },
+    {
+      "pure": 27,
+      "healthBits": 1115224044,
+      "score": 7105290
+    },
+    {
+      "pure": 28,
+      "healthBits": 1115756609,
+      "score": 7368449
+    },
+    {
+      "pure": 29,
+      "healthBits": 1116058764,
+      "score": 7631607
+    },
+    {
+      "pure": 30,
+      "healthBits": 1116360919,
+      "score": 7894766
+    },
+    {
+      "pure": 31,
+      "healthBits": 1116663074,
+      "score": 8157925
+    },
+    {
+      "pure": 32,
+      "healthBits": 1116965229,
+      "score": 8421084
+    },
+    {
+      "pure": 33,
+      "healthBits": 1117267384,
+      "score": 8684243
+    },
+    {
+      "pure": 34,
+      "healthBits": 1117569539,
+      "score": 8947402
+    },
+    {
+      "pure": 35,
+      "healthBits": 1117871694,
+      "score": 9210561
+    },
+    {
+      "pure": 36,
+      "healthBits": 1118173849,
+      "score": 9473720
+    },
+    {
+      "pure": 37,
+      "healthBits": 1118476004,
+      "score": 9736879
+    },
+    {
+      "pure": 38,
+      "healthBits": 1118778159,
+      "score": 10000038
+    }
+  ],
+  "mixedPerUnitProvenance": "Independent binary32 recurrence from E006 N38 ordinary gain (219/2.5)/38 and E002 all-PURE integer score; RECONSTRUCTED composition, not native whole-chart execution."
+}

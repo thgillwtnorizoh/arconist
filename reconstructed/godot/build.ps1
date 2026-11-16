@@ -15,7 +15,7 @@ $env:DOTNET_PROCESSOR_COUNT = '1'
 # skips the unreachable online advisory lookup; no test or compiler gate changes.
 if ($OfflineRestore) { $env:NuGetAudit = 'false' }
 $toolsDir = Join-Path $repoRoot 'reconstructed/out/r002-tools'
-$exportDir = Join-Path $repoRoot 'reconstructed/out/r010-windows'
+$exportDir = Join-Path $repoRoot 'reconstructed/out/s01-w2-01-windows'
 function Invoke-Dotnet {
     param([string[]]$Arguments)
     & dotnet @Arguments
@@ -81,6 +81,8 @@ try {
     Invoke-Dotnet -Arguments @('reconstructed/group-tests/bin/Release/net10.0/Arconist.Group.Tests.dll','.','reconstructed/out/r010-core')
     Invoke-Dotnet -Arguments @('build','reconstructed/group-bridge-tests/Arconist.Group.Bridge.Tests.csproj','-c','Release','-m:1','-nr:false')
     Invoke-Dotnet -Arguments @('reconstructed/group-bridge-tests/bin/Release/net10.0/Arconist.Group.Bridge.Tests.dll','.','reconstructed/out/r010-bridge')
+    Invoke-Dotnet -Arguments @('build','reconstructed/mixed-tests/Arconist.Mixed.Tests.csproj','-c','Release','-m:1','-nr:false')
+    Invoke-Dotnet -Arguments @('reconstructed/mixed-tests/bin/Release/net10.0/Arconist.Mixed.Tests.dll','.','reconstructed/out/s01-mixed')
     Push-Location $PSScriptRoot
     try {
         Invoke-Dotnet -Arguments @('build','Arconist.Godot.csproj','-c','Debug','-m:1','-nr:false')
@@ -96,6 +98,7 @@ try {
     Invoke-Godot -Arguments @('--headless','--path','reconstructed/godot','--','--arctap-tests')
     Invoke-Godot -Arguments @('--headless','--path','reconstructed/godot','--','--linked-tests')
     Invoke-Godot -Arguments @('--headless','--path','reconstructed/godot','--','--group-tests')
+    Invoke-Godot -Arguments @('--headless','--path','reconstructed/godot','--','--mixed-tests')
     Invoke-Godot -Arguments @('--headless','--path','reconstructed/godot','--export-release','Windows x64')
     if (-not (Test-Path (Join-Path $exportDir 'data_Arconist.Godot_windows_x86_64/coreclr.dll'))) { throw 'Self-contained runtime missing' }
     Write-Host ('Built Windows x64 application: '+(Join-Path $exportDir 'Arconist.exe'))

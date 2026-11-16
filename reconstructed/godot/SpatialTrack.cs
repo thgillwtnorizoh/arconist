@@ -92,7 +92,7 @@ public partial class SpatialTrack : Node3D
                 if(arc.Successors.Count==1){v.Junction=Box(Vector3.Zero,World(100,28,16),new Color("65d9f0"),true,v.Root);v.Junction.Name="LinkedJunction";}
                 arcs.Add(arc.Id,v);
             }
-            int now=core.Timeline.EffectiveTime,depth=HoldDepth(core,arc.Start);var g=arc.Geometry;
+            int now=core.Timeline.EffectiveTime,depth=HoldDepth(core,arc.Start,arc.TimingGroupId);var g=arc.Geometry;
             v.Root.Visible=!core.Finished&&now<=arc.End+300;
             var color=new Color(arc.Data.Trace?"98a4ba":arc.Holding||(arc.Group?.Active==true&&now>=arc.End)?"a5f56d":arc.Predecessor!=null?"96d3ff":arc.Data.Color==0?"79b6ff":"ff9de1");
             for(int i=0;i<v.Segments.Count;i++)
@@ -130,8 +130,8 @@ public partial class SpatialTrack : Node3D
             }
             for(int i=0;i<arc.Records.Count;i++)
             {
-                var r=arc.Records[i];float u=(float)(r.Time-arc.Start)/(arc.End-arc.Start);var m=v.Markers[i];int z=HoldDepth(core,r.Time);
-                m.Position=World(g.X0+(g.X1-g.X0)*u,g.Y0+(g.Y1-g.Y0)*u,r.Resolved?0:z);
+                var r=arc.Records[i];float u=(float)(r.Time-arc.Start)/(arc.End-arc.Start);var m=v.Markers[i];int z=HoldDepth(core,r.Time,arc.TimingGroupId);var point=g.Point(u);
+                m.Position=World(g.X0+point.X,point.Y,r.Resolved?0:z);
                 m.Visible=z>=-9500&&(r.Resolved?now-r.ResolvedAt!.Value<=300:z<=1000);
                 ((StandardMaterial3D)m.MaterialOverride).AlbedoColor=new Color(!r.Resolved?(r.Weight==2?"ffd36f":"f4f7ff"):r.Outcome=="LOST"?"ff6985":"a5f56d");
             }
@@ -168,7 +168,7 @@ public partial class SpatialTrack : Node3D
     public void SetView(bool alternate)
     {
         AlternateView=alternate;
-        if(displayedCore?.Chart.TimingGroups.Count>1)
+        if(displayedCore?.Chart.Profile==ChartProfile.S01Mixed||displayedCore?.Chart.TimingGroups.Count>1)
         {Camera.Far=16000*Unit;Camera.Position=alternate?World(220,1800,2800):World(0,1600,2600);Camera.LookAt(World(0,-550,-2000),Vector3.Up);return;}
         Camera.Far=10000*Unit;
         Camera.Position = alternate ? World(220,1100,1050) : World(0,900,900);
@@ -212,7 +212,7 @@ public partial class SpatialTrack : Node3D
                 holds.Add(hold.Id, view);
             }
             int now = core.Timeline.EffectiveTime;
-            int startDepth = HoldDepth(core, hold.Data.Start), endDepth = HoldDepth(core, hold.Data.End);
+            int startDepth = HoldDepth(core, hold.Data.Start,hold.TimingGroupId), endDepth = HoldDepth(core, hold.Data.End,hold.TimingGroupId);
             float front = Math.Min(startDepth, 0), tail = Math.Max(endDepth, -9500);
             view.Root.Visible = !core.Finished && !(hold.Terminal && now > hold.End+300);
             view.Body.Visible = now < hold.End && endDepth <= 1000 && startDepth >= -9500;
@@ -224,12 +224,12 @@ public partial class SpatialTrack : Node3D
             for(int i=0;i<hold.Records.Count;i++)
             {
                 var r=hold.Records[i];var marker=view.Markers[i];
-                int depth=HoldDepth(core,r.Time);
+                int depth=HoldDepth(core,r.Time,hold.TimingGroupId);
                 marker.Position=World(NativeX(hold.Lane),20,r.Resolved?Math.Min(depth,0):depth);
                 marker.Visible = depth >= -9500 && (r.Resolved ? now-r.ResolvedAt!.Value <= 300 : depth <= 1000);
                 ((StandardMaterial3D)marker.MaterialOverride).AlbedoColor = new Color(!r.Resolved ? "fff1c7" : r.Outcome=="LOST" ? "ff6985" : "c3fa7d");
             }
         }
     }
-    public static int HoldDepth(Kernel core,int time) => (int)((int)core.DepthAt(time)-core.DepthAt(core.Timeline.EffectiveTime));
+    public static int HoldDepth(Kernel core,int time,int group=0) => (int)((int)core.DepthAt(time,group)-core.DepthAt(core.Timeline.EffectiveTime,group));
 }

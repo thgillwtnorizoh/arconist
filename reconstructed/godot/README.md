@@ -1,3 +1,35 @@
+# S01 / Work2 / W2-01 — coherent mixed normal gameplay
+
+Explicit `ChartProfile.S01Mixed` integrates positive-timing grouped holds, ordinary
+sky arcs, one trace child and one exact constant linked pair per group with the
+same core Timeline/contact/recorder/result system. R010 remains the default
+compatibility profile for all old charts/tests and unchanged Work1 expectations.
+This versioned boundary is explicit, not a new native rejection claim.
+
+Six E003 sine families (si/so/sisi/sosi/siso/soso) share sampled geometry between
+input cache and renderer. E028 exact two-color crossing uses sequential caches,
+<200proximity, shared-color bypass/release and strict500ms persistence. General
+curved crossing, cubic b, graph/child conflicts and reverse/noinput long notes
+remain OPEN/rejected. No new native experiment or GUI/OS automation.
+
+New first S01 mixed chart has N38/end24120, five timing groups, F hold + curved
+mouse simultaneously, a trace-child click, grouped N7 linked pair, two-contact
+crossing with a ground tap, reverse D/K pair and visible disabled tap. Existing
+32s original CC0 Clockwork Steps is bundled; all18 earlier choices/bytes remain.
+Mouse L/R are separate actual button identities sharing the real cursor; real
+ScreenTouch/Drag/CANCEL use separate indices. Synthetic cross-emulation is disabled
+to prevent duplicated contacts. F6/F7/F8 and pause/focus policy are preserved.
+
+See [checkpoint](../validation/S01-W2-01.md), [owner guide](PLAYER.txt),
+[campaign](../campaigns/S01-normal-gameplay/README.md). S01 remains OPEN. New Work1
+exact-production independent QA and owner physical qualification are NOT RUN.
+Full logged build uses pinned Godot4.7.2.NET / SDK10.0.402, runtime10.0.13 and
+DOTNET_PROCESSOR_COUNT=1. It must execute449prior+22mixed+13Godot=484development
+groups, the46unchanged W1cases as Work2 compatibility rerun, three standalone
+references and complete Windows/PCK/runtime/CRC/extracted-file checks.
+
+Historical documentation follows unchanged.
+
 # R010 — Independent timing groups and bounded reverse scrolling
 
 R009 owner acceptance on November12,2026 is recorded from Headquarters. R010 is

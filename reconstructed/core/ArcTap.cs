@@ -19,6 +19,7 @@ public sealed class ArcTapState:RuntimeNote
     // Sampled local Z scrolls with the parent; initial input independently uses Z0.
     public SkyPoint WorldPosition=>new SkyPoint(Parent.Geometry.X0+Local.X,Local.Y,Parent.Depth+Local.Z);
     public SkyPoint InputTarget=>new SkyPoint(Parent.Geometry.X0+Local.X,Local.Y,0);
+    public override int TimingGroupId=>Parent.TimingGroupId;
     public override string Id=>Data.Id;
     public override int Start=>Data.Time;
     public override int End=>Data.Time;

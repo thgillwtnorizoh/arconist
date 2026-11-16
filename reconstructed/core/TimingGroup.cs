@@ -110,9 +110,9 @@ internal static class GroupBodyParser
 {
     // Bounded structural scanner: semicolons terminate records, braces delimit ONE
     // independent group. Parentheses/arc child brackets remain inside each record.
-    internal static List<AffStatement> Read(string body,List<TimingGroup> groups,List<List<Timing>> lists)
+    internal static List<AffStatement> Read(string body,List<TimingGroup> groups,List<List<Timing>> lists,int maximumGroups=2)
     {
-        var result=new List<AffStatement>();int at=0,group=0,order=0;bool opened=false;
+        var result=new List<AffStatement>();int at=0,group=0,order=0;
         void Space(){while(at<body.Length&&char.IsWhiteSpace(body[at]))at++;}
         while(true)
         {
@@ -125,13 +125,13 @@ internal static class GroupBodyParser
             }
             if(body.Substring(at).StartsWith("timinggroup",StringComparison.Ordinal))
             {
-                if(group!=0||opened)throw new NotSupportedException("One nonnested independent timing group supported.");
+                if(group!=0||groups.Count>=maximumGroups)throw new NotSupportedException("One nonnested independent timing group supported.");
                 int brace=body.IndexOf('{',at);if(brace<0)throw new FormatException("Timing group requires braces.");
                 string head=body.Substring(at,brace-at).Trim();
                 var match=System.Text.RegularExpressions.Regex.Match(head,@"^timinggroup\(\s*(noinput)?\s*\)$");
                 if(!match.Success)throw new NotSupportedException("Unsupported timing-group descriptor.");
-                group=1;opened=true;at=brace+1;
-                var list=new List<Timing>();lists.Add(list);groups.Add(new TimingGroup(1,order++,match.Groups[1].Value,list));continue;
+                group=groups.Count;at=brace+1;
+                var list=new List<Timing>();lists.Add(list);groups.Add(new TimingGroup(group,order++,match.Groups[1].Value,list));continue;
             }
             int end=body.IndexOf(';',at);if(end<0)throw new FormatException("AFF record requires semicolon.");
             string text=body.Substring(at,end-at).Trim();

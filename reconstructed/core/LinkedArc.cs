@@ -21,7 +21,7 @@ internal static class OrdinaryPairLinker
             var a=arcs[i-1];var b=arcs[i];
             if((long)b.Start>=a.End+1000L)continue; // Preserve old isolated/trace spacing.
             bool constant=a.X0==a.X1&&a.Y0==a.Y1&&b.X0==b.X1&&b.Y0==b.Y1;
-            bool strict=!a.Trace&&!b.Trace&&a.Children.Count==0&&b.Children.Count==0&&
+            bool strict=a.Curve=="s"&&b.Curve=="s"&&!a.Trace&&!b.Trace&&a.Children.Count==0&&b.Children.Count==0&&
                 a.SourceOrder<b.SourceOrder&&a.End==b.Start&&constant&&a.X1==b.X0&&a.Y1==b.Y0&&a.Color==0&&b.Color==0&&
                 a.Bpm==120&&b.Bpm==120&&a.Density==1&&b.Density==1&&a.TimingTime==b.TimingTime&&
                 a.End-a.Start>=1000&&b.End-b.Start>=1000&&(a.End-a.Start)%250==1&&(b.End-b.Start)%250==0;

@@ -1,3 +1,64 @@
+ARCONIST S01 / W2-01 — mixed ordinary gameplay qualification build
+
+Extract the ENTIRE ZIP. Open Arconist.exe beside PCK/runtime/notices. Windows10/11
+x64/OpenGL3.3; no SDK/editor/separate .NET install. Select first S01 Mixed, offset0.
+Music: original CC0 Clockwork Steps. Approximately3s preroll; HUD shows effective E.
+
+OWNER MIXED-CHART GUIDE (all times HUD seconds at combined offset0)
+ 1. Tap D2.0,F2.5,J3.0,K3.5.
+ 2. Hold F4.0–6.5 while holding LEFT MOUSE and following the rising curved white
+    sky target from left to right. Ground hold uses independent60BPM timing;
+    curved sky uses default120. Release F and mouse after6.5.
+ 3. Tap D7.5. At9.0 CLICK gold sky child, then RELEASE. Grey trace is not a hold;
+    keeping a previous mouse contact over it must not award it. Tap K10.5.
+ 4. At12.0 hold LEFT MOUSE over central sky target until14.01. Junction13.001:
+    DO NOT press again. Gold weighted record12.5 resolves12.375 as two units.
+ 5. At16.0 press BOTH LEFT AND RIGHT mouse at midpoint between the two sky
+    targets (nativeX0,Y300 in this view). Keep both buttons held through17.0.
+    Both logical contacts follow your actual cursor; expanded camera-dependent
+    native bounds permit this desktop method. Tap K16.5 while retaining buttons.
+    Release both after17.0. Touch devices can use two actual touch contacts.
+ 6. Pink D reverse section turns at20.0; tap D and K at20.3. This deliberate
+    native-derived300ms interval is between musical beats; no hidden offset.
+ 7. At21.5 try grey D and tap F. Grey noinput can neither score nor miss.
+    Tap final J24.0. Results follow24.120. Perfect38PURE/max38/score10000038.
+ 8. Replay and return to menu: all contacts, groups, latches, bypass flags,
+    records, child consumption and sound playback must start fresh.
+ 9. In another run keep F + mouse held around5.25, P/Escape, wait AT LEAST60s,
+    explicitly R/Resume. Time/geometry freeze, music seeks to E+offset and resumes.
+    Resume must not create a DOWN. Try releasing one contact while paused.
+10. Test focus loss: it pauses AND CANCELs uncertain contacts; focus return
+    never resumes. Explicitly resume/repress. Ordinary arc reacquisition gate
+    can last up to1000effective ms; do not mistake cancelled input for retention.
+11. Test F6/F7 and observe target/input agreement. F8 captures only on your request.
+    Test original R007/R008/R009/R010 and Clockwork Steps choices remain usable.
+12. Smaller S01 Crossing and Grouped Long Note selections discriminate geometry/
+    two contacts and independent hold/arc depth; their counts differ from N38.
+
+D/F/J/K ground; left mouse ground/sky, right mouse SKY ONLY, two distinct button
+IDs. Both retained mouse contacts move with actual cursor. Delivered touch/drag/
+CANCEL are supported without synthesizing matching mouse events. No automated
+input or aim-assist exists. For mouse ground taps click near green judgment line.
+
+Native basis: E003 sine equations isolated, E028 two-contact crossing, E025 child,
+E038 natural linked units, E029 depth, E036 disabled tap. Whole mixed composition,
+desktop/touch transport and placeholder graphics are RECONSTRUCTED/ENGINEERING.
+No claim of full original mixed runtime or Android hardware equivalence. Actual
+Windows appearance/physical input/audio/sync/results/replay are OWNER ONLY.
+
+S01 is OPEN. R010 old profile remains for historical charts. Unsupported: cubic b,
+curved/extra crossing layouts, branching/triple/tolerant links, multiple children,
+ordinary-parent children, ground/child conflicts within240ms, simultaneous sky arcs
+across groups, reverse/noinput long notes, arbitrary attributes, widening, flicks,
+special gauges/skills, exact GPU/FM0D, continuous drift correction or Unity.
+
+Diagnostics: %APPDATA%/Godot/app_userdata/Arconist S01 - Mixed Normal Gameplay/evidence
+Includes profile, per-group clocks/scales/keys, contacts/claims, sequential proximity,
+bypass timestamps, latches/cache/weighted recorder events, audio/errors and results.
+TECHNICAL CHECKPOINT ONLY; owner and separate new-production Work1 QA pending.
+
+PRESERVED HISTORICAL GUIDES (old first-choice labels follow)
+
 ARCONIST R010 — independent timing groups / reverse-scroll qualification build
 
 Extract the ENTIRE ZIP. Launch Arconist.exe beside its PCK/runtime directory.

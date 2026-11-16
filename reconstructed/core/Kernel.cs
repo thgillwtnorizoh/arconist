@@ -150,6 +150,7 @@ public sealed class HoldState : RuntimeNote
     public override int End => Data.End;
     public override int Lane => Data.Lane;
     public override int SourceOrder => Data.SourceOrder;
+    public override int TimingGroupId=>Data.TimingGroup.Id;
     public override bool Terminal => Records.All(r => r.Resolved);
     public bool Latched { get; internal set; }
     public bool Holding { get; internal set; }
@@ -225,6 +226,7 @@ public sealed class Kernel
     public IReadOnlyList<ArcGroupState> ArcGroups {get;}
     public List<RecorderObservation> RecorderTrace {get;}=new List<RecorderObservation>();
     public int RecorderCalls {get;private set;}
+    public List<ProximityObservation> ProximityTrace {get;}=new List<ProximityObservation>();
     private readonly Dictionary<int,ArcColorState> colors=new Dictionary<int,ArcColorState>();
     private readonly HashSet<int> claimed=new HashSet<int>();
     public IReadOnlyDictionary<int,ArcColorState> Colors=>colors;
@@ -267,15 +269,15 @@ public sealed class Kernel
         RequestedSpeed=requestedSpeed;MetadataBpm=baseBpm;
         Chart = chart; Timeline = new Timeline(originMs, chart.AudioOffset, userOffset);
         EffectiveSpeed = (requestedSpeed * 180f) / baseBpm;
-        TimingGroups=chart.TimingGroups.Select(g=>new TimingGroupState(g,EffectiveSpeed,chart.EndTime,chart.TimingGroups.Count>1)).ToArray();
+        TimingGroups=chart.TimingGroups.Select(g=>new TimingGroupState(g,EffectiveSpeed,chart.EndTime,chart.TimingGroups.Count>1||chart.Profile==ChartProfile.S01Mixed)).ToArray();
         scales = TimingGroups[0].Records.Select(t=>t.Scale).ToArray();
         if (scales.Any(s => !float.IsFinite(s) || s <= 0)) throw new ArgumentException("Unsupported timing scale.");
         var notes = chart.Taps.Select(t => new NoteState(t)).ToList(); Notes = notes.AsReadOnly();
         var holds = chart.Holds.Select(h => new HoldState(h)).ToList(); Holds = holds.AsReadOnly();
         var arcs=chart.Arcs.Select(a=>{
             if(!colors.TryGetValue(a.Color,out var color))colors[a.Color]=color=new ArcColorState(a.Color);
-            int ti=chart.Timings.ToList().FindLastIndex(t=>t.Time<=a.Start);
-            return new ArcState(a,new ArcGeometry(a,scales[ti],arcHeight),color);
+            var timingGroup=TimingGroups[a.TimingGroup.Id];int ti=a.TimingGroup.Timings.ToList().FindLastIndex(t=>t.Time<=a.Start);
+            return new ArcState(a,new ArcGeometry(a,timingGroup.Records[ti].Scale,arcHeight),color);
         }).ToList();Arcs=arcs.AsReadOnly();ArcTaps=arcs.SelectMany(a=>a.Children).ToList().AsReadOnly();
         var byDefinition=arcs.ToDictionary(a=>a.Data);var groups=new List<ArcGroupState>();
         foreach(var arc in arcs)
@@ -298,7 +300,7 @@ public sealed class Kernel
     public float DepthAt(int time,int group) => TimingGroups[group].DepthAt(time);
     public int CurrentDepth(RuntimeNote note) => (int)(note.PreDepth-DepthAt(Timeline.EffectiveTime,note.TimingGroupId));
 
-    private void BeginEvent() { Candidates.Clear(); Classifications.Clear(); Expired.Clear(); Judgments.Clear(); RecorderTrace.Clear(); }
+    private void BeginEvent() { Candidates.Clear(); Classifications.Clear(); Expired.Clear(); Judgments.Clear(); RecorderTrace.Clear(); ProximityTrace.Clear(); }
 
     public void Frame(long wallMs)
     {
@@ -355,8 +357,26 @@ public sealed class Kernel
                 { hold.Holding = true; hold.activating.Add(contact.Id); }
         foreach(var color in colors.Values){color.Accepted=false;color.Conflict=false;}
         foreach(var group in ArcGroups){group.Active=false;group.Accepted=false;}
+        foreach(var color in colors.Values)if(color.Bypass&&(long)color.BypassTime+500<now)color.Bypass=false;
         foreach(var arc in Arcs)
-        {arc.Holding=false;if(arc.Active)arc.UpdateCache(now);else if(arc.Group!=null)arc.ClearEligibility();if(arc.CacheEnabled&&arc.Group!=null)arc.Group.CacheRelated=true;}
+        {
+            arc.Holding=false;
+            if(arc.Active)arc.UpdateCache(now);else if(arc.Group!=null)arc.ClearEligibility();
+            if(arc.CacheEnabled&&arc.Group!=null)arc.Group.CacheRelated=true;
+            // E028 cache write THEN compare against the neighbor's still-old cache.
+            if(Chart.Profile==ChartProfile.S01Mixed&&arc.Data.CrossingPartner!=null&&arc.Active&&arc.CacheEnabled)
+            {
+                var other=byArc(arc.Data.CrossingPartner);
+                if(other.Active&&other.CacheEnabled)
+                {
+                    float dx=arc.TargetX-other.TargetX,dy=arc.TargetY-other.TargetY;
+                    float distance=(float)Math.Sqrt(dx*dx+dy*dy);
+                    ProximityTrace.Add(new ProximityObservation(now,arc.Id,other.Id,distance));
+                    if(distance<200f)foreach(var c in new[]{arc.Color,other.Color})
+                    {c.Bypass=true;c.BypassTime=now;ReleaseColor(c,c.Owner,now);}
+                }
+            }
+        }
         foreach(var contact in contacts.Values.OrderBy(c=>c.Id))
             if(contact.Sky.HasValue)foreach(var arc in active.OfType<ArcState>())
                 if(!arc.Data.Trace&&arc.CacheEnabled&&ArcSpatial.Matches(arc.TargetX,arc.TargetY,contact.Sky.Value)&&Claim(arc.Color,contact.Id,now,(int)arc.Data.Interval)){arc.Holding=true;arc.Group?.Accept(arc);}
@@ -441,18 +461,25 @@ public sealed class Kernel
 
     public void MoveSpatial(int pointer,int lane,SkyContact? sky)
     {Move(pointer,lane);var contact=contacts[pointer];contact.PreviousSky=contact.Sky;contact.Sky=sky.HasValue&&sky.Value.Valid?sky:null;}
+    private ArcState byArc(Arc definition)=>Arcs.Single(a=>ReferenceEquals(a.Data,definition));
+    private void ReleaseColor(ArcColorState color,int id,int now)
+    {
+        if(color.Owner!=id||id<0)return;
+        color.Owner=-1;if(claimed.Remove(id)&&color.PreviouslyClaimed&&!color.Bypass)color.ReleaseTime=now;
+        if(color.Bypass)color.Conflict=false;
+    }
     private bool Claim(ArcColorState color,int id,int now,int interval)
     {
         color.IntervalInteger=interval;
         if(color.ReleaseTime!=-1){if((long)now-color.ReleaseTime<(int)Math.Min(4L*interval,1000)){if(!color.Accepted)color.Conflict=true;return false;}color.ReleaseTime=-1;}
-        if(color.Owner==id){color.Accepted=true;return true;}
+        if(color.Owner==id||color.Bypass){color.Accepted=true;return true;}
         if(color.Owner!=-1||claimed.Contains(id)){if(!color.Accepted)color.Conflict=true;return false;}
         color.Owner=id;color.Accepted=color.PreviouslyClaimed=true;claimed.Add(id);return true;
     }
     private void ReleaseArcContact(int pointer)
     {
         if(!contacts.TryGetValue(pointer,out var contact))return;
-        foreach(var color in colors.Values)if(color.Owner==contact.Id){color.Owner=-1;if(claimed.Remove(contact.Id)&&color.PreviouslyClaimed)color.ReleaseTime=Timeline.EffectiveTime;}
+        foreach(var color in colors.Values)ReleaseColor(color,contact.Id,Timeline.EffectiveTime);
     }
     // Ordinary UP only cleans retained contacts; it does not refresh the judgment clock (035).
     public void Up(int pointer) { BeginEvent(); ReleaseArcContact(pointer); if (!contacts.Remove(pointer)) throw new ArgumentException("UP pointer is not retained."); }

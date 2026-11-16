@@ -44,9 +44,9 @@ public sealed class GameplaySession
                 return char.ToUpperInvariant((char)code);
         return '\0';
     }
-    public void Start(string aff, int userOffset=0, string chartId="ordinary", string? audioResource=null,int arcHeight=500)
+    public void Start(string aff, int userOffset=0, string chartId="ordinary", string? audioResource=null,int arcHeight=500,ChartProfile profile=ChartProfile.R010)
     {
-        var chart=Chart.Parse(aff);
+        var chart=Chart.Parse(aff,profile);
         _ = checked(chart.AudioOffset+userOffset);
         ReleaseAll(); DetachAudio(); Audio?.End("restart");
         held.Clear(); PauseModalActive=false; PauseReason=""; Feedback = "READY"; Run++;

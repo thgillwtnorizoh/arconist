@@ -973,3 +973,35 @@ Preserve all 449 historical R010 technical groups and 46 independent expected
 cases, run relevant pipelines where available, publish exact source and tests.
 Windows physical visual/input/audio qualification is owner-only and required
 when Work2 delivers playable build. S01 subsystem OPEN, UEP-001 Rev2.1.
+
+## S01 / Work2 / W2-01 — preparation and integration authority — 2026-11-16
+
+Verified remote/start72b320260c50cb7b2e5d3a7fcc9cf1d09a17ec43 and ancestry to
+accepted ab349d4 and independent cdfd058. Read complete reconstruction history,
+standing instructions, campaign/A01/registers and W1 baseline corpus/driver.
+S01 remains OPEN. Work2 does not amend W1 expected bytes or self-certify new
+independent QA. New explicit S01Mixed profile shares the runtime; default R010
+profile preserves historical supported/rejection behavior. E003 sine geometry
+is native-isolated evidence; E028 supplies the sequential crossing cache/bypass
+and two-contact oracle. General graphs/child conflicts/reverse or noinput long
+notes and G006/G007/G009/G010 stay OPEN. No new ARM64 experiment/GUI/OS injection.
+
+## S01 / Work2 / W2-01 — focused integrated verification — 2026-11-16
+
+Added explicit S01Mixed profile; old R010 parser/bridge defaults retained for
+449historical groups and unchanged46case W1corpus. Positive independent holds,
+arcs,trace child and exact linked pair use own scales/index/lifetimes,one E.
+Six E003 sine families share curve samples/current cache/markers. Cubic b remains
+OPEN. Exact translated E028 crossing preserves sequential old/new cache operands,
+shared color bypass/release and strict500ms persistence; native two-contact ledger
+matches. General graph/child/curve crossing conflicts remain OPEN/rejected.
+
+New audible mixedN38/end24120 chart integrates Fhold+curve,child click,grouped
+N7chain,two-contact crossing+ground tap,reverse pair and disabled tap. L/R buttons
+and touch/drag/CANCEL map real delivered contacts; no synthesized OS input or
+mouse/touch cross-emulation. Owner physical qualification pending. New22focused/
+13Godot groups pass; same effective ledger after60s pause and unavailable audio,
+independent E006/E002 per-unit gauge/score conservation. Work2 runs unchanged W1
+C#driver46/46compatibilitycases; manifest baseline retained, new-source receipt
+separate. Not separate new-production Work1 QA. No original research changes.
+Full484groups/3references/Windows pipeline/publication follows; S01 OPEN.

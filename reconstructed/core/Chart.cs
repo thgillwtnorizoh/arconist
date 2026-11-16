@@ -3,6 +3,8 @@ using System.Text.RegularExpressions;
 
 namespace Arconist.Core;
 
+public enum ChartProfile { R010, S01Mixed }
+
 public sealed class Tap
 {
     public int Ordinal { get; }
@@ -26,11 +28,14 @@ public sealed class Hold
     public int End { get; }
     public int RawLane { get; }
     public int Lane => RawLane + 1;
+    public TimingGroup TimingGroup { get; }
+    public Timing Timing { get; }
     public float Interval { get; }
     public IReadOnlyList<int> Checkpoints { get; }
     public string Id => $"hold:{Ordinal}:{Start}:{End}:{Lane}";
-    internal Hold(int ordinal, int sourceOrder, int start, int end, int rawLane, float bpm, float density)
+    internal Hold(int ordinal, int sourceOrder, int start, int end, int rawLane, float bpm, float density, TimingGroup group)
     {
+        TimingGroup=group;Timing=group.Timings.Last(t=>t.Time<=start);
         Ordinal = ordinal; SourceOrder = sourceOrder; Start = start; End = end; RawLane = rawLane;
         // E001/010: literal f32 stages; ordinary generation flag0, no head/tail.
         float beat = 60000f / bpm;
@@ -68,6 +73,7 @@ public sealed class Timing
 
 public sealed class Chart
 {
+    public ChartProfile Profile { get; }
     public IReadOnlyList<Tap> Taps { get; }
     public IReadOnlyList<TimingGroup> TimingGroups { get; }
     public IReadOnlyList<Timing> Timings { get; }
@@ -77,10 +83,12 @@ public sealed class Chart
     public float Density { get; }
     public int JudgmentUnits { get; }
     public int EndTime { get; }
-    private Chart(List<Tap> taps, List<Hold> holds, List<Arc> arcs, List<Timing> timings, List<TimingGroup> groups, int offset, float density)
+    private Chart(List<Tap> taps, List<Hold> holds, List<Arc> arcs, List<Timing> timings, List<TimingGroup> groups, int offset, float density, ChartProfile profile)
     {
+        Profile=profile;
         TimingGroups=groups.AsReadOnly();
-        foreach(var group in groups.Where(g=>g.Id!=0))group.LifetimeEnd=checked(taps.Where(t=>t.Group==group).Max(t=>t.Time)+1200);
+        foreach(var group in groups.Where(g=>g.Id!=0))
+            group.LifetimeEnd=checked(taps.Where(t=>t.Group==group).Select(t=>t.Time).Concat(holds.Where(h=>h.TimingGroup==group).Select(h=>h.End)).Concat(arcs.Where(a=>a.TimingGroup==group).Select(a=>a.End)).DefaultIfEmpty(0).Max()+1200);
         Taps = taps.AsReadOnly(); Timings = groups[0].Timings; AudioOffset = offset;
         Density = density; Holds = holds.AsReadOnly(); Arcs=arcs.AsReadOnly();
         JudgmentUnits = checked(taps.Count(t=>t.InputEnabled) + holds.Sum(h => h.Checkpoints.Count)+arcs.Sum(a=>a.RecordDefinitions.Sum(r=>r.Weight)+a.Children.Count));
@@ -91,8 +99,11 @@ public sealed class Chart
     }
 
     // Deliberately bounded grammar: no silent omission of unsupported AFF constructs.
-    public static Chart Parse(string text)
+    public static Chart Parse(string text) => Parse(text,ChartProfile.R010);
+    public static Chart Parse(string text,ChartProfile profile)
     {
+        if(!Enum.IsDefined(typeof(ChartProfile),profile))throw new ArgumentException("Unknown compatibility profile.");
+        bool mixed=profile==ChartProfile.S01Mixed;
         text = text.Replace("\r\n", "\n");
         int separator = text.IndexOf("\n-\n", StringComparison.Ordinal);
         if (separator < 0) throw new FormatException("AFF requires a newline-hyphen-newline separator.");
@@ -112,20 +123,20 @@ public sealed class Chart
         if (!float.IsFinite(density) || density <= 0) throw new FormatException("Density must be positive and finite.");
         var taps = new List<Tap>(); var timings = new List<Timing>();
         var lists=new List<List<Timing>>{timings};var groups=new List<TimingGroup>{new TimingGroup(0,-1,"",timings)};
-        var parsedHolds = new List<(int start, int end, int raw, int order)>();
-        var parsedArcs=new List<(string[] fields,int order,int? child)>();
+        var parsedHolds = new List<(int start, int end, int raw, int order, int group)>();
+        var parsedArcs=new List<(string[] fields,int order,int? child,int group)>();
         int sourceOrder = 0;
         string body = text.Substring(separator + 3);
         const string number = @"[0-9]+\.[0-9]+";
         var tapPattern = new Regex(@"^\(\s*([0-9]+)\s*,\s*([0-9]+)\s*\)$", RegexOptions.CultureInvariant);
         var holdPattern = new Regex(@"^hold\(\s*([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9]+)\s*\)$", RegexOptions.CultureInvariant);
         var timingPattern = new Regex(@"^timing\(\s*([0-9]+)\s*,\s*(-?" + number + @")\s*,\s*(" + number + @")\s*\)$", RegexOptions.CultureInvariant);
-        var statements = GroupBodyParser.Read(body,groups,lists);
+        var statements = GroupBodyParser.Read(body,groups,lists,mixed?8:2);
         foreach(var statement in statements)
         {
             string s = statement.Text;
             int groupId=statement.Group;
-            if(groupId!=0&&(s.StartsWith("hold(",StringComparison.Ordinal)||s.StartsWith("arc(",StringComparison.Ordinal)))throw new NotSupportedException("Independent groups support taps only.");
+            if(!mixed&&groupId!=0&&(s.StartsWith("hold(",StringComparison.Ordinal)||s.StartsWith("arc(",StringComparison.Ordinal)))throw new NotSupportedException("Independent groups support taps only.");
             if(s.StartsWith("arc(",StringComparison.Ordinal))
             {
                 // One bounded child list on a trace parent. No silent stripping of suffixes.
@@ -134,10 +145,11 @@ public sealed class Chart
                 var fields=arcSyntax.Groups[1].Value.Split(',').Select(f=>f.Trim()).ToArray();
                 if(fields.Length!=10&&fields.Length!=11)throw new NotSupportedException("Unsupported arc field count.");
                 bool trace=fields[9]=="true";int? child=arcSyntax.Groups[2].Success?int.Parse(arcSyntax.Groups[2].Value,CultureInfo.InvariantCulture):null;
-                if(fields[4]!="s"||fields[8]!="none"||(fields[9]!="false"&&!trace)||trace!=child.HasValue)throw new NotSupportedException("Only ordinary linear arcs or trace linear parents with exactly one child supported.");
+                if((fields[4]!="s"&&(!mixed||!new[]{"si","so","sisi","sosi","siso","soso"}.Contains(fields[4])))||fields[8]!="none"||(fields[9]!="false"&&!trace)||trace!=child.HasValue)throw new NotSupportedException("Only ordinary linear arcs or trace linear parents with exactly one child supported.");
                 foreach(int f in new[]{0,1,7})if(!Regex.IsMatch(fields[f],@"^[0-9]+$"))throw new NotSupportedException("Arc integer syntax required.");
                 foreach(int f in new[]{2,3,5,6}.Concat(fields.Length==11?new[]{10}:Array.Empty<int>()))if(!Regex.IsMatch(fields[f],@"^[0-9]+\.[0-9]+$"))throw new NotSupportedException("Arc decimal syntax required.");
-                parsedArcs.Add((fields,sourceOrder++,child));continue;
+                if(trace&&fields[4]!="s")throw new NotSupportedException("Curved child-parent production remains unverified.");
+                parsedArcs.Add((fields,sourceOrder++,child,groupId));continue;
             }
             var tap = tapPattern.Match(s);
             if (tap.Success)
@@ -158,7 +170,7 @@ public sealed class Chart
                 // R004 supports >=2ms, with finite distinct interior checkpoint times.
                 if (end <= start || (long)end - start < 2 || end > int.MaxValue - 1000000 || raw < 1 || raw > 4)
                     throw new NotSupportedException("Holds require duration >=2ms and raw integer lanes 1..4 within the timestamp domain.");
-                parsedHolds.Add((start, end, raw, sourceOrder++)); continue;
+                parsedHolds.Add((start, end, raw, sourceOrder++,groupId)); continue;
             }
             var timing = timingPattern.Match(s);
             if (!timing.Success) throw new NotSupportedException($"Unsupported AFF statement: {s}");
@@ -177,7 +189,7 @@ public sealed class Chart
                 throw new NotSupportedException("Every group needs timing at zero and distinct timing times.");
         }
         if(timings.Any(t=>t.Bpm<=0))throw new NotSupportedException("Default-group reverse is deferred.");
-        if(groups.Count>1)
+        if(groups.Count>1&&!mixed)
         {
             var separate=lists[1];var members=taps.Where(t=>t.Group.Id==1).ToArray();
             if(parsedHolds.Count!=0||parsedArcs.Count!=0||members.Length==0||!taps.Any(t=>t.Group.Id==0)||taps.Count>10000||taps.Any(t=>t.Time>600000)||density!=1||timings.Count!=1||timings[0].Bpm!=120||timings[0].Beats!=4||separate[0].Bpm!=60||separate[0].Beats!=4||separate.Count>2)
@@ -185,20 +197,35 @@ public sealed class Chart
             if(separate.Count==2&&(groups[1].Attribute!=""||separate[1].Bpm!=-60||separate[1].Beats!=4||separate[1].Time<=0||members.Any(t=>t.Time!=separate[1].Time+300)))
                 throw new NotSupportedException("Reverse subset requires +60/-60 and grouped taps300ms after the single reversal; no reverse noinput.");
         }
+        if(mixed)
+        {
+            if(taps.Count+parsedHolds.Count+parsedArcs.Count>10000||taps.Any(t=>t.Time>600000)||parsedHolds.Any(h=>h.end>600000)||parsedArcs.Any(a=>int.Parse(a.fields[1],CultureInfo.InvariantCulture)>600000))throw new NotSupportedException("Mixed profile exceeds10000objects/600000ms.");
+            foreach(var group in groups)
+            {
+                bool longNotes=parsedHolds.Any(h=>h.group==group.Id)||parsedArcs.Any(a=>a.group==group.Id);
+                if(longNotes&&(!group.InputEnabled||group.Timings.Any(t=>t.Bpm<0)))throw new NotSupportedException("Reverse/noinput long notes require original reference closure.");
+                if(group.Id!=0&&!taps.Any(t=>t.Group==group)&&!longNotes)throw new NotSupportedException("Empty independent groups deferred.");
+                if(group.Timings.Any(t=>t.Bpm<0))
+                {
+                    var ts=group.Timings;
+                    if(!group.InputEnabled||ts.Count!=2||ts[0].Bpm!=60||ts[1].Bpm!=-60||ts[1].Time<=0||taps.Where(t=>t.Group==group).Any(t=>t.Time!=ts[1].Time+300))throw new NotSupportedException("Only the E029 +60/-60 retained-tap reverse profile is integrated.");
+                }
+            }
+        }
         taps.Sort((a, b) => { int c = a.Time.CompareTo(b.Time); return c != 0 ? c : a.Ordinal.CompareTo(b.Ordinal); });
         var holds = parsedHolds.Select((h, i) => new Hold(i, h.order, h.start, h.end, h.raw,
-            timings.Last(t => t.Time <= h.start).Bpm, density)).OrderBy(h => h.Start).ThenBy(h => h.SourceOrder).ToList();
+            lists[h.group].Last(t => t.Time <= h.start).Bpm, density,groups[h.group])).OrderBy(h => h.Start).ThenBy(h => h.SourceOrder).ToList();
         var arcs=parsedArcs.Select((a,i)=>{
             var f=a.fields;int start=int.Parse(f[0],CultureInfo.InvariantCulture),end=int.Parse(f[1],CultureInfo.InvariantCulture),color=int.Parse(f[7],CultureInfo.InvariantCulture);
             float V(int k)=>float.Parse(f[k],CultureInfo.InvariantCulture);
             float x0=V(2),x1=V(3),y0=V(5),y1=V(6),extra=f.Length==11?V(10):1;
             if(start<0||(long)end-start<2||(long)end-start>600000||end>int.MaxValue-1000000||color>1||!float.IsFinite(extra)||extra<0||extra>4||new[]{x0,x1,y0,y1}.Any(v=>!float.IsFinite(v)||v<0||v>1))throw new NotSupportedException("Arc outside bounded R007 domain.");
-            if(timings.Any(t=>t.Time>start&&t.Time<end))throw new NotSupportedException("Timing changes inside an arc deferred.");
+            if(lists[a.group].Any(t=>t.Time>start&&t.Time<end))throw new NotSupportedException("Timing changes inside an arc deferred.");
             if(a.child.HasValue&&(a.child.Value<=start||a.child.Value>=end||color!=0))throw new NotSupportedException("R008 child must be strictly inside a trace color0 parent.");
             if(a.child.HasValue&&(taps.Any(t=>Math.Abs((long)t.Time-a.child.Value)<=240)||holds.Any(h=>h.Start<=a.child.Value+240L&&h.End>=a.child.Value-240L)))throw new NotSupportedException("Ground/child candidate conflicts within240ms are deferred.");
-            return new Arc(i,a.order,start,end,x0,x1,y0,y1,color,extra,timings.Last(t=>t.Time<=start),density,f[9]=="true",a.child);
+            return new Arc(i,a.order,start,end,x0,x1,y0,y1,color,extra,lists[a.group].Last(t=>t.Time<=start),density,f[9]=="true",a.child,groups[a.group],f[4]);
         }).OrderBy(a=>a.Start).ThenBy(a=>a.SourceOrder).ToList();
-        OrdinaryPairLinker.LinkAndGenerate(arcs);
-        return new Chart(taps, holds, arcs, timings, groups, offset, density);
+        if(mixed)MixedArcConstruction.Link(arcs);else OrdinaryPairLinker.LinkAndGenerate(arcs);
+        return new Chart(taps, holds, arcs, timings, groups, offset, density,profile);
     }
 }

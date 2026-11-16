@@ -639,3 +639,31 @@ Independent corpus/driver prepared:50 scenarios,38 RUNNABLE specifications,8 EXP
 ## W1-01-C01 executed CLI checkpoint — 2026-11-16
 
 Pinned production ab349d441dfa02f3c1ff97d6d0b8837c6ebb8f0e now independently executed:38 baseline+8 rejection cases pass,0fail/skip; repeat byte-identical. Four producer-blocked cases remain NOT VERIFIED. Official SDK10.0.402/runtime10.0.13 plus reference pack2.1.0 installed in isolated workspace. Historical13 CLI suites319checks and three standalone comparisons pass separately with Work2 provenance. See [W1-01-C01-report.md](W1-01-C01-report.md) and results/c01/receipt.json. Only asserted fields in this bounded corpus gain independent verification; broad requirement statuses remain OPEN. W1-01-B01 recovered for CLI; Godot4.7.2.NET is not needed for this driver. G006/007/009/010, D01–D16 completeness gaps remain. Next recommendation: authorized coherent Work2 W2-01 integration plus Work1 graph/child reference closure. No implementation begun; S01 OPEN.
+
+
+## W2-01 mixed-profile development checkpoint — 2026-11-16
+
+New explicit S01Mixed compatibility profile in shared production runtime. Partial
+VERIFIED COMPONENT coverage only; existing immutable A01/R010 statements remain
+historical. This does not close any complete S01 row, discrepancy or H decision.
+
+| Requirement/dependency | Bounded coverage gained | Remaining / next verification |
+|---|---|---|
+|S01-01.01/02,D01|typed mixed notes/source/group/N/end; R010 profile preserved|full grammar and native abnormal/default branches OPEN|
+|S01-07.01–04,D02|positive groups hold/arc/trace/link; shared E, own scales/index/lifetime; E029 taps/noinput coexist|reverse/noinput long notes and broader reversal OPEN|
+|S01-04.01/03,D04|six E003 sine families, sampled cache/render/marker agreement|native-isolated equations only; cubic b/internal tempo changes OPEN|
+|S01-04.02/04,D05|translated exact E028 crossing, sequential proximity, bypass release/500ms lifetime/two contacts|general crossings/equality200/one-contact native execution OPEN|
+|S01-04.05,D06|E038 exact pair in positive independent group, flag0/1/fold/unit callbacks|graphs/tolerances/nonempty window/history OPEN|
+|S01-05.01,D07|one E025 trace child grouped, fresh DOWN/guard, same runtime|multi-child/ordinary parent/general candidate conflicts OPEN|
+|S01-10/11/12/14,D10–13|38-unit audible mixed bridge/nodes/results/replay/pause; L/R/touch transport|Work2 development only; exact new-production Work1 and owner pending|
+
+Work1 driver/fixtures/oracles remain unchanged. Work2 reruns its46legacy cases via
+the unchanged C# driver against current core/bridge R010 compatibility path. The
+manifest's historical productionSha stays ab349d4 as provenance; outer execution
+receipt records actual tested commit. Pinned-byte run.py is not misrepresented as
+accepting changed source. Four original-producer cases stay NOT RUN/NOT VERIFIED.
+No new independent Mixed-profile verification is claimed. G006/G007/G009/G010,
+D03 widening, H decisions and every other required campaign gap remain OPEN.
+Full449historical+new mixed/Godot/Windows execution evidence and exact source are
+in ../../validation/S01-W2-01.md. Scope/acceptance authority remains Headquarters/
+owner; do not initiate W1-02/W2-02 or another campaign from this checkpoint.
