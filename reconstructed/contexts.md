@@ -1061,3 +1061,31 @@ scope exclusion, physical GUI automation or S01 acceptance are authorized.
 Independent QA and owner qualification can proceed separately; negative
 or blocked tests must be reported explicitly. Report UEP-001 checkpoint
 at exact tested SHA, with first differences and preservation.
+
+## S01 W2-01 physical Windows owner qualification — 2026-11-16
+
+Owner submitted a direct report that all six assigned W2-01 Windows
+human-qualification groups PASS: (1) launch and audible music,
+(2) mixed ground/hold/curved-note play, (3) fresh arc-tap and connected
+arc junction, (4) crossing and reverse scrolling, (5) results/replay,
+and (6) pause/focus recovery and regression checks. This is OWNER
+ATTESTATION of performed physical Windows tests, not Headquarters'
+independent personal execution or automated GUI evidence. The reported
+scope covers six grouped checks; details not separately asserted remain
+not independently attested. No unchecked group was inferred PASS.
+Qualified delivered Windows build is documented in
+reconstructed/validation/S01-W2-01.md, corresponding to exact exported
+production 49e7c263a36aebcc0316e010a629c6bfdf205f6d and published
+handoff 6b84bf3e9766948a4507e8c2c44939dc912b8414.
+
+Headquarters accepts W2-01's owner-physical qualification gate as
+PASS for the reported six groups. Final W2-01 implementation checkpoint
+acceptance remains PENDING separately executed Work1 QA-W2-01 at exact
+production SHA. GitHub Issues #5 (W2-01) and #6 (QA-W2-01) remain OPEN
+for that reason. No more routine physical checks are demanded for the
+already reported six groups, absent QA-discovered defects requiring
+focused requalification. G-006/G-007/G-009/G-010, broad normal-gameplay
+requirements and S01 stage acceptance remain OPEN. No production edits,
+native experiments, additional owner testing or QA were performed by
+this Headquarters recording operation. UEP-001 Rev2.1 evidence
+separation preserved.
