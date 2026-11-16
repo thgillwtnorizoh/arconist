@@ -92,6 +92,8 @@ public sealed class Chart
         Taps = taps.AsReadOnly(); Timings = groups[0].Timings; AudioOffset = offset;
         Density = density; Holds = holds.AsReadOnly(); Arcs=arcs.AsReadOnly();
         JudgmentUnits = checked(taps.Count(t=>t.InputEnabled) + holds.Sum(h => h.Checkpoints.Count)+arcs.Sum(a=>a.RecordDefinitions.Sum(r=>r.Weight)+a.Children.Count));
+        if(profile==ChartProfile.S01Mixed && JudgmentUnits==0)
+            throw new NotSupportedException("Zero-unit charts require original reference closure.");
         var enabled=taps.Where(t=>t.InputEnabled).ToArray();
         EndTime = Math.Max(enabled.Length == 0 ? 0 : checked(enabled.Max(t => t.Time) + 120),
                            holds.Count == 0 ? 0 : checked(holds.Max(h => h.End) + 500));
