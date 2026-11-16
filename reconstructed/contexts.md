@@ -1005,3 +1005,19 @@ independent E006/E002 per-unit gauge/score conservation. Work2 runs unchanged W1
 C#driver46/46compatibilitycases; manifest baseline retained, new-source receipt
 separate. Not separate new-production Work1 QA. No original research changes.
 Full484groups/3references/Windows pipeline/publication follows; S01 OPEN.
+
+W2-01 boundary repair: a separate zero-unit/noinput-only probe observed N0 and BaseGain Infinity. S01Mixed now explicitly rejects zero-unit charts as ENGINEERING unsupported-domain handling; original zero-unit behavior remains NOT VERIFIED. First full pipeline at4f5460c succeeded; retained as pre-repair evidence. Final exact-source pipeline must be rerun after this change.
+
+## S01 / Work2 / W2-01 final technical delivery — 2026-11-16
+
+VERIFIED CHECKPOINT / TECHNICAL PASS — READY FOR HUMAN QUALIFICATION. Starting72b320260c50cb7b2e5d3a7fcc9cf1d09a17ec43; first implementation4f5460c9117be417ce31cb0813c74effd6b89098; final exact tested/exported/published source49e7c263a36aebcc0316e010a629c6bfdf205f6d. Official Godot4.7.2.NET + SDK10.0.402/runtime10.0.13, serialized DOTNET_PROCESSOR_COUNT=1. Final driver exit0,52commands exit0;449historical+22newcore/bridge+13newGodot=484/484groups,0fail/skip; unchanged Work1 corpus46/46 development rerun; three original normalized comparisons pass9/6/6events. Four producer cases G006/G007/G009/G010 NOT RUN/NOT VERIFIED. Work1 new-source independent verification and physical Windows owner qualification pending; no acceptance claimed.
+
+S01Mixed explicit production profile: positive independent-group holds/arcs/onechild/constantlinkedpair; original six sine equations and exact E028 crossing sequential caches/bypass; shared input/recorders/results.38unit audible mixed full ledgers match uninterrupted/60secondpause/missingaudio schedules; perfect score10000038/liveH87.59996795654297. Native whole-mixed execution not claimed. New L/R/touch transport/camera is ENGINEERING. Old default R010/449assertions/46expectations/18chart/music bytes preserved. Original research/harness/reference and341protected files unchanged; prior contexts67107byte prefix and campaign-register prefixes preserved. Expanded inventory and reports in sealed evidence.
+
+Windows export:21AFF/music resources actual PCKread/hash verified,AMD64 complete runtime191dependencyassets,202payloadfiles+manifest,CRC/extractionhashesPASS. Windows launch/audio/GUI/physical gameplay NOT RUN. Append-only coverage/dependency/discrepancy notes preserve all campaign requirements and open research gaps; no new native experiments/GUIautomation/OSinjection.
+
+Arconist-S01-W2-01-Windows-x64.zip 76495407bytes SHA25668abe40fc49583324c62a1f08012ad7299175ab78a944d1b036f995bdd5ff5e6 https://chatgpt.com/library?file_id=libfile_1368cb0d20e88191b4e0786285700693&account_id=personal
+
+Arconist-S01-W2-01-Technical-Evidence.zip 378951bytes SHA2561542259af21114cad2884933d6a7148238bf91b8aae70ca7b80f9d3e0a418d87 https://chatgpt.com/library?file_id=libfile_53fc7d8b60d08191b6bb7e2a9c39235b&account_id=personal
+
+Full report reconstructed/validation/S01-W2-01.md; all33changed paths and reproduction commands recorded. Final audit child modifies documentation only. Next actor: Headquarters arrange separate Work1 exact-source QA and owner Windows qualification under their authorization. No W2-02/W1-02/new campaign begun. S01/subsystem OPEN.

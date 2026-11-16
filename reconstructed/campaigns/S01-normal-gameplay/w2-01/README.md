@@ -13,3 +13,7 @@ execution. Full committed-source484groups/3references/52commands/export/publicat
 must pass before technical readiness. No GUI/OS injection/native experiment.
 Next: complete technical gate and package, then stop for owner/new-production W1QA.
 S01 remains OPEN. Report: reconstructed/validation/S01-W2-01.md.
+
+## Final recovery checkpoint
+
+Exact tested/exported main source 49e7c263a36aebcc0316e010a629c6bfdf205f6d.484/484development groups,46unchanged Work1 development-rerun cases,3standalone references;0fail/skip;52commands exit0. Real Godot import/build/headless execution and Windows export completed; all21AFF/audio/PCK/runtime/CRC/extracted hashes pass. Final source follows explicit zero-unit boundary repair; prior run retained as pre-repair evidence. Artifact digests/downloads, full33pathinventory and owner guide: ../../../validation/S01-W2-01.md. Separate Work1 QA and owner human Windows qualification NOT RUN/PENDING. Final main audit child changes only documentation. S01 OPEN; stop here without new assignment.
