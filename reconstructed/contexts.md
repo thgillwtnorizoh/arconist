@@ -940,3 +940,36 @@ UEP-001 Rev2.1 exact SHA/publication/history/independence boundaries apply.
 Starting main34d489ebcc9167f6f10a64be833a2226ced6d412 verified. Exact independently runtime-tested production ab349d441dfa02f3c1ff97d6d0b8837c6ebb8f0e unchanged. Official SHA512-verified SDK10.0.402/runtime10.0.13 and NETStandard.Library.Ref2.1.0 (from verifiedSDK6 archive, pack only) installed non-system-wide. Driver Release build0/zero warnings/errors;46case comparisons pass (38baseline/8expected rejection),0fail/skip; confirmatory output byte-identical. Four research-blocked NOT RUN/NOT VERIFIED. No first divergence or harness correction. Historical13 CLI suites319checks plus three9/6/6-event standalone references pass separately, retaining Work2 provenance. Godot/Windows/audio-output qualification NOT RUN and not required for CLI baseline.
 
 VERIFIED CHECKPOINT for asserted bounded fields, not full S01 requirements. C01 report and separate machine/log receipts preserve old preflight, all cases/AFF/reference/test/production bytes. Coverage/dependency/discrepancy progress appended. Next: HQ-authorized Work2 integrated group/curve/contact behavior and Work1 graph/child expectations; nothing new started. No original native experiment or GUI automation. S01 OPEN. Exact publication/readback preservation in handoff.
+
+## S01 Headquarters W1-01-C01 acceptance and W2-01 authorization — 2026-11-16
+
+Headquarters reviewed and accepted Work1 W1-01-C01 as a VERIFIED CHECKPOINT:
+publication cdfd058f8a91bfd9ee3b53f6555424099e338bf0, tested R010 production
+ab349d441dfa02f3c1ff97d6d0b8837c6ebb8f0e. Independent original-derived CLI
+suite 46/46 (38 runnable and 8 expected rejections) PASS, no skips/failures;
+four G-006/G-007/G-009/G-010 cases remain NOT VERIFIED; repeat serialized
+snapshots byte-identical. Release driver build zero warnings/errors; historical
+Work2-authored CLI suites 319/319 and three 9/6/6-event standalone comparisons
+reported PASS separately. SDK10.0.402/runtime10.0.13/ref2.1.0 recovery verified
+through archived receipts; no independent Godot Camera3D/Windows graphics,
+audible output or physical owner qualification is claimed. Previous blocked
+W1-01 stage remains historical evidence rather than erased. Issues #3 and #4
+closed as fulfilled by verified corrective execution.
+
+Headquarters authorizes Work2 W2-01, **coherent normal-gameplay mixed-chart
+integration**, as the next bounded execution. Use existing original authority
+and independent W1-01 baseline to implement group-aware ordinary note runtime,
+supported non-linear arc geometry, crossing ownership behavior and connected
+contact/recorder/arbitration integration. Deliver a genuinely playable Godot
+Windows session containing multiple ordinary note types and timing membership,
+with original-derived integration tests, real chart/audio/results/replay and
+honest missing-evidence boundaries. Work1 retains independent verification
+authority: Work2 must not change original/independent oracles or claim new
+independent QA for its own tests. Research-dependent arbitrary branching,
+multiple children/unknown conflicts remain OPEN pending Work1 W1-02 and exact
+Headquarters authorizations; G-006/007/009/010 and H decisions remain OPEN.
+Scope is an execution checkpoint, not full S01 acceptance; do not shrink stage.
+Preserve all 449 historical R010 technical groups and 46 independent expected
+cases, run relevant pipelines where available, publish exact source and tests.
+Windows physical visual/input/audio qualification is owner-only and required
+when Work2 delivers playable build. S01 subsystem OPEN, UEP-001 Rev2.1.
