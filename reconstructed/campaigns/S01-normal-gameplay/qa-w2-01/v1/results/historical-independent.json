@@ -1,0 +1,247 @@
+{
+  "actualProductionSha": "49e7c263a36aebcc0316e010a629c6bfdf205f6d",
+  "historicalManifestProductionSha": "ab349d441dfa02f3c1ff97d6d0b8837c6ebb8f0e",
+  "profile": "R010",
+  "passed": 46,
+  "failed": 0,
+  "firstDivergences": [],
+  "cases": [
+    {
+      "id": "TAP-m121",
+      "status": "PASS",
+      "events": 3
+    },
+    {
+      "id": "TAP-m120",
+      "status": "PASS",
+      "events": 3
+    },
+    {
+      "id": "TAP-m101",
+      "status": "PASS",
+      "events": 3
+    },
+    {
+      "id": "TAP-m100",
+      "status": "PASS",
+      "events": 3
+    },
+    {
+      "id": "TAP-m51",
+      "status": "PASS",
+      "events": 3
+    },
+    {
+      "id": "TAP-m50",
+      "status": "PASS",
+      "events": 3
+    },
+    {
+      "id": "TAP-m26",
+      "status": "PASS",
+      "events": 3
+    },
+    {
+      "id": "TAP-m25",
+      "status": "PASS",
+      "events": 3
+    },
+    {
+      "id": "TAP-0",
+      "status": "PASS",
+      "events": 4
+    },
+    {
+      "id": "TAP-25",
+      "status": "PASS",
+      "events": 4
+    },
+    {
+      "id": "TAP-26",
+      "status": "PASS",
+      "events": 4
+    },
+    {
+      "id": "TAP-50",
+      "status": "PASS",
+      "events": 4
+    },
+    {
+      "id": "TAP-51",
+      "status": "PASS",
+      "events": 4
+    },
+    {
+      "id": "TAP-100",
+      "status": "PASS",
+      "events": 4
+    },
+    {
+      "id": "TAP-101",
+      "status": "PASS",
+      "events": 4
+    },
+    {
+      "id": "TAP-120",
+      "status": "PASS",
+      "events": 4
+    },
+    {
+      "id": "TAP-121",
+      "status": "PASS",
+      "events": 4
+    },
+    {
+      "id": "CHORD-42",
+      "status": "PASS",
+      "events": 6
+    },
+    {
+      "id": "CHORD-43",
+      "status": "PASS",
+      "events": 6
+    },
+    {
+      "id": "HOLD-E026_uninterrupted",
+      "status": "PASS",
+      "events": 17
+    },
+    {
+      "id": "HOLD-E026_reacquisition",
+      "status": "PASS",
+      "events": 19
+    },
+    {
+      "id": "HOLD-E037_A1",
+      "status": "PASS",
+      "events": 13
+    },
+    {
+      "id": "HOLD-E037_A2",
+      "status": "PASS",
+      "events": 18
+    },
+    {
+      "id": "HOLD-E037_B",
+      "status": "PASS",
+      "events": 17
+    },
+    {
+      "id": "HOLD-E008_E009_overdue",
+      "status": "PASS",
+      "events": 12
+    },
+    {
+      "id": "ARC-moving",
+      "status": "PASS",
+      "events": 18
+    },
+    {
+      "id": "CHILD-duplicate",
+      "status": "PASS",
+      "events": 6
+    },
+    {
+      "id": "LINK-natural",
+      "status": "PASS",
+      "events": 16
+    },
+    {
+      "id": "GROUP-positive",
+      "status": "PASS",
+      "events": 14
+    },
+    {
+      "id": "GROUP-reverse",
+      "status": "PASS",
+      "events": 14
+    },
+    {
+      "id": "NOINPUT",
+      "status": "PASS",
+      "events": 9
+    },
+    {
+      "id": "PAUSE-retain",
+      "status": "PASS",
+      "events": 8
+    },
+    {
+      "id": "REJECT-CURVE",
+      "status": "PASS",
+      "events": 0
+    },
+    {
+      "id": "REJECT-CROSS",
+      "status": "PASS",
+      "events": 0
+    },
+    {
+      "id": "REJECT-MULTICHILD",
+      "status": "PASS",
+      "events": 0
+    },
+    {
+      "id": "REJECT-GROUP-HOLD",
+      "status": "PASS",
+      "events": 0
+    },
+    {
+      "id": "REJECT-REVERSE-NOINPUT",
+      "status": "PASS",
+      "events": 0
+    },
+    {
+      "id": "REJECT-WIDEN",
+      "status": "PASS",
+      "events": 0
+    },
+    {
+      "id": "REJECT-MIXED-CHILD",
+      "status": "PASS",
+      "events": 0
+    },
+    {
+      "id": "REJECT-TRIPLE",
+      "status": "PASS",
+      "events": 0
+    },
+    {
+      "id": "OFFSET-0",
+      "status": "PASS",
+      "events": 5
+    },
+    {
+      "id": "OFFSET-80",
+      "status": "PASS",
+      "events": 5
+    },
+    {
+      "id": "OFFSET-200",
+      "status": "PASS",
+      "events": 5
+    },
+    {
+      "id": "SESSION-replay",
+      "status": "PASS",
+      "events": 7
+    },
+    {
+      "id": "ORDER-input-first",
+      "status": "PASS",
+      "events": 5
+    },
+    {
+      "id": "ORDER-frame-first",
+      "status": "PASS",
+      "events": 5
+    }
+  ],
+  "rawOutputSha256": "a7816b10e0b1f594811b7f5fea6e591967495a735e82de6dd648a0be32e768d0",
+  "blockedNotRun": [
+    "G-006",
+    "G-007",
+    "G-009",
+    "G-010"
+  ]
+}

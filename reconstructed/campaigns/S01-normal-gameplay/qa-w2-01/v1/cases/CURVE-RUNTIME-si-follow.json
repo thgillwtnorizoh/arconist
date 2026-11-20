@@ -1,0 +1,24 @@
+{
+  "id": "CURVE-RUNTIME-si-follow",
+  "aff": "fixtures/curve-si.aff",
+  "height": 500,
+  "evidence": [
+    "E003 isolated equations;E004 spatial bounds;E028 continuous activity; RECONSTRUCTED integration, no original six-family runtime trial"
+  ],
+  "requirements": [
+    "S01-04.01",
+    "S01-04.03"
+  ],
+  "profile": "S01Mixed",
+  "classification": "RUNNABLE",
+  "affSha256": "920ecbfaeb8bd73b443f126a389dab56db2d6fd4c1f9b8be819e86b46f6cdd42",
+  "expectationOrigin": "Work1 original ledgers/equations or explicitly reconstructed integration; never sampled production output"
+,
+  "events": [
+    {"op":"FRAME","wall":3002,"expect":{"e":0}},
+    {"op":"FRAME","e":1000,"expect":{"n":3}},
+    {"op":"SPATIAL","e":1000,"lane":0,"sky":[0,300,0],"expect":{"ids":[0]}},
+    {"op":"MOVE","e":1500,"lane":0,"sky":[105.62445223331451,300,0],"expect":{}},
+    {"op":"FRAME","e":1500,"expect":{"arcs":[{"holding":true}]}}
+  ]
+}

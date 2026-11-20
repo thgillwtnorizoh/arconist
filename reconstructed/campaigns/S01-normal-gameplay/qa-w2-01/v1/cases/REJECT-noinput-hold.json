@@ -1,0 +1,14 @@
+{
+  "id": "REJECT-noinput-hold",
+  "classification": "EXPECTED REJECTION",
+  "aff": "fixtures/reject-noinput-hold.aff",
+  "evidence": [
+    "Declared W2 compatibility admission; ENGINEERING domain guard; native behavior NOT VERIFIED"
+  ],
+  "requirements": [
+    "S01-01.01"
+  ],
+  "profile": "S01Mixed",
+  "affSha256": "143d5f3b73582bbaf5aded3106982bc6a45fcaace0a4fa19ab36ff9c7a59015b",
+  "expectationOrigin": "Work1 original ledgers/equations or explicitly reconstructed integration; never sampled production output"
+}

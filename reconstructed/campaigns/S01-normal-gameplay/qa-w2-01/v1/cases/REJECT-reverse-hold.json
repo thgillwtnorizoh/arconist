@@ -1,0 +1,14 @@
+{
+  "id": "REJECT-reverse-hold",
+  "classification": "EXPECTED REJECTION",
+  "aff": "fixtures/reject-reverse-hold.aff",
+  "evidence": [
+    "Declared W2 compatibility admission; ENGINEERING domain guard; native behavior NOT VERIFIED"
+  ],
+  "requirements": [
+    "S01-01.01"
+  ],
+  "profile": "S01Mixed",
+  "affSha256": "7aeda8715b76796e681c7cb8744305894a286ff9dca27d48cc48aa7926091363",
+  "expectationOrigin": "Work1 original ledgers/equations or explicitly reconstructed integration; never sampled production output"
+}

@@ -1,0 +1,76 @@
+{
+  "id": "MIX-GROUP-reverse",
+  "classification": "RUNNABLE",
+  "aff": "fixtures/native_reverse_scroll.aff",
+  "affSha256": "bcba5d21f8f00ebece3c0f212ccbf5f10b95e20c2daa9e635b083d9deb84e32b",
+  "requirements": [
+    "S01-07.01",
+    "S01-07.03"
+  ],
+  "evidence": [
+    "E029 depth/native group identity and JNI results; no native completion"
+  ],
+  "normalizedObjects": {
+    "sourceObjects": [
+      {
+        "kind": "timing",
+        "typedRawFields": [
+          "0",
+          "120.00",
+          "4.00"
+        ]
+      },
+      {
+        "kind": "tap",
+        "time": 1500,
+        "rawLane": 4,
+        "nativeLane": 5
+      },
+      {
+        "kind": "timing",
+        "typedRawFields": [
+          "0",
+          "60.00",
+          "4.00"
+        ]
+      },
+      {
+        "kind": "timing",
+        "typedRawFields": [
+          "1200",
+          "-60.00",
+          "4.00"
+        ]
+      },
+      {
+        "kind": "tap",
+        "time": 1500,
+        "rawLane": 1,
+        "nativeLane": 2
+      }
+    ],
+    "semanticExpectation": {},
+    "normalizationConfidence": "Lexical source object inventory; native runtime fields/records only asserted where independently established. Not parser output from production."
+  },
+  "confidence": "CONFIRMED ORIGINAL within cited fixture; engineering adapter uses wall epoch0 and already projected coordinates",
+  "dependencies": [],
+  "profile": "S01Mixed",
+  "expectationOrigin": "Work1 original ledgers/equations or explicitly reconstructed integration; never sampled production output"
+,
+  "events": [
+    {"op":"FRAME","wall":3002,"expect":{"e":0}},
+    {"e":0,"op":"FRAME","expect":{"notes":[{"group":0,"depth":-12134},{"group":1,"depth":-3640,"active":true}]}},
+    {"e":1000,"op":"FRAME","expect":{"notes":[{"group":0,"depth":-4044},{"group":1,"depth":404,"active":true}]}},
+    {"e":1100,"op":"FRAME","expect":{"notes":[{"group":0,"depth":-3235},{"group":1,"depth":809,"active":true}]}},
+    {"e":1199,"op":"FRAME","expect":{"notes":[{"group":0,"depth":-2434},{"group":1,"depth":1209,"active":true}]}},
+    {"e":1200,"op":"FRAME","expect":{"notes":[{"group":0,"depth":-2426},{"group":1,"depth":1213,"active":true}]}},
+    {"e":1201,"op":"FRAME","expect":{"notes":[{"group":0,"depth":-2418},{"group":1,"depth":1209,"active":true}]}},
+    {"e":1300,"op":"FRAME","expect":{"notes":[{"group":0,"depth":-1617},{"group":1,"depth":809,"active":true}]}},
+    {"e":1499,"op":"FRAME","expect":{"notes":[{"group":0,"depth":-7},{"group":1,"depth":4,"active":true}]}},
+    {"e":1500,"op":"FRAME","expect":{"notes":[{"group":0,"depth":0},{"group":1,"depth":0,"active":true}]}},
+    {"e":1500,"op":"DOWN","expect":{"pure":1,"score":5000001},"lane":5},
+    {"e":1500,"op":"UP","expect":{},"lane":5},
+    {"e":1500,"op":"DOWN","expect":{"pure":2,"score":10000002,"healthBits":1117834445},"lane":2},
+    {"e":1500,"op":"UP","expect":{"contacts":0},"lane":2}
+  ]
+}

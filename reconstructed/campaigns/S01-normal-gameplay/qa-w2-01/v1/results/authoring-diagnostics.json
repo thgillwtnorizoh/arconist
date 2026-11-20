@@ -1,0 +1,44 @@
+{
+  "compileDraftError": "CS0136 geometry local k shadowed event kernel; corrected harness variable name only",
+  "initialRun": {
+    "pass": 25,
+    "failures": [
+      {
+        "id": "CURVE-si",
+        "firstDifference": "$.geometry[0].zBits: expected 0, actual -2147483648"
+      },
+      {
+        "id": "CURVE-so",
+        "firstDifference": "$.geometry[0].zBits: expected 0, actual -2147483648"
+      },
+      {
+        "id": "CURVE-sisi",
+        "firstDifference": "$.geometry[0].zBits: expected 0, actual -2147483648"
+      },
+      {
+        "id": "CURVE-sosi",
+        "firstDifference": "$.geometry[0].zBits: expected 0, actual -2147483648"
+      },
+      {
+        "id": "CURVE-siso",
+        "firstDifference": "$.geometry[0].zBits: expected 0, actual -2147483648"
+      },
+      {
+        "id": "CURVE-soso",
+        "firstDifference": "$.geometry[0].zBits: expected 0, actual -2147483648"
+      },
+      {
+        "id": "REJECT-zero",
+        "firstDifference": "exception: FormatException: At least one timing and one supported note required."
+      },
+      {
+        "id": "MIX38-miss-replay",
+        "firstDifference": "$.events[0].arcGroups[1]: expected 0, actual 1"
+      }
+    ]
+  },
+  "sharedDraft": {
+    "firstDifference": "$.events[14].arcs[0].holding: expected true, actual false",
+    "correctionAuthority": "E003 0x15a90c4 release-time gate; not instantaneous arc reacquisition. E035 UP/CANCEL does not advance E. See report; corrected from source, not fitted output."
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "id": "MIX-CHILD-duplicate",
+  "classification": "RUNNABLE",
+  "aff": "fixtures/native_arc_tap.aff",
+  "affSha256": "b7ec1c7fd945c2dca5c1a6151c07137c302531505cd299b7df5ae94256f3d0ff",
+  "requirements": [
+    "S01-05.01"
+  ],
+  "evidence": [
+    "E025 child constructor/geometry and spatially eligible fresh duplicate; no native completion"
+  ],
+  "normalizedObjects": {
+    "sourceObjects": [
+      {
+        "kind": "timing",
+        "typedRawFields": [
+          "0",
+          "120.00",
+          "4.00"
+        ]
+      },
+      {
+        "kind": "arc",
+        "typedRawFields": [
+          "1000",
+          "2000",
+          "0.50",
+          "0.50",
+          "s",
+          "0.50",
+          "0.50",
+          "0",
+          "none",
+          "true"
+        ]
+      }
+    ],
+    "semanticExpectation": {},
+    "normalizationConfidence": "Lexical source object inventory; native runtime fields/records only asserted where independently established. Not parser output from production."
+  },
+  "confidence": "CONFIRMED ORIGINAL within cited fixture; engineering adapter uses wall epoch0 and already projected coordinates",
+  "dependencies": [],
+  "profile": "S01Mixed",
+  "expectationOrigin": "Work1 original ledgers/equations or explicitly reconstructed integration; never sampled production output"
+,
+  "events": [
+    {"op":"FRAME","wall":3002,"expect":{"e":0}},
+    {"e":1500,"op":"FRAME","expect":{"n":1,"end":2500,"children":[{"time":1500,"x":0,"y":50,"z":-4044.5}]}},
+    {"e":1500,"op":"SPATIAL","expect":{"pure":1,"score":10000001,"healthBits":1117808230,"children":[{"consumed":true,"contact":0}]},"lane":0,"sky":[0,50,0]},
+    {"e":1500,"op":"UP","expect":{}},
+    {"e":1500,"op":"SPATIAL","expect":{"pure":1,"outcomes":["guard_consumed"],"ids":[1]},"pointer":43,"lane":0,"sky":[0,50,0]},
+    {"e":1500,"op":"UP","expect":{"contacts":0},"pointer":43}
+  ]
+}

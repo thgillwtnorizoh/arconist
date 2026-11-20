@@ -1,0 +1,81 @@
+{
+  "id": "CURVE-soso",
+  "aff": "fixtures/curve-soso.aff",
+  "height": 500,
+  "requirements": [
+    "S01-04.01",
+    "S01-04.03"
+  ],
+  "evidence": [
+    "E003 0x180a190; native-isolated sine equations, not integrated six-curve native sessions"
+  ],
+  "geometry": [
+    {
+      "arc": 0,
+      "u": 0,
+      "expect": {
+        "xBits": 0,
+        "yBits": 1128792064,
+        "zBits": -2147483648
+      }
+    },
+    {
+      "arc": 0,
+      "u": 0.125,
+      "expect": {
+        "xBits": 1092405976,
+        "yBits": 1129043916,
+        "zBits": -998455296
+      }
+    },
+    {
+      "arc": 0,
+      "u": 0.25,
+      "expect": {
+        "xBits": 1109084459,
+        "yBits": 1129789791,
+        "zBits": -990066688
+      }
+    },
+    {
+      "arc": 0,
+      "u": 0.5,
+      "expect": {
+        "xBits": 1125474340,
+        "yBits": 1132546577,
+        "zBits": -981678080
+      }
+    },
+    {
+      "arc": 0,
+      "u": 0.75,
+      "expect": {
+        "xBits": 1134389870,
+        "yBits": 1134672718,
+        "zBits": -977431040
+      }
+    },
+    {
+      "arc": 0,
+      "u": 0.875,
+      "expect": {
+        "xBits": 1137524865,
+        "yBits": 1135902128,
+        "zBits": -975360256
+      }
+    },
+    {
+      "arc": 0,
+      "u": 1,
+      "expect": {
+        "xBits": 1140785152,
+        "yBits": 1137180672,
+        "zBits": -973289472
+      }
+    }
+  ],
+  "profile": "S01Mixed",
+  "classification": "RUNNABLE",
+  "affSha256": "30685a034d62064ebe71e6639aefebf7428ef391e6930143b909143645ca7a57",
+  "expectationOrigin": "Work1 original ledgers/equations or explicitly reconstructed integration; never sampled production output"
+}

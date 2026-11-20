@@ -1,0 +1,80 @@
+{
+  "id": "MIX-LINK-natural",
+  "classification": "RUNNABLE",
+  "aff": "fixtures/native_linked_arc_successors.aff",
+  "affSha256": "c0abe4ca157ea34888c27571081383284df5b7ca61e58cce3815ac41ecedd527",
+  "requirements": [
+    "S01-04.05"
+  ],
+  "evidence": [
+    "E038 natural0/1 flags,N7,six stored records/seven native calls",
+    "pre-final scores at reference_traces/r009 are instruction-derived where declared"
+  ],
+  "normalizedObjects": {
+    "sourceObjects": [
+      {
+        "kind": "timing",
+        "typedRawFields": [
+          "0",
+          "120.00",
+          "4.00"
+        ]
+      },
+      {
+        "kind": "arc",
+        "typedRawFields": [
+          "1000",
+          "2001",
+          "0.50",
+          "0.50",
+          "s",
+          "0.50",
+          "0.50",
+          "0",
+          "none",
+          "false"
+        ]
+      },
+      {
+        "kind": "arc",
+        "typedRawFields": [
+          "2001",
+          "3001",
+          "0.50",
+          "0.50",
+          "s",
+          "0.50",
+          "0.50",
+          "0",
+          "none",
+          "false"
+        ]
+      }
+    ],
+    "semanticExpectation": {},
+    "normalizationConfidence": "Lexical source object inventory; native runtime fields/records only asserted where independently established. Not parser output from production."
+  },
+  "confidence": "CONFIRMED ORIGINAL within cited fixture; engineering adapter uses wall epoch0 and already projected coordinates",
+  "dependencies": [],
+  "profile": "S01Mixed",
+  "expectationOrigin": "Work1 original ledgers/equations or explicitly reconstructed integration; never sampled production output"
+,
+  "events": [
+    {"op":"FRAME","wall":3002,"expect":{"e":0}},
+    {"e":1000,"op":"FRAME","expect":{"n":7,"end":3501,"arcs":[{"flag":0,"weights":[1,2],"times":[1250,1500]},{"flag":1,"weights":[1,1,1,1],"times":[2001,2251,2501,2751]}]}},
+    {"e":1000,"op":"SPATIAL","expect":{},"lane":0,"sky":[0,50,0]},
+    {"e":1001,"op":"FRAME","expect":{"pure":0,"healthBits":0,"arcs":[{"holding":true},{"holding":false}]}},
+    {"e":1125,"op":"FRAME","expect":{"pure":1,"healthBits":1094323873,"arcs":[{"holding":true},{"holding":false}],"records":[{"time":1250,"pure":1,"score":1428572,"healthBits":1094323873}]}},
+    {"e":1375,"op":"FRAME","expect":{"pure":3,"healthBits":1108052729,"arcs":[{"holding":true},{"holding":false}],"records":[{"time":1500,"pure":2,"score":2857144,"healthBits":1102712481},{"time":1500,"pure":3,"score":4285717,"healthBits":1108052729}]}},
+    {"e":1876,"op":"FRAME","expect":{"pure":3,"healthBits":1108052729,"arcs":[{"holding":true},{"holding":false}]}},
+    {"e":2000,"op":"FRAME","expect":{"pure":3,"healthBits":1108052729,"arcs":[{"holding":true},{"holding":false}]}},
+    {"e":2001,"op":"FRAME","expect":{"pure":4,"healthBits":1111101089,"arcs":[{"holding":false},{"holding":true}],"records":[{"time":2001,"pure":4,"score":5714289,"healthBits":1111101089}]}},
+    {"e":2002,"op":"FRAME","expect":{"pure":4,"healthBits":1111101089,"arcs":[{"holding":false},{"holding":true}]}},
+    {"e":2126,"op":"FRAME","expect":{"pure":5,"healthBits":1114149449,"arcs":[{"holding":false},{"holding":true}],"records":[{"time":2251,"pure":5,"score":7142862,"healthBits":1114149449}]}},
+    {"e":2376,"op":"FRAME","expect":{"pure":6,"healthBits":1116441337,"arcs":[{"holding":false},{"holding":true}],"records":[{"time":2501,"pure":6,"score":8571434,"healthBits":1116441337}]}},
+    {"e":2626,"op":"FRAME","expect":{"pure":7,"healthBits":1117965517,"arcs":[{"holding":false},{"holding":true}],"records":[{"time":2751,"pure":7,"score":10000007,"healthBits":1117965517}]}},
+    {"e":2876,"op":"FRAME","expect":{"pure":7,"healthBits":1117965517,"arcs":[{"holding":false},{"holding":true}]}},
+    {"e":2876,"op":"UP","expect":{"contacts":0,"arcs":[{"owner":-1},{"owner":-1}]}},
+    {"e":2877,"op":"FRAME","expect":{"arcs":[{"holding":false},{"holding":false}]}}
+  ]
+}

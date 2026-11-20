@@ -1,0 +1,14 @@
+{
+  "id": "REJECT-cubic",
+  "classification": "EXPECTED REJECTION",
+  "aff": "fixtures/reject-cubic.aff",
+  "evidence": [
+    "Declared W2 compatibility admission; ENGINEERING domain guard; native behavior NOT VERIFIED"
+  ],
+  "requirements": [
+    "S01-01.01"
+  ],
+  "profile": "S01Mixed",
+  "affSha256": "c082068b418e9a7506f091dc8f2d9f625ef997e4f3d316586a9a7a9fc4020eee",
+  "expectationOrigin": "Work1 original ledgers/equations or explicitly reconstructed integration; never sampled production output"
+}

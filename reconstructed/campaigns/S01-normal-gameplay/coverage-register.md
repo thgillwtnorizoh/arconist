@@ -672,3 +672,30 @@ owner; do not initiate W1-02/W2-02 or another campaign from this checkpoint.
 ## W2-01 final executed technical evidence — 2026-11-16
 
 Exact production 49e7c263a36aebcc0316e010a629c6bfdf205f6d; TECHNICAL PASS — READY FOR HUMAN QUALIFICATION, bounded VERIFIED COMPONENT only.484/484development groups (449prior+35new),46unchanged Work1 cases rerun by Work2,3standalone comparisons;0fail/skip;52commands exit0; complete Windows/PCK/runtime/CRC/extracted-hash checks pass. All historical requirement/discrepancy entries remain; no complete S01 coverage row/H decision is closed. New-profile independent Work1 and owner Windows/physical/audio qualification NOT RUN/PENDING. Four G006/G007/G009/G010 cases remain producer-blocked. S01Mixed zero-unit rejection is ENGINEERING unsupported-domain handling; native zero-unit behavior NOT VERIFIED. Full exact scope, inventory, receipts, limits and reproduction: ../../validation/S01-W2-01.md. S01 OPEN.
+
+
+## QA-W2-01 independent new-production checkpoint — 2026-11-20
+
+Work1 independently executed unchanged49e7c263a36aebcc0316e010a629c6bfdf205f6d:
+37/37newS01Mixed cases (33runnable/4engineering rejection),16,760scalar assertions,
+0fail/skip;46/46immutable historical Work1 cases with defaultR010 also pass.
+Separately341Work2 CLI groups pass; their test authorship remains Work2. Three
+comparator mutations correctly report the intended first differing field. No genuine
+production divergence found in the final declared corpus. Draft oracle/adapter
+errors and source-based corrections are preserved in QA-W2-01-report.md.
+FourG006/G007/G009/G010 cases remain NOT RUN/NOT VERIFIED. Owner's already
+reported six-group Windows qualification is preserved; no GUI/physical/audio
+requalification or new native experiment performed. No S01 closure or scope waiver.
+
+Bounded independently verified fields now include typed mixed group/source/N/end,
+42sine equation samples, six-family continuous/displaced contacts, originalE028
+sequential mixed-cache operands/ownership/bypass and instruction-backed expiry,
+E038weighted calls, E025fresh-child/guard, hold/arbitration/order/noinput/reverse
+ledgers, shared contact cancellation/reacquisition and ordinary counters/score/f32
+gauge/results/replay. Full38perfect/pause/miss sessions are RECONSTRUCTED
+INTEGRATION, never original-native whole-chart observations. Applies to previously
+listed S01-01,03,04,05,07,10,11,12,14,16 bounded rows only; every broad requirement
+and applicability gate remains OPEN. See qa-w2-01/v1/results/receipt.json for the
+exact asserted fields; unasserted snapshot fields are not independently verified.
+
+Full checkpoint: [QA-W2-01-report.md](QA-W2-01-report.md). S01 OPEN.

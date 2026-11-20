@@ -1,0 +1,23 @@
+[
+  {
+    "id": "CURVE-si",
+    "expectedExit": 1,
+    "actualExit": 1,
+    "firstDifference": "$.geometry[1].xBits: expected 1120337405, actual 1120337404",
+    "purpose": "deliberately corrupted expectation in temporary copy only; comparator sensitivity, not production failure"
+  },
+  {
+    "id": "CROSS-E028",
+    "expectedExit": 1,
+    "actualExit": 1,
+    "firstDifference": "$.events[33].proximity[0].distance: expected {\n  \"approx\": 255.1575927734,\n  \"tolerance\": 5e-05\n}, actual 191.4155",
+    "purpose": "deliberately corrupted expectation in temporary copy only; comparator sensitivity, not production failure"
+  },
+  {
+    "id": "SHARED-cancel-focus-far-lost",
+    "expectedExit": 1,
+    "actualExit": 1,
+    "firstDifference": "$.events[14].arcs[0].holding: expected true, actual false",
+    "purpose": "deliberately corrupted expectation in temporary copy only; comparator sensitivity, not production failure"
+  }
+]

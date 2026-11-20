@@ -1089,3 +1089,14 @@ requirements and S01 stage acceptance remain OPEN. No production edits,
 native experiments, additional owner testing or QA were performed by
 this Headquarters recording operation. UEP-001 Rev2.1 evidence
 separation preserved.
+
+
+## S01 / Work1 / QA-W2-01 — independent mixed-production verification — 2026-11-20 Asia/Saigon
+
+VERIFIED CHECKPOINT / bounded PASS. Starting remote main46efbe54168edcf836c491497600550f03793231 verified; exact production49e7c263a36aebcc0316e010a629c6bfdf205f6d core/bridge bytes unchanged. New versioned37caseS01Mixed independent suite executes33runnable+4engineering rejection cases,16,760scalar assertions,0fail/skip. Separate unchanged historical Work1 corpus46/46defaultR010 passes; fourG006/G007/G009/G010 cases NOT RUN/NOT VERIFIED. Separately341/341Work2 CLI groups (319prior+22mixed),0fail/skip;30historical build/run commands exit0. Three temporary expectation-mutation controls return expected1 at targeted first fields. SDK10.0.402/runtime10.0.13/ref2.1.0 recovered isolated with preserved official SHA512 provenance.
+
+Original-derived expectations include E003six-sine equations, E028two-contact sequential cache/proximity/ownership, E025child guard,E038sixrecords/sevencalls, E029/E036group/noinput,E037mixedholdarbitration,E041clock retention and ordinary per-unit scoring/gauge. Whole38perfect/pause/miss chart sessions are RECONSTRUCTED INTEGRATION, never a native whole-chart experiment. Supplied archive ARM64library SHA256verified. No new native execution.
+
+Draft build shadowing error, signed-zero oracle/type mistake, wrong zero-unit fixture, chronological-versus-source ordering and omitted original arc release gate were corrected in new QA files from source evidence; diagnostics retained. No production correction or historical-oracle change. Final37new+46old cases have no genuine first production difference. INDEPENDENTLY VERIFIED applies only to asserted bounded fields. Fake audio/internal sky points and focus policy are ENGINEERING; Godot/Windows/audio-output qualification not repeated. Prior owner six-groupPASS remains accepted as attestation.
+
+Report QA-W2-01-report.md and qa-w2-01/v1testsource/frozenexpectations/curatedreceipts published; coverage/dependency/discrepancy appended. All prior production/research/tests/fixtures/reports/independent-corpus bytes and exact76496byte history prefix preserved. Non-forced main publication/remote readback and complete inventory recorded in handoff/preservation receipt. No issue comment, scope exclusion, R011, implementation or subsequent expedition. Recommend HQreviewW2-01 bounded checkpoint, then separately authorize Work1graph/child/conflict closure; widening E039 integration remains separate authority. S01/subsystem OPEN. Stop after publication.

@@ -1,0 +1,49 @@
+{
+  "id": "SHARED-cancel-focus-far-lost",
+  "profile": "S01Mixed",
+  "classification": "RUNNABLE",
+  "aff": "fixtures/shared.aff",
+  "affSha256": "5528595407cc7fcada91208ccd5f908a6ec3d1490a88e10a92eaaff2c1026d2c",
+  "height": 500,
+  "requirements": [
+    "S01-03.02",
+    "S01-04.02",
+    "S01-10.01",
+    "S01-11.01",
+    "S01-12.05"
+  ],
+  "evidence": [
+    "E026/E037 shared hold activity/reacquisition;E003 color ownership;E041 pause identity;E035 windows;E002/E006 score/health. RECONSTRUCTED cross-mechanic integration. Focus pause+cancel is ENGINEERING desktop policy, not original Android equivalence.",
+    "E003 0x15a90c4 recorded-release gate min(4*interval,1000). CANCEL occurs at existing E1201, not nominal event1250: UP/CANCEL do not refresh clock. Arc reacquisition remains blocked during remaining checkpoints; hold latch survives. This corrects a draft oracle omission, not production."
+  ]
+,
+  "events": [
+    {"op":"FRAME","e":0,"expect":{"e":0,"n":8},"wall":3002},
+    {"op":"FRAME","e":1000,"expect":{}},
+    {"op":"SPATIAL","e":1000,"expect":{"ids":[0],"holds":[{"latched":true,"holding":false}]},"pointer":42,"lane":3,"sky":[0,300,0]},
+    {"op":"FRAME","e":1001,"expect":{"holds":[{"holding":true,"activators":[0]}],"arcs":[{"holding":true,"owner":0}]}},
+    {"op":"DOWN","e":1051,"expect":{"pure":0,"far":1,"lost":0,"shining":0,"score":625000,"healthBits":1084437299,"combo":1},"pointer":43,"lane":4},
+    {"op":"UP","e":1051,"expect":{},"pointer":43},
+    {"op":"FRAME","e":1125,"expect":{"pure":2,"far":1,"lost":0,"shining":2,"score":3125002,"healthBits":1103888384,"combo":3}},
+    {"op":"PAUSE","e":1200,"expect":{"e":1200,"ids":[0],"paused":true}},
+    {"op":"FRAME","e":1200,"expect":{"e":1200,"ids":[0],"holds":[{"latched":true,"holding":false}],"arcs":[{"holding":false}]},"wall":64202},
+    {"op":"RESUME","e":1200,"expect":{"e":1200,"ids":[0],"audio":["load","play","pause","seek:1200","unpause"]},"wall":64202},
+    {"op":"FRAME","e":1201,"wall":64203,"expect":{"ids":[0],"holds":[{"holding":true,"activators":[0]}],"arcs":[{"holding":true}]}},
+    {"op":"CANCEL","e":1250,"wall":64252,"expect":{"contacts":0,"claimed":[],"colors":[{"owner":-1}]},"pointer":42},
+    {"op":"FRAME","e":1251,"wall":64253,"expect":{"holds":[{"holding":false}],"arcs":[{"holding":false}]}},
+    {"op":"SPATIAL","e":1251,"wall":64253,"expect":{"ids":[2]},"pointer":42,"lane":3,"sky":[0,300,0]},
+    {"op":"FRAME","e":1252,"wall":64254,"expect":{"holds":[{"holding":true,"activators":[2]}],"arcs":[{"holding":false,"owner":-1,"release":1201,"conflict":true}]}},
+    {"op":"FRAME","e":1375,"wall":64377,"expect":{"pure":3,"far":1,"lost":0,"shining":3,"score":4375003,"healthBits":1108266189,"combo":4}},
+    {"op":"FOCUS","e":1400,"wall":64402,"expect":{"paused":true,"contacts":0,"claimed":[]}},
+    {"op":"RETURN","e":1400,"wall":64402,"expect":{"paused":true,"contacts":0}},
+    {"op":"RESUME","e":1400,"wall":64402,"expect":{"paused":false,"contacts":0}},
+    {"op":"SPATIAL","e":1401,"wall":64403,"expect":{"ids":[3]},"pointer":42,"lane":3,"sky":[0,300,0]},
+    {"op":"FRAME","e":1402,"wall":64404,"expect":{"holds":[{"holding":true,"activators":[3]}],"arcs":[{"holding":false,"owner":-1,"release":1201,"conflict":true}]}},
+    {"op":"FRAME","e":1625,"wall":64627,"expect":{"pure":4,"far":1,"lost":0,"shining":4,"score":5625004,"healthBits":1110940058,"combo":5}},
+    {"op":"UP","e":1625,"wall":64627,"expect":{"contacts":0},"pointer":42},
+    {"op":"FRAME","e":2100,"wall":65102,"expect":{"pure":4,"far":1,"lost":1,"combo":0,"healthBits":1110415770}},
+    {"op":"FRAME","e":2101,"wall":65103,"expect":{"pure":4,"far":1,"lost":2,"combo":0,"max":5,"score":5625004,"healthBits":1109891482}},
+    {"op":"FRAME","e":2501,"wall":65503,"expect":{"finished":true,"pure":4,"far":1,"lost":3,"healthBits":1109367194,"result":{"pure":4,"far":1,"lost":3,"score":5625004,"max":5,"health":39}}},
+    {"op":"HOME","e":2501,"wall":65503,"expect":{"sessionHome":true,"sessionHeld":0}}
+  ]
+}

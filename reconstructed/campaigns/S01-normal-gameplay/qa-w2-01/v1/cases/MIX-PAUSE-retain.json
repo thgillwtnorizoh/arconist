@@ -1,0 +1,50 @@
+{
+  "id": "MIX-PAUSE-retain",
+  "classification": "RUNNABLE",
+  "aff": "fixtures/native_hold.aff",
+  "affSha256": "603c78c37c228436bf47e37d0826aa8b2efa0d5c93177b3fefbfb253379cee6e",
+  "requirements": [
+    "S01-12.05"
+  ],
+  "evidence": [
+    "E0411200 freeze/60000ms/resume/retained-contact; translated wall origin6450\u21920",
+    "Audio is ENGINEERING fake boundary; not audible verification"
+  ],
+  "normalizedObjects": {
+    "sourceObjects": [
+      {
+        "kind": "timing",
+        "typedRawFields": [
+          "0",
+          "120.00",
+          "4.00"
+        ]
+      },
+      {
+        "kind": "hold",
+        "typedRawFields": [
+          "1000",
+          "2000",
+          "3"
+        ]
+      }
+    ],
+    "semanticExpectation": {},
+    "normalizationConfidence": "Lexical source object inventory; native runtime fields/records only asserted where independently established. Not parser output from production."
+  },
+  "confidence": "CONFIRMED ORIGINAL within cited fixture; engineering adapter uses wall epoch0 and already projected coordinates",
+  "dependencies": [],
+  "profile": "S01Mixed",
+  "expectationOrigin": "Work1 original ledgers/equations or explicitly reconstructed integration; never sampled production output"
+,
+  "events": [
+    {"op":"FRAME","wall":3002,"expect":{"e":0}},
+    {"e":1000,"op":"DOWN","expect":{}},
+    {"e":1001,"op":"FRAME","expect":{}},
+    {"e":1125,"op":"FRAME","expect":{"pure":1}},
+    {"e":1200,"op":"PAUSE","expect":{"paused":true,"e":1200,"p":1200}},
+    {"op":"FRAME","wall":64202,"expect":{"paused":true,"e":1200,"c":60002,"raw":61202,"contacts":1,"holds":[{"latched":true,"holding":false}]}},
+    {"op":"RESUME","wall":64202,"expect":{"paused":false,"e":1200,"audio":["load","play","pause","seek:1200","unpause"]}},
+    {"op":"FRAME","wall":64203,"expect":{"e":1201,"ids":[0],"holds":[{"holding":true}]}}
+  ]
+}

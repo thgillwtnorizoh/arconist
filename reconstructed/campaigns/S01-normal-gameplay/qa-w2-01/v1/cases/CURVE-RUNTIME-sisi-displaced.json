@@ -1,0 +1,23 @@
+{
+  "id": "CURVE-RUNTIME-sisi-displaced",
+  "aff": "fixtures/curve-sisi.aff",
+  "height": 500,
+  "evidence": [
+    "E003 isolated equations;E004 spatial bounds;E028 continuous activity; RECONSTRUCTED integration, no original six-family runtime trial"
+  ],
+  "requirements": [
+    "S01-04.01",
+    "S01-04.03"
+  ],
+  "profile": "S01Mixed",
+  "classification": "RUNNABLE",
+  "affSha256": "f4219d012229950bb061cfa2b621926fdf7fe6a3a550af84b3920363a7dc95a8",
+  "expectationOrigin": "Work1 original ledgers/equations or explicitly reconstructed integration; never sampled production output"
+,
+  "events": [
+    {"op":"FRAME","wall":3002,"expect":{"e":0}},
+    {"op":"FRAME","e":1000,"expect":{"n":3}},
+    {"op":"SPATIAL","e":1000,"lane":0,"sky":[2000,300,0],"expect":{"ids":[0]}},
+    {"op":"FRAME","e":1500,"expect":{"arcs":[{"holding":false}]}}
+  ]
+}
