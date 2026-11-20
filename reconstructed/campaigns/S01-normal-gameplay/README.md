@@ -75,3 +75,19 @@ Old R001–R010 reports and previous bytes of `reconstructed/contexts.md` must r
 **Next bounded task:** Work 1 audits R010 production against the original normal-play feature inventory and publishes a complete, independently sourced S01 coverage/dependency/discrepancy register with priority recommendations. The audit is *not* authorization to implement R011, rewrite research, start a new native experiment or declare S01 complete.
 
 **Subsystem: OPEN.**
+
+## 6. UEP-001 cost-control amendment — 2026-11-20
+
+The owner directs S01 to use the Hard-Rock Stop-and-Pivot rule recorded in
+`reconstructed/Instruction.md`. After two evidence-led failed attempts on the
+same root blocker, park the work, preserve its provenance and choose a separate
+high-value feature. Do not chain ABI/VM/import repairs or run fresh native
+experiments automatically. Scope remains OPEN and mandatory G1–G8 gates remain
+unchanged; a parked blocker is not an owner-approved exclusion.
+
+Current application: W102-P03 Scene A is BLOCKED by the host `asin(double)`
+import during activation, before any input candidate result. No automatic P03-C01
+retry, Scenes B–D or further W1-02 excavation. Favor the independently verified
+E039 chart-driven widening/input-geometry path as the next Work 2 functional
+checkpoint. Original graph/conflict requirements remain OPEN until separately
+addressed.
