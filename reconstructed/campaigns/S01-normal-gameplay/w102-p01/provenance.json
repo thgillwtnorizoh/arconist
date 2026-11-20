@@ -1,0 +1,100 @@
+{
+  "assignment": "W102-P01",
+  "sources": [
+    {
+      "path": "excavations/025_native_arc_tap_construction_and_jni_judgment.md",
+      "sha256": "0a121c26d08d187f3ea53936370d74aeaaae92aab8a13bd254d3497f46fb7cc9",
+      "baselineSha": "a9628c139e449dffd3e3a5fef3bb5b74414be9d3",
+      "unchanged": true
+    },
+    {
+      "path": "excavations/006_gauge_skills_and_special_states.md",
+      "sha256": "618b9bb3952d2eaeddc67bc5efaefa5a1d159023b118d2143fab0d006eb95a61",
+      "baselineSha": "a9628c139e449dffd3e3a5fef3bb5b74414be9d3",
+      "unchanged": true
+    },
+    {
+      "path": "excavations/028_native_moving_arc_geometry_and_crossing_ownership.md",
+      "sha256": "72537a34f81c5b7cee68c15d0a7c6daeb62f4103b022c6cfaebfe205324ab4d0",
+      "baselineSha": "a9628c139e449dffd3e3a5fef3bb5b74414be9d3",
+      "unchanged": true
+    },
+    {
+      "path": "research_harness/src/arc_tap.py",
+      "sha256": "39682e4588bd968a3cf937cbcbf99995cf045a50f1ea10df69e86cc84337b422",
+      "baselineSha": "a9628c139e449dffd3e3a5fef3bb5b74414be9d3",
+      "unchanged": true
+    },
+    {
+      "path": "research_harness/src/arc_tap_services.py",
+      "sha256": "52144479ed3f5699a2763e084261444d78e991c3c3f624fe9ab93a64373dd17c",
+      "baselineSha": "a9628c139e449dffd3e3a5fef3bb5b74414be9d3",
+      "unchanged": true
+    },
+    {
+      "path": "research_harness/src/solo_entry.py",
+      "sha256": "948445953a4817083872be7694cf65fd512a2813a0dada43a08362e8e584e20a",
+      "baselineSha": "a9628c139e449dffd3e3a5fef3bb5b74414be9d3",
+      "unchanged": true
+    },
+    {
+      "path": "research_harness/src/lifecycle.py",
+      "sha256": "c674c310b8f7a6dc5f1f92722a65ba61885fe730c951b8553ad087d6507c6320",
+      "baselineSha": "a9628c139e449dffd3e3a5fef3bb5b74414be9d3",
+      "unchanged": true
+    },
+    {
+      "path": "research_harness/src/jni_arrays.py",
+      "sha256": "a12d88ef4ce2afd31f9d203633dd0624b1382e886cd141a001b8f264c75dc8bd",
+      "baselineSha": "a9628c139e449dffd3e3a5fef3bb5b74414be9d3",
+      "unchanged": true
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/W1-02-report.md",
+      "sha256": "5e17b1167dc6e2d7603cb0142ff681b2b2942fcc6222508682cebf526d8cde13",
+      "baselineSha": "a9628c139e449dffd3e3a5fef3bb5b74414be9d3",
+      "unchanged": true
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/w1-02/proposed-experiments.json",
+      "sha256": "1b537043c6402757cec312389a2107842545afdceaa5cf5b515a463c16075314",
+      "baselineSha": "a9628c139e449dffd3e3a5fef3bb5b74414be9d3",
+      "unchanged": true
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/w1-02/requirements.json",
+      "sha256": "d1439e32d93055d223044874ae867b8465914d4fadfc0354b1c93a212fa2e8de",
+      "baselineSha": "a9628c139e449dffd3e3a5fef3bb5b74414be9d3",
+      "unchanged": true
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/w1-02/fixtures.json",
+      "sha256": "93ce187c86192f88d9d52b2762182fb74ba54b8ca548e0fd9b579b03c4408ef3",
+      "baselineSha": "a9628c139e449dffd3e3a5fef3bb5b74414be9d3",
+      "unchanged": true
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/w1-02/sources.json",
+      "sha256": "996dd075e2a7a88e29ebd06c43fc6196cce84745a7439a8b987726966a0a900a",
+      "baselineSha": "a9628c139e449dffd3e3a5fef3bb5b74414be9d3",
+      "unchanged": true
+    }
+  ],
+  "fixtures": [
+    {
+      "copy": "reconstructed/campaigns/S01-normal-gameplay/w102-p01/fixtures/trace_two.aff",
+      "source": "reconstructed/campaigns/S01-normal-gameplay/w1-02/fixtures/W102-C-trace-two.aff",
+      "byteIdentical": true,
+      "sha256": "062e6a76261328b4a03c06104b222e5dbc5685ec97c8a9430d16f4525a45bdce"
+    },
+    {
+      "copy": "reconstructed/campaigns/S01-normal-gameplay/w102-p01/fixtures/ordinary_two.aff",
+      "source": "reconstructed/campaigns/S01-normal-gameplay/w1-02/fixtures/W102-C-ordinary-two.aff",
+      "byteIdentical": true,
+      "sha256": "cbf47e5c83e070533bee8bc1b1e31b59209e452d43b612832f3cd02fad2cb0e1"
+    }
+  ],
+  "productionSource": "49e7c263a36aebcc0316e010a629c6bfdf205f6d (preserved, NOT tested or used as oracle)",
+  "nativeExecutionSource": "e780629894646da3fbf32e7fb6881006d1453f09",
+  "evidenceRule": "Original memory/callback ledgers supply new reference values; no Work2 output used."
+}

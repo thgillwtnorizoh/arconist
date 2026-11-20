@@ -194,3 +194,36 @@ retracted. Proposed tripleN11/trace-twoN2/ordinary-twoN5 are conditional
 RECONSTRUCTED predictions, not original results. Preserve E009preparedN8 versus
 E038naturalN7/activity differences and E038empty group-history scope. See
 W1-02-report.md for exact source anchors, blockers and unexecuted proposals.
+
+
+## W102-P01 observation — raw false flag is not prepared ordinary mode
+
+2026-11-20, B01 / D07 / S01-05.01. This supplements, without rewriting, W1-02's
+conditional trace N2 / ordinary N5 predictions. Exact native harness source
+`e780629894646da3fbf32e7fb6881006d1453f09`, three-scene execution, original library
+SHA-256 `3eaca4e6dabb3395f276f8915698d57675757d0df0970e716b23a3dc201c79be`.
+
+**W102-P01-D01 — original expectation / host assertion discrepancy.**
+`w1-02/fixtures/W102-C-ordinary-two.aff` (copied byte-identically as
+`w102-p01/fixtures/ordinary_two.aff`) parses mode0 with children1250/1500. Original
+parent construction produces mode1 at +0xa4 and counting helper produces N2,
+not conditional N5. Both child identities/backlinks/geometry exist. Constructor
+`0xc6663c–0xc66654` statically promotes mode0 to1 for a nonempty child vector.
+Observed parsed/prepared values and N are CONFIRMED ORIGINAL; attribution to these
+specific store instructions is INSTRUCTION-BACKED. No store hook observed them.
+
+First differing field: preparedParent.mode, expected0 / actual1. The unmodified
+new host driver's line55 assertion required0 and interrupted Scene3 before any
+child inputs, recorders or cleanup. This was an avoidable harness assumption;
+no original rejection/fault and no new production discrepancy are established.
+N5 is refuted for the supplied fixture. True-mode0 body+child coexistence is NOT
+VERIFIED; do not infer that an unobserved alternative producer exists or is absent.
+
+Two-child trace N2 and its judgment/guards/cleanup are now observed; raw false
+judgment remains NOT RUN. Budget3/3 spent, no retry. Preserve this failure and
+the prior conditional prediction. Proposed disposition is HQ review plus a
+separately authorized one-scene correction if direct false-input judgment proof
+is required; no expectation fitting or semantic object patching. Reproduction,
+exact fixture hashes and first difference are in
+[W102-P01-report.md](W102-P01-report.md) and
+[first-divergence.json](w102-p01/first-divergence.json). S01 OPEN.

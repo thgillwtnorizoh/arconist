@@ -1,0 +1,1086 @@
+{
+  "schema": 1,
+  "provenance": "Actual original-native execution, not Work2 outputs. Only heap pointers are mapped to per-scene child ordinals; numeric state is retained from the original observations.",
+  "executionSourceSha": "e780629894646da3fbf32e7fb6881006d1453f09",
+  "librarySha256": "3eaca4e6dabb3395f276f8915698d57675757d0df0970e716b23a3dc201c79be",
+  "scenes": [
+    {
+      "id": "scene1-E025",
+      "status": "pass",
+      "confidence": "CONFIRMED ORIGINAL only for executed phases",
+      "fixture": "single_control.aff",
+      "fixtureSha256": "b7ec1c7fd945c2dca5c1a6151c07137c302531505cd299b7df5ae94256f3d0ff",
+      "parsedModes": [
+        1
+      ],
+      "runtimeMode": 1,
+      "judgmentUnits": 1,
+      "chartEnd": 2500,
+      "children": [
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1500,
+          "end": 1500,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -4044.5
+          ],
+          "missed": 0,
+          "consumed": 1,
+          "contact": 0,
+          "id": "child:0",
+          "backlink": "same native parent"
+        }
+      ],
+      "parentRecords": [
+        {
+          "pointer": "0x4332000",
+          "time": 1250,
+          "weight": 1,
+          "resolved": 0
+        },
+        {
+          "pointer": "0x433200c",
+          "time": 1500,
+          "weight": 1,
+          "resolved": 0
+        },
+        {
+          "pointer": "0x4332018",
+          "time": 1750,
+          "weight": 1,
+          "resolved": 0
+        }
+      ],
+      "recorders": [
+        {
+          "phase": "arc_tap_positive",
+          "E": 1500,
+          "recorder": "0x1730290",
+          "caller": "0x160cf48",
+          "judgmentId": 0,
+          "before": {
+            "N": 1,
+            "score": 0,
+            "combo": 0,
+            "shining": 0,
+            "PURE": 0,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 0.0,
+            "healthBits": 0,
+            "result": "0x0"
+          },
+          "after": {
+            "N": 1,
+            "score": 10000001,
+            "combo": 1,
+            "shining": 1,
+            "PURE": 1,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 80.19999694824219,
+            "healthBits": 1117808230,
+            "result": "0x0"
+          },
+          "returnValue": 82695744,
+          "note": "child:0"
+        }
+      ],
+      "events": [
+        {
+          "label": "historical duplicate cleanup",
+          "E": 1500,
+          "score": {
+            "N": 1,
+            "score": 10000001,
+            "combo": 1,
+            "shining": 1,
+            "PURE": 1,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 80.19999694824219,
+            "healthBits": 1117808230,
+            "result": "0x0"
+          },
+          "generatedIds": [],
+          "childFlags": [
+            {
+              "id": "child:0",
+              "consumed": 1,
+              "missed": 0,
+              "contact": 0
+            }
+          ],
+          "bodyActivity": [
+            0,
+            0
+          ],
+          "owner": -1,
+          "mask": 0,
+          "androidMapSize": 0
+        },
+        {
+          "label": "control next frame",
+          "E": 1501,
+          "score": {
+            "N": 1,
+            "score": 10000001,
+            "combo": 1,
+            "shining": 1,
+            "PURE": 1,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 80.19999694824219,
+            "healthBits": 1117808230,
+            "result": "0x0"
+          },
+          "generatedIds": [],
+          "childFlags": [
+            {
+              "id": "child:0",
+              "consumed": 1,
+              "missed": 0,
+              "contact": 0
+            }
+          ],
+          "bodyActivity": [
+            0,
+            0
+          ],
+          "owner": -1,
+          "mask": 0,
+          "androidMapSize": 0
+        }
+      ]
+    },
+    {
+      "id": "scene2-trace-two",
+      "status": "pass",
+      "confidence": "CONFIRMED ORIGINAL only for executed phases",
+      "fixture": "trace_two.aff",
+      "fixtureSha256": "062e6a76261328b4a03c06104b222e5dbc5685ec97c8a9430d16f4525a45bdce",
+      "parsedModes": [
+        1,
+        1
+      ],
+      "runtimeMode": 1,
+      "judgmentUnits": 2,
+      "chartEnd": 2500,
+      "children": [
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1250,
+          "end": 1250,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -2022.25
+          ],
+          "missed": 0,
+          "consumed": 1,
+          "contact": 1,
+          "id": "child:0",
+          "backlink": "same native parent"
+        },
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1500,
+          "end": 1500,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -4044.5
+          ],
+          "missed": 0,
+          "consumed": 1,
+          "contact": 3,
+          "id": "child:1",
+          "backlink": "same native parent"
+        }
+      ],
+      "parentRecords": [
+        {
+          "pointer": "0x4332200",
+          "time": 1250,
+          "weight": 1,
+          "resolved": 0
+        },
+        {
+          "pointer": "0x433220c",
+          "time": 1500,
+          "weight": 1,
+          "resolved": 0
+        },
+        {
+          "pointer": "0x4332218",
+          "time": 1750,
+          "weight": 1,
+          "resolved": 0
+        }
+      ],
+      "recorders": [
+        {
+          "phase": "first child fresh DOWN",
+          "E": 1250,
+          "recorder": "0x1730290",
+          "caller": "0x160cf48",
+          "judgmentId": 0,
+          "before": {
+            "N": 2,
+            "score": 0,
+            "combo": 0,
+            "shining": 0,
+            "PURE": 0,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 0.0,
+            "healthBits": 0,
+            "result": "0x0"
+          },
+          "after": {
+            "N": 2,
+            "score": 5000001,
+            "combo": 1,
+            "shining": 1,
+            "PURE": 1,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 40.20000076293945,
+            "healthBits": 1109445837,
+            "result": "0x0"
+          },
+          "returnValue": 82706240,
+          "note": "child:0"
+        },
+        {
+          "phase": "second child fresh DOWN",
+          "E": 1500,
+          "recorder": "0x1730290",
+          "caller": "0x160cf48",
+          "judgmentId": 0,
+          "before": {
+            "N": 2,
+            "score": 5000001,
+            "combo": 1,
+            "shining": 1,
+            "PURE": 1,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 40.20000076293945,
+            "healthBits": 1109445837,
+            "result": "0x0"
+          },
+          "after": {
+            "N": 2,
+            "score": 10000002,
+            "combo": 2,
+            "shining": 2,
+            "PURE": 2,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 80.4000015258789,
+            "healthBits": 1117834445,
+            "result": "0x0"
+          },
+          "returnValue": 82706240,
+          "note": "child:1"
+        }
+      ],
+      "events": [
+        {
+          "label": "admit parent and children",
+          "E": 1000,
+          "score": {
+            "N": 2,
+            "score": 0,
+            "combo": 0,
+            "shining": 0,
+            "PURE": 0,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 0.0,
+            "healthBits": 0,
+            "result": "0x0"
+          },
+          "generatedIds": [],
+          "childFlags": [
+            {
+              "id": "child:0",
+              "consumed": 0,
+              "missed": 0,
+              "contact": -1
+            },
+            {
+              "id": "child:1",
+              "consumed": 0,
+              "missed": 0,
+              "contact": -1
+            }
+          ],
+          "bodyActivity": [
+            0,
+            0
+          ],
+          "owner": -1,
+          "mask": 0,
+          "androidMapSize": 0
+        },
+        {
+          "label": "first child frame",
+          "E": 1250,
+          "score": {
+            "N": 2,
+            "score": 0,
+            "combo": 0,
+            "shining": 0,
+            "PURE": 0,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 0.0,
+            "healthBits": 0,
+            "result": "0x0"
+          },
+          "generatedIds": [],
+          "childFlags": [
+            {
+              "id": "child:0",
+              "consumed": 0,
+              "missed": 0,
+              "contact": -1
+            },
+            {
+              "id": "child:1",
+              "consumed": 0,
+              "missed": 0,
+              "contact": -1
+            }
+          ],
+          "bodyActivity": [
+            0,
+            0
+          ],
+          "owner": -1,
+          "mask": 0,
+          "androidMapSize": 0
+        },
+        {
+          "label": "displaced DOWN negative",
+          "E": 1250,
+          "score": {
+            "N": 2,
+            "score": 0,
+            "combo": 0,
+            "shining": 0,
+            "PURE": 0,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 0.0,
+            "healthBits": 0,
+            "result": "0x0"
+          },
+          "generatedIds": [
+            0
+          ],
+          "childFlags": [
+            {
+              "id": "child:0",
+              "consumed": 0,
+              "missed": 0,
+              "contact": -1
+            },
+            {
+              "id": "child:1",
+              "consumed": 0,
+              "missed": 0,
+              "contact": -1
+            }
+          ],
+          "bodyActivity": [
+            0,
+            0
+          ],
+          "owner": -1,
+          "mask": 1,
+          "androidMapSize": 1
+        },
+        {
+          "label": "displaced UP",
+          "E": 1250,
+          "score": {
+            "N": 2,
+            "score": 0,
+            "combo": 0,
+            "shining": 0,
+            "PURE": 0,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 0.0,
+            "healthBits": 0,
+            "result": "0x0"
+          },
+          "generatedIds": [],
+          "childFlags": [
+            {
+              "id": "child:0",
+              "consumed": 0,
+              "missed": 0,
+              "contact": -1
+            },
+            {
+              "id": "child:1",
+              "consumed": 0,
+              "missed": 0,
+              "contact": -1
+            }
+          ],
+          "bodyActivity": [
+            0,
+            0
+          ],
+          "owner": -1,
+          "mask": 0,
+          "androidMapSize": 0
+        },
+        {
+          "label": "first child fresh DOWN",
+          "E": 1250,
+          "score": {
+            "N": 2,
+            "score": 5000001,
+            "combo": 1,
+            "shining": 1,
+            "PURE": 1,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 40.20000076293945,
+            "healthBits": 1109445837,
+            "result": "0x0"
+          },
+          "generatedIds": [
+            1
+          ],
+          "childFlags": [
+            {
+              "id": "child:0",
+              "consumed": 1,
+              "missed": 0,
+              "contact": 1
+            },
+            {
+              "id": "child:1",
+              "consumed": 0,
+              "missed": 0,
+              "contact": -1
+            }
+          ],
+          "bodyActivity": [
+            0,
+            0
+          ],
+          "owner": -1,
+          "mask": 1,
+          "androidMapSize": 1
+        },
+        {
+          "label": "first child UP",
+          "E": 1250,
+          "score": {
+            "N": 2,
+            "score": 5000001,
+            "combo": 1,
+            "shining": 1,
+            "PURE": 1,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 40.20000076293945,
+            "healthBits": 1109445837,
+            "result": "0x0"
+          },
+          "generatedIds": [],
+          "childFlags": [
+            {
+              "id": "child:0",
+              "consumed": 1,
+              "missed": 0,
+              "contact": 1
+            },
+            {
+              "id": "child:1",
+              "consumed": 0,
+              "missed": 0,
+              "contact": -1
+            }
+          ],
+          "bodyActivity": [
+            0,
+            0
+          ],
+          "owner": -1,
+          "mask": 0,
+          "androidMapSize": 0
+        },
+        {
+          "label": "first child fresh-ID duplicate",
+          "E": 1250,
+          "score": {
+            "N": 2,
+            "score": 5000001,
+            "combo": 1,
+            "shining": 1,
+            "PURE": 1,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 40.20000076293945,
+            "healthBits": 1109445837,
+            "result": "0x0"
+          },
+          "generatedIds": [
+            2
+          ],
+          "childFlags": [
+            {
+              "id": "child:0",
+              "consumed": 1,
+              "missed": 0,
+              "contact": 1
+            },
+            {
+              "id": "child:1",
+              "consumed": 0,
+              "missed": 0,
+              "contact": -1
+            }
+          ],
+          "bodyActivity": [
+            0,
+            0
+          ],
+          "owner": -1,
+          "mask": 1,
+          "androidMapSize": 1
+        },
+        {
+          "label": "retained frame; body checkpoint if ordinary",
+          "E": 1375,
+          "score": {
+            "N": 2,
+            "score": 5000001,
+            "combo": 1,
+            "shining": 1,
+            "PURE": 1,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 40.20000076293945,
+            "healthBits": 1109445837,
+            "result": "0x0"
+          },
+          "generatedIds": [
+            2
+          ],
+          "childFlags": [
+            {
+              "id": "child:0",
+              "consumed": 1,
+              "missed": 0,
+              "contact": 1
+            },
+            {
+              "id": "child:1",
+              "consumed": 0,
+              "missed": 0,
+              "contact": -1
+            }
+          ],
+          "bodyActivity": [
+            0,
+            0
+          ],
+          "owner": -1,
+          "mask": 1,
+          "androidMapSize": 1
+        },
+        {
+          "label": "second child time WITHOUT fresh DOWN",
+          "E": 1500,
+          "score": {
+            "N": 2,
+            "score": 5000001,
+            "combo": 1,
+            "shining": 1,
+            "PURE": 1,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 40.20000076293945,
+            "healthBits": 1109445837,
+            "result": "0x0"
+          },
+          "generatedIds": [
+            2
+          ],
+          "childFlags": [
+            {
+              "id": "child:0",
+              "consumed": 1,
+              "missed": 0,
+              "contact": 1
+            },
+            {
+              "id": "child:1",
+              "consumed": 0,
+              "missed": 0,
+              "contact": -1
+            }
+          ],
+          "bodyActivity": [
+            0,
+            0
+          ],
+          "owner": -1,
+          "mask": 1,
+          "androidMapSize": 1
+        },
+        {
+          "label": "native MOVE at second child",
+          "E": 1500,
+          "score": {
+            "N": 2,
+            "score": 5000001,
+            "combo": 1,
+            "shining": 1,
+            "PURE": 1,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 40.20000076293945,
+            "healthBits": 1109445837,
+            "result": "0x0"
+          },
+          "generatedIds": [
+            2
+          ],
+          "childFlags": [
+            {
+              "id": "child:0",
+              "consumed": 1,
+              "missed": 0,
+              "contact": 1
+            },
+            {
+              "id": "child:1",
+              "consumed": 0,
+              "missed": 0,
+              "contact": -1
+            }
+          ],
+          "bodyActivity": [
+            0,
+            0
+          ],
+          "owner": -1,
+          "mask": 1,
+          "androidMapSize": 1
+        },
+        {
+          "label": "repeat FRAME after MOVE without fresh DOWN",
+          "E": 1500,
+          "score": {
+            "N": 2,
+            "score": 5000001,
+            "combo": 1,
+            "shining": 1,
+            "PURE": 1,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 40.20000076293945,
+            "healthBits": 1109445837,
+            "result": "0x0"
+          },
+          "generatedIds": [
+            2
+          ],
+          "childFlags": [
+            {
+              "id": "child:0",
+              "consumed": 1,
+              "missed": 0,
+              "contact": 1
+            },
+            {
+              "id": "child:1",
+              "consumed": 0,
+              "missed": 0,
+              "contact": -1
+            }
+          ],
+          "bodyActivity": [
+            0,
+            0
+          ],
+          "owner": -1,
+          "mask": 1,
+          "androidMapSize": 1
+        },
+        {
+          "label": "retained duplicate UP",
+          "E": 1500,
+          "score": {
+            "N": 2,
+            "score": 5000001,
+            "combo": 1,
+            "shining": 1,
+            "PURE": 1,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 40.20000076293945,
+            "healthBits": 1109445837,
+            "result": "0x0"
+          },
+          "generatedIds": [],
+          "childFlags": [
+            {
+              "id": "child:0",
+              "consumed": 1,
+              "missed": 0,
+              "contact": 1
+            },
+            {
+              "id": "child:1",
+              "consumed": 0,
+              "missed": 0,
+              "contact": -1
+            }
+          ],
+          "bodyActivity": [
+            0,
+            0
+          ],
+          "owner": -1,
+          "mask": 0,
+          "androidMapSize": 0
+        },
+        {
+          "label": "second child fresh DOWN",
+          "E": 1500,
+          "score": {
+            "N": 2,
+            "score": 10000002,
+            "combo": 2,
+            "shining": 2,
+            "PURE": 2,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 80.4000015258789,
+            "healthBits": 1117834445,
+            "result": "0x0"
+          },
+          "generatedIds": [
+            3
+          ],
+          "childFlags": [
+            {
+              "id": "child:0",
+              "consumed": 1,
+              "missed": 0,
+              "contact": 1
+            },
+            {
+              "id": "child:1",
+              "consumed": 1,
+              "missed": 0,
+              "contact": 3
+            }
+          ],
+          "bodyActivity": [
+            0,
+            0
+          ],
+          "owner": -1,
+          "mask": 1,
+          "androidMapSize": 1
+        },
+        {
+          "label": "second child UP",
+          "E": 1500,
+          "score": {
+            "N": 2,
+            "score": 10000002,
+            "combo": 2,
+            "shining": 2,
+            "PURE": 2,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 80.4000015258789,
+            "healthBits": 1117834445,
+            "result": "0x0"
+          },
+          "generatedIds": [],
+          "childFlags": [
+            {
+              "id": "child:0",
+              "consumed": 1,
+              "missed": 0,
+              "contact": 1
+            },
+            {
+              "id": "child:1",
+              "consumed": 1,
+              "missed": 0,
+              "contact": 3
+            }
+          ],
+          "bodyActivity": [
+            0,
+            0
+          ],
+          "owner": -1,
+          "mask": 0,
+          "androidMapSize": 0
+        },
+        {
+          "label": "second child fresh-ID duplicate",
+          "E": 1500,
+          "score": {
+            "N": 2,
+            "score": 10000002,
+            "combo": 2,
+            "shining": 2,
+            "PURE": 2,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 80.4000015258789,
+            "healthBits": 1117834445,
+            "result": "0x0"
+          },
+          "generatedIds": [
+            4
+          ],
+          "childFlags": [
+            {
+              "id": "child:0",
+              "consumed": 1,
+              "missed": 0,
+              "contact": 1
+            },
+            {
+              "id": "child:1",
+              "consumed": 1,
+              "missed": 0,
+              "contact": 3
+            }
+          ],
+          "bodyActivity": [
+            0,
+            0
+          ],
+          "owner": -1,
+          "mask": 1,
+          "androidMapSize": 1
+        },
+        {
+          "label": "second duplicate UP",
+          "E": 1500,
+          "score": {
+            "N": 2,
+            "score": 10000002,
+            "combo": 2,
+            "shining": 2,
+            "PURE": 2,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 80.4000015258789,
+            "healthBits": 1117834445,
+            "result": "0x0"
+          },
+          "generatedIds": [],
+          "childFlags": [
+            {
+              "id": "child:0",
+              "consumed": 1,
+              "missed": 0,
+              "contact": 1
+            },
+            {
+              "id": "child:1",
+              "consumed": 1,
+              "missed": 0,
+              "contact": 3
+            }
+          ],
+          "bodyActivity": [
+            0,
+            0
+          ],
+          "owner": -1,
+          "mask": 0,
+          "androidMapSize": 0
+        },
+        {
+          "label": "trace next-frame cleanup",
+          "E": 1501,
+          "score": {
+            "N": 2,
+            "score": 10000002,
+            "combo": 2,
+            "shining": 2,
+            "PURE": 2,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 80.4000015258789,
+            "healthBits": 1117834445,
+            "result": "0x0"
+          },
+          "generatedIds": [],
+          "childFlags": [
+            {
+              "id": "child:0",
+              "consumed": 1,
+              "missed": 0,
+              "contact": 1
+            },
+            {
+              "id": "child:1",
+              "consumed": 1,
+              "missed": 0,
+              "contact": 3
+            }
+          ],
+          "bodyActivity": [
+            0,
+            0
+          ],
+          "owner": -1,
+          "mask": 0,
+          "androidMapSize": 0
+        },
+        {
+          "label": "stopped before results",
+          "E": 1501,
+          "score": {
+            "N": 2,
+            "score": 10000002,
+            "combo": 2,
+            "shining": 2,
+            "PURE": 2,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 80.4000015258789,
+            "healthBits": 1117834445,
+            "result": "0x0"
+          },
+          "generatedIds": [],
+          "childFlags": [
+            {
+              "id": "child:0",
+              "consumed": 1,
+              "missed": 0,
+              "contact": 1
+            },
+            {
+              "id": "child:1",
+              "consumed": 1,
+              "missed": 0,
+              "contact": 3
+            }
+          ],
+          "bodyActivity": [
+            0,
+            0
+          ],
+          "owner": -1,
+          "mask": 0,
+          "androidMapSize": 0
+        }
+      ]
+    },
+    {
+      "id": "scene3-ordinary-two",
+      "status": "blocked",
+      "confidence": "CONFIRMED ORIGINAL only for executed phases",
+      "fixture": "ordinary_two.aff",
+      "fixtureSha256": "cbf47e5c83e070533bee8bc1b1e31b59209e452d43b612832f3cd02fad2cb0e1",
+      "parsedModes": [
+        0,
+        0
+      ],
+      "runtimeMode": 1,
+      "judgmentUnits": 2,
+      "chartEnd": 2500,
+      "children": [
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1250,
+          "end": 1250,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -2022.25
+          ],
+          "missed": 0,
+          "consumed": 0,
+          "contact": -1,
+          "id": "child:0",
+          "backlink": "same native parent"
+        },
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1500,
+          "end": 1500,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -4044.5
+          ],
+          "missed": 0,
+          "consumed": 0,
+          "contact": -1,
+          "id": "child:1",
+          "backlink": "same native parent"
+        }
+      ],
+      "parentRecords": [
+        {
+          "pointer": "0x4332200",
+          "time": 1250,
+          "weight": 1,
+          "resolved": 0
+        },
+        {
+          "pointer": "0x433220c",
+          "time": 1500,
+          "weight": 1,
+          "resolved": 0
+        },
+        {
+          "pointer": "0x4332218",
+          "time": 1750,
+          "weight": 1,
+          "resolved": 0
+        }
+      ],
+      "recorders": [],
+      "events": [],
+      "notVerified": [
+        "input schedule",
+        "child judgment and recorder deltas",
+        "body contact/checkpoint coexistence",
+        "input cleanup phase"
+      ],
+      "failure": {
+        "type": "AssertionError",
+        "message": "native parent mode disagrees with supplied AFF",
+        "traceback": "Traceback (most recent call last):\n  File \"/workspace/scratch/e83b3992fd3d/p01/reconstructed/campaigns/S01-normal-gameplay/w102-p01/run.py\", line 115, in main\n    else:run_two(budget,scene,id==2)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/e83b3992fd3d/p01/reconstructed/campaigns/S01-normal-gameplay/w102-p01/run.py\", line 55, in run_two\n    assert n.i(p+0xa4)==(0 if ordinary else 1),'native parent mode disagrees with supplied AFF'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: native parent mode disagrees with supplied AFF\n"
+      }
+    }
+  ]
+}

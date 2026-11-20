@@ -724,3 +724,34 @@ time sort: no source/type/nearest priority. Pre-link main sort has start/end key
 separate from input start-only sort. General mixed tie permutations/stop ledgers
 remain NOT VERIFIED. No entire S01row closed; primitive READY is not integration
 acceptance. See W1-02-report.md and w1-02/requirements.json.
+
+
+## W102-P01 bounded native child checkpoint — 2026-11-20
+
+**BLOCKED for the complete assignment; verified partial original evidence.** Exact
+executed harness source `e780629894646da3fbf32e7fb6881006d1453f09`; original
+library SHA-256 `3eaca4e6dabb3395f276f8915698d57675757d0df0970e716b23a3dc201c79be`.
+One invocation used exactly three fresh scenes: E025 single-child control PASS,
+two-child trace PASS, raw false/two-child construction followed by host diagnostic
+assertion BLOCKED before input. No retry. Production and previous QA are unchanged.
+
+S01-05.01 / D07 / B01 gains CONFIRMED ORIGINAL, native-integrated evidence for
+two factory-created children, common parent backlinks, ordered 1250/1500 times,
+sampled/projected geometry, N2, distinct generated contact IDs, fresh-DOWN PURE
+awards, displaced/duplicate/MOVE negatives, recorder/float32 health and cleanup.
+Underlying trace-parent checkpoint records remain unresolved and do not count as
+body awards. This closes the tested trace-two primitive, not arbitrary multiple
+children, ordinary-body coexistence, connected children or candidate ties.
+
+The raw false fixture is admitted: parsed mode0 becomes prepared parent mode1,
+N2. The conditional W1-02 N5 prediction is **refuted for this fixture**. Constructor
+`0xc664f8`, instructions `0xc6663c–0xc66654`, explain nonempty-child mode promotion;
+this writer attribution is INSTRUCTION-BACKED, not a dynamically watched store.
+The host incorrectly required prepared mode0 and stopped Scene3 before judgment.
+False-fixture input, body interactions, misses and its cleanup are NOT RUN. Do not
+interpret this as an original rejection or claim a native mode0 body with children.
+
+No new production behavior is independently verified here. HQ review and, if
+needed, separately authorized one-scene P01-C01 input verification precede general
+child integration. All other requirements/gates remain OPEN. See
+[W102-P01-report.md](W102-P01-report.md) and the selected native ledger.

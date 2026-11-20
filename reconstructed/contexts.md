@@ -1211,3 +1211,41 @@ QA and owner Windows qualification are required for future production
 deltas. G-006/007/009/010 and S01 applicability remain OPEN. S01
 Subsystem OPEN; UEP-001 Rev2.1 source/precision/provenance, clean
 publication and historical prefix requirements preserved.
+
+
+## 2026-11-20 — S01 / Work1 / W102-P01 native two-child checkpoint
+
+Status **BLOCKED** for the full assignment; partial original-native findings
+preserved. Assigned start `a9628c139e449dffd3e3a5fef3bb5b74414be9d3` matched remote;
+prepared-source publication and exact executed harness commit
+`e780629894646da3fbf32e7fb6881006d1453f09`. Original library SHA-256
+`3eaca4e6dabb3395f276f8915698d57675757d0df0970e716b23a3dc201c79be`, Build ID
+`17d660edbf37ca78beefc32e07672c97419ddce6` verified. No reconstruction changes.
+
+One native invocation, exit1, exactly3/3 fresh scenes: E025 control PASS; trace-two
+PASS; raw false/two-child construction BLOCKED by the host diagnostic mode
+assertion before input. Original ownership/factories/backlinks/geometry/counts
+succeeded in all three. Trace-two N2 confirmed; fresh-DOWN PURE2, distinct contact
+identities, displaced/duplicate/MOVE negatives, two recorder callbacks, exact
+float32 health and cleanup observed. No results screen reached.
+
+Raw false parses mode0 but original prepares mode1/N2. Conditional W1-02 N5 is
+refuted for this fixture. Static constructor c664f8/c6663c–c66654 explains promotion
+when children are present; writer attribution is instruction-backed, not watched
+native execution. The host assumption mode0 caused the interrupted third scene;
+this is not an original rejection. Scene3 judgment/body interaction/cleanup NOT
+RUN. No retry: budget exhausted. Offline evidence audit38checks PASS,0fail/skip,
+0new scenes; production/Windows/GUI/historical suites NOT RUN in this assignment.
+
+New report/reference pack: campaigns/S01-normal-gameplay/W102-P01-report.md and
+w102-p01/{native-ledger.json,normalized-reference.json,first-divergence.json,
+mode-normalization-source.json,run.py,observe.py,audit.py,fixtures/,results/}.
+Appended coverage/dependency/discrepancy notes preserve all prior observations,
+tests, source and conditional predictions. Final publication SHA and remote
+readback are in the checkpoint handoff; exact changed paths/prefix hashes in
+w102-p01/results/preservation.json. Executed driver bytes remain at e780629.
+
+Recommend HQ review mode normalization; if needed, separately authorize P01-C01
+one identical false/two-child scene with observed mode1 and child input/cleanup,
+without forcing body mode or N5. No next task executed. P02/P03/P04 and Work2
+remain unauthorized. G006/007/009/010 unchanged. S01 subsystem **OPEN**.

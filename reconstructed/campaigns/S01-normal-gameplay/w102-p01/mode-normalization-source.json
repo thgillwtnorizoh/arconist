@@ -1,0 +1,47 @@
+{
+  "librarySha256": "3eaca4e6dabb3395f276f8915698d57675757d0df0970e716b23a3dc201c79be",
+  "classification": "INSTRUCTION-BACKED explanation of observed normalization; these store PCs were not dynamically watched in P01",
+  "function": "0xc664f8",
+  "initialModeStore": "0xc66570 copies supplied mode from W24",
+  "condition": "supplied mode==0 and input child vector nonempty",
+  "result": "write runtime mode1 at arc+0xa4",
+  "anchors": [
+    {
+      "va": "0xc6663c",
+      "bytes": "f8000035",
+      "decoded": "cbnz w24, #0xc66658"
+    },
+    {
+      "va": "0xc66640",
+      "bytes": "e92240a9",
+      "decoded": "ldp x9, x8, [x23]"
+    },
+    {
+      "va": "0xc66644",
+      "bytes": "080109cb",
+      "decoded": "sub x8, x8, x9"
+    },
+    {
+      "va": "0xc66648",
+      "bytes": "1f0500f1",
+      "decoded": "cmp x8, #1"
+    },
+    {
+      "va": "0xc6664c",
+      "bytes": "6b000054",
+      "decoded": "b.lt #0xc66658"
+    },
+    {
+      "va": "0xc66650",
+      "bytes": "28008052",
+      "decoded": "mov w8, #1"
+    },
+    {
+      "va": "0xc66654",
+      "bytes": "68a600b9",
+      "decoded": "str w8, [x19, #0xa4]"
+    }
+  ],
+  "observedLink": "Scene3 actual parsed mode0 -> native mode1/N2",
+  "nativeExecution": "NOT RUN during postmortem; no new scene"
+}

@@ -1,0 +1,19 @@
+{
+  "assignment": "W102-P01",
+  "limit": 3,
+  "reservedScenes": 3,
+  "scenes": [
+    {
+      "id": "scene1-E025",
+      "state": "PASS; stopped before completion/results"
+    },
+    {
+      "id": "scene2-trace-two",
+      "state": "PASS; stopped before completion/results"
+    },
+    {
+      "id": "scene3-ordinary-two",
+      "state": "BLOCKED; no retry and later scenes NOT RUN"
+    }
+  ]
+}

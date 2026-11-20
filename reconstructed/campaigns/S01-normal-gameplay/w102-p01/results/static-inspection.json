@@ -1,0 +1,46 @@
+{
+  "status": "PASS static ELF validation only",
+  "checks": 16,
+  "failures": 0,
+  "skips": 0,
+  "nativeFreshScenes": 0,
+  "librarySha256": "3eaca4e6dabb3395f276f8915698d57675757d0df0970e716b23a3dc201c79be",
+  "buildId": "17d660edbf37ca78beefc32e07672c97419ddce6",
+  "anchors": [
+    {
+      "va": "0xc6663c",
+      "bytes": "f8000035",
+      "decoded": "cbnz w24, #0xc66658"
+    },
+    {
+      "va": "0xc66640",
+      "bytes": "e92240a9",
+      "decoded": "ldp x9, x8, [x23]"
+    },
+    {
+      "va": "0xc66644",
+      "bytes": "080109cb",
+      "decoded": "sub x8, x8, x9"
+    },
+    {
+      "va": "0xc66648",
+      "bytes": "1f0500f1",
+      "decoded": "cmp x8, #1"
+    },
+    {
+      "va": "0xc6664c",
+      "bytes": "6b000054",
+      "decoded": "b.lt #0xc66658"
+    },
+    {
+      "va": "0xc66650",
+      "bytes": "28008052",
+      "decoded": "mov w8, #1"
+    },
+    {
+      "va": "0xc66654",
+      "bytes": "68a600b9",
+      "decoded": "str w8, [x19, #0xa4]"
+    }
+  ]
+}

@@ -1,0 +1,4243 @@
+{
+  "assignment": "W102-P01",
+  "status": "blocked",
+  "sourceBaseSha": "a9628c139e449dffd3e3a5fef3bb5b74414be9d3",
+  "executionCheckoutSha": "e780629894646da3fbf32e7fb6881006d1453f09",
+  "nativeLibrarySha256": "3eaca4e6dabb3395f276f8915698d57675757d0df0970e716b23a3dc201c79be",
+  "scriptSha256": {
+    "run.py": "b02e6063a7c3d31e951b4669c8609688cc6f9590af41151e8f4adb145dcce649",
+    "observe.py": "14b149da0548ec8aa4acd1b6454c6390b95d2651778f94ecc8f9e88881c46ef3"
+  },
+  "sceneLimit": 3,
+  "scenes": [
+    {
+      "id": "scene1-E025",
+      "fixture": {
+        "file": "single_control.aff",
+        "sha256": "b7ec1c7fd945c2dca5c1a6151c07137c302531505cd299b7df5ae94256f3d0ff",
+        "rawAff": "AudioOffset:0\nTimingPointDensityFactor:1.0\n-\ntiming(0,120.00,4.00);\narc(1000,2000,0.50,0.50,s,0.50,0.50,0,none,true)[arctap(1500)];\n",
+        "boundary": "unchanged external AFF resource-provider bytes only"
+      },
+      "status": "pass",
+      "parsed": [
+        {
+          "mode": 1,
+          "start": 1000,
+          "end": 2000,
+          "times": [
+            1500
+          ],
+          "childArgument": 1500
+        }
+      ],
+      "factories": [
+        {
+          "pointer": "0x4331980",
+          "type": "15LogicArcTapNote",
+          "vtable": "0x1acac18",
+          "time": 1500
+        }
+      ],
+      "writes": [
+        {
+          "phase": "019 original Scheduler dt 0.4",
+          "pc": "0x1865514",
+          "object": "0x4331980",
+          "kind": "geometry/backlink",
+          "offset": "0x90",
+          "size": 8,
+          "value": 70458432
+        },
+        {
+          "phase": "019 original Scheduler dt 0.4",
+          "pc": "0x1925888",
+          "object": "0x4331980",
+          "kind": "geometry/backlink",
+          "offset": "0x80",
+          "size": 8,
+          "value": 4776067404826411008
+        },
+        {
+          "phase": "019 original Scheduler dt 0.4",
+          "pc": "0x192588c",
+          "object": "0x4331980",
+          "kind": "geometry/backlink",
+          "offset": "0x88",
+          "size": 4,
+          "value": 3313289216
+        },
+        {
+          "phase": "arc_tap_positive",
+          "pc": "0xc788f0",
+          "object": "0x4331980",
+          "kind": "guard",
+          "offset": "0xd",
+          "size": 1,
+          "value": 1
+        }
+      ],
+      "countProducer": [
+        {
+          "chart": "0x43310c0",
+          "lower": 0,
+          "upper": 2147483647,
+          "caller": "0x173bf2c",
+          "N": 1
+        }
+      ],
+      "candidates": [
+        {
+          "phase": "arc_tap_positive",
+          "E": 1500,
+          "stage": "beforeSort",
+          "items": [
+            {
+              "pointer": "0x4331980",
+              "time": 1500,
+              "missed": 0,
+              "consumed": 0
+            }
+          ]
+        },
+        {
+          "phase": "arc_tap_positive",
+          "E": 1500,
+          "stage": "afterSort",
+          "items": [
+            {
+              "pointer": "0x4331980",
+              "time": 1500,
+              "missed": 0,
+              "consumed": 0
+            }
+          ]
+        },
+        {
+          "phase": "arc_tap_duplicate",
+          "E": 1500,
+          "stage": "beforeSort",
+          "items": [
+            {
+              "pointer": "0x4331980",
+              "time": 1500,
+              "missed": 0,
+              "consumed": 1
+            }
+          ]
+        },
+        {
+          "phase": "arc_tap_duplicate",
+          "E": 1500,
+          "stage": "afterSort",
+          "items": [
+            {
+              "pointer": "0x4331980",
+              "time": 1500,
+              "missed": 0,
+              "consumed": 1
+            }
+          ]
+        }
+      ],
+      "classifiers": [
+        {
+          "phase": "arc_tap_positive",
+          "E": 1500,
+          "child": "0x4331980",
+          "generatedId": 0,
+          "missed": 0,
+          "consumed": 0,
+          "nativeAbsoluteError": 0,
+          "consumesInput": 1
+        },
+        {
+          "phase": "arc_tap_duplicate",
+          "E": 1500,
+          "child": "0x4331980",
+          "generatedId": 1,
+          "missed": 0,
+          "consumed": 1,
+          "consumesInput": 0
+        }
+      ],
+      "spatial": [
+        {
+          "phase": "arc_tap_positive",
+          "E": 1500,
+          "child": "0x4331980",
+          "accepted": 1,
+          "target": [
+            0.0,
+            50.0
+          ],
+          "point": [
+            0.0,
+            50.017578125,
+            0.0
+          ]
+        },
+        {
+          "phase": "arc_tap_duplicate",
+          "E": 1500,
+          "child": "0x4331980",
+          "accepted": 1,
+          "target": [
+            0.0,
+            50.0
+          ],
+          "point": [
+            0.0,
+            50.017578125,
+            0.0
+          ]
+        }
+      ],
+      "guardReads": [
+        {
+          "phase": "arc-tap native music anchor",
+          "pc": "0x13b73ac",
+          "child": "0x4331980",
+          "value": 0
+        },
+        {
+          "phase": "arc-tap native music anchor",
+          "pc": "0x180cf28",
+          "child": "0x4331980",
+          "value": 0
+        },
+        {
+          "phase": "arc-tap judgment frame",
+          "pc": "0x180cf28",
+          "child": "0x4331980",
+          "value": 0
+        },
+        {
+          "phase": "arc-tap judgment frame",
+          "pc": "0x13b73ac",
+          "child": "0x4331980",
+          "value": 0
+        },
+        {
+          "phase": "arc-tap judgment frame",
+          "pc": "0x13b73ac",
+          "child": "0x4331980",
+          "value": 0
+        },
+        {
+          "phase": "arc-tap judgment frame",
+          "pc": "0x180cf28",
+          "child": "0x4331980",
+          "value": 0
+        },
+        {
+          "phase": "arc_tap_positive",
+          "pc": "0x13b73ac",
+          "child": "0x4331980",
+          "value": 0
+        },
+        {
+          "phase": "arc_tap_positive",
+          "pc": "0x180cf28",
+          "child": "0x4331980",
+          "value": 0
+        },
+        {
+          "phase": "arc_tap_duplicate",
+          "pc": "0x13b73ac",
+          "child": "0x4331980",
+          "value": 0
+        },
+        {
+          "phase": "arc_tap_duplicate",
+          "pc": "0x180cf28",
+          "child": "0x4331980",
+          "value": 1
+        },
+        {
+          "phase": "P01 control next-frame cleanup",
+          "pc": "0x180cf28",
+          "child": "0x4331980",
+          "value": 1
+        },
+        {
+          "phase": "P01 control next-frame cleanup",
+          "pc": "0x13b73ac",
+          "child": "0x4331980",
+          "value": 0
+        },
+        {
+          "phase": "P01 control next-frame cleanup",
+          "pc": "0x180cf28",
+          "child": "0x4331980",
+          "value": 1
+        }
+      ],
+      "recorders": [
+        {
+          "phase": "arc_tap_positive",
+          "E": 1500,
+          "recorder": "0x1730290",
+          "caller": "0x160cf48",
+          "note": "0x4331980",
+          "judgmentId": 0,
+          "before": {
+            "N": 1,
+            "score": 0,
+            "combo": 0,
+            "shining": 0,
+            "PURE": 0,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 0.0,
+            "healthBits": 0,
+            "result": "0x0"
+          },
+          "after": {
+            "N": 1,
+            "score": 10000001,
+            "combo": 1,
+            "shining": 1,
+            "PURE": 1,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 80.19999694824219,
+            "healthBits": 1117808230,
+            "result": "0x0"
+          },
+          "returnValue": 82695744
+        }
+      ],
+      "bodyAcceptances": [],
+      "events": [
+        {
+          "label": "historical duplicate cleanup",
+          "wall": 10952,
+          "E": 1500,
+          "lastModelE": 1500,
+          "score": {
+            "N": 1,
+            "score": 10000001,
+            "combo": 1,
+            "shining": 1,
+            "PURE": 1,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 80.19999694824219,
+            "healthBits": 1117808230,
+            "result": "0x0"
+          },
+          "contacts": [],
+          "mask": 0,
+          "androidMapSize": 0,
+          "active": [
+            "0x4331c40",
+            "0x4332180"
+          ],
+          "children": [
+            {
+              "pointer": "0x4331980",
+              "type": "15LogicArcTapNote",
+              "time": 1500,
+              "end": 1500,
+              "parent": "0x4331c40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -4044.5
+              ],
+              "missed": 0,
+              "consumed": 1,
+              "contact": 0
+            }
+          ],
+          "parent": {
+            "pointer": "0x4331c40",
+            "mode": 1,
+            "activity": [
+              0,
+              0
+            ],
+            "cache": 1,
+            "records": [
+              {
+                "pointer": "0x4332000",
+                "time": 1250,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x433200c",
+                "time": 1500,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x4332018",
+                "time": 1750,
+                "weight": 1,
+                "resolved": 0
+              }
+            ],
+            "color": "0x4331b80",
+            "owner": -1
+          },
+          "finishedResult": "0x0"
+        },
+        {
+          "label": "control next frame",
+          "wall": 10953,
+          "E": 1501,
+          "lastModelE": 1501,
+          "score": {
+            "N": 1,
+            "score": 10000001,
+            "combo": 1,
+            "shining": 1,
+            "PURE": 1,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 80.19999694824219,
+            "healthBits": 1117808230,
+            "result": "0x0"
+          },
+          "contacts": [],
+          "mask": 0,
+          "androidMapSize": 0,
+          "active": [
+            "0x4331c40",
+            "0x4332180"
+          ],
+          "children": [
+            {
+              "pointer": "0x4331980",
+              "type": "15LogicArcTapNote",
+              "time": 1500,
+              "end": 1500,
+              "parent": "0x4331c40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -4044.5
+              ],
+              "missed": 0,
+              "consumed": 1,
+              "contact": 0
+            }
+          ],
+          "parent": {
+            "pointer": "0x4331c40",
+            "mode": 1,
+            "activity": [
+              0,
+              0
+            ],
+            "cache": 1,
+            "records": [
+              {
+                "pointer": "0x4332000",
+                "time": 1250,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x433200c",
+                "time": 1500,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x4332018",
+                "time": 1750,
+                "weight": 1,
+                "resolved": 0
+              }
+            ],
+            "color": "0x4331b80",
+            "owner": -1
+          },
+          "finishedResult": "0x0"
+        }
+      ],
+      "historicalE025": {
+        "status": "pass",
+        "fixture": "native_arc_tap.aff",
+        "parsed_arc": {
+          "mode": 1,
+          "times": [
+            1500
+          ],
+          "endpoints": [
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ],
+          "child_time_argument": 1500,
+          "pc": "0x1864e18"
+        },
+        "native_call_counts": {
+          "0xeec480": 2,
+          "0x194ff80": 2,
+          "0x927384": 2,
+          "0x1925084": 1,
+          "0xe2ea48": 1,
+          "0x1730290": 1,
+          "0x924b50": 1,
+          "0xeec47c": 2,
+          "0x1862a14": 1,
+          "0xc78814": 1,
+          "0x1864e18": 1,
+          "0x173b358": 1,
+          "0xdda71c": 2,
+          "0xc2cb1c": 1,
+          "0x1864e1c": 1,
+          "0xe4e4dc": 1,
+          "0x11ea120": 1,
+          "0xee197c": 1,
+          "0xeec024": 2,
+          "0x160ce28": 2,
+          "0xbe31a8": 2,
+          "0xc27d34": 0,
+          "0x173a778": 1,
+          "0x178f7fc": 1
+        },
+        "native_objects": {
+          "game_scene": "0x4326ec0",
+          "model": "0x4355cc0",
+          "chart": "0x43310c0",
+          "parent": "0x4331c40",
+          "parent_vtable": "0x1b91500",
+          "parent_mode": 1,
+          "child": {
+            "pointer": "0x4331980",
+            "vtable": "0x1acac18",
+            "type": "15LogicArcTapNote",
+            "ref_at_factory_return": 1
+          },
+          "child_ref": 3,
+          "child_parent": "0x4331c40"
+        },
+        "native_chart": {
+          "judgment_units": 1,
+          "end": 2500,
+          "main_objects": 505,
+          "timing_group": 0,
+          "input_mode110": 0
+        },
+        "construction_writes": [
+          {
+            "pc": "0x1865514",
+            "offset": "0x90",
+            "size": 8,
+            "value": "0x4331c40"
+          },
+          {
+            "pc": "0x1925888",
+            "offset": "0x80",
+            "size": 8,
+            "value": "0x4248000000000000"
+          },
+          {
+            "pc": "0x192588c",
+            "offset": "0x88",
+            "size": 4,
+            "value": "0xc57cc800"
+          }
+        ],
+        "native_child_geometry": [
+          0.0,
+          50.0,
+          -4044.5
+        ],
+        "projection": {
+          "routine_elf_va": "0xbdbb70",
+          "world_input_plane_point": [
+            0.0,
+            50.0,
+            0.0
+          ],
+          "jni_xy": [
+            640.0,
+            593.0632781982422
+          ],
+          "effective_time": 1500
+        },
+        "spatial_checks": [
+          {
+            "phase": "arc_tap_positive",
+            "accepted": 1,
+            "child": "0x4331980",
+            "target_xy": [
+              0.0,
+              50.0
+            ],
+            "projected_point": [
+              0.0,
+              50.017578125,
+              0.0
+            ]
+          },
+          {
+            "phase": "arc_tap_duplicate",
+            "accepted": 1,
+            "child": "0x4331980",
+            "target_xy": [
+              0.0,
+              50.0
+            ],
+            "projected_point": [
+              0.0,
+              50.017578125,
+              0.0
+            ]
+          }
+        ],
+        "before": {
+          "score": 0,
+          "shining": 0,
+          "PURE": 0,
+          "FAR": 0,
+          "LOST": 0,
+          "health": 0.0,
+          "consumed": 0
+        },
+        "after_hit": {
+          "score": 10000001,
+          "shining": 1,
+          "PURE": 1,
+          "FAR": 0,
+          "LOST": 0,
+          "health": 80.19999694824219,
+          "consumed": 1
+        },
+        "after_duplicate": {
+          "score": 10000001,
+          "shining": 1,
+          "PURE": 1,
+          "FAR": 0,
+          "LOST": 0,
+          "health": 80.19999694824219,
+          "consumed": 1
+        },
+        "consumption_guard_reads": [
+          {
+            "pc": "0x180cf28",
+            "phase": "arc-tap native music anchor",
+            "consumed": 0
+          },
+          {
+            "pc": "0x180cf28",
+            "phase": "arc-tap judgment frame",
+            "consumed": 0
+          },
+          {
+            "pc": "0x180cf28",
+            "phase": "arc-tap judgment frame",
+            "consumed": 0
+          },
+          {
+            "pc": "0x180cf28",
+            "phase": "arc_tap_positive",
+            "consumed": 0
+          },
+          {
+            "pc": "0x180cf28",
+            "phase": "arc_tap_duplicate",
+            "consumed": 1
+          },
+          {
+            "pc": "0x180cf28",
+            "phase": "P01 control next-frame cleanup",
+            "consumed": 1
+          },
+          {
+            "pc": "0x180cf28",
+            "phase": "P01 control next-frame cleanup",
+            "consumed": 1
+          }
+        ],
+        "abi_services": {
+          "strspn": 174,
+          "sscanf": 4,
+          "strcspn": 176,
+          "pow": 430,
+          "ldexp": 66,
+          "strchr": 1,
+          "__vsprintf_chk": 2
+        },
+        "sscanf_formats": [
+          "%s"
+        ],
+        "resource_paths": [
+          "models/tap_l.mtl",
+          "models/tap_l.obj"
+        ],
+        "identity_checks": {
+          "native_parent_child_links": true,
+          "native_geometry_writes": true,
+          "same_child_judged": true,
+          "duplicate_spatially_eligible": true,
+          "native_consumption_guard": true,
+          "no_direct_host_builder_or_judge": true
+        },
+        "pc_skips_elf_va": [
+          [
+            "0xf72110",
+            "0xf72158",
+            "Platform GLView attachment"
+          ],
+          [
+            "0x16a4238",
+            "0x16a48d8",
+            "Shutter panels replaced with native Node proxies"
+          ],
+          [
+            "0x121581c",
+            "0x121584c",
+            "Loading overlay omitted"
+          ],
+          [
+            "0xa507c4",
+            "0xa519ec",
+            "Loading artwork prefix; native Node target supplied"
+          ],
+          [
+            "0xa51adc",
+            "0xa5213c",
+            "Remaining information artwork and canary omitted"
+          ],
+          [
+            "0x196fdac",
+            "0x196ffac",
+            "Information child closing visuals omitted"
+          ],
+          [
+            "0x891190",
+            "0x89164c",
+            "Results UI prefix; application/scratch registers restored"
+          ],
+          [
+            "0x891688",
+            "0x89219c",
+            "Middle results UI omitted; native save branch retained"
+          ],
+          [
+            "0x8921dc",
+            "0x8928e0",
+            "Post-save progression/UI omitted"
+          ]
+        ],
+        "native_failures": [],
+        "endpoint": "after duplicate cleanup; no completion/results/SQLite replay"
+      },
+      "nativeObjects": {
+        "scene": "0x4326ec0",
+        "model": "0x4355cc0",
+        "chart": "0x43310c0",
+        "parent": "0x4331c40",
+        "parentType": "12LogicArcNote",
+        "parentMode": 1,
+        "children": [
+          {
+            "pointer": "0x4331980",
+            "type": "15LogicArcTapNote",
+            "time": 1500,
+            "end": 1500,
+            "parent": "0x4331c40",
+            "group": 0,
+            "input": 1,
+            "geometry": [
+              0.0,
+              50.0,
+              -4044.5
+            ],
+            "missed": 0,
+            "consumed": 1,
+            "contact": 0
+          }
+        ],
+        "N": 1,
+        "end": 2500,
+        "mainContainsParent": true,
+        "mainContainsChildren": [
+          false
+        ],
+        "index": [
+          {
+            "0": [
+              "0x4332040",
+              "0x4331c40"
+            ],
+            "1": [
+              "0x4331c40",
+              "0x4332180"
+            ]
+          }
+        ],
+        "listener": {
+          "p": "0x4365f80",
+          "registered": 1,
+          "priority": 20,
+          "paused": 0,
+          "enabled": 1
+        },
+        "records": [
+          {
+            "pointer": "0x4332000",
+            "time": 1250,
+            "weight": 1,
+            "resolved": 0
+          },
+          {
+            "pointer": "0x433200c",
+            "time": 1500,
+            "weight": 1,
+            "resolved": 0
+          },
+          {
+            "pointer": "0x4332018",
+            "time": 1750,
+            "weight": 1,
+            "resolved": 0
+          }
+        ]
+      },
+      "callCounts": {
+        "0xee197c": 1,
+        "0xe4e4dc": 1,
+        "0xe2ea48": 1,
+        "0x173b358": 1,
+        "0x1862a14": 1,
+        "0x1864e18": 1,
+        "0x173a778": 1,
+        "0x1864e1c": 1,
+        "0x178f7fc": 1,
+        "0x1865468": 1,
+        "0x1925084": 1,
+        "0x11ea120": 1,
+        "0x173bf2c": 1,
+        "0x1576aa4": 505,
+        "0x10a7550": 5,
+        "0x14858d4": 5,
+        "0x13b73ac": 6,
+        "0x180cf28": 7,
+        "0xbe31a8": 2,
+        "0xeec480": 2,
+        "0xeec4e0": 2,
+        "0xeec4f0": 2,
+        "0x160ce28": 2,
+        "0x160cec0": 1,
+        "0x1730290": 1,
+        "0xc78814": 1,
+        "0xeec56c": 2,
+        "0xdda71c": 2,
+        "0xf9a50c": 2
+      },
+      "directHostCalls": [
+        "0x1905bc8",
+        "0x14c9fe0",
+        "0x133eedc",
+        "0x14c3080",
+        "0x18931ac",
+        "0x88a938",
+        "0x145b1a0",
+        "0xcabe24",
+        "0xa4227c",
+        "0xf720a8",
+        "0xb99da4",
+        "0x86d390",
+        "0x132c46c",
+        "0x1754440",
+        "0x14ef098",
+        "0x1a165bc",
+        "0xd07d38",
+        "0xd07d38",
+        "0xd07d38",
+        "0xd07d38",
+        "0x131419c",
+        "0x131419c",
+        "0x1054f24",
+        "0xee197c",
+        "0x131419c",
+        "0xefd848",
+        "0x1793f8c",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x1793f8c",
+        "0x1793f8c",
+        "0x1793f8c",
+        "0x1793f8c",
+        "0xbdbb70",
+        "0xbe31a8",
+        "0xdda71c",
+        "0xbe31a8",
+        "0xdda71c",
+        "0x1793f8c"
+      ],
+      "semanticReplacementHooks": [],
+      "lastNativePc": "0x4000100"
+    },
+    {
+      "id": "scene2-trace-two",
+      "fixture": {
+        "file": "trace_two.aff",
+        "sha256": "062e6a76261328b4a03c06104b222e5dbc5685ec97c8a9430d16f4525a45bdce",
+        "rawAff": "AudioOffset:0\nTimingPointDensityFactor:1.0\n-\ntiming(0,120.00,4.00);\narc(1000,2000,0.50,0.50,s,0.50,0.50,0,none,true)[arctap(1250),arctap(1500)];\n",
+        "boundary": "unchanged external AFF resource-provider bytes only"
+      },
+      "status": "pass",
+      "parsed": [
+        {
+          "mode": 1,
+          "start": 1000,
+          "end": 2000,
+          "times": [
+            1250,
+            1500
+          ],
+          "childArgument": 1250
+        },
+        {
+          "mode": 1,
+          "start": 1000,
+          "end": 2000,
+          "times": [
+            1250,
+            1500
+          ],
+          "childArgument": 1500
+        }
+      ],
+      "factories": [
+        {
+          "pointer": "0x4331a00",
+          "type": "15LogicArcTapNote",
+          "vtable": "0x1acac18",
+          "time": 1250
+        },
+        {
+          "pointer": "0x4331b80",
+          "type": "15LogicArcTapNote",
+          "vtable": "0x1acac18",
+          "time": 1500
+        }
+      ],
+      "writes": [
+        {
+          "phase": "019 original Scheduler dt 0.4",
+          "pc": "0x1865514",
+          "object": "0x4331a00",
+          "kind": "geometry/backlink",
+          "offset": "0x90",
+          "size": 8,
+          "value": 70458944
+        },
+        {
+          "phase": "019 original Scheduler dt 0.4",
+          "pc": "0x1865514",
+          "object": "0x4331b80",
+          "kind": "geometry/backlink",
+          "offset": "0x90",
+          "size": 8,
+          "value": 70458944
+        },
+        {
+          "phase": "019 original Scheduler dt 0.4",
+          "pc": "0x1925888",
+          "object": "0x4331a00",
+          "kind": "geometry/backlink",
+          "offset": "0x80",
+          "size": 8,
+          "value": 4776067404826411008
+        },
+        {
+          "phase": "019 original Scheduler dt 0.4",
+          "pc": "0x192588c",
+          "object": "0x4331a00",
+          "kind": "geometry/backlink",
+          "offset": "0x88",
+          "size": 4,
+          "value": 3304900608
+        },
+        {
+          "phase": "019 original Scheduler dt 0.4",
+          "pc": "0x1925888",
+          "object": "0x4331b80",
+          "kind": "geometry/backlink",
+          "offset": "0x80",
+          "size": 8,
+          "value": 4776067404826411008
+        },
+        {
+          "phase": "019 original Scheduler dt 0.4",
+          "pc": "0x192588c",
+          "object": "0x4331b80",
+          "kind": "geometry/backlink",
+          "offset": "0x88",
+          "size": 4,
+          "value": 3313289216
+        },
+        {
+          "phase": "first child fresh DOWN",
+          "pc": "0xc788f0",
+          "object": "0x4331a00",
+          "kind": "guard",
+          "offset": "0xd",
+          "size": 1,
+          "value": 1
+        },
+        {
+          "phase": "second child fresh DOWN",
+          "pc": "0xc788f0",
+          "object": "0x4331b80",
+          "kind": "guard",
+          "offset": "0xd",
+          "size": 1,
+          "value": 1
+        }
+      ],
+      "countProducer": [
+        {
+          "chart": "0x4331140",
+          "lower": 0,
+          "upper": 2147483647,
+          "caller": "0x173bf2c",
+          "N": 2
+        }
+      ],
+      "candidates": [
+        {
+          "phase": "displaced DOWN negative",
+          "E": 1250,
+          "stage": "beforeSort",
+          "items": []
+        },
+        {
+          "phase": "displaced DOWN negative",
+          "E": 1250,
+          "stage": "afterSort",
+          "items": []
+        },
+        {
+          "phase": "first child fresh DOWN",
+          "E": 1250,
+          "stage": "beforeSort",
+          "items": [
+            {
+              "pointer": "0x4331a00",
+              "time": 1250,
+              "missed": 0,
+              "consumed": 0
+            },
+            {
+              "pointer": "0x4331b80",
+              "time": 1500,
+              "missed": 0,
+              "consumed": 0
+            }
+          ]
+        },
+        {
+          "phase": "first child fresh DOWN",
+          "E": 1250,
+          "stage": "afterSort",
+          "items": [
+            {
+              "pointer": "0x4331a00",
+              "time": 1250,
+              "missed": 0,
+              "consumed": 0
+            },
+            {
+              "pointer": "0x4331b80",
+              "time": 1500,
+              "missed": 0,
+              "consumed": 0
+            }
+          ]
+        },
+        {
+          "phase": "first child fresh-ID duplicate",
+          "E": 1250,
+          "stage": "beforeSort",
+          "items": [
+            {
+              "pointer": "0x4331a00",
+              "time": 1250,
+              "missed": 0,
+              "consumed": 1
+            },
+            {
+              "pointer": "0x4331b80",
+              "time": 1500,
+              "missed": 0,
+              "consumed": 0
+            }
+          ]
+        },
+        {
+          "phase": "first child fresh-ID duplicate",
+          "E": 1250,
+          "stage": "afterSort",
+          "items": [
+            {
+              "pointer": "0x4331a00",
+              "time": 1250,
+              "missed": 0,
+              "consumed": 1
+            },
+            {
+              "pointer": "0x4331b80",
+              "time": 1500,
+              "missed": 0,
+              "consumed": 0
+            }
+          ]
+        },
+        {
+          "phase": "second child fresh DOWN",
+          "E": 1500,
+          "stage": "beforeSort",
+          "items": [
+            {
+              "pointer": "0x4331a00",
+              "time": 1250,
+              "missed": 0,
+              "consumed": 1
+            },
+            {
+              "pointer": "0x4331b80",
+              "time": 1500,
+              "missed": 0,
+              "consumed": 0
+            }
+          ]
+        },
+        {
+          "phase": "second child fresh DOWN",
+          "E": 1500,
+          "stage": "afterSort",
+          "items": [
+            {
+              "pointer": "0x4331a00",
+              "time": 1250,
+              "missed": 0,
+              "consumed": 1
+            },
+            {
+              "pointer": "0x4331b80",
+              "time": 1500,
+              "missed": 0,
+              "consumed": 0
+            }
+          ]
+        },
+        {
+          "phase": "second child fresh-ID duplicate",
+          "E": 1500,
+          "stage": "beforeSort",
+          "items": [
+            {
+              "pointer": "0x4331a00",
+              "time": 1250,
+              "missed": 0,
+              "consumed": 1
+            },
+            {
+              "pointer": "0x4331b80",
+              "time": 1500,
+              "missed": 0,
+              "consumed": 1
+            }
+          ]
+        },
+        {
+          "phase": "second child fresh-ID duplicate",
+          "E": 1500,
+          "stage": "afterSort",
+          "items": [
+            {
+              "pointer": "0x4331a00",
+              "time": 1250,
+              "missed": 0,
+              "consumed": 1
+            },
+            {
+              "pointer": "0x4331b80",
+              "time": 1500,
+              "missed": 0,
+              "consumed": 1
+            }
+          ]
+        }
+      ],
+      "classifiers": [
+        {
+          "phase": "first child fresh DOWN",
+          "E": 1250,
+          "child": "0x4331a00",
+          "generatedId": 1,
+          "missed": 0,
+          "consumed": 0,
+          "nativeAbsoluteError": 0,
+          "consumesInput": 1
+        },
+        {
+          "phase": "first child fresh-ID duplicate",
+          "E": 1250,
+          "child": "0x4331a00",
+          "generatedId": 2,
+          "missed": 0,
+          "consumed": 1,
+          "consumesInput": 0
+        },
+        {
+          "phase": "first child fresh-ID duplicate",
+          "E": 1250,
+          "child": "0x4331b80",
+          "generatedId": 2,
+          "missed": 0,
+          "consumed": 0,
+          "nativeAbsoluteError": 250,
+          "consumesInput": 0
+        },
+        {
+          "phase": "second child fresh DOWN",
+          "E": 1500,
+          "child": "0x4331a00",
+          "generatedId": 3,
+          "missed": 0,
+          "consumed": 1,
+          "consumesInput": 0
+        },
+        {
+          "phase": "second child fresh DOWN",
+          "E": 1500,
+          "child": "0x4331b80",
+          "generatedId": 3,
+          "missed": 0,
+          "consumed": 0,
+          "nativeAbsoluteError": 0,
+          "consumesInput": 1
+        },
+        {
+          "phase": "second child fresh-ID duplicate",
+          "E": 1500,
+          "child": "0x4331a00",
+          "generatedId": 4,
+          "missed": 0,
+          "consumed": 1,
+          "consumesInput": 0
+        },
+        {
+          "phase": "second child fresh-ID duplicate",
+          "E": 1500,
+          "child": "0x4331b80",
+          "generatedId": 4,
+          "missed": 0,
+          "consumed": 1,
+          "consumesInput": 0
+        }
+      ],
+      "spatial": [
+        {
+          "phase": "displaced DOWN negative",
+          "E": 1250,
+          "child": "0x4331a00",
+          "accepted": 0,
+          "target": [
+            0.0,
+            50.0
+          ],
+          "point": [
+            1999.91796875,
+            50.0166015625,
+            -0.00048828125
+          ]
+        },
+        {
+          "phase": "displaced DOWN negative",
+          "E": 1250,
+          "child": "0x4331b80",
+          "accepted": 0,
+          "target": [
+            0.0,
+            50.0
+          ],
+          "point": [
+            1999.91796875,
+            50.0166015625,
+            -0.00048828125
+          ]
+        },
+        {
+          "phase": "first child fresh DOWN",
+          "E": 1250,
+          "child": "0x4331a00",
+          "accepted": 1,
+          "target": [
+            0.0,
+            50.0
+          ],
+          "point": [
+            0.0,
+            50.017578125,
+            0.0
+          ]
+        },
+        {
+          "phase": "first child fresh DOWN",
+          "E": 1250,
+          "child": "0x4331b80",
+          "accepted": 1,
+          "target": [
+            0.0,
+            50.0
+          ],
+          "point": [
+            0.0,
+            50.017578125,
+            0.0
+          ]
+        },
+        {
+          "phase": "first child fresh-ID duplicate",
+          "E": 1250,
+          "child": "0x4331a00",
+          "accepted": 1,
+          "target": [
+            0.0,
+            50.0
+          ],
+          "point": [
+            0.0,
+            50.017578125,
+            0.0
+          ]
+        },
+        {
+          "phase": "first child fresh-ID duplicate",
+          "E": 1250,
+          "child": "0x4331b80",
+          "accepted": 1,
+          "target": [
+            0.0,
+            50.0
+          ],
+          "point": [
+            0.0,
+            50.017578125,
+            0.0
+          ]
+        },
+        {
+          "phase": "second child fresh DOWN",
+          "E": 1500,
+          "child": "0x4331a00",
+          "accepted": 1,
+          "target": [
+            0.0,
+            50.0
+          ],
+          "point": [
+            0.0,
+            50.017578125,
+            0.0
+          ]
+        },
+        {
+          "phase": "second child fresh DOWN",
+          "E": 1500,
+          "child": "0x4331b80",
+          "accepted": 1,
+          "target": [
+            0.0,
+            50.0
+          ],
+          "point": [
+            0.0,
+            50.017578125,
+            0.0
+          ]
+        },
+        {
+          "phase": "second child fresh-ID duplicate",
+          "E": 1500,
+          "child": "0x4331a00",
+          "accepted": 1,
+          "target": [
+            0.0,
+            50.0
+          ],
+          "point": [
+            0.0,
+            50.017578125,
+            0.0
+          ]
+        },
+        {
+          "phase": "second child fresh-ID duplicate",
+          "E": 1500,
+          "child": "0x4331b80",
+          "accepted": 1,
+          "target": [
+            0.0,
+            50.0
+          ],
+          "point": [
+            0.0,
+            50.017578125,
+            0.0
+          ]
+        }
+      ],
+      "guardReads": [
+        {
+          "phase": "P01 native music anchor",
+          "pc": "0x13b73ac",
+          "child": "0x4331a00",
+          "value": 0
+        },
+        {
+          "phase": "P01 native music anchor",
+          "pc": "0x180cf28",
+          "child": "0x4331a00",
+          "value": 0
+        },
+        {
+          "phase": "P01 native music anchor",
+          "pc": "0x13b73ac",
+          "child": "0x4331b80",
+          "value": 0
+        },
+        {
+          "phase": "P01 native music anchor",
+          "pc": "0x180cf28",
+          "child": "0x4331b80",
+          "value": 0
+        },
+        {
+          "phase": "admit parent and children",
+          "pc": "0x180cf28",
+          "child": "0x4331a00",
+          "value": 0
+        },
+        {
+          "phase": "admit parent and children",
+          "pc": "0x13b73ac",
+          "child": "0x4331a00",
+          "value": 0
+        },
+        {
+          "phase": "admit parent and children",
+          "pc": "0x180cf28",
+          "child": "0x4331b80",
+          "value": 0
+        },
+        {
+          "phase": "admit parent and children",
+          "pc": "0x13b73ac",
+          "child": "0x4331b80",
+          "value": 0
+        },
+        {
+          "phase": "admit parent and children",
+          "pc": "0x13b73ac",
+          "child": "0x4331a00",
+          "value": 0
+        },
+        {
+          "phase": "admit parent and children",
+          "pc": "0x180cf28",
+          "child": "0x4331a00",
+          "value": 0
+        },
+        {
+          "phase": "admit parent and children",
+          "pc": "0x13b73ac",
+          "child": "0x4331b80",
+          "value": 0
+        },
+        {
+          "phase": "admit parent and children",
+          "pc": "0x180cf28",
+          "child": "0x4331b80",
+          "value": 0
+        },
+        {
+          "phase": "first child frame",
+          "pc": "0x180cf28",
+          "child": "0x4331a00",
+          "value": 0
+        },
+        {
+          "phase": "first child frame",
+          "pc": "0x13b73ac",
+          "child": "0x4331a00",
+          "value": 0
+        },
+        {
+          "phase": "first child frame",
+          "pc": "0x180cf28",
+          "child": "0x4331b80",
+          "value": 0
+        },
+        {
+          "phase": "first child frame",
+          "pc": "0x13b73ac",
+          "child": "0x4331b80",
+          "value": 0
+        },
+        {
+          "phase": "first child frame",
+          "pc": "0x13b73ac",
+          "child": "0x4331a00",
+          "value": 0
+        },
+        {
+          "phase": "first child frame",
+          "pc": "0x180cf28",
+          "child": "0x4331a00",
+          "value": 0
+        },
+        {
+          "phase": "first child frame",
+          "pc": "0x13b73ac",
+          "child": "0x4331b80",
+          "value": 0
+        },
+        {
+          "phase": "first child frame",
+          "pc": "0x180cf28",
+          "child": "0x4331b80",
+          "value": 0
+        },
+        {
+          "phase": "first child fresh DOWN",
+          "pc": "0x13b73ac",
+          "child": "0x4331a00",
+          "value": 0
+        },
+        {
+          "phase": "first child fresh DOWN",
+          "pc": "0x180cf28",
+          "child": "0x4331a00",
+          "value": 0
+        },
+        {
+          "phase": "first child fresh-ID duplicate",
+          "pc": "0x13b73ac",
+          "child": "0x4331a00",
+          "value": 0
+        },
+        {
+          "phase": "first child fresh-ID duplicate",
+          "pc": "0x180cf28",
+          "child": "0x4331a00",
+          "value": 1
+        },
+        {
+          "phase": "first child fresh-ID duplicate",
+          "pc": "0x13b73ac",
+          "child": "0x4331b80",
+          "value": 0
+        },
+        {
+          "phase": "first child fresh-ID duplicate",
+          "pc": "0x180cf28",
+          "child": "0x4331b80",
+          "value": 0
+        },
+        {
+          "phase": "retained frame; body checkpoint if ordinary",
+          "pc": "0x180cf28",
+          "child": "0x4331a00",
+          "value": 1
+        },
+        {
+          "phase": "retained frame; body checkpoint if ordinary",
+          "pc": "0x180cf28",
+          "child": "0x4331b80",
+          "value": 0
+        },
+        {
+          "phase": "retained frame; body checkpoint if ordinary",
+          "pc": "0x13b73ac",
+          "child": "0x4331b80",
+          "value": 0
+        },
+        {
+          "phase": "retained frame; body checkpoint if ordinary",
+          "pc": "0x13b73ac",
+          "child": "0x4331a00",
+          "value": 0
+        },
+        {
+          "phase": "retained frame; body checkpoint if ordinary",
+          "pc": "0x180cf28",
+          "child": "0x4331a00",
+          "value": 1
+        },
+        {
+          "phase": "retained frame; body checkpoint if ordinary",
+          "pc": "0x13b73ac",
+          "child": "0x4331b80",
+          "value": 0
+        },
+        {
+          "phase": "retained frame; body checkpoint if ordinary",
+          "pc": "0x180cf28",
+          "child": "0x4331b80",
+          "value": 0
+        },
+        {
+          "phase": "second child time WITHOUT fresh DOWN",
+          "pc": "0x180cf28",
+          "child": "0x4331a00",
+          "value": 1
+        },
+        {
+          "phase": "second child time WITHOUT fresh DOWN",
+          "pc": "0x180cf28",
+          "child": "0x4331b80",
+          "value": 0
+        },
+        {
+          "phase": "second child time WITHOUT fresh DOWN",
+          "pc": "0x13b73ac",
+          "child": "0x4331b80",
+          "value": 0
+        },
+        {
+          "phase": "second child time WITHOUT fresh DOWN",
+          "pc": "0x13b73ac",
+          "child": "0x4331a00",
+          "value": 0
+        },
+        {
+          "phase": "second child time WITHOUT fresh DOWN",
+          "pc": "0x180cf28",
+          "child": "0x4331a00",
+          "value": 1
+        },
+        {
+          "phase": "second child time WITHOUT fresh DOWN",
+          "pc": "0x13b73ac",
+          "child": "0x4331b80",
+          "value": 0
+        },
+        {
+          "phase": "second child time WITHOUT fresh DOWN",
+          "pc": "0x180cf28",
+          "child": "0x4331b80",
+          "value": 0
+        },
+        {
+          "phase": "repeat FRAME after MOVE without fresh DOWN",
+          "pc": "0x180cf28",
+          "child": "0x4331a00",
+          "value": 1
+        },
+        {
+          "phase": "repeat FRAME after MOVE without fresh DOWN",
+          "pc": "0x180cf28",
+          "child": "0x4331b80",
+          "value": 0
+        },
+        {
+          "phase": "repeat FRAME after MOVE without fresh DOWN",
+          "pc": "0x13b73ac",
+          "child": "0x4331b80",
+          "value": 0
+        },
+        {
+          "phase": "repeat FRAME after MOVE without fresh DOWN",
+          "pc": "0x13b73ac",
+          "child": "0x4331a00",
+          "value": 0
+        },
+        {
+          "phase": "repeat FRAME after MOVE without fresh DOWN",
+          "pc": "0x180cf28",
+          "child": "0x4331a00",
+          "value": 1
+        },
+        {
+          "phase": "repeat FRAME after MOVE without fresh DOWN",
+          "pc": "0x13b73ac",
+          "child": "0x4331b80",
+          "value": 0
+        },
+        {
+          "phase": "repeat FRAME after MOVE without fresh DOWN",
+          "pc": "0x180cf28",
+          "child": "0x4331b80",
+          "value": 0
+        },
+        {
+          "phase": "second child fresh DOWN",
+          "pc": "0x13b73ac",
+          "child": "0x4331a00",
+          "value": 0
+        },
+        {
+          "phase": "second child fresh DOWN",
+          "pc": "0x180cf28",
+          "child": "0x4331a00",
+          "value": 1
+        },
+        {
+          "phase": "second child fresh DOWN",
+          "pc": "0x13b73ac",
+          "child": "0x4331b80",
+          "value": 0
+        },
+        {
+          "phase": "second child fresh DOWN",
+          "pc": "0x180cf28",
+          "child": "0x4331b80",
+          "value": 0
+        },
+        {
+          "phase": "second child fresh-ID duplicate",
+          "pc": "0x13b73ac",
+          "child": "0x4331a00",
+          "value": 0
+        },
+        {
+          "phase": "second child fresh-ID duplicate",
+          "pc": "0x180cf28",
+          "child": "0x4331a00",
+          "value": 1
+        },
+        {
+          "phase": "second child fresh-ID duplicate",
+          "pc": "0x13b73ac",
+          "child": "0x4331b80",
+          "value": 0
+        },
+        {
+          "phase": "second child fresh-ID duplicate",
+          "pc": "0x180cf28",
+          "child": "0x4331b80",
+          "value": 1
+        },
+        {
+          "phase": "trace next-frame cleanup",
+          "pc": "0x180cf28",
+          "child": "0x4331a00",
+          "value": 1
+        },
+        {
+          "phase": "trace next-frame cleanup",
+          "pc": "0x180cf28",
+          "child": "0x4331b80",
+          "value": 1
+        },
+        {
+          "phase": "trace next-frame cleanup",
+          "pc": "0x13b73ac",
+          "child": "0x4331a00",
+          "value": 0
+        },
+        {
+          "phase": "trace next-frame cleanup",
+          "pc": "0x180cf28",
+          "child": "0x4331a00",
+          "value": 1
+        },
+        {
+          "phase": "trace next-frame cleanup",
+          "pc": "0x13b73ac",
+          "child": "0x4331b80",
+          "value": 0
+        },
+        {
+          "phase": "trace next-frame cleanup",
+          "pc": "0x180cf28",
+          "child": "0x4331b80",
+          "value": 1
+        }
+      ],
+      "recorders": [
+        {
+          "phase": "first child fresh DOWN",
+          "E": 1250,
+          "recorder": "0x1730290",
+          "caller": "0x160cf48",
+          "note": "0x4331a00",
+          "judgmentId": 0,
+          "before": {
+            "N": 2,
+            "score": 0,
+            "combo": 0,
+            "shining": 0,
+            "PURE": 0,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 0.0,
+            "healthBits": 0,
+            "result": "0x0"
+          },
+          "after": {
+            "N": 2,
+            "score": 5000001,
+            "combo": 1,
+            "shining": 1,
+            "PURE": 1,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 40.20000076293945,
+            "healthBits": 1109445837,
+            "result": "0x0"
+          },
+          "returnValue": 82706240
+        },
+        {
+          "phase": "second child fresh DOWN",
+          "E": 1500,
+          "recorder": "0x1730290",
+          "caller": "0x160cf48",
+          "note": "0x4331b80",
+          "judgmentId": 0,
+          "before": {
+            "N": 2,
+            "score": 5000001,
+            "combo": 1,
+            "shining": 1,
+            "PURE": 1,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 40.20000076293945,
+            "healthBits": 1109445837,
+            "result": "0x0"
+          },
+          "after": {
+            "N": 2,
+            "score": 10000002,
+            "combo": 2,
+            "shining": 2,
+            "PURE": 2,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 80.4000015258789,
+            "healthBits": 1117834445,
+            "result": "0x0"
+          },
+          "returnValue": 82706240
+        }
+      ],
+      "bodyAcceptances": [],
+      "events": [
+        {
+          "label": "admit parent and children",
+          "wall": 10452,
+          "E": 1000,
+          "lastModelE": 1000,
+          "score": {
+            "N": 2,
+            "score": 0,
+            "combo": 0,
+            "shining": 0,
+            "PURE": 0,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 0.0,
+            "healthBits": 0,
+            "result": "0x0"
+          },
+          "contacts": [],
+          "mask": 0,
+          "androidMapSize": 0,
+          "active": [
+            "0x4331e40",
+            "0x4332380"
+          ],
+          "children": [
+            {
+              "pointer": "0x4331a00",
+              "type": "15LogicArcTapNote",
+              "time": 1250,
+              "end": 1250,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -2022.25
+              ],
+              "missed": 0,
+              "consumed": 0,
+              "contact": -1
+            },
+            {
+              "pointer": "0x4331b80",
+              "type": "15LogicArcTapNote",
+              "time": 1500,
+              "end": 1500,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -4044.5
+              ],
+              "missed": 0,
+              "consumed": 0,
+              "contact": -1
+            }
+          ],
+          "parent": {
+            "pointer": "0x4331e40",
+            "mode": 1,
+            "activity": [
+              0,
+              0
+            ],
+            "cache": 1,
+            "records": [
+              {
+                "pointer": "0x4332200",
+                "time": 1250,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x433220c",
+                "time": 1500,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x4332218",
+                "time": 1750,
+                "weight": 1,
+                "resolved": 0
+              }
+            ],
+            "color": "0x4331d80",
+            "owner": -1
+          },
+          "finishedResult": "0x0"
+        },
+        {
+          "label": "first child frame",
+          "wall": 10702,
+          "E": 1250,
+          "lastModelE": 1250,
+          "score": {
+            "N": 2,
+            "score": 0,
+            "combo": 0,
+            "shining": 0,
+            "PURE": 0,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 0.0,
+            "healthBits": 0,
+            "result": "0x0"
+          },
+          "contacts": [],
+          "mask": 0,
+          "androidMapSize": 0,
+          "active": [
+            "0x4331e40",
+            "0x4332380"
+          ],
+          "children": [
+            {
+              "pointer": "0x4331a00",
+              "type": "15LogicArcTapNote",
+              "time": 1250,
+              "end": 1250,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -2022.25
+              ],
+              "missed": 0,
+              "consumed": 0,
+              "contact": -1
+            },
+            {
+              "pointer": "0x4331b80",
+              "type": "15LogicArcTapNote",
+              "time": 1500,
+              "end": 1500,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -4044.5
+              ],
+              "missed": 0,
+              "consumed": 0,
+              "contact": -1
+            }
+          ],
+          "parent": {
+            "pointer": "0x4331e40",
+            "mode": 1,
+            "activity": [
+              0,
+              0
+            ],
+            "cache": 1,
+            "records": [
+              {
+                "pointer": "0x4332200",
+                "time": 1250,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x433220c",
+                "time": 1500,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x4332218",
+                "time": 1750,
+                "weight": 1,
+                "resolved": 0
+              }
+            ],
+            "color": "0x4331d80",
+            "owner": -1
+          },
+          "finishedResult": "0x0"
+        },
+        {
+          "label": "displaced DOWN negative",
+          "wall": 10702,
+          "E": 1250,
+          "lastModelE": 1250,
+          "score": {
+            "N": 2,
+            "score": 0,
+            "combo": 0,
+            "shining": 0,
+            "PURE": 0,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 0.0,
+            "healthBits": 0,
+            "result": "0x0"
+          },
+          "contacts": [
+            {
+              "pointer": "0x4edf3c0",
+              "generatedId": 0,
+              "slot": 0,
+              "xy": [
+                1942.8638916015625,
+                593.0632934570312
+              ]
+            }
+          ],
+          "mask": 1,
+          "androidMapSize": 1,
+          "active": [
+            "0x4331e40",
+            "0x4332380"
+          ],
+          "children": [
+            {
+              "pointer": "0x4331a00",
+              "type": "15LogicArcTapNote",
+              "time": 1250,
+              "end": 1250,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -2022.25
+              ],
+              "missed": 0,
+              "consumed": 0,
+              "contact": -1
+            },
+            {
+              "pointer": "0x4331b80",
+              "type": "15LogicArcTapNote",
+              "time": 1500,
+              "end": 1500,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -4044.5
+              ],
+              "missed": 0,
+              "consumed": 0,
+              "contact": -1
+            }
+          ],
+          "parent": {
+            "pointer": "0x4331e40",
+            "mode": 1,
+            "activity": [
+              0,
+              0
+            ],
+            "cache": 1,
+            "records": [
+              {
+                "pointer": "0x4332200",
+                "time": 1250,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x433220c",
+                "time": 1500,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x4332218",
+                "time": 1750,
+                "weight": 1,
+                "resolved": 0
+              }
+            ],
+            "color": "0x4331d80",
+            "owner": -1
+          },
+          "finishedResult": "0x0"
+        },
+        {
+          "label": "displaced UP",
+          "wall": 10702,
+          "E": 1250,
+          "lastModelE": 1250,
+          "score": {
+            "N": 2,
+            "score": 0,
+            "combo": 0,
+            "shining": 0,
+            "PURE": 0,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 0.0,
+            "healthBits": 0,
+            "result": "0x0"
+          },
+          "contacts": [],
+          "mask": 0,
+          "androidMapSize": 0,
+          "active": [
+            "0x4331e40",
+            "0x4332380"
+          ],
+          "children": [
+            {
+              "pointer": "0x4331a00",
+              "type": "15LogicArcTapNote",
+              "time": 1250,
+              "end": 1250,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -2022.25
+              ],
+              "missed": 0,
+              "consumed": 0,
+              "contact": -1
+            },
+            {
+              "pointer": "0x4331b80",
+              "type": "15LogicArcTapNote",
+              "time": 1500,
+              "end": 1500,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -4044.5
+              ],
+              "missed": 0,
+              "consumed": 0,
+              "contact": -1
+            }
+          ],
+          "parent": {
+            "pointer": "0x4331e40",
+            "mode": 1,
+            "activity": [
+              0,
+              0
+            ],
+            "cache": 1,
+            "records": [
+              {
+                "pointer": "0x4332200",
+                "time": 1250,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x433220c",
+                "time": 1500,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x4332218",
+                "time": 1750,
+                "weight": 1,
+                "resolved": 0
+              }
+            ],
+            "color": "0x4331d80",
+            "owner": -1
+          },
+          "finishedResult": "0x0"
+        },
+        {
+          "label": "first child fresh DOWN",
+          "wall": 10702,
+          "E": 1250,
+          "lastModelE": 1250,
+          "score": {
+            "N": 2,
+            "score": 5000001,
+            "combo": 1,
+            "shining": 1,
+            "PURE": 1,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 40.20000076293945,
+            "healthBits": 1109445837,
+            "result": "0x0"
+          },
+          "contacts": [
+            {
+              "pointer": "0x4edfb80",
+              "generatedId": 1,
+              "slot": 0,
+              "xy": [
+                640.0,
+                593.0632934570312
+              ]
+            }
+          ],
+          "mask": 1,
+          "androidMapSize": 1,
+          "active": [
+            "0x4331e40",
+            "0x4332380"
+          ],
+          "children": [
+            {
+              "pointer": "0x4331a00",
+              "type": "15LogicArcTapNote",
+              "time": 1250,
+              "end": 1250,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -2022.25
+              ],
+              "missed": 0,
+              "consumed": 1,
+              "contact": 1
+            },
+            {
+              "pointer": "0x4331b80",
+              "type": "15LogicArcTapNote",
+              "time": 1500,
+              "end": 1500,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -4044.5
+              ],
+              "missed": 0,
+              "consumed": 0,
+              "contact": -1
+            }
+          ],
+          "parent": {
+            "pointer": "0x4331e40",
+            "mode": 1,
+            "activity": [
+              0,
+              0
+            ],
+            "cache": 1,
+            "records": [
+              {
+                "pointer": "0x4332200",
+                "time": 1250,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x433220c",
+                "time": 1500,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x4332218",
+                "time": 1750,
+                "weight": 1,
+                "resolved": 0
+              }
+            ],
+            "color": "0x4331d80",
+            "owner": -1
+          },
+          "finishedResult": "0x0"
+        },
+        {
+          "label": "first child UP",
+          "wall": 10702,
+          "E": 1250,
+          "lastModelE": 1250,
+          "score": {
+            "N": 2,
+            "score": 5000001,
+            "combo": 1,
+            "shining": 1,
+            "PURE": 1,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 40.20000076293945,
+            "healthBits": 1109445837,
+            "result": "0x0"
+          },
+          "contacts": [],
+          "mask": 0,
+          "androidMapSize": 0,
+          "active": [
+            "0x4331e40",
+            "0x4332380"
+          ],
+          "children": [
+            {
+              "pointer": "0x4331a00",
+              "type": "15LogicArcTapNote",
+              "time": 1250,
+              "end": 1250,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -2022.25
+              ],
+              "missed": 0,
+              "consumed": 1,
+              "contact": 1
+            },
+            {
+              "pointer": "0x4331b80",
+              "type": "15LogicArcTapNote",
+              "time": 1500,
+              "end": 1500,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -4044.5
+              ],
+              "missed": 0,
+              "consumed": 0,
+              "contact": -1
+            }
+          ],
+          "parent": {
+            "pointer": "0x4331e40",
+            "mode": 1,
+            "activity": [
+              0,
+              0
+            ],
+            "cache": 1,
+            "records": [
+              {
+                "pointer": "0x4332200",
+                "time": 1250,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x433220c",
+                "time": 1500,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x4332218",
+                "time": 1750,
+                "weight": 1,
+                "resolved": 0
+              }
+            ],
+            "color": "0x4331d80",
+            "owner": -1
+          },
+          "finishedResult": "0x0"
+        },
+        {
+          "label": "first child fresh-ID duplicate",
+          "wall": 10702,
+          "E": 1250,
+          "lastModelE": 1250,
+          "score": {
+            "N": 2,
+            "score": 5000001,
+            "combo": 1,
+            "shining": 1,
+            "PURE": 1,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 40.20000076293945,
+            "healthBits": 1109445837,
+            "result": "0x0"
+          },
+          "contacts": [
+            {
+              "pointer": "0x4ee0680",
+              "generatedId": 2,
+              "slot": 0,
+              "xy": [
+                640.0,
+                593.0632934570312
+              ]
+            }
+          ],
+          "mask": 1,
+          "androidMapSize": 1,
+          "active": [
+            "0x4331e40",
+            "0x4332380"
+          ],
+          "children": [
+            {
+              "pointer": "0x4331a00",
+              "type": "15LogicArcTapNote",
+              "time": 1250,
+              "end": 1250,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -2022.25
+              ],
+              "missed": 0,
+              "consumed": 1,
+              "contact": 1
+            },
+            {
+              "pointer": "0x4331b80",
+              "type": "15LogicArcTapNote",
+              "time": 1500,
+              "end": 1500,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -4044.5
+              ],
+              "missed": 0,
+              "consumed": 0,
+              "contact": -1
+            }
+          ],
+          "parent": {
+            "pointer": "0x4331e40",
+            "mode": 1,
+            "activity": [
+              0,
+              0
+            ],
+            "cache": 1,
+            "records": [
+              {
+                "pointer": "0x4332200",
+                "time": 1250,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x433220c",
+                "time": 1500,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x4332218",
+                "time": 1750,
+                "weight": 1,
+                "resolved": 0
+              }
+            ],
+            "color": "0x4331d80",
+            "owner": -1
+          },
+          "finishedResult": "0x0"
+        },
+        {
+          "label": "retained frame; body checkpoint if ordinary",
+          "wall": 10827,
+          "E": 1375,
+          "lastModelE": 1375,
+          "score": {
+            "N": 2,
+            "score": 5000001,
+            "combo": 1,
+            "shining": 1,
+            "PURE": 1,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 40.20000076293945,
+            "healthBits": 1109445837,
+            "result": "0x0"
+          },
+          "contacts": [
+            {
+              "pointer": "0x4ee0680",
+              "generatedId": 2,
+              "slot": 0,
+              "xy": [
+                640.0,
+                593.0632934570312
+              ]
+            }
+          ],
+          "mask": 1,
+          "androidMapSize": 1,
+          "active": [
+            "0x4331e40",
+            "0x4332380"
+          ],
+          "children": [
+            {
+              "pointer": "0x4331a00",
+              "type": "15LogicArcTapNote",
+              "time": 1250,
+              "end": 1250,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -2022.25
+              ],
+              "missed": 0,
+              "consumed": 1,
+              "contact": 1
+            },
+            {
+              "pointer": "0x4331b80",
+              "type": "15LogicArcTapNote",
+              "time": 1500,
+              "end": 1500,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -4044.5
+              ],
+              "missed": 0,
+              "consumed": 0,
+              "contact": -1
+            }
+          ],
+          "parent": {
+            "pointer": "0x4331e40",
+            "mode": 1,
+            "activity": [
+              0,
+              0
+            ],
+            "cache": 1,
+            "records": [
+              {
+                "pointer": "0x4332200",
+                "time": 1250,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x433220c",
+                "time": 1500,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x4332218",
+                "time": 1750,
+                "weight": 1,
+                "resolved": 0
+              }
+            ],
+            "color": "0x4331d80",
+            "owner": -1
+          },
+          "finishedResult": "0x0"
+        },
+        {
+          "label": "second child time WITHOUT fresh DOWN",
+          "wall": 10952,
+          "E": 1500,
+          "lastModelE": 1500,
+          "score": {
+            "N": 2,
+            "score": 5000001,
+            "combo": 1,
+            "shining": 1,
+            "PURE": 1,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 40.20000076293945,
+            "healthBits": 1109445837,
+            "result": "0x0"
+          },
+          "contacts": [
+            {
+              "pointer": "0x4ee0680",
+              "generatedId": 2,
+              "slot": 0,
+              "xy": [
+                640.0,
+                593.0632934570312
+              ]
+            }
+          ],
+          "mask": 1,
+          "androidMapSize": 1,
+          "active": [
+            "0x4331e40",
+            "0x4332380"
+          ],
+          "children": [
+            {
+              "pointer": "0x4331a00",
+              "type": "15LogicArcTapNote",
+              "time": 1250,
+              "end": 1250,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -2022.25
+              ],
+              "missed": 0,
+              "consumed": 1,
+              "contact": 1
+            },
+            {
+              "pointer": "0x4331b80",
+              "type": "15LogicArcTapNote",
+              "time": 1500,
+              "end": 1500,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -4044.5
+              ],
+              "missed": 0,
+              "consumed": 0,
+              "contact": -1
+            }
+          ],
+          "parent": {
+            "pointer": "0x4331e40",
+            "mode": 1,
+            "activity": [
+              0,
+              0
+            ],
+            "cache": 1,
+            "records": [
+              {
+                "pointer": "0x4332200",
+                "time": 1250,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x433220c",
+                "time": 1500,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x4332218",
+                "time": 1750,
+                "weight": 1,
+                "resolved": 0
+              }
+            ],
+            "color": "0x4331d80",
+            "owner": -1
+          },
+          "finishedResult": "0x0"
+        },
+        {
+          "label": "native MOVE at second child",
+          "wall": 10952,
+          "E": 1500,
+          "lastModelE": 1500,
+          "score": {
+            "N": 2,
+            "score": 5000001,
+            "combo": 1,
+            "shining": 1,
+            "PURE": 1,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 40.20000076293945,
+            "healthBits": 1109445837,
+            "result": "0x0"
+          },
+          "contacts": [
+            {
+              "pointer": "0x4ee0680",
+              "generatedId": 2,
+              "slot": 0,
+              "xy": [
+                640.0,
+                593.0632934570312
+              ]
+            }
+          ],
+          "mask": 1,
+          "androidMapSize": 1,
+          "active": [
+            "0x4331e40",
+            "0x4332380"
+          ],
+          "children": [
+            {
+              "pointer": "0x4331a00",
+              "type": "15LogicArcTapNote",
+              "time": 1250,
+              "end": 1250,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -2022.25
+              ],
+              "missed": 0,
+              "consumed": 1,
+              "contact": 1
+            },
+            {
+              "pointer": "0x4331b80",
+              "type": "15LogicArcTapNote",
+              "time": 1500,
+              "end": 1500,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -4044.5
+              ],
+              "missed": 0,
+              "consumed": 0,
+              "contact": -1
+            }
+          ],
+          "parent": {
+            "pointer": "0x4331e40",
+            "mode": 1,
+            "activity": [
+              0,
+              0
+            ],
+            "cache": 1,
+            "records": [
+              {
+                "pointer": "0x4332200",
+                "time": 1250,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x433220c",
+                "time": 1500,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x4332218",
+                "time": 1750,
+                "weight": 1,
+                "resolved": 0
+              }
+            ],
+            "color": "0x4331d80",
+            "owner": -1
+          },
+          "finishedResult": "0x0"
+        },
+        {
+          "label": "repeat FRAME after MOVE without fresh DOWN",
+          "wall": 10952,
+          "E": 1500,
+          "lastModelE": 1500,
+          "score": {
+            "N": 2,
+            "score": 5000001,
+            "combo": 1,
+            "shining": 1,
+            "PURE": 1,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 40.20000076293945,
+            "healthBits": 1109445837,
+            "result": "0x0"
+          },
+          "contacts": [
+            {
+              "pointer": "0x4ee0680",
+              "generatedId": 2,
+              "slot": 0,
+              "xy": [
+                640.0,
+                593.0632934570312
+              ]
+            }
+          ],
+          "mask": 1,
+          "androidMapSize": 1,
+          "active": [
+            "0x4331e40",
+            "0x4332380"
+          ],
+          "children": [
+            {
+              "pointer": "0x4331a00",
+              "type": "15LogicArcTapNote",
+              "time": 1250,
+              "end": 1250,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -2022.25
+              ],
+              "missed": 0,
+              "consumed": 1,
+              "contact": 1
+            },
+            {
+              "pointer": "0x4331b80",
+              "type": "15LogicArcTapNote",
+              "time": 1500,
+              "end": 1500,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -4044.5
+              ],
+              "missed": 0,
+              "consumed": 0,
+              "contact": -1
+            }
+          ],
+          "parent": {
+            "pointer": "0x4331e40",
+            "mode": 1,
+            "activity": [
+              0,
+              0
+            ],
+            "cache": 1,
+            "records": [
+              {
+                "pointer": "0x4332200",
+                "time": 1250,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x433220c",
+                "time": 1500,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x4332218",
+                "time": 1750,
+                "weight": 1,
+                "resolved": 0
+              }
+            ],
+            "color": "0x4331d80",
+            "owner": -1
+          },
+          "finishedResult": "0x0"
+        },
+        {
+          "label": "retained duplicate UP",
+          "wall": 10952,
+          "E": 1500,
+          "lastModelE": 1500,
+          "score": {
+            "N": 2,
+            "score": 5000001,
+            "combo": 1,
+            "shining": 1,
+            "PURE": 1,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 40.20000076293945,
+            "healthBits": 1109445837,
+            "result": "0x0"
+          },
+          "contacts": [],
+          "mask": 0,
+          "androidMapSize": 0,
+          "active": [
+            "0x4331e40",
+            "0x4332380"
+          ],
+          "children": [
+            {
+              "pointer": "0x4331a00",
+              "type": "15LogicArcTapNote",
+              "time": 1250,
+              "end": 1250,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -2022.25
+              ],
+              "missed": 0,
+              "consumed": 1,
+              "contact": 1
+            },
+            {
+              "pointer": "0x4331b80",
+              "type": "15LogicArcTapNote",
+              "time": 1500,
+              "end": 1500,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -4044.5
+              ],
+              "missed": 0,
+              "consumed": 0,
+              "contact": -1
+            }
+          ],
+          "parent": {
+            "pointer": "0x4331e40",
+            "mode": 1,
+            "activity": [
+              0,
+              0
+            ],
+            "cache": 1,
+            "records": [
+              {
+                "pointer": "0x4332200",
+                "time": 1250,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x433220c",
+                "time": 1500,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x4332218",
+                "time": 1750,
+                "weight": 1,
+                "resolved": 0
+              }
+            ],
+            "color": "0x4331d80",
+            "owner": -1
+          },
+          "finishedResult": "0x0"
+        },
+        {
+          "label": "second child fresh DOWN",
+          "wall": 10952,
+          "E": 1500,
+          "lastModelE": 1500,
+          "score": {
+            "N": 2,
+            "score": 10000002,
+            "combo": 2,
+            "shining": 2,
+            "PURE": 2,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 80.4000015258789,
+            "healthBits": 1117834445,
+            "result": "0x0"
+          },
+          "contacts": [
+            {
+              "pointer": "0x4ee2980",
+              "generatedId": 3,
+              "slot": 0,
+              "xy": [
+                640.0,
+                593.0632934570312
+              ]
+            }
+          ],
+          "mask": 1,
+          "androidMapSize": 1,
+          "active": [
+            "0x4331e40",
+            "0x4332380"
+          ],
+          "children": [
+            {
+              "pointer": "0x4331a00",
+              "type": "15LogicArcTapNote",
+              "time": 1250,
+              "end": 1250,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -2022.25
+              ],
+              "missed": 0,
+              "consumed": 1,
+              "contact": 1
+            },
+            {
+              "pointer": "0x4331b80",
+              "type": "15LogicArcTapNote",
+              "time": 1500,
+              "end": 1500,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -4044.5
+              ],
+              "missed": 0,
+              "consumed": 1,
+              "contact": 3
+            }
+          ],
+          "parent": {
+            "pointer": "0x4331e40",
+            "mode": 1,
+            "activity": [
+              0,
+              0
+            ],
+            "cache": 1,
+            "records": [
+              {
+                "pointer": "0x4332200",
+                "time": 1250,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x433220c",
+                "time": 1500,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x4332218",
+                "time": 1750,
+                "weight": 1,
+                "resolved": 0
+              }
+            ],
+            "color": "0x4331d80",
+            "owner": -1
+          },
+          "finishedResult": "0x0"
+        },
+        {
+          "label": "second child UP",
+          "wall": 10952,
+          "E": 1500,
+          "lastModelE": 1500,
+          "score": {
+            "N": 2,
+            "score": 10000002,
+            "combo": 2,
+            "shining": 2,
+            "PURE": 2,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 80.4000015258789,
+            "healthBits": 1117834445,
+            "result": "0x0"
+          },
+          "contacts": [],
+          "mask": 0,
+          "androidMapSize": 0,
+          "active": [
+            "0x4331e40",
+            "0x4332380"
+          ],
+          "children": [
+            {
+              "pointer": "0x4331a00",
+              "type": "15LogicArcTapNote",
+              "time": 1250,
+              "end": 1250,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -2022.25
+              ],
+              "missed": 0,
+              "consumed": 1,
+              "contact": 1
+            },
+            {
+              "pointer": "0x4331b80",
+              "type": "15LogicArcTapNote",
+              "time": 1500,
+              "end": 1500,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -4044.5
+              ],
+              "missed": 0,
+              "consumed": 1,
+              "contact": 3
+            }
+          ],
+          "parent": {
+            "pointer": "0x4331e40",
+            "mode": 1,
+            "activity": [
+              0,
+              0
+            ],
+            "cache": 1,
+            "records": [
+              {
+                "pointer": "0x4332200",
+                "time": 1250,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x433220c",
+                "time": 1500,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x4332218",
+                "time": 1750,
+                "weight": 1,
+                "resolved": 0
+              }
+            ],
+            "color": "0x4331d80",
+            "owner": -1
+          },
+          "finishedResult": "0x0"
+        },
+        {
+          "label": "second child fresh-ID duplicate",
+          "wall": 10952,
+          "E": 1500,
+          "lastModelE": 1500,
+          "score": {
+            "N": 2,
+            "score": 10000002,
+            "combo": 2,
+            "shining": 2,
+            "PURE": 2,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 80.4000015258789,
+            "healthBits": 1117834445,
+            "result": "0x0"
+          },
+          "contacts": [
+            {
+              "pointer": "0x4ee2ec0",
+              "generatedId": 4,
+              "slot": 0,
+              "xy": [
+                640.0,
+                593.0632934570312
+              ]
+            }
+          ],
+          "mask": 1,
+          "androidMapSize": 1,
+          "active": [
+            "0x4331e40",
+            "0x4332380"
+          ],
+          "children": [
+            {
+              "pointer": "0x4331a00",
+              "type": "15LogicArcTapNote",
+              "time": 1250,
+              "end": 1250,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -2022.25
+              ],
+              "missed": 0,
+              "consumed": 1,
+              "contact": 1
+            },
+            {
+              "pointer": "0x4331b80",
+              "type": "15LogicArcTapNote",
+              "time": 1500,
+              "end": 1500,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -4044.5
+              ],
+              "missed": 0,
+              "consumed": 1,
+              "contact": 3
+            }
+          ],
+          "parent": {
+            "pointer": "0x4331e40",
+            "mode": 1,
+            "activity": [
+              0,
+              0
+            ],
+            "cache": 1,
+            "records": [
+              {
+                "pointer": "0x4332200",
+                "time": 1250,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x433220c",
+                "time": 1500,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x4332218",
+                "time": 1750,
+                "weight": 1,
+                "resolved": 0
+              }
+            ],
+            "color": "0x4331d80",
+            "owner": -1
+          },
+          "finishedResult": "0x0"
+        },
+        {
+          "label": "second duplicate UP",
+          "wall": 10952,
+          "E": 1500,
+          "lastModelE": 1500,
+          "score": {
+            "N": 2,
+            "score": 10000002,
+            "combo": 2,
+            "shining": 2,
+            "PURE": 2,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 80.4000015258789,
+            "healthBits": 1117834445,
+            "result": "0x0"
+          },
+          "contacts": [],
+          "mask": 0,
+          "androidMapSize": 0,
+          "active": [
+            "0x4331e40",
+            "0x4332380"
+          ],
+          "children": [
+            {
+              "pointer": "0x4331a00",
+              "type": "15LogicArcTapNote",
+              "time": 1250,
+              "end": 1250,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -2022.25
+              ],
+              "missed": 0,
+              "consumed": 1,
+              "contact": 1
+            },
+            {
+              "pointer": "0x4331b80",
+              "type": "15LogicArcTapNote",
+              "time": 1500,
+              "end": 1500,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -4044.5
+              ],
+              "missed": 0,
+              "consumed": 1,
+              "contact": 3
+            }
+          ],
+          "parent": {
+            "pointer": "0x4331e40",
+            "mode": 1,
+            "activity": [
+              0,
+              0
+            ],
+            "cache": 1,
+            "records": [
+              {
+                "pointer": "0x4332200",
+                "time": 1250,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x433220c",
+                "time": 1500,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x4332218",
+                "time": 1750,
+                "weight": 1,
+                "resolved": 0
+              }
+            ],
+            "color": "0x4331d80",
+            "owner": -1
+          },
+          "finishedResult": "0x0"
+        },
+        {
+          "label": "trace next-frame cleanup",
+          "wall": 10953,
+          "E": 1501,
+          "lastModelE": 1501,
+          "score": {
+            "N": 2,
+            "score": 10000002,
+            "combo": 2,
+            "shining": 2,
+            "PURE": 2,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 80.4000015258789,
+            "healthBits": 1117834445,
+            "result": "0x0"
+          },
+          "contacts": [],
+          "mask": 0,
+          "androidMapSize": 0,
+          "active": [
+            "0x4331e40",
+            "0x4332380"
+          ],
+          "children": [
+            {
+              "pointer": "0x4331a00",
+              "type": "15LogicArcTapNote",
+              "time": 1250,
+              "end": 1250,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -2022.25
+              ],
+              "missed": 0,
+              "consumed": 1,
+              "contact": 1
+            },
+            {
+              "pointer": "0x4331b80",
+              "type": "15LogicArcTapNote",
+              "time": 1500,
+              "end": 1500,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -4044.5
+              ],
+              "missed": 0,
+              "consumed": 1,
+              "contact": 3
+            }
+          ],
+          "parent": {
+            "pointer": "0x4331e40",
+            "mode": 1,
+            "activity": [
+              0,
+              0
+            ],
+            "cache": 1,
+            "records": [
+              {
+                "pointer": "0x4332200",
+                "time": 1250,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x433220c",
+                "time": 1500,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x4332218",
+                "time": 1750,
+                "weight": 1,
+                "resolved": 0
+              }
+            ],
+            "color": "0x4331d80",
+            "owner": -1
+          },
+          "finishedResult": "0x0"
+        },
+        {
+          "label": "stopped before results",
+          "wall": 10953,
+          "E": 1501,
+          "lastModelE": 1501,
+          "score": {
+            "N": 2,
+            "score": 10000002,
+            "combo": 2,
+            "shining": 2,
+            "PURE": 2,
+            "FAR": 0,
+            "LOST": 0,
+            "health": 80.4000015258789,
+            "healthBits": 1117834445,
+            "result": "0x0"
+          },
+          "contacts": [],
+          "mask": 0,
+          "androidMapSize": 0,
+          "active": [
+            "0x4331e40",
+            "0x4332380"
+          ],
+          "children": [
+            {
+              "pointer": "0x4331a00",
+              "type": "15LogicArcTapNote",
+              "time": 1250,
+              "end": 1250,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -2022.25
+              ],
+              "missed": 0,
+              "consumed": 1,
+              "contact": 1
+            },
+            {
+              "pointer": "0x4331b80",
+              "type": "15LogicArcTapNote",
+              "time": 1500,
+              "end": 1500,
+              "parent": "0x4331e40",
+              "group": 0,
+              "input": 1,
+              "geometry": [
+                0.0,
+                50.0,
+                -4044.5
+              ],
+              "missed": 0,
+              "consumed": 1,
+              "contact": 3
+            }
+          ],
+          "parent": {
+            "pointer": "0x4331e40",
+            "mode": 1,
+            "activity": [
+              0,
+              0
+            ],
+            "cache": 1,
+            "records": [
+              {
+                "pointer": "0x4332200",
+                "time": 1250,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x433220c",
+                "time": 1500,
+                "weight": 1,
+                "resolved": 0
+              },
+              {
+                "pointer": "0x4332218",
+                "time": 1750,
+                "weight": 1,
+                "resolved": 0
+              }
+            ],
+            "color": "0x4331d80",
+            "owner": -1
+          },
+          "finishedResult": "0x0"
+        }
+      ],
+      "nativeObjects": {
+        "scene": "0x4326ec0",
+        "model": "0x4355ec0",
+        "chart": "0x4331140",
+        "parent": "0x4331e40",
+        "parentType": "12LogicArcNote",
+        "parentMode": 1,
+        "children": [
+          {
+            "pointer": "0x4331a00",
+            "type": "15LogicArcTapNote",
+            "time": 1250,
+            "end": 1250,
+            "parent": "0x4331e40",
+            "group": 0,
+            "input": 1,
+            "geometry": [
+              0.0,
+              50.0,
+              -2022.25
+            ],
+            "missed": 0,
+            "consumed": 1,
+            "contact": 1
+          },
+          {
+            "pointer": "0x4331b80",
+            "type": "15LogicArcTapNote",
+            "time": 1500,
+            "end": 1500,
+            "parent": "0x4331e40",
+            "group": 0,
+            "input": 1,
+            "geometry": [
+              0.0,
+              50.0,
+              -4044.5
+            ],
+            "missed": 0,
+            "consumed": 1,
+            "contact": 3
+          }
+        ],
+        "N": 2,
+        "end": 2500,
+        "mainContainsParent": true,
+        "mainContainsChildren": [
+          false,
+          false
+        ],
+        "index": [
+          {
+            "0": [
+              "0x4332240",
+              "0x4331e40"
+            ],
+            "1": [
+              "0x4331e40",
+              "0x4332380"
+            ]
+          }
+        ],
+        "listener": {
+          "p": "0x4366180",
+          "registered": 1,
+          "priority": 20,
+          "paused": 0,
+          "enabled": 1
+        },
+        "records": [
+          {
+            "pointer": "0x4332200",
+            "time": 1250,
+            "weight": 1,
+            "resolved": 0
+          },
+          {
+            "pointer": "0x433220c",
+            "time": 1500,
+            "weight": 1,
+            "resolved": 0
+          },
+          {
+            "pointer": "0x4332218",
+            "time": 1750,
+            "weight": 1,
+            "resolved": 0
+          }
+        ]
+      },
+      "prediction": {
+        "conditionalW102N": 2,
+        "nativeObservedN": 2,
+        "agrees": true,
+        "neverWrittenByDriver": true
+      },
+      "projection": [
+        {
+          "child": "0x4331a00",
+          "worldPlane": [
+            0.0,
+            50.0,
+            0.0
+          ],
+          "childSamplerZ": -2022.25,
+          "jni": [
+            640.0,
+            593.0632781982422
+          ],
+          "displaced": false
+        },
+        {
+          "child": "0x4331b80",
+          "worldPlane": [
+            0.0,
+            50.0,
+            0.0
+          ],
+          "childSamplerZ": -4044.5,
+          "jni": [
+            640.0,
+            593.0632781982422
+          ],
+          "displaced": false
+        },
+        {
+          "child": "0x4331a00",
+          "worldPlane": [
+            2000.0,
+            50.0,
+            0.0
+          ],
+          "childSamplerZ": -2022.25,
+          "jni": [
+            1942.8638916015625,
+            593.0632781982422
+          ],
+          "displaced": true
+        }
+      ],
+      "jniArrayCalls": [
+        {
+          "service": "GetArrayLength",
+          "length": 1,
+          "caller": "0x17069b4"
+        },
+        {
+          "service": "GetIntArrayRegion",
+          "start": 0,
+          "count": 1,
+          "caller": "0x1706a88"
+        },
+        {
+          "service": "GetFloatArrayRegion",
+          "start": 0,
+          "count": 1,
+          "caller": "0x1706aac"
+        },
+        {
+          "service": "GetFloatArrayRegion",
+          "start": 0,
+          "count": 1,
+          "caller": "0x1706ad0"
+        },
+        {
+          "service": "GetFloatArrayRegion",
+          "start": 0,
+          "count": 1,
+          "caller": "0x1706af4"
+        }
+      ],
+      "final": {
+        "label": "stopped before results",
+        "wall": 10953,
+        "E": 1501,
+        "lastModelE": 1501,
+        "score": {
+          "N": 2,
+          "score": 10000002,
+          "combo": 2,
+          "shining": 2,
+          "PURE": 2,
+          "FAR": 0,
+          "LOST": 0,
+          "health": 80.4000015258789,
+          "healthBits": 1117834445,
+          "result": "0x0"
+        },
+        "contacts": [],
+        "mask": 0,
+        "androidMapSize": 0,
+        "active": [
+          "0x4331e40",
+          "0x4332380"
+        ],
+        "children": [
+          {
+            "pointer": "0x4331a00",
+            "type": "15LogicArcTapNote",
+            "time": 1250,
+            "end": 1250,
+            "parent": "0x4331e40",
+            "group": 0,
+            "input": 1,
+            "geometry": [
+              0.0,
+              50.0,
+              -2022.25
+            ],
+            "missed": 0,
+            "consumed": 1,
+            "contact": 1
+          },
+          {
+            "pointer": "0x4331b80",
+            "type": "15LogicArcTapNote",
+            "time": 1500,
+            "end": 1500,
+            "parent": "0x4331e40",
+            "group": 0,
+            "input": 1,
+            "geometry": [
+              0.0,
+              50.0,
+              -4044.5
+            ],
+            "missed": 0,
+            "consumed": 1,
+            "contact": 3
+          }
+        ],
+        "parent": {
+          "pointer": "0x4331e40",
+          "mode": 1,
+          "activity": [
+            0,
+            0
+          ],
+          "cache": 1,
+          "records": [
+            {
+              "pointer": "0x4332200",
+              "time": 1250,
+              "weight": 1,
+              "resolved": 0
+            },
+            {
+              "pointer": "0x433220c",
+              "time": 1500,
+              "weight": 1,
+              "resolved": 0
+            },
+            {
+              "pointer": "0x4332218",
+              "time": 1750,
+              "weight": 1,
+              "resolved": 0
+            }
+          ],
+          "color": "0x4331d80",
+          "owner": -1
+        },
+        "finishedResult": "0x0"
+      },
+      "callCounts": {
+        "0xee197c": 1,
+        "0xe4e4dc": 1,
+        "0xe2ea48": 1,
+        "0x173b358": 1,
+        "0x1862a14": 1,
+        "0x1864e18": 2,
+        "0x173a778": 2,
+        "0x1864e1c": 2,
+        "0x178f7fc": 1,
+        "0x1865468": 1,
+        "0x1925084": 1,
+        "0x11ea120": 1,
+        "0x173bf2c": 1,
+        "0x1576aa4": 505,
+        "0x10a7550": 9,
+        "0x14858d4": 9,
+        "0x13b73ac": 28,
+        "0x180cf28": 33,
+        "0xbe31a8": 5,
+        "0xeec480": 10,
+        "0xeec4e0": 5,
+        "0xeec4f0": 5,
+        "0xdda71c": 5,
+        "0xf9a50c": 5,
+        "0x160ce28": 7,
+        "0x160cec0": 3,
+        "0x1730290": 2,
+        "0xc78814": 2,
+        "0xeec56c": 7,
+        "0x1706960": 1
+      },
+      "directHostCalls": [
+        "0x1905bc8",
+        "0x14c9fe0",
+        "0x133eedc",
+        "0x14c3080",
+        "0x18931ac",
+        "0x88a938",
+        "0x145b1a0",
+        "0xcabe24",
+        "0xa4227c",
+        "0xf720a8",
+        "0xb99da4",
+        "0x86d390",
+        "0x132c46c",
+        "0x1754440",
+        "0x14ef098",
+        "0x1a165bc",
+        "0xd07d38",
+        "0xd07d38",
+        "0xd07d38",
+        "0xd07d38",
+        "0x131419c",
+        "0x131419c",
+        "0x1054f24",
+        "0xee197c",
+        "0x131419c",
+        "0xefd848",
+        "0x1793f8c",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x13d3f44",
+        "0x1793f8c",
+        "0xbdbb70",
+        "0xbdbb70",
+        "0xbdbb70",
+        "0x1793f8c",
+        "0x1793f8c",
+        "0x1793f8c",
+        "0x1793f8c",
+        "0xbe31a8",
+        "0xdda71c",
+        "0xbe31a8",
+        "0xdda71c",
+        "0xbe31a8",
+        "0x1793f8c",
+        "0x1793f8c",
+        "0x1706960",
+        "0x1793f8c",
+        "0xdda71c",
+        "0xbe31a8",
+        "0xdda71c",
+        "0xbe31a8",
+        "0xdda71c",
+        "0x1793f8c"
+      ],
+      "semanticReplacementHooks": [],
+      "abiServices": {
+        "strspn": 174,
+        "sscanf": 4,
+        "strcspn": 176,
+        "pow": 430,
+        "ldexp": 66,
+        "strchr": 1,
+        "__vsprintf_chk": 2
+      }
+    },
+    {
+      "id": "scene3-ordinary-two",
+      "fixture": {
+        "file": "ordinary_two.aff",
+        "sha256": "cbf47e5c83e070533bee8bc1b1e31b59209e452d43b612832f3cd02fad2cb0e1",
+        "rawAff": "AudioOffset:0\nTimingPointDensityFactor:1.0\n-\ntiming(0,120.00,4.00);\narc(1000,2000,0.50,0.50,s,0.50,0.50,0,none,false)[arctap(1250),arctap(1500)];\n",
+        "boundary": "unchanged external AFF resource-provider bytes only"
+      },
+      "status": "blocked",
+      "parsed": [
+        {
+          "mode": 0,
+          "start": 1000,
+          "end": 2000,
+          "times": [
+            1250,
+            1500
+          ],
+          "childArgument": 1250
+        },
+        {
+          "mode": 0,
+          "start": 1000,
+          "end": 2000,
+          "times": [
+            1250,
+            1500
+          ],
+          "childArgument": 1500
+        }
+      ],
+      "factories": [
+        {
+          "pointer": "0x4331a00",
+          "type": "15LogicArcTapNote",
+          "vtable": "0x1acac18",
+          "time": 1250
+        },
+        {
+          "pointer": "0x4331b80",
+          "type": "15LogicArcTapNote",
+          "vtable": "0x1acac18",
+          "time": 1500
+        }
+      ],
+      "writes": [
+        {
+          "phase": "019 original Scheduler dt 0.4",
+          "pc": "0x1865514",
+          "object": "0x4331a00",
+          "kind": "geometry/backlink",
+          "offset": "0x90",
+          "size": 8,
+          "value": 70458944
+        },
+        {
+          "phase": "019 original Scheduler dt 0.4",
+          "pc": "0x1865514",
+          "object": "0x4331b80",
+          "kind": "geometry/backlink",
+          "offset": "0x90",
+          "size": 8,
+          "value": 70458944
+        },
+        {
+          "phase": "019 original Scheduler dt 0.4",
+          "pc": "0x1925888",
+          "object": "0x4331a00",
+          "kind": "geometry/backlink",
+          "offset": "0x80",
+          "size": 8,
+          "value": 4776067404826411008
+        },
+        {
+          "phase": "019 original Scheduler dt 0.4",
+          "pc": "0x192588c",
+          "object": "0x4331a00",
+          "kind": "geometry/backlink",
+          "offset": "0x88",
+          "size": 4,
+          "value": 3304900608
+        },
+        {
+          "phase": "019 original Scheduler dt 0.4",
+          "pc": "0x1925888",
+          "object": "0x4331b80",
+          "kind": "geometry/backlink",
+          "offset": "0x80",
+          "size": 8,
+          "value": 4776067404826411008
+        },
+        {
+          "phase": "019 original Scheduler dt 0.4",
+          "pc": "0x192588c",
+          "object": "0x4331b80",
+          "kind": "geometry/backlink",
+          "offset": "0x88",
+          "size": 4,
+          "value": 3313289216
+        }
+      ],
+      "countProducer": [
+        {
+          "chart": "0x4331140",
+          "lower": 0,
+          "upper": 2147483647,
+          "caller": "0x173bf2c",
+          "N": 2
+        }
+      ],
+      "candidates": [],
+      "classifiers": [],
+      "spatial": [],
+      "guardReads": [],
+      "recorders": [],
+      "bodyAcceptances": [],
+      "events": [],
+      "nativeObjects": {
+        "scene": "0x4326ec0",
+        "model": "0x4355ec0",
+        "chart": "0x4331140",
+        "parent": "0x4331e40",
+        "parentType": "12LogicArcNote",
+        "parentMode": 1,
+        "children": [
+          {
+            "pointer": "0x4331a00",
+            "type": "15LogicArcTapNote",
+            "time": 1250,
+            "end": 1250,
+            "parent": "0x4331e40",
+            "group": 0,
+            "input": 1,
+            "geometry": [
+              0.0,
+              50.0,
+              -2022.25
+            ],
+            "missed": 0,
+            "consumed": 0,
+            "contact": -1
+          },
+          {
+            "pointer": "0x4331b80",
+            "type": "15LogicArcTapNote",
+            "time": 1500,
+            "end": 1500,
+            "parent": "0x4331e40",
+            "group": 0,
+            "input": 1,
+            "geometry": [
+              0.0,
+              50.0,
+              -4044.5
+            ],
+            "missed": 0,
+            "consumed": 0,
+            "contact": -1
+          }
+        ],
+        "N": 2,
+        "end": 2500,
+        "mainContainsParent": true,
+        "mainContainsChildren": [
+          false,
+          false
+        ],
+        "index": [
+          {
+            "0": [
+              "0x4332240",
+              "0x4331e40"
+            ],
+            "1": [
+              "0x4331e40",
+              "0x4332380"
+            ]
+          }
+        ],
+        "listener": {
+          "p": "0x4366180",
+          "registered": 1,
+          "priority": 20,
+          "paused": 0,
+          "enabled": 1
+        },
+        "records": [
+          {
+            "pointer": "0x4332200",
+            "time": 1250,
+            "weight": 1,
+            "resolved": 0
+          },
+          {
+            "pointer": "0x433220c",
+            "time": 1500,
+            "weight": 1,
+            "resolved": 0
+          },
+          {
+            "pointer": "0x4332218",
+            "time": 1750,
+            "weight": 1,
+            "resolved": 0
+          }
+        ]
+      },
+      "failure": {
+        "type": "AssertionError",
+        "message": "native parent mode disagrees with supplied AFF",
+        "traceback": "Traceback (most recent call last):\n  File \"/workspace/scratch/e83b3992fd3d/p01/reconstructed/campaigns/S01-normal-gameplay/w102-p01/run.py\", line 115, in main\n    else:run_two(budget,scene,id==2)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/e83b3992fd3d/p01/reconstructed/campaigns/S01-normal-gameplay/w102-p01/run.py\", line 55, in run_two\n    assert n.i(p+0xa4)==(0 if ordinary else 1),'native parent mode disagrees with supplied AFF'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: native parent mode disagrees with supplied AFF\n"
+      }
+    }
+  ],
+  "nativeFailures": [
+    {
+      "type": "AssertionError",
+      "message": "native parent mode disagrees with supplied AFF",
+      "traceback": "Traceback (most recent call last):\n  File \"/workspace/scratch/e83b3992fd3d/p01/reconstructed/campaigns/S01-normal-gameplay/w102-p01/run.py\", line 115, in main\n    else:run_two(budget,scene,id==2)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/e83b3992fd3d/p01/reconstructed/campaigns/S01-normal-gameplay/w102-p01/run.py\", line 55, in run_two\n    assert n.i(p+0xa4)==(0 if ordinary else 1),'native parent mode disagrees with supplied AFF'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: native parent mode disagrees with supplied AFF\n"
+    }
+  ],
+  "budget": {
+    "assignment": "W102-P01",
+    "limit": 3,
+    "reservedScenes": 3,
+    "scenes": [
+      {
+        "id": "scene1-E025",
+        "state": "PASS; stopped before completion/results"
+      },
+      {
+        "id": "scene2-trace-two",
+        "state": "PASS; stopped before completion/results"
+      },
+      {
+        "id": "scene3-ordinary-two",
+        "state": "BLOCKED; no retry and later scenes NOT RUN"
+      }
+    ]
+  },
+  "notRunScenes": 0
+}

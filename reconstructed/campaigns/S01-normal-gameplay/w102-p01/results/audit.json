@@ -1,0 +1,28 @@
+{
+  "status": "PASS offline evidence validation only; native experiment remains BLOCKED",
+  "checks": 38,
+  "failures": 0,
+  "skips": 0,
+  "nativeFreshScenesCreatedByAudit": 0,
+  "executionSourceSha": "e780629894646da3fbf32e7fb6881006d1453f09",
+  "sceneStatuses": [
+    "PASS",
+    "PASS",
+    "BLOCKED before input"
+  ],
+  "N2": "confirmed original trace count",
+  "N5": "refuted for supplied false+children fixture; mode1/N2 observed",
+  "scene3Judgment": "NOT RUN",
+  "arithmetic": [
+    {
+      "unit": 1,
+      "nativeHealthBits": 1109445837,
+      "nativeScore": 5000001
+    },
+    {
+      "unit": 2,
+      "nativeHealthBits": 1117834445,
+      "nativeScore": 10000002
+    }
+  ]
+}

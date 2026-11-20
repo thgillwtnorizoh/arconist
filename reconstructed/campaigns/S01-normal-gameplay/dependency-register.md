@@ -150,3 +150,28 @@ observations if demanded. Existing comparator/guard/N7 contracts do not need
 generic rediscovery. Next proposed Work2child/conflict integration depends on
 P01/P03; broader graph integration on P02/P04. No new native execution authorized
 or started here. E039widening remains independent; G006/007/009/010 unchanged.
+
+
+## W102-P01 dependency disposition — 2026-11-20
+
+**B01 / D07 partially resolved, still OPEN.** Source `e780629894646da3fbf32e7fb6881006d1453f09`
+executed exactly three scenes. Two-child trace construction/count/child judgment
+and negative controls now have native-integrated evidence; repeating generic E025
+ownership discovery is unnecessary. Raw false/two-child input also constructs
+real children but prepares mode1/N2, contradicting the conditional mode0/N5 model.
+Raw AFF flag and prepared mode must be separate normalization fields in future
+fixtures and implementation acceptance tests.
+
+The Scene3 host mode assertion interrupted judgment. It is a harness prerequisite
+error, not a missing native producer or engine rejection. No fresh scene remains
+authorized. Headquarters should review the measured conversion and decide whether
+to authorize one-scene P01-C01: the identical false/two-child fixture, observing
+prepared mode1 without forcing it, then fresh-DOWN/negative/recorder/cleanup checks.
+Do not attempt to manufacture ordinary body+children or preserve predicted N5.
+
+Future Work2 child integration requires explicit raw-to-prepared mode handling,
+native-backed child input/recording contracts, production negatives and independent
+QA; generalized conflict behavior still depends on separately authorized P03.
+Graph P02/P04, E039 widening and G006/007/009/010 remain separate unresolved work.
+No implementation or additional native experiment started. Full scope and ledger:
+[W102-P01-report.md](W102-P01-report.md). S01 OPEN.

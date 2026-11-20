@@ -1,0 +1,40 @@
+{
+  "command": [
+    "python",
+    "reconstructed/campaigns/S01-normal-gameplay/w102-p01/run.py",
+    "--archive",
+    "../project_sources/01-arccopy.zip",
+    "--budget",
+    "/tmp/p01-authorized-budget.json",
+    "--output",
+    "/tmp/p01-native-ledger.json"
+  ],
+  "cwd": "/workspace/scratch/e83b3992fd3d/p01",
+  "environment": {
+    "PYTHONPATH": "/tmp/p01-native-libs"
+  },
+  "executionSourceSha": "e780629894646da3fbf32e7fb6881006d1453f09",
+  "exit": 1,
+  "freshScenesReserved": 3,
+  "scenesPass": 2,
+  "scenesBlocked": 1,
+  "notStartedScenes": 0,
+  "scene3Input": "NOT RUN after host diagnostic mode assertion",
+  "rawHostLogSha256": "964769a149554a776e944bfd0624d45fa665d9427be2e737639d0f50d5c0f7da",
+  "selectedSemanticLedgerSha256": "8a103d5d396fddc682adf201d4c6fb9dcc16be6db5539753ab840a28b1537ce8",
+  "owningEntryLogCounts": {
+    "0xee197c": 3,
+    "0xee29a8": 3,
+    "0xee29e8": 3
+  },
+  "unrun": [
+    "scene3 child inputs/body-contact schedule",
+    "results",
+    "P02",
+    "P03",
+    "P04",
+    "production QA",
+    "GUI/Windows",
+    "native repeat"
+  ]
+}

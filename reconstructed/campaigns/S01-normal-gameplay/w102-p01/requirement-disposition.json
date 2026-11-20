@@ -1,0 +1,56 @@
+{
+  "campaign": "S01",
+  "dependency": "D07/B01",
+  "status": "BLOCKED full assignment; partial evidence",
+  "requirements": [
+    {
+      "id": "W102-C01",
+      "scope": "two distinct interior children of one trace parent",
+      "state": "CONFIRMED ORIGINAL / native-integrated",
+      "ledger": "scene2-trace-two.nativeObjects / factories / writes",
+      "remaining": "Simultaneous, out-of-range, arbitrary count, graph child structures NOT VERIFIED"
+    },
+    {
+      "id": "W102-C02",
+      "scope": "raw false plus two children constructor",
+      "state": "CONFIRMED ORIGINAL construction; INSTRUCTION-BACKED writer attribution",
+      "ledger": "scene3-ordinary-two.parsed / nativeObjects; mode-normalization-source.json",
+      "finding": "parsed0 -> prepared1, not an ordinary-body-plus-child object",
+      "remaining": "Direct false-fixture judgment NOT RUN"
+    },
+    {
+      "id": "W102-C03",
+      "scope": "trace two-child N; raw false fixture N",
+      "state": "CONFIRMED ORIGINAL / native count helper and stored N",
+      "finding": "N2 for both two-child inputs; N5 refuted for supplied false fixture",
+      "remaining": "General time ordering/count boundaries NOT VERIFIED"
+    },
+    {
+      "id": "W102-C04",
+      "scope": "two unequal-time child candidates and displaced negative",
+      "state": "CONFIRMED ORIGINAL / native-integrated for trace fixture",
+      "ledger": "scene2-trace-two.spatial / classifiers / recorders",
+      "remaining": "Equal-time or ground/hold competition NOT VERIFIED"
+    },
+    {
+      "id": "W102-C05",
+      "scope": "fresh-DOWN, retained MOVE/frame negative, fresh-ID duplicates, cleanup",
+      "state": "CONFIRMED ORIGINAL / native-integrated for trace fixture",
+      "ledger": "scene2-trace-two.events / classifiers / final",
+      "remaining": "False fixture not input-tested; misses, simultaneous children NOT VERIFIED"
+    },
+    {
+      "id": "W102-C06",
+      "scope": "connected parents with children",
+      "state": "NOT RUN / NOT VERIFIED",
+      "remaining": "P02/P03/P04 not authorized; no closure inferred"
+    },
+    {
+      "id": "S01-11.01",
+      "scope": "two child PURE callbacks, score and binary32 health transitions",
+      "state": "CONFIRMED ORIGINAL / native-integrated for trace fixture",
+      "ledger": "scene2-trace-two.recorders",
+      "remaining": "FAR/LOST child schedules and full results NOT RUN"
+    }
+  ]
+}

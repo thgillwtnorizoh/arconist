@@ -1,0 +1,24 @@
+{
+  "firstDifference": {
+    "stage": "after native construction/activation, before Scene3 input",
+    "field": "preparedParent.mode(+0xa4)",
+    "conditionalExpectation": 0,
+    "originalObserved": 1,
+    "parsedModeObserved": 0,
+    "diagnosticAssertion": "run.py line55",
+    "notAnOriginalEngineRejection": true
+  },
+  "predictionN2": {
+    "predicted": 2,
+    "observed": 2,
+    "status": "CONFIRMED ORIGINAL for tested trace fixture"
+  },
+  "predictionN5": {
+    "predicted": 5,
+    "observed": 2,
+    "status": "REFUTED for supplied false+two-child AFF; original prepares mode1/N2"
+  },
+  "scene3Judgment": "NOT RUN; assertion stopped existing VM. Budget exhausted; no retry.",
+  "parentBodyCoexistence": "NOT VERIFIED. No genuine mode0 parent with children produced by this input.",
+  "guardFailureOrigin": "Host harness assumption about prepared mode. Native construction succeeded; no original-native exception recorded."
+}

@@ -21,3 +21,14 @@ leaves later scenes NOT RUN. No results/complete-song path is called.
 
 A final report and curated event ledger will follow the authorized single execution.
 S01 OPEN. P02/P03/P04 and reconstruction implementation remain unauthorized.
+
+## Executed disposition
+
+One execution at e780629894646da3fbf32e7fb6881006d1453f09 consumed all3scenes.
+Control and trace-two PASS. Raw false/two-child native construction yields mode1/N2;
+the mode0 diagnostic assertion stopped Scene3before input. Overall BLOCKED, exit1.
+N2 confirmed; N5 refuted for this input. No retry. See ../W102-P01-report.md,
+native-ledger.json, normalized-reference.json, first-divergence.json and results/.
+The prepared-source text above is retained as historical setup, not current NOT RUN
+status. Safe offline audit: `python .../w102-p01/audit.py --output /tmp/p01-audit.json`.
+Native reproduction requires separate authorization; do not reuse or bypass budget.
