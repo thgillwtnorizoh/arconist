@@ -92,3 +92,31 @@ the playable mission until the owner reports a satisfactory hands-on result.
 R003-C01's Windows package was delivered for owner qualification; it is not
 accepted as R003 PASS. The owner will test that specific build and report findings.
 Do not launch R004 or Unity because source is now on `main`.
+
+## UEP-001 addendum — Hard-Rock Stop-and-Pivot (owner directive, 2026-11-20)
+
+Applies to Headquarters, Work 1 and Work 2 in all research/reconstruction work.
+Optimize for verified integrated coverage and sustainable token/compute cost, not
+time spent on one difficult blocker. Preserve the mandatory acceptance gates.
+
+For a distinct root blocker, permit at most two bounded, materially different
+failed attempts by default: (1) characterize and test the likely cause; (2) one
+targeted, evidence-led recovery. Stop early on an established prerequisite or
+budget ceiling. A new missing import or prerequisite does not automatically
+authorize a chain of additional repairs or reclassification as a new feature.
+No silent retries, unbounded excavation, test weakening or expectation fitting.
+
+At the stop threshold, freeze the exact source/test SHA, first failure, fixtures,
+commands, costs/attempt counts and reproduction instructions; mark affected
+requirements BLOCKED/OPEN, NOT VERIFIED. Headquarters then schedules the best
+independently actionable feature, using existing evidence, runnable tests and
+integration value. Reopen only with material new evidence, removed prerequisites
+or explicit owner authorization of a bounded third attempt. A future retry must
+not overwrite the original failed checkpoint or automatically consume other
+scenes/experiments. Blocking one feature never closes or suspends unrelated work.
+
+Do not use the pivot rule to exclude mandatory requirements, claim subsystem
+acceptance, bypass independent QA or replace original gameplay with a fabricated
+approximation. Every new assignment must state the minimum working deliverable,
+dependencies, a concrete test budget, one first-blocker stop condition, its
+next independent pivot option, and exact published/tested source.
