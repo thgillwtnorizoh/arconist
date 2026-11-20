@@ -1249,3 +1249,57 @@ Recommend HQ review mode normalization; if needed, separately authorize P01-C01
 one identical false/two-child scene with observed mode1 and child input/cleanup,
 without forcing body mode or N5. No next task executed. P02/P03/P04 and Work2
 remain unauthorized. G006/007/009/010 unchanged. S01 subsystem **OPEN**.
+
+## S01 HQ W102-P01 review — partial native evidence and stop-policy correction — 2026-11-20
+
+Headquarters verified P01's published native research at
+62e50fc5fbd166a661af0f6d7a69fdc3224bbb34, a non-forced two-commit
+descendant of a9628c139e449dffd3e3a5fef3bb5b74414be9d3.
+Exact native harness executed: e780629894646da3fbf32e7fb6881006d1453f09;
+original lib SHA256 3eaca4e6dabb3395f276f8915698d57675757d0df0970e716b23a3dc201c79be.
+Scene1 E025 historical one-child original-owned control PASS. Scene2 original-
+owned trace parent with two children observed mode1/N2, two independent PURE
+callbacks, H/score recorder fields, displaced, duplicate, MOVE and cleanup
+negatives PASS. Scene3 raw false/two-child original-owned construction
+succeeded, parsed0 -> prepared1/N2. Host diagnostic assertion at P01 run.py
+line55 expected prepared0, stopped before child input; this was not original
+engine rejection. Its original constructor normalization explanation is
+instruction-backed, not a dynamically watched mode-store PC. Prior conditional
+ordinary N5 prediction refuted for exactly this source fixture; no native
+original ordinary-body-with-children behavior established. All three
+authorized fresh scenes consumed. 38 offline audit,16 static-inspection and33
+publication preflight checks pass separately; production runtime, scene3
+judgment, owner Windows and graphical/audio not executed. 30 changed paths;
+protected original/production/history bytes preserved. Parent W1-02 and P01
+remain BLOCKED for their missing native ledgers; no retrospective PASS.
+
+Headquarters makes an experiment-control improvement: distinguish
+(A) hard aborts (lost original-owned producer, invalid original fixture/
+source identity, safety/ABI/corruption, exceeded scene budget) from
+(B) falsified *conditional research predictions*. A type/mode/N mismatch
+against a speculative prediction is a scientific OBSERVATION and must
+be logged as first divergence, not a fatal test failure when native
+ownership and safety remain intact. Previously accepted historical
+control oracles remain strict; never change expected results silently or
+fit goldens to production. Preserve exact predeclared hypotheses and
+observed values and continue *within the already authorized scene
+and schedule* where safe. No retroactive reuse/retry of exhausted P01
+scenes. This rule refines future HQ brief design; does not waive
+UEP-001 correctness, scene budgets, or original provenance.
+
+Separate corrective Work1 W102-P01-C01 is AUTHORIZED for at most ONE new
+original-created raw-false/two-child scene on the identical AFF fixture,
+using the same genuine E025 owning chain and observing parsed0/prepared
+mode and N before input. Do not assert ordinary prepared0/N5; retain
+those as explicitly refuted historical predictions. Capture ordinary
+source input path, original prepared children/body record weights,
+child DOWN/MOVE/duplicate/displaced/UP results and cleanup, continuing
+through *observed* prepared mode1 if still safe and provenance-valid.
+Do not force mode0, modify original child/vector/denominator/semantics,
+or pursue a separate mode0-with-children producer. Stop at native child
+cleanup or first genuinely missing owning prerequisite, before results.
+No more than one fresh scene; do not start P02/P03/P04, Work2 coding
+or broader normal behavior exploration. S01 OPEN. P01/C01 native
+evidence may inform a future separately authorized Work2 source
+integration and independent QA. No additional owner Windows qualification
+required for the research-only experiment.
