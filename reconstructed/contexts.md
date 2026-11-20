@@ -1328,3 +1328,63 @@ authorized Work1 evidence precedes generalized Work2 conflict integration. No P0
 or implementation executed. Production/Windows/GUI/results NOT RUN. All prior
 original/reconstruction/QA evidence preserved. Full report and receipts:
 campaigns/S01-normal-gameplay/W102-P01-C01-report.md and w102-p01-c01/. S01 subsystem OPEN; all other gates remain.
+
+## S01 Headquarters W102-P01-C01 acceptance and W102-P03 native candidate-sort authorization — 2026-11-20
+
+Headquarters verified W102-P01-C01 independently published at
+f21af7b5da3906d2fb80f37cdf99e416f633020a from starting
+c4e4c219214e3a55a4ffcab550ec59485d67e550. Exactly one
+original-created owned scene executed at harness commit
+fd11c2e013831f010412d4457fca04d85df7c2e9, exit0, 1/1
+budget, no retry; 385/385 offline exact-ledger comparisons against
+P01 trace-two and E006 precision pass with no genuine gameplay
+difference. Native read-only c66654/c66658 hooks witnessed parsed0
+to prepared mode1/N2 normalization for the exact raw-false/two-child
+AFF. Two factory children each PURE once, displaced/fresh-duplicate/
+MOVE negatives produce no award and cleanup succeeds; final
+PURE2,FAR0,LOST0,combo2,score10000002,H80.4000015258789.
+Conditional prepared-mode0/N5 remains REFUTED for this fixture; no
+original-owned mode0-with-children body coexistence, equal-time ties,
+graphs, results or platform qualification is inferred. Source and
+preservation evidence verified: sixteen changed paths, prior
+historical/production/QA sources unchanged and append-only history.
+
+HQ accepts W102-P01-C01 as VERIFIED CHECKPOINT and closes its
+Issue #9 plus parent P01 Issue #8 as *bounded child research resolved
+by corrective evidence*; the original historical BLOCKED record and
+falsified hypothesis are retained. Parent W1-02 Issue #7 remains
+OPEN, since graph, conflict and group-window evidence is absent.
+No new reconstruction implementation acceptance or entire S01 gate
+is claimed.
+
+HQ separately AUTHORIZES Work1 **W102-P03** strictly for native-
+owned mixed candidate collection, sort permutation and stopping
+ledger, using the W1-02 original P03 proposal. Up to FOUR genuine
+fresh scenes total, each budgeted before native setup, restricted to
+published W102-A-all3, W102-A-distinct, W102-A-size31 and
+W102-A-two-retained AFF sources. Reuse E004 input sorter
+0xf6b514/start-only comparator and actual original main-vector
+sort start/end independently; do not impose a stable source-order
+tie rule. Reuse E025/W102-P01 child construction and E035/E037
+stop/retained-contact observations as controls, not rerun them as
+additional scenes. At E1500, establish real ground AND child spatial
+eligibility for every intended competing object before using input
+outcomes to claim arbitration; record actual admitted/index/active,
+pre- and post-sort collected identities, comparator keys, first
+classifier/guard/latch or consumed stop and typed recorder results.
+Distinguish actual native input-generated order from AFF/source
+order. If positive overlap or 31 admitted candidates are not
+native-producible, preserve the first producer gap/negative evidence
+without fabricating collection or injecting heaps. Hypothesis
+differences are observations, not fatal assertions where ownership
+and safety still hold. Hard stops only for invalid provenance,
+native missing producer, corrupted ABI/VM, unsafe input, or
+authorized budget exhaustion; no hidden input/frame scheduling.
+Source-derived result ledgers and comparator-sensitive controls
+are mandatory. Avoid complete results, arbitrary new graph,
+P02/P04, Work2 coding, physical Windows testing and scope
+exclusions. Report exact native executable identity, source
+and publication SHAs, event evidence/confidence and remaining
+B03 requirements. A future Work2 change requires separate HQ
+authority and new exact-SHA Work1 QA plus owner Windows retest.
+S01 OPEN under UEP-001 Rev2.1.
