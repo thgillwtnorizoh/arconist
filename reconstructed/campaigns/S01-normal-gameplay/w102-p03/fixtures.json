@@ -1,0 +1,54 @@
+[
+  {
+    "scene": "all3",
+    "path": "reconstructed/campaigns/S01-normal-gameplay/w1-02/fixtures/W102-A-all3.aff",
+    "sha256": "6de46bdf84d4ffe56e9d0db41065406b9951787d5d38e0b7f8a7bca24bead46d",
+    "raw": "AudioOffset:0\nTimingPointDensityFactor:1.0\n-\ntiming(0,120.00,4.00);\n(1500,3);\nhold(1500,2500,3);\narc(1000,2000,0.50,0.50,s,0.50,0.50,0,none,true)[arctap(1500)];\n",
+    "hypothesis": "Actual native overlap/order/winner NOT VERIFIED",
+    "staticOverlap": "Plausible: AFF lane3 becomes native lane4; ground center X212.5,Y0,Z0. Child targetX0,Y50; E004 flag1 half-width302 and clampY100 permit overlap. Verify original lane/spatial at input; no injected overlap.",
+    "typedSource": {
+      "taps": 1,
+      "holds": 1,
+      "children": 1
+    }
+  },
+  {
+    "scene": "distinct",
+    "path": "reconstructed/campaigns/S01-normal-gameplay/w1-02/fixtures/W102-A-distinct.aff",
+    "sha256": "e8d43e2c7ebb755a9a0bbcded49f901ab1c561b826975d07229c697919c5b57c",
+    "raw": "AudioOffset:0\nTimingPointDensityFactor:1.0\n-\ntiming(0,120.00,4.00);\n(1499,3);\narc(1000,2000,0.50,0.50,s,0.50,0.50,0,none,true)[arctap(1500)];\n",
+    "hypothesis": "Actual native overlap/order/winner NOT VERIFIED",
+    "staticOverlap": "Plausible: AFF lane3 becomes native lane4; ground center X212.5,Y0,Z0. Child targetX0,Y50; E004 flag1 half-width302 and clampY100 permit overlap. Verify original lane/spatial at input; no injected overlap.",
+    "typedSource": {
+      "taps": 1,
+      "holds": 0,
+      "children": 1
+    }
+  },
+  {
+    "scene": "size31",
+    "path": "reconstructed/campaigns/S01-normal-gameplay/w1-02/fixtures/W102-A-size31.aff",
+    "sha256": "acc370c1e457435933f86fb24ce3cc8090c60ff922a2d1dbc41a9306d3d5f9e0",
+    "raw": "AudioOffset:0\nTimingPointDensityFactor:1.0\n-\ntiming(0,120.00,4.00);\n(1500,3);\n(1500,3);\n(1500,3);\n(1500,3);\n(1500,3);\n(1500,3);\n(1500,3);\n(1500,3);\n(1500,3);\n(1500,3);\n(1500,3);\n(1500,3);\n(1500,3);\n(1500,3);\n(1500,3);\n(1500,3);\n(1500,3);\n(1500,3);\n(1500,3);\n(1500,3);\n(1500,3);\n(1500,3);\n(1500,3);\n(1500,3);\n(1500,3);\n(1500,3);\n(1500,3);\n(1500,3);\n(1500,3);\n(1500,3);\narc(1000,2000,0.50,0.50,s,0.50,0.50,0,none,true)[arctap(1500)];\n",
+    "hypothesis": "Actual native overlap/order/winner NOT VERIFIED",
+    "staticOverlap": "Plausible: AFF lane3 becomes native lane4; ground center X212.5,Y0,Z0. Child targetX0,Y50; E004 flag1 half-width302 and clampY100 permit overlap. Verify original lane/spatial at input; no injected overlap.",
+    "typedSource": {
+      "taps": 30,
+      "holds": 0,
+      "children": 1
+    }
+  },
+  {
+    "scene": "two-retained",
+    "path": "reconstructed/campaigns/S01-normal-gameplay/w1-02/fixtures/W102-A-two-retained.aff",
+    "sha256": "7b0ae21a81155efc60904297ddf9d61ca33bcee54809de50a124eca786b4db24",
+    "raw": "AudioOffset:0\nTimingPointDensityFactor:1.0\n-\ntiming(0,120.00,4.00);\narc(1000,2000,0.50,0.50,s,0.50,0.50,0,none,true)[arctap(1500),arctap(1500)];\n",
+    "hypothesis": "Actual native overlap/order/winner NOT VERIFIED",
+    "staticOverlap": "Plausible: AFF lane3 becomes native lane4; ground center X212.5,Y0,Z0. Child targetX0,Y50; E004 flag1 half-width302 and clampY100 permit overlap. Verify original lane/spatial at input; no injected overlap.",
+    "typedSource": {
+      "taps": 0,
+      "holds": 0,
+      "children": 2
+    }
+  }
+]
