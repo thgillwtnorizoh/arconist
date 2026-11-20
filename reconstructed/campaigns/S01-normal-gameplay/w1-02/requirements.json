@@ -1,0 +1,332 @@
+{
+  "schema": 1,
+  "assignment": "W1-02",
+  "sourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+  "productionAssessedSha": "49e7c263a36aebcc0316e010a629c6bfdf205f6d",
+  "runtimeTestedSha": null,
+  "requirements": [
+    {
+      "id": "W102-G01",
+      "campaign": [
+        "S01-04.05"
+      ],
+      "dependency": "D06",
+      "behavior": "Graph pass scans later main-vector entries j>i; for unique arc-pointer entries this yields a DAG with no self/back edges",
+      "evidence": [
+        "0x125e514..0x125e52c",
+        "0x125e5cc..0x125e5f4"
+      ],
+      "confidence": "instruction-backed",
+      "readiness": "PARTIAL",
+      "remaining": "Full pre-link ordering for identical (start,end) keys and runtime branches/merge consumers NOT VERIFIED; pointer uniqueness must be established before applying DAG proof to a produced graph"
+    },
+    {
+      "id": "W102-G02",
+      "campaign": [
+        "S01-04.05"
+      ],
+      "dependency": "D06",
+      "behavior": "Finite bounded time delta abs(endA-startB)<=9; X abs subtract in binary32 then promote to binary64 and compare strictly against double0.1; Y float equality",
+      "evidence": [
+        "E038 exact operands",
+        "0x125e5f8..0x125e640",
+        "constant0x4184b0"
+      ],
+      "confidence": "native-integrated exact pair; instruction-backed unexecuted boundaries",
+      "readiness": "READY",
+      "remaining": "Predicates ready; near-boundary native object graphs/record/score outcomes NOT VERIFIED"
+    },
+    {
+      "id": "W102-G03",
+      "campaign": [
+        "S01-04.05"
+      ],
+      "dependency": "D06",
+      "behavior": "Mode compatibility: zero with zero, nonzero with nonzero; inspected pair loop has no curve/color/group-ID comparison",
+      "evidence": [
+        "0x125e644..0x125e658",
+        "0x125e5dc..0x125e79c"
+      ],
+      "confidence": "instruction-backed",
+      "readiness": "PARTIAL",
+      "remaining": "No universal cross-color/group gameplay continuity or special-mode admission inferred"
+    },
+    {
+      "id": "W102-G04",
+      "campaign": [
+        "S01-04.05"
+      ],
+      "dependency": "D06",
+      "behavior": "Successor vector append, single predecessor overwrite; existing successor group is retained rather than merged",
+      "evidence": [
+        "0x1205bf4",
+        "0x125e5b8..0x125e5c8",
+        "0x125e700..0x125e720",
+        "0x12418d8",
+        "0x165286c"
+      ],
+      "confidence": "native-integrated pair; instruction-backed branch/merge",
+      "readiness": "PARTIAL",
+      "remaining": "Triple/branch/merge group topology and gameplay require owned construction observations"
+    },
+    {
+      "id": "W102-G05",
+      "campaign": [
+        "S01-04.05"
+      ],
+      "dependency": "D06",
+      "behavior": "Factory+a0=0; matching link writes successor+a0=1; sign changes additionally set successor+6c=1",
+      "evidence": [
+        "E038",
+        "0x178f8fc",
+        "0x125e6f8..0x125e79c"
+      ],
+      "confidence": "native-integrated root0/successor1; instruction-backed direction-change branch",
+      "readiness": "PARTIAL",
+      "remaining": "Consumer effect of +6c and new direction/zero-duration combinations not runtime-qualified"
+    },
+    {
+      "id": "W102-G06",
+      "campaign": [
+        "S01-04.05",
+        "S01-11.01"
+      ],
+      "dependency": "D06",
+      "behavior": "Generation follows link/geometry; six final pair records represent seven units; weight2 calls recorder twice",
+      "evidence": [
+        "E038",
+        "0x173bd54..0x173bdfc",
+        "0xd92558",
+        "0xba81e8..0xba8278"
+      ],
+      "confidence": "native-integrated exact pair",
+      "readiness": "READY",
+      "remaining": "General duration/branch final records and full-session results remain outside E038; prepared E009 N8 stays separate"
+    },
+    {
+      "id": "W102-G07",
+      "campaign": [
+        "S01-04.05"
+      ],
+      "dependency": "D06",
+      "behavior": "Second linker pass appends zero-duration linked arc start into group timestamp vector; acceptance scans predecessor/current/first-successor chain before potential window write",
+      "evidence": [
+        "0x125e860..0x125e91c",
+        "0x15dfe6c..0x15e015c"
+      ],
+      "confidence": "instruction-backed; native-integrated E038 empty-history control",
+      "readiness": "BLOCKED",
+      "remaining": "Nonempty native-produced group history/window activation and effect NOT VERIFIED"
+    },
+    {
+      "id": "W102-G08",
+      "campaign": [
+        "S01-04.02",
+        "S01-04.05"
+      ],
+      "dependency": "D06",
+      "behavior": "Shared color ownership is separate from graph group; same retained contact crosses E038 junction; release/reacquisition gate and bypass remain separate",
+      "evidence": [
+        "E003",
+        "E009 prepared release/overlap",
+        "E028",
+        "E038"
+      ],
+      "confidence": "native-integrated E028/E038; native-isolated/prepared E009 as labeled",
+      "readiness": "READY",
+      "remaining": "No automatic same-ID continuity across differing colors/groups/branches"
+    },
+    {
+      "id": "W102-C01",
+      "campaign": [
+        "S01-05.01"
+      ],
+      "dependency": "D07",
+      "behavior": "AFF accepts comma-separated child timestamp vector; builder loops per time, child factory and per-child parent backlink",
+      "evidence": [
+        "E002 0xc2cb1c/0x924b50",
+        "0x1864d78..0x1864f28",
+        "0x186550c..0x1865518",
+        "E025 one-child control"
+      ],
+      "confidence": "instruction-backed multiplicity; native-integrated one trace child",
+      "readiness": "PARTIAL",
+      "remaining": "Two or simultaneous child objects, sorting/duplicate times and full unit ledger NOT VERIFIED in owned original scene"
+    },
+    {
+      "id": "W102-C02",
+      "campaign": [
+        "S01-05.01"
+      ],
+      "dependency": "D07",
+      "behavior": "Child vector creation precedes parent mode branch; ordinary path passes child vector to parent factory; parent-mode2 acceptance/miss returns false after flag write",
+      "evidence": [
+        "0x1864f40..0x1864fa4",
+        "0x18653d4..0x1865464",
+        "0x186550c..0x1865518",
+        "0xc788e8..0xc78904",
+        "0x178f5fc..0x178f61c",
+        "0x17302ec",
+        "0x868e98"
+      ],
+      "confidence": "instruction-backed ordinary/mode2; native-integrated trace mode1",
+      "readiness": "PARTIAL",
+      "remaining": "Ordinary-parent live child judgment and denominator need original trace; mode2 inclusion/normal applicability not authorized here"
+    },
+    {
+      "id": "W102-C03",
+      "campaign": [
+        "S01-05.01",
+        "S01-11.01"
+      ],
+      "dependency": "D07",
+      "behavior": "Count helper skips disabled parents/special arc flags/mode2, visits child times, and adds ordinary-mode record weights; it can break on upper-time bound",
+      "evidence": [
+        "0x11ea184..0x11ea270",
+        "E025 N1",
+        "E038 N7"
+      ],
+      "confidence": "instruction-backed general count; native-integrated controls",
+      "readiness": "PARTIAL",
+      "remaining": "Unsorted/out-of-parent child time normalization/geometry/count cannot be guessed"
+    },
+    {
+      "id": "W102-C04",
+      "campaign": [
+        "S01-05.01",
+        "S01-10.01"
+      ],
+      "dependency": "D07",
+      "behavior": "Initial DOWN traverses active enabled arc child vector and uses spatial flag1/width212; arc body is not a discrete tap candidate",
+      "evidence": [
+        "E004",
+        "E025",
+        "0xeec3d0..0xeec49c"
+      ],
+      "confidence": "instruction-backed collector; native-integrated E025 single child",
+      "readiness": "READY",
+      "remaining": "General child-child/ground/hold competition lacks owned runtime observation"
+    },
+    {
+      "id": "W102-C05",
+      "campaign": [
+        "S01-05.01",
+        "S01-10.03"
+      ],
+      "dependency": "D07",
+      "behavior": "Fresh DOWN judgment versus retained MOVE/frame; child consumed/missed guards and generated contact identity; duplicate guard occurs on same child",
+      "evidence": [
+        "E004/E011",
+        "E025",
+        "0xc788e8..0xc78904",
+        "0x178f5fc"
+      ],
+      "confidence": "native-integrated duplicate control; instruction-backed MOVE separation",
+      "readiness": "READY",
+      "remaining": "Simultaneous same-time child winners under multiple contacts NOT VERIFIED"
+    },
+    {
+      "id": "W102-C06",
+      "campaign": [
+        "S01-04.05",
+        "S01-05.01"
+      ],
+      "dependency": "D06/D07",
+      "behavior": "Children stay attached to their own parent; linker handles arcs, not children as graph vertices; trace-to-trace modes can pass same-class predicate",
+      "evidence": [
+        "0x125e644..0x125e658",
+        "0x1865514",
+        "E025/E038 separately"
+      ],
+      "confidence": "instruction-backed composition",
+      "readiness": "BLOCKED",
+      "remaining": "Linked parents with multiple children/checkpoints and shared contact accounting not original-integrated"
+    },
+    {
+      "id": "W102-A01",
+      "campaign": [
+        "S01-10.01",
+        "S01-03.03"
+      ],
+      "dependency": "D07",
+      "behavior": "Candidate sorter signed start only; no source/type/distance key; E004 isolated31-element equal-time reorder disproves stable-source guarantee",
+      "evidence": [
+        "E004 section5",
+        "0xf6b514",
+        "0x16af85c",
+        "0x96cc18"
+      ],
+      "confidence": "native-isolated sort observation; instruction-backed comparator",
+      "readiness": "READY",
+      "remaining": "Exact tie permutation requires faithful size-dependent sort and actual collected-vector order, not invented priority"
+    },
+    {
+      "id": "W102-A02",
+      "campaign": [
+        "S01-04.05",
+        "S01-10.01"
+      ],
+      "dependency": "D06/D07",
+      "behavior": "Pre-link main-vector sorter differs from candidate sorter: start then end key appears in decoded comparison paths",
+      "evidence": [
+        "0x173bd54",
+        "0x7b6ab8..0x7b6ad4",
+        "0x150dbcc..0x150dbe8"
+      ],
+      "confidence": "instruction-backed",
+      "readiness": "PARTIAL",
+      "remaining": "Complete equal-(start,end) stability/permutation and admitted active order NOT VERIFIED"
+    },
+    {
+      "id": "W102-A03",
+      "campaign": [
+        "S01-03.03",
+        "S01-10.01"
+      ],
+      "dependency": "D07",
+      "behavior": "Hold selection latches and unconditionally stops even latch1; tap/child classifier false continues; true including consuming LOST stops",
+      "evidence": [
+        "E035/E037",
+        "0xeec56c..0xeec570",
+        "0xeec6ec..0xeec6f4"
+      ],
+      "confidence": "native-integrated E035/E037; instruction-backed general routing",
+      "readiness": "READY",
+      "remaining": "A tie winner cannot be named without established candidate vector/sort result"
+    },
+    {
+      "id": "W102-A04",
+      "campaign": [
+        "S01-02.03",
+        "S01-10.02"
+      ],
+      "dependency": "D07",
+      "behavior": "JNI DOWN refreshes E without model FRAME; strict expiry and consumed/missed guards produce distinct E035 interleavings",
+      "evidence": [
+        "E035",
+        "E037",
+        "E025 duplicate"
+      ],
+      "confidence": "native-integrated",
+      "readiness": "READY",
+      "remaining": "Actual Android queue ordering and exhaustive mixed simultaneous contacts NOT VERIFIED"
+    },
+    {
+      "id": "W102-A05",
+      "campaign": [
+        "S01-03.02",
+        "S01-04.02",
+        "S01-10.03"
+      ],
+      "dependency": "D06/D07",
+      "behavior": "Initial consumption is separate from continuous hold/arc contacts: retained nonlatching contact can sustain latched hold; color owns generated ID",
+      "evidence": [
+        "E037 B",
+        "E003/E009/E028/E038"
+      ],
+      "confidence": "native-integrated specified cases; prepared ownership boundaries retained",
+      "readiness": "READY",
+      "remaining": "No universal one-contact-one-note/type or arbitrary color exclusivity rule"
+    }
+  ]
+}

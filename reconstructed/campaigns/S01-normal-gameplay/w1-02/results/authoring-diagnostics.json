@@ -1,0 +1,6 @@
+{
+  "controlCopyDraft": "Duplicated default timing line caught by exact-copy assertion; corrected new control copy to original bytes.",
+  "proposalDraft": "Reserved keyword pass in dict keyword arguments raised SyntaxError before execution; renamed passCriteria.",
+  "publicationGuard": "Staging audit rejected generated normalizer bytecode before any publication; unstaged/removed generated file and added local ignore rules.",
+  "scope": "Only new W1-02 files corrected; no original/native/production expectation changed."
+}

@@ -1,0 +1,135 @@
+{
+  "authorization": "NOT AUTHORIZED / NOT RUN in W1-02",
+  "proposals": [
+    {
+      "id": "W102-P01",
+      "priority": 1,
+      "objective": "Owned ordinary/trace multi-child production, count and judgment",
+      "fixtures": [
+        "W102-C00",
+        "W102-C-trace-two",
+        "W102-C-ordinary-two"
+      ],
+      "owningEntry": "ordinary solo0xee197c -> native GameScene/loading0xe2ea48 -> 0x173b358 -> 0x1862a14",
+      "objects": [
+        "original parsed child vector",
+        "per-child factory0x173a778",
+        "parent0x178f7fc/backlinks+90",
+        "sampler0x1925084",
+        "count0x11ea120",
+        "native index/admission and JNI Touches"
+      ],
+      "positiveCase": "E025 unchanged one-child trace control, then two distinct interior children1250/1500 on trace parent",
+      "negativeControl": "Change only parent mode false for same two children; spatially displaced DOWN; fresh eligible duplicate on first consumed child. Ordinary mode is a discriminating control, not a presumed rejection.",
+      "schedule": "Observe construction before activation; project native child geometry with original camera. At child times use explicit frame/DOWN/UP schedules and same-time fresh duplicate. MOVE/frame over second child without fresh DOWN is the no-award control.",
+      "expectedObservations": [
+        "two unique original factory children with parsed times and exact parent backlink",
+        "native vector ordering/geometry/group/input fields",
+        "native N versus conditional trace2/ordinary5 count predictions",
+        "all candidates, classifier guards, acceptance/miss returns and per-unit recorder/health state",
+        "mapping/retention cleanup"
+      ],
+      "passCriteria": "Complete original-owned producer and event ledger; instruction predictions agree or exact contradiction is reported. Native values are never assigned to force the prediction.",
+      "failCriteria": "Missing original producer/provenance, substituted objects, unresolved mismatch or incomplete cleanup; later gates NOT RUN",
+      "stop": "Three fresh scenes maximum; stop at first missing owned prerequisite or after child/duplicate cleanup, before results. No graphs, special mode or timestamp/curve sweep.",
+      "actor": "Work1",
+      "authorization": "Separate Headquarters authorization required; NOT RUN in W1-02"
+    },
+    {
+      "id": "W102-P02",
+      "priority": 2,
+      "objective": "Three-node graph topology and triple junction consumers",
+      "fixtures": [
+        "W102-G00",
+        "W102-G-triple",
+        "W102-G-branch",
+        "W102-G-merge"
+      ],
+      "owningEntry": "ordinary solo0xee197c -> native GameScene/loading0xe2ea48 -> 0x173b358 -> 0x1862a14 -> main sort0x173bd54 -> linker0x125e474",
+      "objects": [
+        "sorted main vector",
+        "successor+138/predecessor+150",
+        "group+e0/color+b0",
+        "a0/6c writers",
+        "final record vectors/N"
+      ],
+      "positiveCase": "E038 pair control then constant three-segment chain",
+      "negativeControl": "Three-node branch and merge distinguish append-all from first-edge-only, predecessor overwrite and group reuse from union; existing Y-ULP mismatch removes an edge if an additional control is authorized.",
+      "schedule": "Observe topology/flags/records after native init. Branch/merge stop at construction. Only triple continues Director/JNI one-contact through two junctions, repeat record frames and UP/next-frame cleanup.",
+      "expectedObservations": [
+        "actual sorted traversal order and all original link stores",
+        "actual group identities/predecessor overwrite without assumed union",
+        "one folding pass per arc versus edge, record weights and N; triple11 remains prediction until observed",
+        "triple shared owner/cache transitions and each unit recorder callback"
+      ],
+      "passCriteria": "Owned construction for declared bounded graphs and complete triple consumer ledger; no arbitrary graph claim",
+      "failCriteria": "First missing original prerequisite or unresolved topology/record/consumer contradiction",
+      "stop": "Four scenes maximum including control; branch/merge construction only. No manual cycle wiring, result/session expansion or further graph variants.",
+      "actor": "Work1",
+      "authorization": "Separate Headquarters authorization required; NOT RUN in W1-02"
+    },
+    {
+      "id": "W102-P03",
+      "priority": 3,
+      "objective": "Exact equal-time mixed permutations and stopping-pointer ledger",
+      "fixtures": [
+        "W102-A-all3",
+        "W102-A-size31",
+        "W102-A-distinct",
+        "W102-A-two-retained"
+      ],
+      "owningEntry": "ordinary solo0xee197c -> native GameScene/loading0xe2ea48 -> 0x173b358 -> 0x1862a14; JNI0xbe31a8 -> listener0x194ff80 -> 0xeec024",
+      "objects": [
+        "real admitted ground/hold/child products",
+        "main/index/active vectors",
+        "Touch generated IDs",
+        "collected vector+b8 and sort0xf6b514",
+        "classifier/latch/recorder traces"
+      ],
+      "positiveCase": "Eligible same-time ground/hold/child trio; observe full pre/post sort and all visited/stopping identities",
+      "negativeControl": "Distinct1499/1500 removes tie;31candidate case exercises size-dependent partition; fresh/retained second contact distinguishes consumed guard from unconditional latch stop.",
+      "schedule": "At E1500 use original projection; first verify actual lane AND child spatial eligibility at that point. Explicit DOWN42/DOWN43 without a model FRAME, then prescribed UP/next frame. Never insert hidden refresh frames.",
+      "expectedObservations": [
+        "native collected order from actual producers, not assumed AFF order",
+        "exact sorted permutation for each size with no synthetic secondary key",
+        "first stopping pointer, guard false/consuming LOST/latch behavior",
+        "generated IDs, per-event counters/f32 health and duplicate prevention"
+      ],
+      "passCriteria": "Original permutation and event ledger captured; winners are observations, never prescribed from Work2",
+      "failCriteria": "Missing overlap/admission/collection producer, unobservable sort or hidden schedule change",
+      "stop": "At most four bounded scenes; no full song/results, physical queue claim or unrestricted sorting expedition. Requires P01 child producer control or equivalent existing original proof.",
+      "actor": "Work1",
+      "authorization": "Separate Headquarters authorization required; NOT RUN in W1-02"
+    },
+    {
+      "id": "W102-P04",
+      "priority": 4,
+      "objective": "Native zero-duration group-timestamp producer and conditional window store",
+      "fixtures": [
+        "W102-G00",
+        "W102-G-same-start"
+      ],
+      "owningEntry": "ordinary solo0xee197c -> native GameScene/loading0xe2ea48 -> 0x173b358 -> 0x1862a14; second linker pass0x125e860..0x125e91c -> acceptance0x15dfe2c",
+      "objects": [
+        "native linked zero-duration member",
+        "group timestamp vector+18/end+20",
+        "predecessor/current/first-successor record scan",
+        "group float+14"
+      ],
+      "positiveCase": "Separately specified junction containing a linked zero-duration arc, original parser/factory only; construct/inspect before input",
+      "negativeControl": "Same chart omitting zero-duration member; existing E038 empty-history control remains authority",
+      "schedule": "Observe timestamp append first. Only after owned producer success, derive candidate triggering frame from actual records and retain original contact. Observe0x15e015c and next consumer; never supply history/window.",
+      "expectedObservations": [
+        "original linked zero-duration member and actual timestamp write",
+        "group association and current/predecessor/first-successor record scan",
+        "conditional +14 store equals selected record time+f32 min(2*interval,500) when conditions hold",
+        "actual consumer effect; absence of store remains a reported bounded negative"
+      ],
+      "passCriteria": "Original-owned producer and conditional store/consumer observations; no fabricated activation PASS",
+      "failCriteria": "Missing zero-duration admission/link, absent justified triggering precondition or unresolved producer/consumer outcome",
+      "stop": "Two scenes only; first absent producer or first store/next consumer. Required only if Headquarters demands nonempty-history profile; no account/camera/gauge work.",
+      "actor": "Work1",
+      "authorization": "Separate Headquarters authorization required; NOT RUN in W1-02"
+    }
+  ]
+}

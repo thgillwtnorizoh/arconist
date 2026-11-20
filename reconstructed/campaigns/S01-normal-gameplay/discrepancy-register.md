@@ -171,3 +171,26 @@ not recorded as a production discrepancy or silently waived.
 Full checkpoint: [QA-W2-01-report.md](QA-W2-01-report.md). S01 OPEN.
 
 QA fixture-review addendum: two new rejection charts corrected to valid AFF decimal timing tokens; all four now assert intended profile-guard messages. Entire37case suite rerun PASS,0fail/skip; original corpus/production unchanged. See QA-W2-01 authoring diagnostics; no coverage exclusion or expectation relaxation.
+
+
+## W1-02 original graph/child/conflict source checkpoint — 2026-11-20
+
+Status BLOCKED for generalized native-integrated closure; evidence-pack validation
+PASS. Starting16d17765e6fe50251162a45ffd5d1a64f243acf5; accepted production
+49e7c263a36aebcc0316e010a629c6bfdf205f6d assessed statically, no new runtime-tested
+SHA.19bounded requirements/45AFF fixtures:5byte-identical historical controls and
+40proposed scenarios NOT RUN.109instruction anchors, exact library identity and
+child virtual relocations rechecked without executing ARM64. No production,
+historical test/oracle, original report/harness or owner qualification change.
+
+D06/D07 remain OPEN. Static source distinguishes native append-all successor/single
+predecessor/group reuse from the exact-pair reconstruction and identifies an
+ordinary/multi-child path beyond current one-trace-child admission. Candidate
+OrderBy(Start).ThenBy(SourceOrder) is an engineering tie guarantee; E004isolated
+31-element reorder already disproves a universal stable-source native rule. Main
+start/end ordering and input start-only sorting are different contracts. No new
+production divergence is claimed and prior bounded QA/owner acceptance is not
+retracted. Proposed tripleN11/trace-twoN2/ordinary-twoN5 are conditional
+RECONSTRUCTED predictions, not original results. Preserve E009preparedN8 versus
+E038naturalN7/activity differences and E038empty group-history scope. See
+W1-02-report.md for exact source anchors, blockers and unexecuted proposals.

@@ -130,3 +130,23 @@ G006/007/009/010 gates remain. No next bounded task was started.
 Full checkpoint: [QA-W2-01-report.md](QA-W2-01-report.md). S01 OPEN.
 
 QA fixture-review addendum: two new rejection charts corrected to valid AFF decimal timing tokens; all four now assert intended profile-guard messages. Entire37case suite rerun PASS,0fail/skip; original corpus/production unchanged. See QA-W2-01 authoring diagnostics; no coverage exclusion or expectation relaxation.
+
+
+## W1-02 original graph/child/conflict source checkpoint — 2026-11-20
+
+Status BLOCKED for generalized native-integrated closure; evidence-pack validation
+PASS. Starting16d17765e6fe50251162a45ffd5d1a64f243acf5; accepted production
+49e7c263a36aebcc0316e010a629c6bfdf205f6d assessed statically, no new runtime-tested
+SHA.19bounded requirements/45AFF fixtures:5byte-identical historical controls and
+40proposed scenarios NOT RUN.109instruction anchors, exact library identity and
+child virtual relocations rechecked without executing ARM64. No production,
+historical test/oracle, original report/harness or owner qualification change.
+
+First blocker B01:original-owned trace/ordinary two-child factory/backlink/geometry/
+count and judgment ledger (W102-P01), reusing E025ordinary entry and services.
+B02small graph topology/triple continuity, B03actual mixed collected/sorted vector
+and stops, B04nonempty group history/window need separately authorized bounded
+observations if demanded. Existing comparator/guard/N7 contracts do not need
+generic rediscovery. Next proposed Work2child/conflict integration depends on
+P01/P03; broader graph integration on P02/P04. No new native execution authorized
+or started here. E039widening remains independent; G006/007/009/010 unchanged.

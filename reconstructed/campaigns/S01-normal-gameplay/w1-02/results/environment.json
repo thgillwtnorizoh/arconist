@@ -1,0 +1,11 @@
+{
+  "python": "3.12.14",
+  "os": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "capstone": "5.0.7",
+  "pyelftools": "0.33",
+  "toolPurpose": "static disassembly / ELF inspection only",
+  "nativeExecutionCount": 0,
+  "buildId": "17d660edbf37ca78beefc32e07672c97419ddce6",
+  "staticInstallCommand": "python -m pip install --target /tmp/w102-static-libs --index-url https://pypi.org/simple capstone==5.0.7 pyelftools==0.33",
+  "staticInstallExit": 0
+}

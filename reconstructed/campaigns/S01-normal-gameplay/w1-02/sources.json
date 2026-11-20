@@ -1,0 +1,202 @@
+{
+  "startingSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+  "acceptedProductionSha": "49e7c263a36aebcc0316e010a629c6bfdf205f6d",
+  "qaPublicationSha": "de13645219e965ae6f519f5665dbcf2de8aa8a59",
+  "sources": [
+    {
+      "path": "reconstructed/Instruction.md",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "eaf454faf3dd9257dd0263ffaed56b49143af211d833d83581a4ec178c150610"
+    },
+    {
+      "path": "reconstructed/contexts.md",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "43d8e1942f81244c6f3fb3bdc7e72541aeb564a903dd3a7511f249fb52f47932"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/README.md",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "836aaa68309a01a438f85bd988c3967852b4db38062825f00a8cc280e603b221"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/A01-audit.md",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "652c1fe9ef86b49a43e7867ddac2af43e280a63fcfa79bc838d4f6abc633ee93"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/coverage-register.md",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "9ba8e6e59ab9f2416b1c758b76648585f0bfa3a8d16be5a49440f40fd16b6055"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/dependency-register.md",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "39b49ca2e7862a5b88f7b3356ffc2585b2f7d8a4f5bbb4424f68413b7487022c"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/discrepancy-register.md",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "e62872784e34bf8e3fb960e880d38073636d907ab4a1d856913101a495c33dc2"
+    },
+    {
+      "path": "reconstructed/validation/S01-W2-01.md",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "5341aed36af1674e598ff4aeb2e5d27af2a22f4fce075494e89fdda3ff81f267"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/QA-W2-01-report.md",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "2b59dc5d14dfd0bb22010e8cb551d96bf6bc33fefba8c702c04ab57d241b9e6e"
+    },
+    {
+      "path": "context.md",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "71164562c131837324ce6941e213befac840b74860f1d13588786c3d8f2af3b2"
+    },
+    {
+      "path": "research_backlog.md",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "b7e7a744632c277784e5a3aa5f4aef57e9704b1be925e76e7b9465f4a1fa9687"
+    },
+    {
+      "path": "excavations/002_aff_parser_and_note_judgment.md",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "7150e08e0939fe4c125fe21b84351f933590c8a51cee1f3f6e6b5303b4790991"
+    },
+    {
+      "path": "excavations/003_arc_geometry_and_finger_tracking.md",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "01591a1c8e01e6d3be0db27f8b9fd5e517e89ab6e822717b94564c1ce6d2a95a"
+    },
+    {
+      "path": "excavations/004_touch_projection_and_input_arbitration.md",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "daffc92333e8c2c872879468ddff6607943789a371005e6a34400bbc355a7dd9"
+    },
+    {
+      "path": "excavations/009_spatial_index_and_continuous_input_lifecycle.md",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "0450cdfb60224bc9195b19b62546446b7b4a6ebf683bd8919ef45812061af632"
+    },
+    {
+      "path": "excavations/010_aff_loading_and_chart_initialization.md",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "14591be638aef26ab5114af7c4e2a0dc4aa430bf7435ee7e868fcc92122c3c70"
+    },
+    {
+      "path": "excavations/025_native_arc_tap_construction_and_jni_judgment.md",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "0a121c26d08d187f3ea53936370d74aeaaae92aab8a13bd254d3497f46fb7cc9"
+    },
+    {
+      "path": "excavations/028_native_moving_arc_geometry_and_crossing_ownership.md",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "72537a34f81c5b7cee68c15d0a7c6daeb62f4103b022c6cfaebfe205324ab4d0"
+    },
+    {
+      "path": "excavations/035_native_jni_late_input_expiry_arbitration.md",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "1c13eb09b23ae29db8e70127071dc04adb9de1bb44d774e9ee649089b333de87"
+    },
+    {
+      "path": "excavations/037_native_mixed_hold_tap_arbitration_and_contact_continuity.md",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "d63ffe4e1d119047c51cbb21fc5ead0665187026a710b6bd6fc95c567d36473f"
+    },
+    {
+      "path": "excavations/038_native_linked_arc_checkpoint_production_and_successor_continuity.md",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "c76deb13d7eca82079c357b6cccca233aed4b48b369e61607b96d9a059cd9a4f"
+    },
+    {
+      "path": "research_harness/src/arc_tap.py",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "39682e4588bd968a3cf937cbcbf99995cf045a50f1ea10df69e86cc84337b422"
+    },
+    {
+      "path": "research_harness/src/linked_arc.py",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "ff4653ba1e489fe71cdfbf82737cfc0ab6223814cdc9cc056ab2a0d87b6846c0"
+    },
+    {
+      "path": "research_harness/src/mixed_hold_tap.py",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "6058b75fa8f5b31889b863544c55dc6522ff6ab693b30455707326b24b3a4afb"
+    },
+    {
+      "path": "research_harness/src/late_input_expiry.py",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "4f4f9d6bab100992fab286be9c9168bc89b355fc74795b81501ab55e331c0de7"
+    },
+    {
+      "path": "reconstructed/core/Chart.cs",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "d7d22ad1e417f896d8907079a02c941c2af0bf93ad17874c632da376ddd2e4e0"
+    },
+    {
+      "path": "reconstructed/core/LinkedArc.cs",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "a162cd079a7078411cbe0e6f7121bacaa1c70fbca3151b655de72c2e1b6be8c1"
+    },
+    {
+      "path": "reconstructed/core/Arc.cs",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "23841c3a866ab802ab0bb65182dcd11282d632fab65cc84bea2eb57927dd2957"
+    },
+    {
+      "path": "reconstructed/core/ArcTap.cs",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "d2cf863e66577d898e8714e673d947ee2be5afba09550c605810ad6283ecc19c"
+    },
+    {
+      "path": "reconstructed/core/Kernel.cs",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "8e742470a71fe9e026541230617a37d30459d98db172e061c422bca6b7f84552"
+    },
+    {
+      "path": "reconstructed/core/MixedArcConstruction.cs",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "d6fcaf281d6a39eb9a32004bb2e1e4a6b537dc991c922c9c414fa24548effd54"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/independent-corpus/cases/LINK-natural.json",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "ab0d3f077422c79df2cbbade6e8095c4de9aef3ccdb1e753624e86d667f1318e"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/independent-corpus/cases/CHILD-duplicate.json",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "dfaeee046d01b22debc2b8f41135068dcea7033552f1879d3f44f577ee7a7dc9"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/independent-corpus/cases/ORDER-input-first.json",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "ba683f29e331555ac6a52fa531664b0c0b6c51c6dd564d874445d1223dec9359"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/independent-corpus/cases/ORDER-frame-first.json",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "6d4fce7d5878ebefc29a1c3b117fe375ddec1a9fd4967bd04339a8c9bb12fa56"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/independent-corpus/cases/HOLD-E037_A1.json",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "2538f6c4a17ed5d22d42ff256bbafe66e17e67747b3a8e9af9cbf757498f5dd4"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/independent-corpus/cases/HOLD-E037_A2.json",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "d928a309baa19d7830c62610581a3c34074edf032e9fb4f5e39c99ee58e6e231"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/independent-corpus/cases/HOLD-E037_B.json",
+      "gitSourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+      "sha256": "d2622b67278c34f7190206d3219a3afef79f3286e2c74867eeeb81a72b201dda"
+    }
+  ],
+  "staticTools": {
+    "capstone": "5.0.7",
+    "pyelftools": "0.33",
+    "installation": "isolated /tmp/w102-static-libs; PyPI HTTPS; no emulator installed or invoked"
+  }
+}

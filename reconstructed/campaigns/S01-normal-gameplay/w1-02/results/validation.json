@@ -1,0 +1,67 @@
+{
+  "assignment": "W1-02",
+  "sourceSha": "16d17765e6fe50251162a45ffd5d1a64f243acf5",
+  "productionAssessedSha": "49e7c263a36aebcc0316e010a629c6bfdf205f6d",
+  "runtimeTestedSha": null,
+  "status": "PASS evidence validation only",
+  "matrixFixtures": 45,
+  "historicalNativeControls": 5,
+  "proposedNotRun": 40,
+  "requirements": 19,
+  "matrixSha256": "93ce187c86192f88d9d52b2762182fb74ba54b8ca548e0fd9b579b03c4408ef3",
+  "requirementsSha256": "d1439e32d93055d223044874ae867b8465914d4fadfc0354b1c93a212fa2e8de",
+  "historicalControlByteChecks": 5,
+  "structuralChecks": 553,
+  "sourceChecks": 38,
+  "arithmeticChecks": [
+    {
+      "id": "W102-GX-left-0p4",
+      "float32Delta": 0.09999999403953552,
+      "predicate": true,
+      "classification": "RECONSTRUCTED arithmetic, not native execution"
+    },
+    {
+      "id": "W102-GX-right-0p6",
+      "float32Delta": 0.10000002384185791,
+      "predicate": false,
+      "classification": "RECONSTRUCTED arithmetic, not native execution"
+    },
+    {
+      "id": "W102-GX-below-right",
+      "float32Delta": 0.09999996423721313,
+      "predicate": true,
+      "classification": "RECONSTRUCTED arithmetic, not native execution"
+    },
+    {
+      "id": "W102-GX-above-left",
+      "float32Delta": 0.10000002384185791,
+      "predicate": false,
+      "classification": "RECONSTRUCTED arithmetic, not native execution"
+    }
+  ],
+  "negativeControls": [
+    {
+      "id": "badChecksum",
+      "detected": true,
+      "diagnostic": "W102-G00 checksum"
+    },
+    {
+      "id": "falseRuntimePromotion",
+      "detected": true,
+      "diagnostic": "W102-GT-m10 unapproved runtime promotion"
+    }
+  ],
+  "archive": {
+    "sha256": "3eaca4e6dabb3395f276f8915698d57675757d0df0970e716b23a3dc201c79be",
+    "bytes": 29217504,
+    "elf": "ELF64 little-endian AArch64",
+    "instructionAnchors": 109,
+    "constants": 1,
+    "relocations": 2,
+    "execution": "NOT RUN; byte reads only"
+  },
+  "productionRuntime": "NOT RUN; prior QA not repeated",
+  "nativeRuntime": "NOT RUN; no authorization",
+  "failures": 0,
+  "skips": 0
+}
