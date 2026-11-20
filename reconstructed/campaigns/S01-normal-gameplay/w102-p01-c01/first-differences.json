@@ -1,0 +1,16 @@
+{
+  "againstPriorTraceScene2": null,
+  "offlineComparisonChecks": 385,
+  "historicalHypothesis": {
+    "preparedMode": 0,
+    "N": 5,
+    "status": "REFUTED for this exact raw-false fixture; preserved unchanged in prior P01 evidence"
+  },
+  "originalObserved": {
+    "parsedMode": 0,
+    "preparedMode": 1,
+    "N": 2
+  },
+  "normalizationWriter": "CONFIRMED ORIGINAL: read-only hooks c66654 before store and c66658 after store",
+  "remaining": "No general tie-order, multiple simultaneous children or mode0 body+children claim"
+}

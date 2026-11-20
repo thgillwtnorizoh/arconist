@@ -1,0 +1,985 @@
+{
+  "provenance": "Original native observations; not Work2 values",
+  "rawAff": {
+    "path": "reconstructed/campaigns/S01-normal-gameplay/w102-p01/fixtures/ordinary_two.aff",
+    "sha256": "cbf47e5c83e070533bee8bc1b1e31b59209e452d43b612832f3cd02fad2cb0e1",
+    "rawAff": "AudioOffset:0\nTimingPointDensityFactor:1.0\n-\ntiming(0,120.00,4.00);\narc(1000,2000,0.50,0.50,s,0.50,0.50,0,none,false)[arctap(1250),arctap(1500)];\n"
+  },
+  "parsed": [
+    {
+      "mode": 0,
+      "start": 1000,
+      "end": 2000,
+      "times": [
+        1250,
+        1500
+      ],
+      "childArgument": 1250
+    },
+    {
+      "mode": 0,
+      "start": 1000,
+      "end": 2000,
+      "times": [
+        1250,
+        1500
+      ],
+      "childArgument": 1500
+    }
+  ],
+  "prepared": {
+    "mode": 1,
+    "N": 2,
+    "children": [
+      {
+        "type": "15LogicArcTapNote",
+        "time": 1250,
+        "end": 1250,
+        "group": 0,
+        "input": 1,
+        "geometry": [
+          0.0,
+          50.0,
+          -2022.25
+        ],
+        "missed": 0,
+        "consumed": 0,
+        "contact": -1
+      },
+      {
+        "type": "15LogicArcTapNote",
+        "time": 1500,
+        "end": 1500,
+        "group": 0,
+        "input": 1,
+        "geometry": [
+          0.0,
+          50.0,
+          -4044.5
+        ],
+        "missed": 0,
+        "consumed": 0,
+        "contact": -1
+      }
+    ],
+    "records": [
+      {
+        "time": 1250,
+        "weight": 1,
+        "resolved": 0
+      },
+      {
+        "time": 1500,
+        "weight": 1,
+        "resolved": 0
+      },
+      {
+        "time": 1750,
+        "weight": 1,
+        "resolved": 0
+      }
+    ]
+  },
+  "events": [
+    {
+      "label": "admit parent and children",
+      "E": 1000,
+      "score": {
+        "N": 2,
+        "score": 0,
+        "combo": 0,
+        "shining": 0,
+        "PURE": 0,
+        "FAR": 0,
+        "LOST": 0,
+        "health": 0.0,
+        "healthBits": 0,
+        "result": "0x0"
+      },
+      "contactIds": [],
+      "children": [
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1250,
+          "end": 1250,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -2022.25
+          ],
+          "missed": 0,
+          "consumed": 0,
+          "contact": -1
+        },
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1500,
+          "end": 1500,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -4044.5
+          ],
+          "missed": 0,
+          "consumed": 0,
+          "contact": -1
+        }
+      ]
+    },
+    {
+      "label": "first child frame",
+      "E": 1250,
+      "score": {
+        "N": 2,
+        "score": 0,
+        "combo": 0,
+        "shining": 0,
+        "PURE": 0,
+        "FAR": 0,
+        "LOST": 0,
+        "health": 0.0,
+        "healthBits": 0,
+        "result": "0x0"
+      },
+      "contactIds": [],
+      "children": [
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1250,
+          "end": 1250,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -2022.25
+          ],
+          "missed": 0,
+          "consumed": 0,
+          "contact": -1
+        },
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1500,
+          "end": 1500,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -4044.5
+          ],
+          "missed": 0,
+          "consumed": 0,
+          "contact": -1
+        }
+      ]
+    },
+    {
+      "label": "displaced DOWN negative",
+      "E": 1250,
+      "score": {
+        "N": 2,
+        "score": 0,
+        "combo": 0,
+        "shining": 0,
+        "PURE": 0,
+        "FAR": 0,
+        "LOST": 0,
+        "health": 0.0,
+        "healthBits": 0,
+        "result": "0x0"
+      },
+      "contactIds": [
+        0
+      ],
+      "children": [
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1250,
+          "end": 1250,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -2022.25
+          ],
+          "missed": 0,
+          "consumed": 0,
+          "contact": -1
+        },
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1500,
+          "end": 1500,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -4044.5
+          ],
+          "missed": 0,
+          "consumed": 0,
+          "contact": -1
+        }
+      ]
+    },
+    {
+      "label": "displaced UP",
+      "E": 1250,
+      "score": {
+        "N": 2,
+        "score": 0,
+        "combo": 0,
+        "shining": 0,
+        "PURE": 0,
+        "FAR": 0,
+        "LOST": 0,
+        "health": 0.0,
+        "healthBits": 0,
+        "result": "0x0"
+      },
+      "contactIds": [],
+      "children": [
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1250,
+          "end": 1250,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -2022.25
+          ],
+          "missed": 0,
+          "consumed": 0,
+          "contact": -1
+        },
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1500,
+          "end": 1500,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -4044.5
+          ],
+          "missed": 0,
+          "consumed": 0,
+          "contact": -1
+        }
+      ]
+    },
+    {
+      "label": "first child fresh DOWN",
+      "E": 1250,
+      "score": {
+        "N": 2,
+        "score": 5000001,
+        "combo": 1,
+        "shining": 1,
+        "PURE": 1,
+        "FAR": 0,
+        "LOST": 0,
+        "health": 40.20000076293945,
+        "healthBits": 1109445837,
+        "result": "0x0"
+      },
+      "contactIds": [
+        1
+      ],
+      "children": [
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1250,
+          "end": 1250,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -2022.25
+          ],
+          "missed": 0,
+          "consumed": 1,
+          "contact": 1
+        },
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1500,
+          "end": 1500,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -4044.5
+          ],
+          "missed": 0,
+          "consumed": 0,
+          "contact": -1
+        }
+      ]
+    },
+    {
+      "label": "first child UP",
+      "E": 1250,
+      "score": {
+        "N": 2,
+        "score": 5000001,
+        "combo": 1,
+        "shining": 1,
+        "PURE": 1,
+        "FAR": 0,
+        "LOST": 0,
+        "health": 40.20000076293945,
+        "healthBits": 1109445837,
+        "result": "0x0"
+      },
+      "contactIds": [],
+      "children": [
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1250,
+          "end": 1250,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -2022.25
+          ],
+          "missed": 0,
+          "consumed": 1,
+          "contact": 1
+        },
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1500,
+          "end": 1500,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -4044.5
+          ],
+          "missed": 0,
+          "consumed": 0,
+          "contact": -1
+        }
+      ]
+    },
+    {
+      "label": "first child fresh-ID duplicate",
+      "E": 1250,
+      "score": {
+        "N": 2,
+        "score": 5000001,
+        "combo": 1,
+        "shining": 1,
+        "PURE": 1,
+        "FAR": 0,
+        "LOST": 0,
+        "health": 40.20000076293945,
+        "healthBits": 1109445837,
+        "result": "0x0"
+      },
+      "contactIds": [
+        2
+      ],
+      "children": [
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1250,
+          "end": 1250,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -2022.25
+          ],
+          "missed": 0,
+          "consumed": 1,
+          "contact": 1
+        },
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1500,
+          "end": 1500,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -4044.5
+          ],
+          "missed": 0,
+          "consumed": 0,
+          "contact": -1
+        }
+      ]
+    },
+    {
+      "label": "retained frame; body checkpoint if ordinary",
+      "E": 1375,
+      "score": {
+        "N": 2,
+        "score": 5000001,
+        "combo": 1,
+        "shining": 1,
+        "PURE": 1,
+        "FAR": 0,
+        "LOST": 0,
+        "health": 40.20000076293945,
+        "healthBits": 1109445837,
+        "result": "0x0"
+      },
+      "contactIds": [
+        2
+      ],
+      "children": [
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1250,
+          "end": 1250,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -2022.25
+          ],
+          "missed": 0,
+          "consumed": 1,
+          "contact": 1
+        },
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1500,
+          "end": 1500,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -4044.5
+          ],
+          "missed": 0,
+          "consumed": 0,
+          "contact": -1
+        }
+      ]
+    },
+    {
+      "label": "second child time WITHOUT fresh DOWN",
+      "E": 1500,
+      "score": {
+        "N": 2,
+        "score": 5000001,
+        "combo": 1,
+        "shining": 1,
+        "PURE": 1,
+        "FAR": 0,
+        "LOST": 0,
+        "health": 40.20000076293945,
+        "healthBits": 1109445837,
+        "result": "0x0"
+      },
+      "contactIds": [
+        2
+      ],
+      "children": [
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1250,
+          "end": 1250,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -2022.25
+          ],
+          "missed": 0,
+          "consumed": 1,
+          "contact": 1
+        },
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1500,
+          "end": 1500,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -4044.5
+          ],
+          "missed": 0,
+          "consumed": 0,
+          "contact": -1
+        }
+      ]
+    },
+    {
+      "label": "native MOVE at second child",
+      "E": 1500,
+      "score": {
+        "N": 2,
+        "score": 5000001,
+        "combo": 1,
+        "shining": 1,
+        "PURE": 1,
+        "FAR": 0,
+        "LOST": 0,
+        "health": 40.20000076293945,
+        "healthBits": 1109445837,
+        "result": "0x0"
+      },
+      "contactIds": [
+        2
+      ],
+      "children": [
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1250,
+          "end": 1250,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -2022.25
+          ],
+          "missed": 0,
+          "consumed": 1,
+          "contact": 1
+        },
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1500,
+          "end": 1500,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -4044.5
+          ],
+          "missed": 0,
+          "consumed": 0,
+          "contact": -1
+        }
+      ]
+    },
+    {
+      "label": "repeat FRAME after MOVE without fresh DOWN",
+      "E": 1500,
+      "score": {
+        "N": 2,
+        "score": 5000001,
+        "combo": 1,
+        "shining": 1,
+        "PURE": 1,
+        "FAR": 0,
+        "LOST": 0,
+        "health": 40.20000076293945,
+        "healthBits": 1109445837,
+        "result": "0x0"
+      },
+      "contactIds": [
+        2
+      ],
+      "children": [
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1250,
+          "end": 1250,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -2022.25
+          ],
+          "missed": 0,
+          "consumed": 1,
+          "contact": 1
+        },
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1500,
+          "end": 1500,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -4044.5
+          ],
+          "missed": 0,
+          "consumed": 0,
+          "contact": -1
+        }
+      ]
+    },
+    {
+      "label": "retained duplicate UP",
+      "E": 1500,
+      "score": {
+        "N": 2,
+        "score": 5000001,
+        "combo": 1,
+        "shining": 1,
+        "PURE": 1,
+        "FAR": 0,
+        "LOST": 0,
+        "health": 40.20000076293945,
+        "healthBits": 1109445837,
+        "result": "0x0"
+      },
+      "contactIds": [],
+      "children": [
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1250,
+          "end": 1250,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -2022.25
+          ],
+          "missed": 0,
+          "consumed": 1,
+          "contact": 1
+        },
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1500,
+          "end": 1500,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -4044.5
+          ],
+          "missed": 0,
+          "consumed": 0,
+          "contact": -1
+        }
+      ]
+    },
+    {
+      "label": "second child fresh DOWN",
+      "E": 1500,
+      "score": {
+        "N": 2,
+        "score": 10000002,
+        "combo": 2,
+        "shining": 2,
+        "PURE": 2,
+        "FAR": 0,
+        "LOST": 0,
+        "health": 80.4000015258789,
+        "healthBits": 1117834445,
+        "result": "0x0"
+      },
+      "contactIds": [
+        3
+      ],
+      "children": [
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1250,
+          "end": 1250,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -2022.25
+          ],
+          "missed": 0,
+          "consumed": 1,
+          "contact": 1
+        },
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1500,
+          "end": 1500,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -4044.5
+          ],
+          "missed": 0,
+          "consumed": 1,
+          "contact": 3
+        }
+      ]
+    },
+    {
+      "label": "second child UP",
+      "E": 1500,
+      "score": {
+        "N": 2,
+        "score": 10000002,
+        "combo": 2,
+        "shining": 2,
+        "PURE": 2,
+        "FAR": 0,
+        "LOST": 0,
+        "health": 80.4000015258789,
+        "healthBits": 1117834445,
+        "result": "0x0"
+      },
+      "contactIds": [],
+      "children": [
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1250,
+          "end": 1250,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -2022.25
+          ],
+          "missed": 0,
+          "consumed": 1,
+          "contact": 1
+        },
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1500,
+          "end": 1500,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -4044.5
+          ],
+          "missed": 0,
+          "consumed": 1,
+          "contact": 3
+        }
+      ]
+    },
+    {
+      "label": "second child fresh-ID duplicate",
+      "E": 1500,
+      "score": {
+        "N": 2,
+        "score": 10000002,
+        "combo": 2,
+        "shining": 2,
+        "PURE": 2,
+        "FAR": 0,
+        "LOST": 0,
+        "health": 80.4000015258789,
+        "healthBits": 1117834445,
+        "result": "0x0"
+      },
+      "contactIds": [
+        4
+      ],
+      "children": [
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1250,
+          "end": 1250,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -2022.25
+          ],
+          "missed": 0,
+          "consumed": 1,
+          "contact": 1
+        },
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1500,
+          "end": 1500,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -4044.5
+          ],
+          "missed": 0,
+          "consumed": 1,
+          "contact": 3
+        }
+      ]
+    },
+    {
+      "label": "second duplicate UP",
+      "E": 1500,
+      "score": {
+        "N": 2,
+        "score": 10000002,
+        "combo": 2,
+        "shining": 2,
+        "PURE": 2,
+        "FAR": 0,
+        "LOST": 0,
+        "health": 80.4000015258789,
+        "healthBits": 1117834445,
+        "result": "0x0"
+      },
+      "contactIds": [],
+      "children": [
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1250,
+          "end": 1250,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -2022.25
+          ],
+          "missed": 0,
+          "consumed": 1,
+          "contact": 1
+        },
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1500,
+          "end": 1500,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -4044.5
+          ],
+          "missed": 0,
+          "consumed": 1,
+          "contact": 3
+        }
+      ]
+    },
+    {
+      "label": "trace next-frame cleanup",
+      "E": 1501,
+      "score": {
+        "N": 2,
+        "score": 10000002,
+        "combo": 2,
+        "shining": 2,
+        "PURE": 2,
+        "FAR": 0,
+        "LOST": 0,
+        "health": 80.4000015258789,
+        "healthBits": 1117834445,
+        "result": "0x0"
+      },
+      "contactIds": [],
+      "children": [
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1250,
+          "end": 1250,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -2022.25
+          ],
+          "missed": 0,
+          "consumed": 1,
+          "contact": 1
+        },
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1500,
+          "end": 1500,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -4044.5
+          ],
+          "missed": 0,
+          "consumed": 1,
+          "contact": 3
+        }
+      ]
+    },
+    {
+      "label": "stopped before results",
+      "E": 1501,
+      "score": {
+        "N": 2,
+        "score": 10000002,
+        "combo": 2,
+        "shining": 2,
+        "PURE": 2,
+        "FAR": 0,
+        "LOST": 0,
+        "health": 80.4000015258789,
+        "healthBits": 1117834445,
+        "result": "0x0"
+      },
+      "contactIds": [],
+      "children": [
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1250,
+          "end": 1250,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -2022.25
+          ],
+          "missed": 0,
+          "consumed": 1,
+          "contact": 1
+        },
+        {
+          "type": "15LogicArcTapNote",
+          "time": 1500,
+          "end": 1500,
+          "group": 0,
+          "input": 1,
+          "geometry": [
+            0.0,
+            50.0,
+            -4044.5
+          ],
+          "missed": 0,
+          "consumed": 1,
+          "contact": 3
+        }
+      ]
+    }
+  ]
+}

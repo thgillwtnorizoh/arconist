@@ -1,0 +1,27 @@
+{
+  "command": "PYTHONPATH=/tmp/c01-native-libs python reconstructed/campaigns/S01-normal-gameplay/w102-p01-c01/run.py --archive ../project_sources/01-arccopy.zip --budget /tmp/c01-one-scene-budget.json --output /tmp/c01-native-ledger.json > /tmp/c01-native-host.log 2>&1",
+  "cwd": "/workspace/scratch/e83b3992fd3d/p01c01",
+  "exitCode": 0,
+  "python": "3.12.14",
+  "os": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "unicorn": "2.1.4",
+  "pyelftools": "0.33",
+  "buildId": "17d660edbf37ca78beefc32e07672c97419ddce6",
+  "executionSha": "fd11c2e013831f010412d4457fca04d85df7c2e9",
+  "nativeFreshScenes": 1,
+  "hostLogSha256": "a8081fbe6d4b14fbb136c7bff6357c53bfc1c23379918598ff25f8fc199fbe2a",
+  "ledgerSha256": "4241552131dbfb3a2042b0cefdf1507ffc183ed83ef025c9e96987e6f9476e26",
+  "otherCommands": [
+    {
+      "command": "git push origin HEAD:main",
+      "exitCode": 128,
+      "result": "No shell GitHub credentials; connected GitHub publication succeeded instead"
+    },
+    {
+      "command": "python import elftools (without isolated PYTHONPATH)",
+      "exitCode": 1,
+      "result": "ModuleNotFoundError; corrected PYTHONPATH import/identity validation succeeds, no native scene involved"
+    }
+  ],
+  "owningEntryObserved": 1
+}

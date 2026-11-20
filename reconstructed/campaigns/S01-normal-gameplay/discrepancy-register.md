@@ -227,3 +227,28 @@ is required; no expectation fitting or semantic object patching. Reproduction,
 exact fixture hashes and first difference are in
 [W102-P01-report.md](W102-P01-report.md) and
 [first-divergence.json](w102-p01/first-divergence.json). S01 OPEN.
+
+
+## W102-P01-C01 native judgment recovery — 2026-11-20
+
+VERIFIED CHECKPOINT for the one-scene raw-false/two-child profile only. Starting
+c4e4c219214e3a55a4ffcab550ec59485d67e550; exact executed harness
+fd11c2e013831f010412d4457fca04d85df7c2e9. Native library SHA256
+3eaca4e6dabb3395f276f8915698d57675757d0df0970e716b23a3dc201c79be.
+One fresh scene exit0; no retry. Parsed0 -> prepared1/N2; read-only c66654 before
+and c66658 after hooks now directly observe the normalization store. Children
+1250/1500 each PURE once; displaced, fresh-ID duplicate and retained MOVE/frame
+negatives preserve state. Two recorder callbacks, intermediate exact binary32
+health/score, contact IDs and cleanup confirmed. Offline385/385 comparisons with
+immutable P01 trace Scene2 and E006 math PASS,0fail/skip; no compared gameplay
+first difference. Conditional mode0/N5 remains refuted for this fixture.
+
+S01-05.01 / W102-C01–C05 / D07 B01 gains the missing raw-false fixture child-input
+ledger. No mode0 body+children, simultaneous tie or arbitrary child profile is
+claimed. Original parent checkpoint vector exists but stays unresolved/uncounted
+in observed mode1. P01/W1-02 historical BLOCKED records remain unchanged.
+P03 still required for general tied/mixed candidate ordering and stops; separately
+authorized Work1 evidence precedes generalized Work2 conflict integration. No P03
+or implementation executed. Production/Windows/GUI/results NOT RUN. All prior
+original/reconstruction/QA evidence preserved. Full report and receipts:
+W102-P01-C01-report.md and w102-p01-c01/. S01 subsystem OPEN; all other gates remain.

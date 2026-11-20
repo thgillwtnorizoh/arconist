@@ -1,0 +1,128 @@
+{
+  "status": "PASS preservation",
+  "baselineSha": "c4e4c219214e3a55a4ffcab550ec59485d67e550",
+  "executionSourceSha": "fd11c2e013831f010412d4457fca04d85df7c2e9",
+  "candidate": "INDEX",
+  "originalFileCount": 535,
+  "protectedByteIdentical": 531,
+  "protectedManifestSha256": "387c0bf75e94cd0c6cf9c0c4d4fcf953928edb38f6910f414092b163b3b5ebff",
+  "appendOnly": [
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/coverage-register.md",
+      "prefixBytes": 134718,
+      "prefixSha256": "cbbef575bf4c40632e654fd0fb0e76da0ed96b6aa0a904e85a5860c3cf8cba66",
+      "bytesAfter": 136326,
+      "suffixBytes": 1608
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/dependency-register.md",
+      "prefixBytes": 20045,
+      "prefixSha256": "18977c8dfc0e081f615323d1d46b99d37713577ba22c5841c453d1558bc9255f",
+      "bytesAfter": 21653,
+      "suffixBytes": 1608
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/discrepancy-register.md",
+      "prefixBytes": 18200,
+      "prefixSha256": "89e55f1abc126464311cc06f0380efe70d4b9210468bf9a60dd4e1d10f692894",
+      "bytesAfter": 19808,
+      "suffixBytes": 1608
+    },
+    {
+      "path": "reconstructed/contexts.md",
+      "prefixBytes": 94969,
+      "prefixSha256": "b66b672303b95b804c79c38bd8e36e41f51355d8b098e0999ad44c24b0261642",
+      "bytesAfter": 96607,
+      "suffixBytes": 1638
+    }
+  ],
+  "changedPaths": [
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/W102-P01-C01-report.md",
+      "status": "added",
+      "sha256": "31010ad2cedbe9c5d7c92b69862bbf3349dee799fac216e2f3e7f4ebac37a5bb"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/coverage-register.md",
+      "status": "append-only",
+      "sha256": "f23b8264232fff1ed824a8850c0ffafeb402e7ca2864f3a5887905381fad127d"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/dependency-register.md",
+      "status": "append-only",
+      "sha256": "5db5384e7a4db1a492306065c8a5b4a3d69d57adace495dd20ef0a597e399e5e"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/discrepancy-register.md",
+      "status": "append-only",
+      "sha256": "7973901ecd6d502d6d14bae54297c4bb40bb2db4445f4df4acd06716ded9c0f8"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/w102-p01-c01/.gitignore",
+      "status": "added",
+      "sha256": "862263fa1f46c20f0d1e4dac5ffcc75abd55c08211b2c3864c5f8764b9d87793"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/w102-p01-c01/audit-receipt.json",
+      "status": "added",
+      "sha256": "7d0b50f1127eee6664f0456096fc0d60b898ad9a03faf743eec490c08075a012"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/w102-p01-c01/audit.py",
+      "status": "added",
+      "sha256": "b3826fdef03d3e285bda447f3517984bc143cdaf889ea510babf88f3b6e5e79a"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/w102-p01-c01/budget.json",
+      "status": "added",
+      "sha256": "1b40640603da71a99b8384c30e569b308ba3c9b6ec7c9dd265541c9f1dc8e7bf"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/w102-p01-c01/command.json",
+      "status": "added",
+      "sha256": "c73068d9826caa1e1ea422d5a055f07b3755b0694ef28abdbde0e71728fa76ec"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/w102-p01-c01/first-differences.json",
+      "status": "added",
+      "sha256": "e70de2c531537236b0904b1da77007df602c8870f43f85368fd009c79868eba3"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/w102-p01-c01/native-ledger.json",
+      "status": "added",
+      "sha256": "4241552131dbfb3a2042b0cefdf1507ffc183ed83ef025c9e96987e6f9476e26"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/w102-p01-c01/normalized-reference.json",
+      "status": "added",
+      "sha256": "a26e8112dc138e565eb3cf03e5a0015f5cab7861b560d6e553568f1f80f73274"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/w102-p01-c01/preservation.json",
+      "status": "added",
+      "sha256": null
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/w102-p01-c01/run.py",
+      "status": "added",
+      "sha256": "aae932fd79ddc9f826801825d405c410a3791c378bc92b5155f5e5f3c6a35043"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/w102-p01-c01/verify-preservation.py",
+      "status": "added",
+      "sha256": "326e1d9303dddef5298bb5fbe5a75a31a8b017760dc90f78e27c66719ff28ee8"
+    },
+    {
+      "path": "reconstructed/contexts.md",
+      "status": "append-only",
+      "sha256": "6662384187482c5f60e9eede63c368a5670f86b256c81585cc42643840513f8e"
+    }
+  ],
+  "changedPathCount": 16,
+  "deletions": 0,
+  "productionChanges": 0,
+  "historicalTestChanges": 0,
+  "executedDriverChanges": 0,
+  "nativeScenesCreated": 0,
+  "selfHashExclusion": "preservation.json only; remote readback checks its bytes"
+}
