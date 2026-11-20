@@ -1162,3 +1162,52 @@ Source findings: linker scans later main indices, append-all successor/single pr
 First original gap B01 is owned two-child trace/ordinary construction/geometry/N and per-child event ledger, proposed W102-P01 under separate HQnative authorization. B02small graph topology/continuity, B03actual mixed candidate permutation/stops and B04nonempty group window remain NOT VERIFIED. Conditional tripleN11/trace-twoN2/ordinary-twoN5 are reconstructed expectations only. Primitive readiness does not close integrated requirements. No ARM64experiment, production change, runtime regression, GUI/physical/audio/CI test or Work2 execution. G006/007/009/010 and E039separate scope preserved; S01 OPEN.
 
 Coverage/dependency/discrepancy notes appended. Original research/root context/backlog/harness, all old production/tests/fixtures/oracles/reports and prior82655byte reconstruction-history prefix preserved. Validator receipts, exact changed-file inventory and preservation evidence published non-forced on main; final SHA/remote readback in handoff. Authoring duplicated timing in an initial control copy was caught by byte assertion; a proposal-writer reserved-keyword SyntaxError failed before execution. Both corrected only new pack authoring; no historical/native expectation adjusted. Stop at reference pack/B01; await separate authorization, no further expedition or implementation.
+
+## S01 Headquarters W1-02 source-pack disposition and W102-P01 native authorization — 2026-11-20
+
+Headquarters verified W1-02's BLOCKED-for-generalized-integration research
+checkpoint published at e18aa1819f962d0fb3b80ca255fc92cda0f63208,
+a non-forced child of 16d17765e6fe50251162a45ffd5d1a64f243acf5.
+Its bounded reference pack includes 19 requirements, 45 AFF fixtures
+(five unchanged historical controls; 40 proposals NOT RUN), 553 passed
+structural checks, 38 historical source identity checks, 109 instruction
+anchors, four binary32 boundary calculations and two deliberately
+rejected validator inputs. Original library bytes/ELF Build ID were
+rechecked; no new native-owned scene or production runtime execution
+occurred. No tested production SHA in this execution; accepted W2-01
+source 49e7c263a36aebcc0316e010a629c6bfdf205f6d unchanged.
+The W1-02 report/validator/fixture matrix and preservation inventory
+support accepting its evidence documentation as a verified partial
+checkpoint, NOT an integrated original behavior PASS. Parent issue #7
+remains OPEN/BLOCKED for its still-unresolved D06/D07 native consumers.
+
+New instruction-backed source facts: linker can append multiple successors
+while keeping one predecessor pointer, float32 X subtraction before
+double 0.1 comparison, distinct main start/end vs candidate start-only
+sorting, child-vector construction preceding parent-mode branch, and
+linked zero-duration group-history timestamp producer. Exact owned
+multi-child judgment, arbitrary topology continuity, mixed candidate
+tie-permutations and nonempty group-window activation remain NOT VERIFIED;
+no conditional N2/N5/N11 prediction is promoted to native original.
+
+Headquarters separately AUTHORIZES Work1 W102-P01 only: bounded native-owned
+E025 scene construction and per-child event/recorder investigation for
+one-child trace control, two-child trace parent, and same two-child
+ordinary parent (at most three fresh original scenes). Reuse original
+GameScene/ordinary solo entry and genuine child factory, backlinks,
+sampler, count and JNI touch scheduling; include displaced/fresh-duplicate/
+MOVE negative schedules only within the same scenes and stop at child
+cleanup or first missing owning prerequisite, before results. Capture
+native observed identities, N, per-child geometry, ordering, classifier
+guards, recorder/health and cleanup independently of Work2.
+Ordinary parent is a discriminating CONTROL, not a presumed rejection;
+trace N2 and ordinary N5 are RECONSTRUCTED conditional predictions only.
+No synthetic child heaps/denominators or patched original semantic
+producers. E038 graph experiment P02, mixed sorting P03, group history
+P04, unrestricted native reconnaissance and Work2 coding are NOT
+authorized. If P01 fails to produce ownership, report BLOCKED with
+first missing call chain rather than fitting results. Separate Work1
+QA and owner Windows qualification are required for future production
+deltas. G-006/007/009/010 and S01 applicability remain OPEN. S01
+Subsystem OPEN; UEP-001 Rev2.1 source/precision/provenance, clean
+publication and historical prefix requirements preserved.
