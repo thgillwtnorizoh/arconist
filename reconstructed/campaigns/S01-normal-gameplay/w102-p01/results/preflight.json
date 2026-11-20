@@ -1,0 +1,15 @@
+{
+  "startingSha": "a9628c139e449dffd3e3a5fef3bb5b74414be9d3",
+  "python": "3.12.14",
+  "os": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "unicorn": "2.1.4",
+  "pyelftools": "0.33",
+  "librarySha256": "3eaca4e6dabb3395f276f8915698d57675757d0df0970e716b23a3dc201c79be",
+  "buildId": "17d660edbf37ca78beefc32e07672c97419ddce6",
+  "fixtureSha256": {
+    "single_control.aff": "b7ec1c7fd945c2dca5c1a6151c07137c302531505cd299b7df5ae94256f3d0ff",
+    "trace_two.aff": "062e6a76261328b4a03c06104b222e5dbc5685ec97c8a9430d16f4525a45bdce",
+    "ordinary_two.aff": "cbf47e5c83e070533bee8bc1b1e31b59209e452d43b612832f3cd02fad2cb0e1"
+  },
+  "freshNativeScenesBeforePreflight": 0
+}

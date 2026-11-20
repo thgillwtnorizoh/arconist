@@ -1,0 +1,11 @@
+{
+  "assignment": "W102-P01",
+  "startingSha": "a9628c139e449dffd3e3a5fef3bb5b74414be9d3",
+  "state": "PREPARED; native scenes NOT RUN",
+  "sceneLimit": 3,
+  "driverSha256": {
+    "run.py": "b02e6063a7c3d31e951b4669c8609688cc6f9590af41151e8f4adb145dcce649",
+    "observe.py": "14b149da0548ec8aa4acd1b6454c6390b95d2651778f94ecc8f9e88881c46ef3"
+  },
+  "budgets": "Each budget/output path created exclusively. No diagnostic retry. Scene1 failure prevents scenes2/3."
+}
