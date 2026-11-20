@@ -1102,3 +1102,50 @@ Draft build shadowing error, signed-zero oracle/type mistake, wrong zero-unit fi
 Report QA-W2-01-report.md and qa-w2-01/v1testsource/frozenexpectations/curatedreceipts published; coverage/dependency/discrepancy appended. All prior production/research/tests/fixtures/reports/independent-corpus bytes and exact76496byte history prefix preserved. Non-forced main publication/remote readback and complete inventory recorded in handoff/preservation receipt. No issue comment, scope exclusion, R011, implementation or subsequent expedition. Recommend HQreviewW2-01 bounded checkpoint, then separately authorize Work1graph/child/conflict closure; widening E039 integration remains separate authority. S01/subsystem OPEN. Stop after publication.
 
 QA-W2-01 final fixture review: first publication e5ad24f9c463aa6468b1af08001f86d8bf22ab07 passed remote78path readback and370protected/prefix checks. Two rejection fixtures were found to reach syntax rejection through integer timing tokens; corrected new QA fixtures to valid decimal timing and strengthened all four cases with exact intended-guard message checks. Entire37case suite rerun PASS,0fail/skip,16,760scalar+4guard-message assertions; three mutation controls still detect first fields. No production or historical expectation change. Final corrective publication remains non-forced; S01 OPEN.
+
+## S01 Headquarters W2-01 bounded acceptance and W1-02 evidence-closure authorization — 2026-11-20
+
+Headquarters reviewed the original Work2 W2-01 technical delivery and Work1's
+independent QA-W2-01 publication de13645219e965ae6f519f5665dbcf2de8aa8a59.
+Exact W2 production under independent QA and owner Windows package:
+49e7c263a36aebcc0316e010a629c6bfdf205f6d. Work1 separately executed
+37/37 new independent mixed-profile cases (16,760 asserted scalar fields and
+four verified rejection guard messages), 46/46 unchanged historical Work1
+cases and 341/341 Work2-authored CLI groups (counted separately). Three
+deliberately mutated comparator controls produced their intended first
+differences; no genuine production discrepancy remained in the final
+independent executable profile. Original/native-isolated, RECONSTRUCTED
+INTEGRATION, ENGINEERING and unverified boundaries remain explicit; draft
+oracle/fixture corrections and original provenance are disclosed in the
+QA-W2-01 report and receipts. Work1 did not repeat Godot/Windows GUI,
+audible-output/native experiments or physical owner testing.
+
+Owner independently attested 6/6 W2-01 Windows qualification groups PASS
+and Headquarters previously recorded this attestation without substituting
+automated execution. The technical W2-01 report includes 449 historical
+and 35 new development groups passing, Godot/Windows export package
+and integrity checks, with independently rerun new-source fields now
+verified by Work1. Combined gates support **W2-01 bounded implementation
+checkpoint ACCEPTANCE**, not entire Normal Gameplay S01 acceptance.
+Issues #5 (W2-01) and #6 (QA-W2-01) were closed as completed after
+Headquarters reviewed both gates. Owner does not need another routine
+W2-01 physical test absent newly found defect or a new release profile.
+
+Headquarters authorizes **Work1 W1-02 — original evidence closure for
+connected-arc graph adjacency/tolerance, child-parent modes/multiplicity
+and same-time/mixed-type candidate conflict ordering** using existing
+Expeditions E025/E038, preserved fixtures, instruction-based source
+observations and production interface review. The task must produce
+source-grounded requirement/fixture matrix and first original facts
+still missing, not invent unseen native behavior. D06/D07 are the
+main critical path; D09 accuracy consumer is optional only when
+provably relevant to the next implementation acceptance, without
+expanding this execution uncontrollably. Any new ARM64 experiment
+needs *separate authorization*, constrained to the exact missing
+owning entry/producer and discriminating controls. Work1 must not
+alter production or old expectations. S01 remains OPEN, with
+G-006/G-007/G-009/G-010 and H applicability decisions unresolved;
+widening E039 D03 remains a separate candidate for Work2. A future
+Work2 integration and exact-production independent QA must be
+separately authorized. UEP-001 Rev2.1 exact evidence/test SHA,
+non-forced publication and append-only preservation remain required.
