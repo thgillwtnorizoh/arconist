@@ -9,6 +9,7 @@
     "S01-01.01"
   ],
   "profile": "S01Mixed",
-  "affSha256": "7aeda8715b76796e681c7cb8744305894a286ff9dca27d48cc48aa7926091363",
-  "expectationOrigin": "Work1 original ledgers/equations or explicitly reconstructed integration; never sampled production output"
+  "affSha256": "9b4c9e4507c1eb66d1a327038e1ed7dca403f9d00c2053cb6afa9263f7ed32f7",
+  "expectationOrigin": "Work1 original ledgers/equations or explicitly reconstructed integration; never sampled production output",
+  "rejectionContains": "Reverse/noinput long notes require original reference closure."
 }

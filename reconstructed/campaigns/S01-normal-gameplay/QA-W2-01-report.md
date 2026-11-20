@@ -14,7 +14,7 @@ S01 remains **OPEN**; Headquarters/owner acceptance is separate.
 |Exact independently tested production|`49e7c263a36aebcc0316e010a629c6bfdf205f6d`|
 |Objective / supported profile / changes|Execute independent S01Mixed expectations on unchanged core/bridge, plus historical R010 compatibility. Added QA source/fixtures/receipts and appended records only; no gameplay changes.|
 |Evidence / confidence|Original integrated E025/E028/E029/E036/E038 ledgers; isolated E003 equations and instruction-backed release/expiry; reconstructed mixed integration; engineering CLI/audio/projection/platform boundaries. INDEPENDENTLY VERIFIED only for explicitly asserted fields.|
-|Tests|New37/37 cases,0fail/skip,16,760 scalar assertions; historical independent46/46,0fail/skip; separately341/341 Work2 CLI groups,0fail/skip;3/3 comparator mutation controls correctly reject at intended first field. Four research-blocked cases NOT RUN.|
+|Tests|New37/37 cases,0fail/skip,16,760 scalar assertions plus4explicit rejection-message checks; historical independent46/46,0fail/skip; separately341/341 Work2 CLI groups,0fail/skip;3/3 comparator mutation controls correctly reject at intended first field. Four research-blocked cases NOT RUN.|
 |Coverage gained / remaining|Exact new-production event-level chart/group/curve/crossing/link/child/shared-contact/recorder/pause/results/replay evidence. General graphs, children/conflicts, widening, broader timing profiles, character/control applicability and full S01 closure remain OPEN.|
 |Discrepancies / limitations / blockers|No genuine production first difference in executable cases. Draft oracle/adapter errors disclosed below. G-006/G-007/G-009/G-010 remain OPEN/BLOCKED and NOT VERIFIED.|
 |Updated records / reproduction|This report; qa-w2-01/v1; appended coverage, dependency, discrepancy and reconstruction history. Reproduction commands below.|
@@ -77,7 +77,7 @@ A case count is not a feature-completeness count.
 |E — MOVE is not fresh DOWN|1|0/0|Retained child contact MOVE/frame cannot award; fresh DOWN allocates new ID and awards once. Instruction-backed/reconstructed negative; not new original E025 MOVE execution.|
 |F/G — shared cancellation/FAR/LOST/focus|1|0/0|Single sky+ground identity sustains hold+arc,60s pause retains it, CANCEL destroys it, fresh ID reacquires hold while arc release gate blocks. Focus never auto-resumes. Per-event mixed score/health/result checked. Focus/CANCEL adapter composition is ENGINEERING.|
 |F/G — complete38 perfect and60s pause|2|0/0|Every scheduled frame compares intermediate unit counts/score/health; hold+curve share ID; trace child,linked chain,crossing+ground,reverse pair,noinput coexist; completion and reset. RECONSTRUCTED INTEGRATION, never a native whole-chart observation.|
-|H — explicit compatibility guards|4|0/0|Zero-unit noinput-only chart,cubic b,reverse hold,noinput hold rejected. ENGINEERING admission, not original-native rejection.|
+|H — explicit compatibility guards|4|0/0|Zero-unit noinput-only chart,cubic b,reverse hold,noinput hold rejected at the explicitly asserted profile guard, using valid AFF decimal tokens. ENGINEERING admission, not original-native rejection.|
 |H — immutable historical Work1 corpus, default R010|46|0/0|Separate source wrapper records actual new SHA; original manifest ab349d4 provenance unchanged; all prior46 expectations pass. Four producer cases remain NOT RUN.|
 |Separate Work2 suites executed by Work1|341 groups|0/0|13historical portable/bridge suites319groups plus22new mixed CLI groups. Test authorship remains Work2; not added to independent counts.|
 
@@ -120,6 +120,14 @@ No production logic or historical expectations were changed.
    Final independent expectation PURE4/FAR1/LOST3 follows the original gate and
    component schedule. This is an oracle correction from cited original rules,
    **not a production fix or original-derived expectation fitted to output**.
+
+4. Final source/fixture review after first publication e5ad24f found that two
+   rejection fixtures used integer timing tokens, so they reached syntax rejection
+   instead of the claimed long-note profile guard. Corrected only new QA fixture
+   tokens to valid decimals and strengthened all four rejection cases to assert
+   the specific guard message. The entire37-case suite reran:37pass,0fail/skip,
+   same16,760scalar fields plus4guard messages. No rejection expectation relaxed;
+   this review correction and first publication remain preserved in Git/diagnostics.
 
 No genuine original-versus-production first difference remains in the final
 37new+46historical executable cases. Earlier failed drafts remain visible and are

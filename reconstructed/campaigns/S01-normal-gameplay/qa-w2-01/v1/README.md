@@ -29,7 +29,7 @@ Audio is an inspectable fake backend, sky inputs already projected internal
 coordinates. No graphics, audible output or physical-device equivalence follows.
 
 `results/receipt.json`:37/37 cases,16,760 scalar assertions;33 runnable and4
-engineering compatibility rejection cases. `results/historical-independent.json`
+engineering compatibility rejection cases, each checking the intended guard message. `results/historical-independent.json`
 records46 unchanged Work1 cases against the new source with default R010 profile.
 Its old manifest's ab349d4 identity remains historical provenance. The old pinned
 Python runner is deliberately not used to admit changed source. Four original

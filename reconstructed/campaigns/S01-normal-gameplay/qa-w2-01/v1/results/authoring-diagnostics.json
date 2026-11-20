@@ -40,5 +40,17 @@
   "sharedDraft": {
     "firstDifference": "$.events[14].arcs[0].holding: expected true, actual false",
     "correctionAuthority": "E003 0x15a90c4 release-time gate; not instantaneous arc reacquisition. E035 UP/CANCEL does not advance E. See report; corrected from source, not fitted output."
+  },
+  "finalFixtureReview": {
+    "finding": "Two rejection fixtures used integer timing tokens; they reached syntax rejection rather than the claimed profile guard. Found by source/fixture review after first publication e5ad24f9c463aa6468b1af08001f86d8bf22ab07.",
+    "correction": "Use valid decimal timing/BPM tokens. All four rejection cases now assert the intended production guard message as well as exception class. No rejection expectation relaxed.",
+    "strictRun": {
+      "passed": 37,
+      "failed": 0,
+      "skipped": 0,
+      "scalarAssertions": 16760,
+      "guardMessageAssertions": 4
+    },
+    "previousPublication": "e5ad24f9c463aa6468b1af08001f86d8bf22ab07"
   }
 }

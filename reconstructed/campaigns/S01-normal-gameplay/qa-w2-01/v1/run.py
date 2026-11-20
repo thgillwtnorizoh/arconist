@@ -48,7 +48,7 @@ def main():
             try:observed=project(expectation,t['actual'])
             except (KeyError,IndexError,TypeError):observed=t['actual']
             rows.append(dict(event=t.get('index',t.get('sample')),expected=expectation,actual=observed,difference=t['difference']))
-        results.append(dict(id=r['id'],classification=c['classification'],status=r['status'],firstDifference=r['firstDifference'],comparisons=rows))
+        results.append(dict(id=r['id'],classification=c['classification'],status=r['status'],firstDifference=r['firstDifference'],rejection=r.get('rejection'),comparisons=rows))
     receipt=dict(assignment='QA-W2-01',exactProductionSha=SHA,checkoutHead=git('rev-parse','HEAD').decode().strip(),sourceSha256=source,manifestSha256=hashlib.sha256((BASE/'manifest.json').read_bytes()).hexdigest(),rawOutputSha256=hashlib.sha256(raw).hexdigest(),commands=commands,counts=dict(passed=sum(r['status']=='PASS' for r in results),failed=sum(r['status']!='PASS' for r in results),skipped=0,assertedLeaves=assertions),results=results,firstDivergences=[dict(id=r['id'],firstDifference=r['firstDifference']) for r in results if r['status']!='PASS'],notVerified=['G-006','G-007','G-009','G-010'])
     dst.write_text(json.dumps(receipt,indent=2)+'\n');print(json.dumps(receipt['counts']));return int(receipt['counts']['failed']!=0)
 if __name__=='__main__':sys.exit(main())

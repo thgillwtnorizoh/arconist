@@ -699,3 +699,5 @@ and applicability gate remains OPEN. See qa-w2-01/v1/results/receipt.json for th
 exact asserted fields; unasserted snapshot fields are not independently verified.
 
 Full checkpoint: [QA-W2-01-report.md](QA-W2-01-report.md). S01 OPEN.
+
+QA fixture-review addendum: two new rejection charts corrected to valid AFF decimal timing tokens; all four now assert intended profile-guard messages. Entire37case suite rerun PASS,0fail/skip; original corpus/production unchanged. See QA-W2-01 authoring diagnostics; no coverage exclusion or expectation relaxation.

@@ -46,7 +46,7 @@ static class Program {
     foreach(var v in samples){var geom=geometryKernel.Arcs[I(v!,"arc")].Geometry;var p=geom.Point(v!["u"]!.GetValue<float>());var actual=JsonSerializer.SerializeToNode(new{xBits=BitConverter.SingleToInt32Bits(p.X),yBits=BitConverter.SingleToInt32Bits(p.Y),zBits=BitConverter.SingleToInt32Bits(p.Z)});var d=Diff(v["expect"],actual,"$.geometry["+trace.Count+"]");first??=d;trace.Add(new{sample=v,actual,difference=d});}return new{id,status=first==null?"PASS":"FAIL",firstDifference=first,trace};}
    if(c["classification"]!.GetValue<string>()=="EXPECTED REJECTION"){
     try{Chart.Parse(aff,profile);return new{id,status="FAIL",firstDifference="parse: expected NotSupportedException"};}
-    catch(NotSupportedException){return new{id,status="PASS",firstDifference=(string?)null};}
+    catch(NotSupportedException rejected){string? expected=c["rejectionContains"]?.GetValue<string>();bool valid=expected==null||rejected.Message.Contains(expected,StringComparison.Ordinal);return new{id,status=valid?"PASS":"FAIL",firstDifference=valid?(string?)null:"parse rejection: expected "+expected+", actual "+rejected.Message,rejection=rejected.Message};}
    }
    var clock=new Clock();var audio=new Audio();var session=new GameplaySession(clock,audio);session.Start(aff,I(c,"userOffset"),id,"res://work1-fake",I(c,"height",0),profile);
    var k=session.Core!;

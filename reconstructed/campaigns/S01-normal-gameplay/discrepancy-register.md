@@ -169,3 +169,5 @@ was corrected from original evidence and preserved as an oracle authoring error,
 not recorded as a production discrepancy or silently waived.
 
 Full checkpoint: [QA-W2-01-report.md](QA-W2-01-report.md). S01 OPEN.
+
+QA fixture-review addendum: two new rejection charts corrected to valid AFF decimal timing tokens; all four now assert intended profile-guard messages. Entire37case suite rerun PASS,0fail/skip; original corpus/production unchanged. See QA-W2-01 authoring diagnostics; no coverage exclusion or expectation relaxation.

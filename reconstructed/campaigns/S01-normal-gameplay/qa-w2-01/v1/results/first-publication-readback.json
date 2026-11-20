@@ -1,0 +1,15 @@
+{
+  "startingSha": "46efbe54168edcf836c491497600550f03793231",
+  "publishedSha": "e5ad24f9c463aa6468b1af08001f86d8bf22ab07",
+  "exactTestedProductionSha": "49e7c263a36aebcc0316e010a629c6bfdf205f6d",
+  "remoteHeadMatches": true,
+  "directNonForcedChild": true,
+  "changedFileCount": 78,
+  "remoteByteReadbackPaths": 78,
+  "protectedUnchanged": 370,
+  "appendOnlyPrefixesVerified": 4,
+  "historyPrefixBytes": 76496,
+  "status": "VERIFIED CHECKPOINT",
+  "subsystem": "OPEN",
+  "productionOrHistoricalTestChanges": false
+}

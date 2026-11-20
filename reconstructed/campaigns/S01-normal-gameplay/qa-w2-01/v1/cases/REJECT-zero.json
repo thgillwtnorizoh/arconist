@@ -10,5 +10,6 @@
   ],
   "profile": "S01Mixed",
   "affSha256": "f2886de96ee66d2343ab8236479a77ec455e716ca84f269c20ead28964f6d20f",
-  "expectationOrigin": "Work1 original ledgers/equations or explicitly reconstructed integration; never sampled production output"
+  "expectationOrigin": "Work1 original ledgers/equations or explicitly reconstructed integration; never sampled production output",
+  "rejectionContains": "Zero-unit charts require original reference closure."
 }

@@ -17,7 +17,7 @@
     "reconstructed/godot/bridge/GameplaySession.cs": "91ad39d09ab05a1dbe2f9acc601143f94f569c259bb109ad749dd38e0bf53840"
   },
   "manifestSha256": "69344df925bc4a1afcbbd28559507d4759eacf43c11e74018d400629e9d3776d",
-  "rawOutputSha256": "35a1c87fef7654ad8068e7e9f1bda197b55fe9e725f0d413b6b1bfcf73ef5533",
+  "rawOutputSha256": "7f9a459a668c2ad7f3f24d4e282c22c5170b27cee739f8bb3ba21a8a66b6d952",
   "commands": [
     {
       "command": [
@@ -31,7 +31,7 @@
         "-nr:false"
       ],
       "exit": 0,
-      "stdout": "  Determining projects to restore...\n  All projects are up-to-date for restore.\n  Arconist.Core -> /workspace/scratch/e83b3992fd3d/qa601/reconstructed/core/bin/Release/netstandard2.1/Arconist.Core.dll\n  Arconist.Bridge -> /workspace/scratch/e83b3992fd3d/qa601/reconstructed/godot/bridge/bin/Release/netstandard2.1/Arconist.Bridge.dll\n  Driver -> /workspace/scratch/e83b3992fd3d/qa601/reconstructed/campaigns/S01-normal-gameplay/qa-w2-01/v1/driver/bin/Release/net10.0/Driver.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:02.11\n",
+      "stdout": "  Determining projects to restore...\n  All projects are up-to-date for restore.\n  Arconist.Core -> /workspace/scratch/e83b3992fd3d/qa601/reconstructed/core/bin/Release/netstandard2.1/Arconist.Core.dll\n  Arconist.Bridge -> /workspace/scratch/e83b3992fd3d/qa601/reconstructed/godot/bridge/bin/Release/netstandard2.1/Arconist.Bridge.dll\n  Driver -> /workspace/scratch/e83b3992fd3d/qa601/reconstructed/campaigns/S01-normal-gameplay/qa-w2-01/v1/driver/bin/Release/net10.0/Driver.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:05.16\n",
       "stderr": ""
     },
     {
@@ -65,7 +65,8 @@
   "id": "MIX-LINK-natural",
   "classification": "RUNNABLE",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": null
 ,
   "comparisons": [
     {"event":0,"expected":{"e":0},"actual":{"e":0},"difference":null},
@@ -89,7 +90,8 @@
   "id": "MIX-CHILD-duplicate",
   "classification": "RUNNABLE",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": null
 ,
   "comparisons": [
     {"event":0,"expected":{"e":0},"actual":{"e":0},"difference":null},
@@ -103,7 +105,8 @@
   "id": "MIX-HOLD-E037_A1",
   "classification": "RUNNABLE",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": null
 ,
   "comparisons": [
     {"event":0,"expected":{"e":0},"actual":{"e":0},"difference":null},
@@ -123,7 +126,8 @@
   "id": "MIX-HOLD-E037_A2",
   "classification": "RUNNABLE",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": null
 ,
   "comparisons": [
     {"event":0,"expected":{"e":0},"actual":{"e":0},"difference":null},
@@ -146,7 +150,8 @@
   "id": "MIX-GROUP-reverse",
   "classification": "RUNNABLE",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": null
 ,
   "comparisons": [
     {"event":0,"expected":{"e":0},"actual":{"e":0},"difference":null},
@@ -168,7 +173,8 @@
   "id": "MIX-NOINPUT",
   "classification": "RUNNABLE",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": null
 ,
   "comparisons": [
     {"event":0,"expected":{"e":0},"actual":{"e":0},"difference":null},
@@ -184,7 +190,8 @@
   "id": "MIX-PAUSE-retain",
   "classification": "RUNNABLE",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": null
 ,
   "comparisons": [
     {"event":0,"expected":{"e":0},"actual":{"e":0},"difference":null},
@@ -199,7 +206,8 @@
   "id": "MIX-ORDER-input-first",
   "classification": "RUNNABLE",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": null
 ,
   "comparisons": [
     {"event":0,"expected":{"e":0},"actual":{"e":0},"difference":null},
@@ -213,7 +221,8 @@
   "id": "MIX-ORDER-frame-first",
   "classification": "RUNNABLE",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": null
 ,
   "comparisons": [
     {"event":0,"expected":{"e":0},"actual":{"e":0},"difference":null},
@@ -227,7 +236,8 @@
   "id": "CURVE-si",
   "classification": "RUNNABLE",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": null
 ,
   "comparisons": [
     {"event":{"arc":0,"u":0,"expect":{"xBits":0,"yBits":1128792064,"zBits":-2147483648}},"expected":{"xBits":0,"yBits":1128792064,"zBits":-2147483648},"actual":{"xBits":0,"yBits":1128792064,"zBits":-2147483648},"difference":null},
@@ -243,7 +253,8 @@
   "id": "CURVE-so",
   "classification": "RUNNABLE",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": null
 ,
   "comparisons": [
     {"event":{"arc":0,"u":0,"expect":{"xBits":0,"yBits":1128792064,"zBits":-2147483648}},"expected":{"xBits":0,"yBits":1128792064,"zBits":-2147483648},"actual":{"xBits":0,"yBits":1128792064,"zBits":-2147483648},"difference":null},
@@ -259,7 +270,8 @@
   "id": "CURVE-sisi",
   "classification": "RUNNABLE",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": null
 ,
   "comparisons": [
     {"event":{"arc":0,"u":0,"expect":{"xBits":0,"yBits":1128792064,"zBits":-2147483648}},"expected":{"xBits":0,"yBits":1128792064,"zBits":-2147483648},"actual":{"xBits":0,"yBits":1128792064,"zBits":-2147483648},"difference":null},
@@ -275,7 +287,8 @@
   "id": "CURVE-sosi",
   "classification": "RUNNABLE",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": null
 ,
   "comparisons": [
     {"event":{"arc":0,"u":0,"expect":{"xBits":0,"yBits":1128792064,"zBits":-2147483648}},"expected":{"xBits":0,"yBits":1128792064,"zBits":-2147483648},"actual":{"xBits":0,"yBits":1128792064,"zBits":-2147483648},"difference":null},
@@ -291,7 +304,8 @@
   "id": "CURVE-siso",
   "classification": "RUNNABLE",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": null
 ,
   "comparisons": [
     {"event":{"arc":0,"u":0,"expect":{"xBits":0,"yBits":1128792064,"zBits":-2147483648}},"expected":{"xBits":0,"yBits":1128792064,"zBits":-2147483648},"actual":{"xBits":0,"yBits":1128792064,"zBits":-2147483648},"difference":null},
@@ -307,7 +321,8 @@
   "id": "CURVE-soso",
   "classification": "RUNNABLE",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": null
 ,
   "comparisons": [
     {"event":{"arc":0,"u":0,"expect":{"xBits":0,"yBits":1128792064,"zBits":-2147483648}},"expected":{"xBits":0,"yBits":1128792064,"zBits":-2147483648},"actual":{"xBits":0,"yBits":1128792064,"zBits":-2147483648},"difference":null},
@@ -323,7 +338,8 @@
   "id": "CROSS-E028",
   "classification": "RUNNABLE",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": null
 ,
   "comparisons": [
     {"event":0,"expected":{"e":0},"actual":{"e":0},"difference":null},
@@ -356,7 +372,8 @@
   "id": "CURVE-RUNTIME-si-follow",
   "classification": "RUNNABLE",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": null
 ,
   "comparisons": [
     {"event":0,"expected":{"e":0},"actual":{"e":0},"difference":null},
@@ -369,7 +386,8 @@
   "id": "CURVE-RUNTIME-so-follow",
   "classification": "RUNNABLE",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": null
 ,
   "comparisons": [
     {"event":0,"expected":{"e":0},"actual":{"e":0},"difference":null},
@@ -382,7 +400,8 @@
   "id": "CURVE-RUNTIME-sisi-follow",
   "classification": "RUNNABLE",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": null
 ,
   "comparisons": [
     {"event":0,"expected":{"e":0},"actual":{"e":0},"difference":null},
@@ -395,7 +414,8 @@
   "id": "CURVE-RUNTIME-sosi-follow",
   "classification": "RUNNABLE",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": null
 ,
   "comparisons": [
     {"event":0,"expected":{"e":0},"actual":{"e":0},"difference":null},
@@ -408,7 +428,8 @@
   "id": "CURVE-RUNTIME-siso-follow",
   "classification": "RUNNABLE",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": null
 ,
   "comparisons": [
     {"event":0,"expected":{"e":0},"actual":{"e":0},"difference":null},
@@ -421,7 +442,8 @@
   "id": "CURVE-RUNTIME-soso-follow",
   "classification": "RUNNABLE",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": null
 ,
   "comparisons": [
     {"event":0,"expected":{"e":0},"actual":{"e":0},"difference":null},
@@ -434,7 +456,8 @@
   "id": "CURVE-RUNTIME-si-displaced",
   "classification": "RUNNABLE",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": null
 ,
   "comparisons": [
     {"event":0,"expected":{"e":0},"actual":{"e":0},"difference":null},
@@ -447,7 +470,8 @@
   "id": "CURVE-RUNTIME-so-displaced",
   "classification": "RUNNABLE",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": null
 ,
   "comparisons": [
     {"event":0,"expected":{"e":0},"actual":{"e":0},"difference":null},
@@ -460,7 +484,8 @@
   "id": "CURVE-RUNTIME-sisi-displaced",
   "classification": "RUNNABLE",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": null
 ,
   "comparisons": [
     {"event":0,"expected":{"e":0},"actual":{"e":0},"difference":null},
@@ -473,7 +498,8 @@
   "id": "CURVE-RUNTIME-sosi-displaced",
   "classification": "RUNNABLE",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": null
 ,
   "comparisons": [
     {"event":0,"expected":{"e":0},"actual":{"e":0},"difference":null},
@@ -486,7 +512,8 @@
   "id": "CURVE-RUNTIME-siso-displaced",
   "classification": "RUNNABLE",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": null
 ,
   "comparisons": [
     {"event":0,"expected":{"e":0},"actual":{"e":0},"difference":null},
@@ -499,7 +526,8 @@
   "id": "CURVE-RUNTIME-soso-displaced",
   "classification": "RUNNABLE",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": null
 ,
   "comparisons": [
     {"event":0,"expected":{"e":0},"actual":{"e":0},"difference":null},
@@ -512,7 +540,8 @@
   "id": "REJECT-zero",
   "classification": "EXPECTED REJECTION",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": "Zero-unit charts require original reference closure."
 ,
   "comparisons": [
 
@@ -522,7 +551,8 @@
   "id": "REJECT-cubic",
   "classification": "EXPECTED REJECTION",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": "Only ordinary linear arcs or trace linear parents with exactly one child supported."
 ,
   "comparisons": [
 
@@ -532,7 +562,8 @@
   "id": "REJECT-reverse-hold",
   "classification": "EXPECTED REJECTION",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": "Reverse/noinput long notes require original reference closure."
 ,
   "comparisons": [
 
@@ -542,7 +573,8 @@
   "id": "REJECT-noinput-hold",
   "classification": "EXPECTED REJECTION",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": "Reverse/noinput long notes require original reference closure."
 ,
   "comparisons": [
 
@@ -552,7 +584,8 @@
   "id": "MIX38-miss-replay",
   "classification": "RUNNABLE",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": null
 ,
   "comparisons": [
     {"event":0,"expected":{"e":0,"profile":"S01Mixed","n":38,"end":24120,"holdGroups":[1],"arcGroups":[0,1,3,3,0,0],"tapOrders":[0,1,2,3,5,6,9,10,15,11,18,12],"arcOrders":[4,14,16,17,7,8],"holds":[{"resolved":[0,0,0,0]}],"arcs":[{"times":[4250,4500,4750,5000,5250,5500,5750,6000,6250]},{"times":[]},{"times":[12250,12500],"weights":[1,2]},{"times":[13001,13251,13501,13751]},{"times":[16250,16500,16750]},{"times":[16250,16500,16750]}]},"actual":{"e":0,"profile":"S01Mixed","n":38,"end":24120,"holdGroups":[1],"arcGroups":[0,1,3,3,0,0],"tapOrders":[0,1,2,3,5,6,9,10,15,11,18,12],"arcOrders":[4,14,16,17,7,8],"holds":[{"resolved":[0,0,0,0]}],"arcs":[{"times":[4250,4500,4750,5000,5250,5500,5750,6000,6250]},{"times":[]},{"times":[12250,12500],"weights":[1,2]},{"times":[13001,13251,13501,13751]},{"times":[16250,16500,16750]},{"times":[16250,16500,16750]}]},"difference":null},
@@ -564,7 +597,8 @@
   "id": "MIX38-perfect",
   "classification": "RUNNABLE",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": null
 ,
   "comparisons": [
     {"event":0,"expected":{"e":0,"n":38,"end":24120},"actual":{"e":0,"n":38,"end":24120},"difference":null},
@@ -1566,7 +1600,8 @@
   "id": "MIX38-perfect-pause",
   "classification": "RUNNABLE",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": null
 ,
   "comparisons": [
     {"event":0,"expected":{"e":0,"n":38,"end":24120},"actual":{"e":0,"n":38,"end":24120},"difference":null},
@@ -2571,7 +2606,8 @@
   "id": "SHARED-cancel-focus-far-lost",
   "classification": "RUNNABLE",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": null
 ,
   "comparisons": [
     {"event":0,"expected":{"e":0,"n":8},"actual":{"e":0,"n":8},"difference":null},
@@ -2605,7 +2641,8 @@
   "id": "CHILD-move-not-down",
   "classification": "RUNNABLE",
   "status": "PASS",
-  "firstDifference": null
+  "firstDifference": null,
+  "rejection": null
 ,
   "comparisons": [
     {"event":0,"expected":{"e":0},"actual":{"e":0},"difference":null},
