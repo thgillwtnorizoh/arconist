@@ -1,0 +1,10 @@
+{
+  "limit": 4,
+  "reserved": 1,
+  "scenes": [
+    {
+      "scene": "all3",
+      "status": "blocked"
+    }
+  ]
+}

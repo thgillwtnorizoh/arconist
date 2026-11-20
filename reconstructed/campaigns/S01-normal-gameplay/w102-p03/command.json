@@ -1,0 +1,15 @@
+{
+  "command": "PYTHONPATH=/tmp/p03-libs python reconstructed/campaigns/S01-normal-gameplay/w102-p03/run.py --archive ../project_sources/01-arccopy.zip --budget /tmp/p03-budget.json --output /tmp/p03-ledger.json > /tmp/p03-host.log 2>&1",
+  "exitCode": 1,
+  "cwd": "/workspace/scratch/e83b3992fd3d/p03",
+  "sourceSha": "f595c7e4bce057efa02d3d587900045e7680effe",
+  "ledgerSha256": "877300fb820d0cd531b112fe33818cc24b41c7e78cc4ba684a5cd5d2712a3cfe",
+  "hostLogSha256": "95d04b3e74f2ce3ec5242f1ca2c5d7d0158bb4443c4f56056d5a93cf7cf996df",
+  "freshScenes": 1,
+  "completedScenes": 0,
+  "blockedScenes": 1,
+  "notRunScenes": 3,
+  "dependencies": "Python3.12.14, Unicorn2.1.4, pyelftools0.33; Capstone5.0.7 static only",
+  "installCommand": "python -m pip install --target /tmp/p03-libs -r research_harness/requirements.txt capstone==5.0.7",
+  "offlineAuthoringCorrection": "First audit reached report-link check before its own receipt existed; assertion failed. Receipt path prepared, audit rerun without changing any native expectation or scene."
+}

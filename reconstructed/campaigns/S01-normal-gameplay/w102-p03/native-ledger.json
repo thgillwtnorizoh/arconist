@@ -1,0 +1,297 @@
+{
+  "assignment": "W102-P03",
+  "sourceSha": "f595c7e4bce057efa02d3d587900045e7680effe",
+  "driverSha256": "8960fd91e8e12b0ccaaaea61c4034e118d066f04a7062c1d3a29bffc7941c5d1",
+  "librarySha256": "3eaca4e6dabb3395f276f8915698d57675757d0df0970e716b23a3dc201c79be",
+  "scenes": [
+    {
+      "fixture": {
+        "scene": "all3",
+        "path": "reconstructed/campaigns/S01-normal-gameplay/w1-02/fixtures/W102-A-all3.aff",
+        "sha256": "6de46bdf84d4ffe56e9d0db41065406b9951787d5d38e0b7f8a7bca24bead46d",
+        "raw": "AudioOffset:0\nTimingPointDensityFactor:1.0\n-\ntiming(0,120.00,4.00);\n(1500,3);\nhold(1500,2500,3);\narc(1000,2000,0.50,0.50,s,0.50,0.50,0,none,true)[arctap(1500)];\n",
+        "hypothesis": "Actual native overlap/order/winner NOT VERIFIED",
+        "staticOverlap": "Plausible: AFF lane3 becomes native lane4; ground center X212.5,Y0,Z0. Child targetX0,Y50; E004 flag1 half-width302 and clampY100 permit overlap. Verify original lane/spatial at input; no injected overlap.",
+        "typedSource": {
+          "taps": 1,
+          "holds": 1,
+          "children": 1
+        }
+      },
+      "parsed": [
+        {
+          "mode": 1,
+          "start": 1000,
+          "end": 2000,
+          "times": [
+            1500
+          ],
+          "childArgument": 1500
+        }
+      ],
+      "factories": [
+        {
+          "pointer": "0x4332bc0",
+          "type": "15LogicArcTapNote",
+          "vtable": "0x1acac18",
+          "time": 1500
+        }
+      ],
+      "writes": [
+        {
+          "phase": "019 original Scheduler dt 0.4",
+          "pc": "0x1865514",
+          "object": "0x4332bc0",
+          "kind": "geometry/backlink",
+          "offset": "0x90",
+          "size": 8,
+          "value": 70463104
+        },
+        {
+          "phase": "019 original Scheduler dt 0.4",
+          "pc": "0x1925888",
+          "object": "0x4332bc0",
+          "kind": "geometry/backlink",
+          "offset": "0x80",
+          "size": 8,
+          "value": 4776067404826411008
+        },
+        {
+          "phase": "019 original Scheduler dt 0.4",
+          "pc": "0x192588c",
+          "object": "0x4332bc0",
+          "kind": "geometry/backlink",
+          "offset": "0x88",
+          "size": 4,
+          "value": 3313289216
+        }
+      ],
+      "countProducer": [
+        {
+          "chart": "0x43320c0",
+          "lower": 0,
+          "upper": 2147483647,
+          "caller": "0x173bf2c",
+          "N": 5
+        }
+      ],
+      "candidates": [],
+      "classifiers": [],
+      "spatial": [],
+      "guardReads": [],
+      "recorders": [],
+      "bodyAcceptances": [],
+      "events": [],
+      "production": [
+        {
+          "stage": "parsed",
+          "kind": "tap",
+          "pointer": "0x432ef00",
+          "start": 1500,
+          "end": 0,
+          "rawLane": 3
+        },
+        {
+          "stage": "prepared",
+          "pointer": "0x4332980",
+          "type": "12LogicTapNote",
+          "start": 1500,
+          "end": 1500
+        },
+        {
+          "stage": "parsed",
+          "kind": "hold",
+          "pointer": "0x432efc0",
+          "start": 1500,
+          "end": 2500,
+          "rawLane": 3
+        },
+        {
+          "stage": "prepared",
+          "pointer": "0x4332a80",
+          "type": "13LogicHoldNote",
+          "start": 1500,
+          "end": 2500
+        }
+      ],
+      "visits": [],
+      "stops": [],
+      "lanes": [],
+      "mainSortCalls": [
+        {
+          "begin": "0x4333080",
+          "end": "0x4333098",
+          "caller": "0x173bd58"
+        },
+        {
+          "begin": "0x43559c0",
+          "end": "0x4356998",
+          "caller": "0x173bf44"
+        },
+        {
+          "begin": "0x43559c0",
+          "end": "0x43559d8",
+          "caller": "0x7b6c90"
+        },
+        {
+          "begin": "0x43559e0",
+          "end": "0x43561b8",
+          "caller": "0x7b6c90"
+        },
+        {
+          "begin": "0x43559e0",
+          "end": "0x43559f0",
+          "caller": "0x7b6c90"
+        },
+        {
+          "begin": "0x4355de0",
+          "end": "0x43561b8",
+          "caller": "0x7b6d28"
+        },
+        {
+          "begin": "0x4355de0",
+          "end": "0x4355df0",
+          "caller": "0x7b6c90"
+        },
+        {
+          "begin": "0x4355fe0",
+          "end": "0x43561b8",
+          "caller": "0x7b6d28"
+        },
+        {
+          "begin": "0x4355fe0",
+          "end": "0x4355ff0",
+          "caller": "0x7b6c90"
+        },
+        {
+          "begin": "0x43560e0",
+          "end": "0x43561b8",
+          "caller": "0x7b6d28"
+        },
+        {
+          "begin": "0x4355df8",
+          "end": "0x4355e08",
+          "caller": "0x7b6c90"
+        },
+        {
+          "begin": "0x4355f00",
+          "end": "0x4355fd8",
+          "caller": "0x7b6d28"
+        },
+        {
+          "begin": "0x43559f8",
+          "end": "0x4355a08",
+          "caller": "0x7b6c90"
+        },
+        {
+          "begin": "0x4355c00",
+          "end": "0x4355dd8",
+          "caller": "0x7b6d28"
+        },
+        {
+          "begin": "0x4355c00",
+          "end": "0x4355c10",
+          "caller": "0x7b6c90"
+        },
+        {
+          "begin": "0x4355d00",
+          "end": "0x4355dd8",
+          "caller": "0x7b6d28"
+        },
+        {
+          "begin": "0x4355a10",
+          "end": "0x4355a20",
+          "caller": "0x7b6c90"
+        },
+        {
+          "begin": "0x4355b18",
+          "end": "0x4355bf8",
+          "caller": "0x7b6d28"
+        },
+        {
+          "begin": "0x43561c0",
+          "end": "0x43561d0",
+          "caller": "0x7b6c90"
+        },
+        {
+          "begin": "0x43565c0",
+          "end": "0x4356998",
+          "caller": "0x7b6d28"
+        },
+        {
+          "begin": "0x43565c0",
+          "end": "0x43565d0",
+          "caller": "0x7b6c90"
+        },
+        {
+          "begin": "0x43567c0",
+          "end": "0x4356998",
+          "caller": "0x7b6d28"
+        },
+        {
+          "begin": "0x43567c0",
+          "end": "0x43567d0",
+          "caller": "0x7b6c90"
+        },
+        {
+          "begin": "0x43568c0",
+          "end": "0x4356998",
+          "caller": "0x7b6d28"
+        },
+        {
+          "begin": "0x43565d8",
+          "end": "0x43565e8",
+          "caller": "0x7b6c90"
+        },
+        {
+          "begin": "0x43566e0",
+          "end": "0x43567b8",
+          "caller": "0x7b6d28"
+        },
+        {
+          "begin": "0x43561d8",
+          "end": "0x43561e8",
+          "caller": "0x7b6c90"
+        },
+        {
+          "begin": "0x43563e0",
+          "end": "0x43565b8",
+          "caller": "0x7b6d28"
+        },
+        {
+          "begin": "0x43563e0",
+          "end": "0x43563f0",
+          "caller": "0x7b6c90"
+        },
+        {
+          "begin": "0x43564e0",
+          "end": "0x43565b8",
+          "caller": "0x7b6d28"
+        },
+        {
+          "begin": "0x43561f0",
+          "end": "0x4356200",
+          "caller": "0x7b6c90"
+        },
+        {
+          "begin": "0x43562f8",
+          "end": "0x43563d8",
+          "caller": "0x7b6d28"
+        }
+      ],
+      "status": "blocked",
+      "error": "unhandled import 0x1a6e300 asin caller=0x17d26c8",
+      "traceback": "Traceback (most recent call last):\n  File \"/workspace/scratch/e83b3992fd3d/p03/research_harness/src/chart_services.py\", line 73, in oncode\n    super().oncode(u, a, size, ud)\n  File \"/workspace/scratch/e83b3992fd3d/p03/research_harness/src/arm64.py\", line 146, in oncode\n    raise RuntimeError('unhandled import ' + hex(a))\nRuntimeError: unhandled import 0x1a6e300\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/workspace/scratch/e83b3992fd3d/p03/reconstructed/campaigns/S01-normal-gameplay/w102-p03/run.py\", line 63, in main\n    try:scene(spec,out);budget['scenes'][-1]['status']='completed'\n        ^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/e83b3992fd3d/p03/reconstructed/campaigns/S01-normal-gameplay/w102-p03/run.py\", line 29, in scene\n    n.call(0x1930604);n.call(0x1054f24);n.trace=[];n.visual=[];n.animationTrace=[];n.downstream=[];n.env=n.alloc(8);n.now=1000;entry(n);activate(n)\n                                                                                                                                        ^^^^^^^^^^^\n  File \"/workspace/scratch/e83b3992fd3d/p03/research_harness/src/lifecycle.py\", line 34, in activate\n    n.tick(dt)\n  File \"/workspace/scratch/e83b3992fd3d/p03/research_harness/src/resources.py\", line 361, in tick\n    self.call(20791108, self.scheduler, fs=(dt,))\n  File \"/workspace/scratch/e83b3992fd3d/p03/research_harness/src/menu_services.py\", line 39, in call\n    return super().call(a, *args, **kw)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/e83b3992fd3d/p03/research_harness/src/resources.py\", line 80, in call\n    return super().call(a, *args, **kw)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/e83b3992fd3d/p03/research_harness/src/arm64.py\", line 162, in call\n    self.u.emu_start(a, stop, count=5000000)\n  File \"/tmp/p03-libs/unicorn/unicorn_py3/unicorn.py\", line 769, in emu_start\n    raise self._hook_exception\n  File \"/tmp/p03-libs/unicorn/unicorn_py3/unicorn.py\", line 363, in wrapper\n    return func(uc, *args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/p03-libs/unicorn/unicorn_py3/unicorn.py\", line 1063, in __hook_code_cb\n    callback(uc, address, size, user_data)\n  File \"/workspace/scratch/e83b3992fd3d/p03/research_harness/src/solo_entry.py\", line 21, in oncode\n    super().oncode(u, a, size, ud)\n  File \"/workspace/scratch/e83b3992fd3d/p03/research_harness/src/menu_services.py\", line 35, in oncode\n    super().oncode(u, a, size, ud)\n  File \"/workspace/scratch/e83b3992fd3d/p03/research_harness/src/track_services.py\", line 105, in oncode\n    super().oncode(u, a, size, ud)\n  File \"/workspace/scratch/e83b3992fd3d/p03/research_harness/src/resources.py\", line 375, in oncode\n    super().oncode(u, a, size, ud)\n  File \"/workspace/scratch/e83b3992fd3d/p03/research_harness/src/resources.py\", line 313, in oncode\n    super().oncode(u, a, size, ud)\n  File \"/workspace/scratch/e83b3992fd3d/p03/research_harness/src/bootstrap.py\", line 87, in oncode\n    super().oncode(u, a, size, ud)\n  File \"/workspace/scratch/e83b3992fd3d/p03/research_harness/src/sqlite_services.py\", line 103, in oncode\n    super().oncode(u, a, size, ud)\n  File \"/workspace/scratch/e83b3992fd3d/p03/research_harness/src/chart_services.py\", line 75, in oncode\n    raise RuntimeError(str(e) + ' ' + self.imports.get(a, '') + ' caller=' + hex(self.x(30)))\nRuntimeError: unhandled import 0x1a6e300 asin caller=0x17d26c8\n"
+    }
+  ],
+  "budget": {
+    "limit": 4,
+    "reserved": 1,
+    "scenes": [
+      {
+        "scene": "all3",
+        "status": "blocked"
+      }
+    ]
+  }
+}

@@ -1,0 +1,170 @@
+{
+  "status": "NOT RUN",
+  "reason": "Scene A activation ABI failure precedes input; no collected candidate permutation exists",
+  "inputPreSort": [],
+  "inputVisits": [],
+  "inputStops": [],
+  "mainSortCalls": [
+    {
+      "begin": "0x4333080",
+      "end": "0x4333098",
+      "caller": "0x173bd58"
+    },
+    {
+      "begin": "0x43559c0",
+      "end": "0x4356998",
+      "caller": "0x173bf44"
+    },
+    {
+      "begin": "0x43559c0",
+      "end": "0x43559d8",
+      "caller": "0x7b6c90"
+    },
+    {
+      "begin": "0x43559e0",
+      "end": "0x43561b8",
+      "caller": "0x7b6c90"
+    },
+    {
+      "begin": "0x43559e0",
+      "end": "0x43559f0",
+      "caller": "0x7b6c90"
+    },
+    {
+      "begin": "0x4355de0",
+      "end": "0x43561b8",
+      "caller": "0x7b6d28"
+    },
+    {
+      "begin": "0x4355de0",
+      "end": "0x4355df0",
+      "caller": "0x7b6c90"
+    },
+    {
+      "begin": "0x4355fe0",
+      "end": "0x43561b8",
+      "caller": "0x7b6d28"
+    },
+    {
+      "begin": "0x4355fe0",
+      "end": "0x4355ff0",
+      "caller": "0x7b6c90"
+    },
+    {
+      "begin": "0x43560e0",
+      "end": "0x43561b8",
+      "caller": "0x7b6d28"
+    },
+    {
+      "begin": "0x4355df8",
+      "end": "0x4355e08",
+      "caller": "0x7b6c90"
+    },
+    {
+      "begin": "0x4355f00",
+      "end": "0x4355fd8",
+      "caller": "0x7b6d28"
+    },
+    {
+      "begin": "0x43559f8",
+      "end": "0x4355a08",
+      "caller": "0x7b6c90"
+    },
+    {
+      "begin": "0x4355c00",
+      "end": "0x4355dd8",
+      "caller": "0x7b6d28"
+    },
+    {
+      "begin": "0x4355c00",
+      "end": "0x4355c10",
+      "caller": "0x7b6c90"
+    },
+    {
+      "begin": "0x4355d00",
+      "end": "0x4355dd8",
+      "caller": "0x7b6d28"
+    },
+    {
+      "begin": "0x4355a10",
+      "end": "0x4355a20",
+      "caller": "0x7b6c90"
+    },
+    {
+      "begin": "0x4355b18",
+      "end": "0x4355bf8",
+      "caller": "0x7b6d28"
+    },
+    {
+      "begin": "0x43561c0",
+      "end": "0x43561d0",
+      "caller": "0x7b6c90"
+    },
+    {
+      "begin": "0x43565c0",
+      "end": "0x4356998",
+      "caller": "0x7b6d28"
+    },
+    {
+      "begin": "0x43565c0",
+      "end": "0x43565d0",
+      "caller": "0x7b6c90"
+    },
+    {
+      "begin": "0x43567c0",
+      "end": "0x4356998",
+      "caller": "0x7b6d28"
+    },
+    {
+      "begin": "0x43567c0",
+      "end": "0x43567d0",
+      "caller": "0x7b6c90"
+    },
+    {
+      "begin": "0x43568c0",
+      "end": "0x4356998",
+      "caller": "0x7b6d28"
+    },
+    {
+      "begin": "0x43565d8",
+      "end": "0x43565e8",
+      "caller": "0x7b6c90"
+    },
+    {
+      "begin": "0x43566e0",
+      "end": "0x43567b8",
+      "caller": "0x7b6d28"
+    },
+    {
+      "begin": "0x43561d8",
+      "end": "0x43561e8",
+      "caller": "0x7b6c90"
+    },
+    {
+      "begin": "0x43563e0",
+      "end": "0x43565b8",
+      "caller": "0x7b6d28"
+    },
+    {
+      "begin": "0x43563e0",
+      "end": "0x43563f0",
+      "caller": "0x7b6c90"
+    },
+    {
+      "begin": "0x43564e0",
+      "end": "0x43565b8",
+      "caller": "0x7b6d28"
+    },
+    {
+      "begin": "0x43561f0",
+      "end": "0x4356200",
+      "caller": "0x7b6c90"
+    },
+    {
+      "begin": "0x43562f8",
+      "end": "0x43563d8",
+      "caller": "0x7b6d28"
+    }
+  ],
+  "boundary": "Main sort entry arguments are observed, not validated main permutation or input vector. No E004 synthetic vector executed."
+}

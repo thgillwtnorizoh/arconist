@@ -1,0 +1,21 @@
+{
+  "stage": "Scene A activate -> original Scheduler",
+  "kind": "host math ABI prerequisite, not original game rejection",
+  "error": "unhandled import 0x1a6e300 asin caller=0x17d26c8",
+  "importVA": "0x1a6e300",
+  "symbol": "asin",
+  "nativeCallInstruction": "0x17d26c4",
+  "nativeReturnPC": "0x17d26c8",
+  "originalFunction": "0x17d26xxx enclosing routine role NOT VERIFIED",
+  "sceneCount": 1,
+  "remainingScenes": "B/C/D NOT RUN; stopped, no retries",
+  "notObserved": [
+    "mixed spatial eligibility",
+    "collected/sorted input permutation",
+    "input generated IDs",
+    "classifier winner/hold latch",
+    "score/health callbacks",
+    "contact cleanup"
+  ],
+  "next": "Separately authorized Work1 ABI adapter validation, then one fresh identical Scene A; do not force gameplay state"
+}

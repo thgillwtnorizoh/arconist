@@ -252,3 +252,24 @@ authorized Work1 evidence precedes generalized Work2 conflict integration. No P0
 or implementation executed. Production/Windows/GUI/results NOT RUN. All prior
 original/reconstruction/QA evidence preserved. Full report and receipts:
 W102-P01-C01-report.md and w102-p01-c01/. S01 subsystem OPEN; all other gates remain.
+
+
+## W102-P03 mixed candidate checkpoint — 2026-11-20
+
+BLOCKED at original Scene A activation by unhandled host asin import1a6e300,
+caller/LR17d26c8. Start69b2b272cff47211091da767840f16a9d56b943b; exact executed
+harness f595c7e4bce057efa02d3d587900045e7680effe; original library identity unchanged.
+One fresh scene reserved before setup, exit1; 0completed,1blocked,3NOT RUN,0retries.
+Tap1500, hold1500–2500 and child1500 factories returned; parent backlink/geometry
+stores and count-helper N5 for this mixed chart observed. Activation/index/input
+eligibility not established. No JNI input, candidate permutation, classifier stop,
+recording/health or cleanup observed. Static/offline evidence checks do not count
+as native gameplay passes. B03 / D07 / W102-A01–A05 and S01-10.01 remain OPEN.
+Two-retained fixture has no hold; do not claim it validates hold-latch arbitration.
+
+No original rejection, managed stable-sort oracle, production divergence or broad
+feature exclusion is inferred. Prior E004/E025/E035/E037 and P01/C01 evidence intact.
+Recommend separately authorized Work1 asin double ABI recovery/isolated numerical
+controls and one fresh identical Scene A, not an automatic retry. No B–D or other
+experiment executed; Work2/Windows/results NOT RUN. Full source/provenance/receipts:
+campaigns/S01-normal-gameplay/W102-P03-report.md and w102-p03/. S01 OPEN.

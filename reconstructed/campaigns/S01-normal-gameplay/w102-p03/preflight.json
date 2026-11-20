@@ -1,0 +1,41 @@
+{
+  "librarySha256": "3eaca4e6dabb3395f276f8915698d57675757d0df0970e716b23a3dc201c79be",
+  "buildId": "17d660edbf37ca78beefc32e07672c97419ddce6",
+  "python": "3.12.14",
+  "os": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "freshScenes": 0,
+  "anchors": [
+    {
+      "va": "0x7b6a08",
+      "instruction": "stp x29, x30, [sp, #-0x50]!"
+    },
+    {
+      "va": "0xf6b514",
+      "instruction": "stp x29, x30, [sp, #-0x50]!"
+    },
+    {
+      "va": "0x194ff80",
+      "instruction": "sub sp, sp, #0xc0"
+    },
+    {
+      "va": "0xeec024",
+      "instruction": "sub sp, sp, #0x190"
+    },
+    {
+      "va": "0xeec53c",
+      "instruction": "ldr x25, [x20]"
+    },
+    {
+      "va": "0xeec570",
+      "instruction": "b #0xeec744"
+    },
+    {
+      "va": "0xeec6ec",
+      "instruction": "mov w8, #1"
+    },
+    {
+      "va": "0xeec6f4",
+      "instruction": "b #0xeec744"
+    }
+  ]
+}
