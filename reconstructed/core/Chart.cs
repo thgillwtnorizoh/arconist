@@ -74,6 +74,7 @@ public sealed class Timing
 public sealed class Chart
 {
     public ChartProfile Profile { get; }
+    public IReadOnlyList<SceneControl> SceneControls {get;}
     public IReadOnlyList<Tap> Taps { get; }
     public IReadOnlyList<TimingGroup> TimingGroups { get; }
     public IReadOnlyList<Timing> Timings { get; }
@@ -83,9 +84,9 @@ public sealed class Chart
     public float Density { get; }
     public int JudgmentUnits { get; }
     public int EndTime { get; }
-    private Chart(List<Tap> taps, List<Hold> holds, List<Arc> arcs, List<Timing> timings, List<TimingGroup> groups, int offset, float density, ChartProfile profile)
+    private Chart(List<Tap> taps, List<Hold> holds, List<Arc> arcs, List<SceneControl> controls, List<Timing> timings, List<TimingGroup> groups, int offset, float density, ChartProfile profile)
     {
-        Profile=profile;
+        Profile=profile;SceneControls=controls.AsReadOnly();
         TimingGroups=groups.AsReadOnly();
         foreach(var group in groups.Where(g=>g.Id!=0))
             group.LifetimeEnd=checked(taps.Where(t=>t.Group==group).Select(t=>t.Time).Concat(holds.Where(h=>h.TimingGroup==group).Select(h=>h.End)).Concat(arcs.Where(a=>a.TimingGroup==group).Select(a=>a.End)).DefaultIfEmpty(0).Max()+1200);
@@ -123,6 +124,7 @@ public sealed class Chart
             }
         }
         if (!float.IsFinite(density) || density <= 0) throw new FormatException("Density must be positive and finite.");
+        var controls=new List<SceneControl>();
         var taps = new List<Tap>(); var timings = new List<Timing>();
         var lists=new List<List<Timing>>{timings};var groups=new List<TimingGroup>{new TimingGroup(0,-1,"",timings)};
         var parsedHolds = new List<(int start, int end, int raw, int order, int group)>();
@@ -138,6 +140,16 @@ public sealed class Chart
         {
             string s = statement.Text;
             int groupId=statement.Group;
+            if(s.StartsWith("scenecontrol(",StringComparison.Ordinal))
+            {
+                var match=Regex.Match(s,@"^scenecontrol\(\s*([0-9]+)\s*,\s*(enwidencamera|enwidenlanes)\s*,\s*([0-9]+\.[0-9]+)\s*,\s*([0-9]+)\s*\)$",RegexOptions.CultureInvariant);
+                if(!mixed||groupId!=0||!match.Success)throw new NotSupportedException("Widening requires S01Mixed, group0 and a supported typed scenecontrol.");
+                int time=int.Parse(match.Groups[1].Value,CultureInfo.InvariantCulture),direction=int.Parse(match.Groups[4].Value,CultureInfo.InvariantCulture);
+                float duration=float.Parse(match.Groups[3].Value,CultureInfo.InvariantCulture);
+                if(time>600000||!float.IsFinite(duration)||duration<=0||duration>600000||time+duration>600000||direction!=1||controls.Count!=0)
+                    throw new NotSupportedException("Widening supports one positive-duration opening control, direction1, within600000ms; closing/overlap/mixed controls remain unverified.");
+                controls.Add(new SceneControl(time,match.Groups[2].Value=="enwidencamera"?WideningKind.Camera:WideningKind.Lanes,duration,direction,sourceOrder++));continue;
+            }
             if(!mixed&&groupId!=0&&(s.StartsWith("hold(",StringComparison.Ordinal)||s.StartsWith("arc(",StringComparison.Ordinal)))throw new NotSupportedException("Independent groups support taps only.");
             if(s.StartsWith("arc(",StringComparison.Ordinal))
             {
@@ -228,6 +240,6 @@ public sealed class Chart
             return new Arc(i,a.order,start,end,x0,x1,y0,y1,color,extra,lists[a.group].Last(t=>t.Time<=start),density,f[9]=="true",a.child,groups[a.group],f[4]);
         }).OrderBy(a=>a.Start).ThenBy(a=>a.SourceOrder).ToList();
         if(mixed)MixedArcConstruction.Link(arcs);else OrdinaryPairLinker.LinkAndGenerate(arcs);
-        return new Chart(taps, holds, arcs, timings, groups, offset, density,profile);
+        return new Chart(taps, holds, arcs, controls, timings, groups, offset, density,profile);
     }
 }

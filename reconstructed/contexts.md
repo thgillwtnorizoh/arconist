@@ -1409,3 +1409,11 @@ Recommend separately authorized Work1 asin double ABI recovery/isolated numerica
 controls and one fresh identical Scene A, not an automatic retry. No B–D or other
 experiment executed; Work2/Windows/results NOT RUN. Full source/provenance/receipts:
 campaigns/S01-normal-gameplay/W102-P03-report.md and w102-p03/. S01 OPEN.
+
+## S01 / Work2 / W2-02 preparation and focused integration — 2026-11-21 Asia/Bangkok
+
+Authorized issue11/start7ccd52dc7829ac597e1f8d3cfdbd0a474357c9dd verified; accepted W2-01 source49e7c263a36aebcc0316e010a629c6bfdf205f6d and its HQ-recorded owner/independent acceptance preserved. Read standing history/Instruction including Hard-Rock amendment, charter/registers and full E039 plus necessary E004/E007. No original execution or W102-P03 recovery. At most two bounded attempts/root blocker; full mandatory gates retained.
+
+Typed S01Mixed one group0 positive-duration/opening1 scene control, separate G/previousG/W and owners; interpolate old transition before strict time<E dispatch; no units. Actual world input computes primary/secondary in portable core, retained identity and shared recording; Godot passes ray-ground coordinates and reads same selector for gold/outer bands. Finite sampled display is ENGINEERING, not native FOV/mesh claim. Three byte-identical E039 exports and two audible practice choices; R010/old21charts/music/references/Work1 expectations unchanged.
+
+Focused21core/bridge+14Godot PASS,0fail/skip; actual compile/import/headless nodes/projection/audio API/lifecycle. Original E039 scalars/pairs/once-only PURE1/score5000001/H40.20000076293945/cleanup1501 match. E751 first new paused-clock expectation used rounded1.251f and failed; independent E007 f32 operation staging yields1.250999927520752. Corrected only new oracle, not production, preserved first diagnostic. Full519groups,37+46unchanged Work1 development reruns,3references, Windows/PCK26resources/runtime/CRC/hash checks pending clean committed-source execution. Separate exact-new-source independent Work1 QA and owner physical Windows/audio qualification pending. Campaign OPEN; no later assignment.

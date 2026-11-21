@@ -273,3 +273,8 @@ Recommend separately authorized Work1 asin double ABI recovery/isolated numerica
 controls and one fresh identical Scene A, not an automatic retry. No B–D or other
 experiment executed; Work2/Windows/results NOT RUN. Full source/provenance/receipts:
 campaigns/S01-normal-gameplay/W102-P03-report.md and w102-p03/. S01 OPEN.
+
+
+## W2-02 widening integration checkpoint — 2026-11-21
+
+D03 / S01-08.01 / S01-02.01 / S01-10.05 / D12 / S01-13.01 gain bounded VERIFIED COMPONENT coverage: E039 typed group0 one opening control, separate authoritative G/W/previousG, strict frame dispatch and scalar order, actual-coordinate primary/secondary selector and shared retained contacts; engineering gold/outer meshes/real camera projection, five chart choices and full practice results. Focused21core+14Godot pass; full exact-source regression/export pending. Existing historical entries/prefixes unchanged. No full discrepancy/requirement closure; Work1 independent new-source QA/owner Windows qualification pending. Closing/grouped/multiple controls, native visible FOV/meshes, broader normal-gameplay and all original G-series/P03 blockers remain OPEN/NOT VERIFIED. No new native experiment, no mixed-sort recovery. Full report ../../validation/S01-W2-02.md; S01 OPEN.

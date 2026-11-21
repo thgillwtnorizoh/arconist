@@ -167,6 +167,9 @@ public sealed class RetainedContact
     public int Pointer { get; }
     public int Id { get; }
     public int Lane { get; internal set; }
+    public int SecondaryLane {get;internal set;}
+    public SkyPoint? Ground {get;internal set;}
+    public LanePair Lanes=>new LanePair(Lane,SecondaryLane);
     public SkyContact? Sky {get;internal set;}
     public SkyContact? PreviousSky {get;internal set;}
     internal RetainedContact(int pointer, int id, int lane) { Pointer = pointer; Id = id; Lane = lane; }
@@ -242,6 +245,7 @@ public sealed class Kernel
     public int MetadataBpm { get; }
     public float EffectiveSpeed { get; }
     public float BaseGain { get; }
+    public WideningState Widening {get;}
     public int LastFrameTime { get; private set; } = -3000;
     public int Pure { get; private set; }
     public int Far { get; private set; }
@@ -267,7 +271,7 @@ public sealed class Kernel
         if (!float.IsFinite(requestedSpeed) || requestedSpeed <= 0 || baseBpm <= 0)
             throw new ArgumentException("Positive finite speed and metadata BPM required.");
         RequestedSpeed=requestedSpeed;MetadataBpm=baseBpm;
-        Chart = chart; Timeline = new Timeline(originMs, chart.AudioOffset, userOffset);
+        Chart = chart; Widening=new WideningState(chart.SceneControls); Timeline = new Timeline(originMs, chart.AudioOffset, userOffset);
         EffectiveSpeed = (requestedSpeed * 180f) / baseBpm;
         TimingGroups=chart.TimingGroups.Select(g=>new TimingGroupState(g,EffectiveSpeed,chart.EndTime,chart.TimingGroups.Count>1||chart.Profile==ChartProfile.S01Mixed)).ToArray();
         scales = TimingGroups[0].Records.Select(t=>t.Scale).ToArray();
@@ -314,6 +318,8 @@ public sealed class Kernel
             foreach(var group in ArcGroups){group.Active=false;group.Accepted=false;}
             return;
         }
+        Widening.Frame(now);
+        foreach(var contact in contacts.Values)if(contact.Ground.HasValue)UpdateGround(contact,contact.Ground.Value);
         foreach(var group in TimingGroups)group.Update(now);
         foreach (var note in active.ToArray())
         {
@@ -353,7 +359,7 @@ public sealed class Kernel
         foreach (var hold in Holds) { hold.Holding = false; hold.activating.Clear(); }
         foreach (var contact in contacts.Values.OrderBy(c => c.Id))
             foreach (var hold in active.OfType<HoldState>())
-                if (hold.Latched && hold.Start < now && now < hold.End && contact.Lane == hold.Lane)
+                if (hold.Latched && hold.Start < now && now < hold.End && contact.Lanes.Matches(hold.Lane))
                 { hold.Holding = true; hold.activating.Add(contact.Id); }
         foreach(var color in colors.Values){color.Accepted=false;color.Conflict=false;}
         foreach(var group in ArcGroups){group.Active=false;group.Accepted=false;}
@@ -393,21 +399,31 @@ public sealed class Kernel
 
     public void Down(long wallMs, int pointer, int lane)=>DownContact(wallMs,pointer,lane,null,false);
     public void DownSpatial(long wallMs,int pointer,int lane,SkyContact? sky)=>DownContact(wallMs,pointer,lane,sky,true);
-    private void DownContact(long wallMs,int pointer,int lane,SkyContact? sky,bool spatial)
+    public void DownGround(long wallMs,int pointer,SkyPoint ground,SkyContact? sky=null)
+    {
+        if(Chart.Profile!=ChartProfile.S01Mixed)throw new NotSupportedException("World-ground input requires S01Mixed; R010 explicit input is unchanged.");
+        if(!ground.Finite)throw new ArgumentException("Finite ground point required.");
+        DownContact(wallMs,pointer,0,sky,true,ground);
+    }
+    private void UpdateGround(RetainedContact contact,SkyPoint point)
+    {var pair=GroundSpatial.Select(point,Widening.G,Widening.W);contact.Ground=point;contact.Lane=pair.Primary;contact.SecondaryLane=pair.Secondary;}
+    private void DownContact(long wallMs,int pointer,int lane,SkyContact? sky,bool spatial,SkyPoint? ground=null)
     {
         BeginEvent();
         if (Paused) return; // Reject new contacts before allocation/time refresh.
         if ((!spatial||lane!=0)&&(lane < 2 || lane > 5)) throw new NotSupportedException("Ordinary input accepts internal lanes 2..5; widening is deferred.");
         if (contacts.ContainsKey(pointer)) throw new ArgumentException("DOWN pointer already retained.");
-        int contact = nextContact++; contacts.Add(pointer, new RetainedContact(pointer, contact, lane){Sky=sky.HasValue&&sky.Value.Valid?sky:null});
+        int contact = nextContact++; contacts.Add(pointer, new RetainedContact(pointer, contact, lane){Sky=sky.HasValue&&sky.Value.Valid?sky:null,Ground=ground});
         if (Finished) return;
         Timeline.Update(wallMs); int now = Timeline.EffectiveTime;
+        if(ground.HasValue)UpdateGround(contacts[pointer],ground.Value);
+        LanePair lanes=contacts[pointer].Lanes;
         // FRAME owns ranges/cache. Initial children are collected by traversing their
         // active parent, including already-consumed children for the native guard.
         var collected=new List<RuntimeNote>();
         foreach(var item in active)
         {
-            if(item.InputEnabled&&lane!=0&&item.Lane==lane&&(item is NoteState||(item is HoldState&&item.Start<(long)now+100&&now<item.End)))collected.Add(item);
+            if(item.InputEnabled&&lanes.Matches(item.Lane)&&(item is NoteState||(item is HoldState&&item.Start<(long)now+100&&now<item.End)))collected.Add(item);
             if(item is ArcState parent&&spatial&&sky.HasValue)
                 foreach(var child in parent.Children)
                     if(ArcTapSpatial.Matches(child.InputTarget.X,child.InputTarget.Y,sky.Value))collected.Add(child);
@@ -456,11 +472,18 @@ public sealed class Kernel
         BeginEvent();
         if (lane != 0 && (lane < 2 || lane > 5)) throw new NotSupportedException("Unsupported contact lane.");
         if (!contacts.TryGetValue(pointer, out var contact)) throw new ArgumentException("MOVE pointer is not retained.");
-        contact.Lane = lane;
+        contact.Lane = lane;contact.SecondaryLane=0;contact.Ground=null;
     }
 
     public void MoveSpatial(int pointer,int lane,SkyContact? sky)
     {Move(pointer,lane);var contact=contacts[pointer];contact.PreviousSky=contact.Sky;contact.Sky=sky.HasValue&&sky.Value.Valid?sky:null;}
+    public void MoveGround(int pointer,SkyPoint ground,SkyContact? sky=null)
+    {
+        if(Paused||Finished)return;
+        if(Chart.Profile!=ChartProfile.S01Mixed||!ground.Finite)throw new ArgumentException("Valid mixed-profile ground point required.");
+        BeginEvent();if(!contacts.TryGetValue(pointer,out var contact))throw new ArgumentException("MOVE pointer is not retained.");
+        UpdateGround(contact,ground);contact.PreviousSky=contact.Sky;contact.Sky=sky.HasValue&&sky.Value.Valid?sky:null;
+    }
     private ArcState byArc(Arc definition)=>Arcs.Single(a=>ReferenceEquals(a.Data,definition));
     private void ReleaseColor(ArcColorState color,int id,int now)
     {

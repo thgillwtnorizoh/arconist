@@ -1,3 +1,21 @@
+# S01 / W2-02 lane widening integration
+
+E039 kind5/6 in S01Mixed now update one authoritative core G/W state and
+primary/secondary ground selection. Actual Godot ray transport, gold secondary
+bands and green outer track feed the same parser/kernel/session as old charts.
+Presentation is ENGINEERING, not original FOV/render proof. Five new choices
+include three byte-identical native fixtures and two original-audio practices.
+All historical choices/fixtures/music and R010 compatibility remain.
+
+Pinned Godot4.7.2.NET, SDK10.0.402, self-contained runtime10.0.13. Build driver:
+`python3 reconstructed/godot/build.py --godot PATH --pack-probe-godot PATH --templates FILE --notices DIR`.
+Retains DOTNET_PROCESSOR_COUNT=1. New output names Arconist-S01-W2-02-Windows-x64.zip
+and Arconist-S01-W2-02-Technical-Evidence.zip. Read PLAYER.txt and
+../validation/S01-W2-02.md. Headless execution is technical only; owner GUI/audio
+qualification and separate new-production Work1 QA are pending. S01 OPEN.
+
+Historical Godot documentation follows unchanged:
+
 # S01 / Work2 / W2-01 — coherent mixed normal gameplay
 
 Explicit `ChartProfile.S01Mixed` integrates positive-timing grouped holds, ordinary

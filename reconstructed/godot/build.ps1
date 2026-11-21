@@ -15,7 +15,7 @@ $env:DOTNET_PROCESSOR_COUNT = '1'
 # skips the unreachable online advisory lookup; no test or compiler gate changes.
 if ($OfflineRestore) { $env:NuGetAudit = 'false' }
 $toolsDir = Join-Path $repoRoot 'reconstructed/out/r002-tools'
-$exportDir = Join-Path $repoRoot 'reconstructed/out/s01-w2-01-windows'
+$exportDir = Join-Path $repoRoot 'reconstructed/out/s01-w2-02-windows'
 function Invoke-Dotnet {
     param([string[]]$Arguments)
     & dotnet @Arguments

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""S01/W2-01: logged technical checks and Windows packaging; never GUI playtesting."""
+"""S01/W2-02: logged technical checks and Windows packaging; never GUI playtesting."""
 import argparse
 import hashlib
 import json
@@ -84,7 +84,7 @@ def verify(package, templates):
                 assets.append(str(relative))
     pck = (package / 'Arconist.pck').read_bytes()
     assert pck[:4] == b'GDPC'
-    for chart in ('practice.aff', 'ordinary_two_tap.aff', 'mixed_practice.aff', 'native_hold.aff', 'hold_first.aff', 'tap_first.aff', 'audible_practice.aff', 'audible_aff120.aff', 'sky_practice.aff', 'native_moving_arc.aff', 'arctap_practice.aff', 'native_arc_tap.aff', 'linked_practice.aff', 'native_linked_arc_successors.aff','native_timing_group.aff','native_reverse_scroll.aff','native_noinput_group.aff','grouped_practice.aff','s01_mixed.aff','s01_crossing.aff','s01_grouped.aff'):
+    for chart in ('practice.aff', 'ordinary_two_tap.aff', 'mixed_practice.aff', 'native_hold.aff', 'hold_first.aff', 'tap_first.aff', 'audible_practice.aff', 'audible_aff120.aff', 'sky_practice.aff', 'native_moving_arc.aff', 'arctap_practice.aff', 'native_arc_tap.aff', 'linked_practice.aff', 'native_linked_arc_successors.aff','native_timing_group.aff','native_reverse_scroll.aff','native_noinput_group.aff','grouped_practice.aff','s01_mixed.aff','s01_crossing.aff','s01_grouped.aff','native_widen_control.aff','native_widen_camera.aff','native_widen_lanes.aff','widen_lanes_practice.aff','widen_camera_practice.aff'):
         assert (PROJECT / 'content' / chart).read_bytes() in pck, chart
     music = PROJECT / 'content/audio/clockwork_steps.wav.bytes'
     music_manifest = json.loads((ROOT / 'reconstructed/audio/manifest.json').read_text())
@@ -114,7 +114,7 @@ def main():
                DOTNET_CLI_TELEMETRY_OPTOUT='1', GODOT_SILENCE_ROOT_WARNING='1')
     if subprocess.check_output(['git', 'status', '--porcelain'], cwd=ROOT, text=True).strip():
         raise RuntimeError('Commit all source changes before the qualification build.')
-    LOGS = OUT / 's01-w2-01-evidence'
+    LOGS = OUT / 's01-w2-02-evidence'
     LOGS.mkdir(parents=True, exist_ok=False)  # Never overwrite an earlier attempt.
     version = run('godot-version', [godot, '--version'])
     assert version.strip().startswith('4.7.2.stable.mono.')
@@ -174,11 +174,18 @@ def main():
     run('r010-bridge-tests', ['dotnet','reconstructed/group-bridge-tests/bin/Release/net10.0/Arconist.Group.Bridge.Tests.dll','.',LOGS/'r010-bridge'])
     run('s01-mixed-build', ['dotnet','build','reconstructed/mixed-tests/Arconist.Mixed.Tests.csproj','-c','Release',*common])
     run('s01-mixed-tests', ['dotnet','reconstructed/mixed-tests/bin/Release/net10.0/Arconist.Mixed.Tests.dll','.',LOGS/'mixed-core'])
+    run('w2-02-widening-build', ['dotnet','build','reconstructed/widening-tests/Arconist.Widening.Tests.csproj','-c','Release',*common])
+    run('w2-02-widening-tests', ['dotnet','reconstructed/widening-tests/bin/Release/net10.0/Arconist.Widening.Tests.dll','.',LOGS/'widening-core'])
     corpus=ROOT/'reconstructed/campaigns/S01-normal-gameplay/independent-corpus'
     run('s01-w1-driver-build', ['dotnet','build',corpus/'driver/Driver.csproj','-c','Release','-p:ProductionRoot='+str(ROOT),*common])
     run('s01-w1-unchanged-corpus', ['dotnet',corpus/'driver/bin/Release/net10.0/Driver.dll',corpus,LOGS/'w1-corpus.json'])
     w1=json.loads((LOGS/'w1-corpus.json').read_text()); assert len(w1['results'])==46 and all(c['status']=='PASS' for c in w1['results'])
     (LOGS/'w1-work2-rerun-provenance.json').write_text(json.dumps(dict(actual_source=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),manifest_baseline=w1['productionSha'],actor='Work2 development execution of unchanged Work1 driver/expectations, R010 compatibility path',new_mixed_profile_independent_verification='NOT RUN',passed=46,failed=0,skipped=0,producer_blocked_not_run=4),indent=2))
+    mixed_corpus=ROOT/'reconstructed/campaigns/S01-normal-gameplay/qa-w2-01/v1'
+    run('qa-w2-01-unchanged-build', ['dotnet','build',mixed_corpus/'driver/Driver.csproj','-c','Release','-p:ProductionRoot='+str(ROOT),*common])
+    run('qa-w2-01-unchanged-cases', ['dotnet',mixed_corpus/'driver/bin/Release/net10.0/Driver.dll',mixed_corpus,LOGS/'qa-w2-01-cases.json'])
+    qa=json.loads((LOGS/'qa-w2-01-cases.json').read_text());assert len(qa['results'])==37 and all(c['status']=='PASS' for c in qa['results'])
+    (LOGS/'qa-work2-rerun-provenance.json').write_text(json.dumps(dict(actual_source=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),manifest_baseline=qa['productionSha'],actor='Work2 development rerun of unchanged Work1 S01Mixed driver and37expectations; NOT independent QA of new source',passed=37,failed=0,skipped=0,new_source_independent_verification='NOT RUN'),indent=2))
     run('godot-build', ['dotnet', 'build', PROJECT / 'Arconist.Godot.csproj', '-c', 'Debug', *common])
     run('bridge-build', ['dotnet', 'build', PROJECT / 'tests/Arconist.Bridge.Tests.csproj',
                          '-c', 'Debug', *common])
@@ -197,10 +204,11 @@ def main():
     run('r009-headless-linked-tests', [godot, '--headless', '--path', PROJECT, '--', '--linked-tests', '--evidence-dir=' + str(LOGS / 'linked')])
     run('r010-headless-group-tests', [godot,'--headless','--path',PROJECT,'--','--group-tests','--evidence-dir='+str(LOGS/'timing-groups')])
     run('s01-headless-mixed-tests', [godot,'--headless','--path',PROJECT,'--','--mixed-tests','--evidence-dir='+str(LOGS/'mixed-godot')])
-    for path, count in [('r007-core/core-tests.json',31), ('r007-bridge/bridge-tests.json',10), ('arcs/arc-tests.json',13), ('r008-core/arctap-core-tests.json',41), ('r008-bridge/arctap-bridge-tests.json',12), ('arctaps/arctap-tests.json',12), ('r009-core/linked-core-tests.json',25), ('r009-bridge/linked-bridge-tests.json',10), ('linked/linked-tests.json',12),('r010-core/group-core-tests.json',29),('r010-bridge/group-bridge-tests.json',11),('timing-groups/group-tests.json',14),('mixed-core/mixed-tests.json',22),('mixed-godot/mixed-headless.json',13)]:
+    run('w2-02-headless-widening-tests', [godot,'--headless','--path',PROJECT,'--','--widening-tests','--evidence-dir='+str(LOGS/'widening-godot')])
+    for path, count in [('r007-core/core-tests.json',31), ('r007-bridge/bridge-tests.json',10), ('arcs/arc-tests.json',13), ('r008-core/arctap-core-tests.json',41), ('r008-bridge/arctap-bridge-tests.json',12), ('arctaps/arctap-tests.json',12), ('r009-core/linked-core-tests.json',25), ('r009-bridge/linked-bridge-tests.json',10), ('linked/linked-tests.json',12),('r010-core/group-core-tests.json',29),('r010-bridge/group-bridge-tests.json',11),('timing-groups/group-tests.json',14),('mixed-core/mixed-tests.json',22),('mixed-godot/mixed-headless.json',13),('widening-core/widening-tests.json',21),('widening-godot/widening-headless.json',14)]:
         result = json.loads((LOGS / path).read_text())
         assert result['passed'] == count and result['failed'] == 0 and result['skipped'] == 0, path
-    package = OUT / 's01-w2-01-windows'
+    package = OUT / 's01-w2-02-windows'
     if package.exists():
         shutil.move(str(package), str(LOGS / 'previous-export'))
     package.mkdir()
@@ -216,11 +224,11 @@ def main():
     exported_audio = json.loads((LOGS / 'exported-audio-probe.json').read_text())
     assert exported_audio['status'] == 'PASS' and exported_audio['sha256'] == expected['wav_sha256']
     expected_charts = {f.name:sha(f) for f in sorted((PROJECT/'content').glob('*.aff'))}
-    assert len(expected_charts) == 21
+    assert len(expected_charts) == 26
     (LOGS/'expected-content.json').write_text(json.dumps(expected_charts,indent=2))
     run('exported-pck-chart-probe', [a.pack_probe_godot.resolve(), '--headless', '--main-pack', package/'Arconist.pck', '--script', ROOT/'reconstructed/arctap/export_probe.gd', '--', LOGS/'expected-content.json', LOGS/'exported-chart-probe.json'])
     exported_charts=json.loads((LOGS/'exported-chart-probe.json').read_text())
-    assert exported_charts['status']=='PASS' and len(exported_charts['resources'])==21
+    assert exported_charts['status']=='PASS' and len(exported_charts['resources'])==26
     report = verify(package, tools)
     assert sorted(x.name for x in a.notices.iterdir()) == [
         'DOTNET-LICENSE.txt', 'DOTNET-THIRD-PARTY-NOTICES.txt', 'GODOT-COPYRIGHT.txt', 'GODOT-LICENSE.txt']
@@ -231,20 +239,20 @@ def main():
     (package / 'SOURCE.txt').write_text(
         'https://github.com/thgillwtnorizoh/arconist\nbranch: main\ncommit: ' + source +
         '\nGodot 4.7.2 .NET; SDK 10.0.402; bundled runtime 10.0.13\n'
-        'READY FOR HUMAN QUALIFICATION. S01 OPEN; W2-01 owner and independent verification pending. Godot audio output is not human qualification.\n', encoding='utf-8')
+        'READY FOR HUMAN QUALIFICATION. S01 OPEN; W2-02 owner and independent verification pending. Godot audio output is not human qualification.\n', encoding='utf-8')
     files = sorted(f for f in package.rglob('*') if f.is_file())
     manifest = {f.relative_to(package).as_posix(): sha(f) for f in files}
     (package / 'SHA256SUMS.txt').write_text(''.join(f'{v}  {k}\n' for k, v in manifest.items()), encoding='utf-8')
-    archive = OUT / 'Arconist-S01-W2-01-Windows-x64.zip'
+    archive = OUT / 'Arconist-S01-W2-02-Windows-x64.zip'
     with zipfile.ZipFile(archive, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as z:
         for f in sorted(package.rglob('*')):
             if f.is_file():
-                z.write(f, 'Arconist-S01-W2-01/' + f.relative_to(package).as_posix())
+                z.write(f, 'Arconist-S01-W2-02/' + f.relative_to(package).as_posix())
     # Validate CRCs and every extracted payload hash, independently of source paths.
     with zipfile.ZipFile(archive) as z:
         assert z.testzip() is None
         z.extractall(LOGS / 'extracted')
-    extracted = LOGS / 'extracted/Arconist-S01-W2-01'
+    extracted = LOGS / 'extracted/Arconist-S01-W2-02'
     for name, expected in manifest.items():
         assert sha(extracted / name) == expected, name
     assert sha(extracted / 'SHA256SUMS.txt') == sha(package / 'SHA256SUMS.txt')
@@ -254,8 +262,9 @@ def main():
     (LOGS / 'package-integrity.json').write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
     shutil.copyfile(package / 'SHA256SUMS.txt', LOGS / 'WINDOWS-PAYLOAD-SHA256SUMS.txt')
     (LOGS / 'WINDOWS-ZIP-SHA256.txt').write_text(report['archive_sha256'] + '  ' + archive.name + '\n', encoding='utf-8')
-    shutil.copyfile(ROOT / 'reconstructed/validation/S01-W2-01.md', LOGS / 'S01-W2-01.md')
-    baseline = '72b320260c50cb7b2e5d3a7fcc9cf1d09a17ec43'
+    shutil.copyfile(ROOT / 'reconstructed/validation/S01-W2-02.md', LOGS / 'S01-W2-02.md')
+    shutil.copyfile(ROOT/'reconstructed/campaigns/S01-normal-gameplay/w2-02/oracles.json',LOGS/'E039-oracles.json')
+    baseline = '7ccd52dc7829ac597e1f8d3cfdbd0a474357c9dd'
     changed = subprocess.check_output(['git','diff','--name-status',baseline,source],cwd=ROOT,text=True)
     (LOGS / 'changed-files.txt').write_text(changed)
     baseline_files = subprocess.check_output(['git','ls-tree','-r','--name-only',baseline],cwd=ROOT,text=True).splitlines()
@@ -273,11 +282,11 @@ def main():
     if str(development)!='.' and development.is_dir(): shutil.copytree(development, LOGS/'development',ignore=shutil.ignore_patterns('extracted'))
     toolchain = {str(f.resolve()):sha(f) for f in [a.templates,godot,a.pack_probe_godot.resolve()]}
     (LOGS/'toolchain-sha256.json').write_text(json.dumps(toolchain,indent=2))
-    evidence_zip = OUT / 'Arconist-S01-W2-01-Technical-Evidence.zip'
+    evidence_zip = OUT / 'Arconist-S01-W2-02-Technical-Evidence.zip'
     with zipfile.ZipFile(evidence_zip, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as z:
         for f in sorted(LOGS.rglob('*')):
             if f.is_file() and f.relative_to(LOGS).parts[0] not in ('extracted', 'previous-export'):
-                z.write(f, 'Arconist-S01-W2-01-Evidence/' + f.relative_to(LOGS).as_posix())
+                z.write(f, 'Arconist-S01-W2-02-Evidence/' + f.relative_to(LOGS).as_posix())
     with zipfile.ZipFile(evidence_zip) as z:
         assert z.testzip() is None
     print(json.dumps(report, indent=2))

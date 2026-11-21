@@ -1,0 +1,86 @@
+{
+  "authority": "E039 full native-owned scene, E004 selector and E007 float32 equations; no new native execution",
+  "nativeScopeEnds": 1501,
+  "N": 2,
+  "end": 1620,
+  "fixtures": {
+    "control": "ed24ad498f97fdee73258c5d1ba8cf2e37e9934237196221818b8b02b9eb0ec5",
+    "camera": "78554144eafca66fd45c3aa054d2976cb923376cf1210da2ea28b14ee2059093",
+    "lanes": "d8e6cfd800d0d8697854f28d5add18e2eaa9a85ebd432f3ba9eb33b604dd5a28"
+  },
+  "times": [
+    500,
+    501,
+    502,
+    750,
+    1000,
+    1500,
+    1501
+  ],
+  "cameraG": [
+    1,
+    1,
+    1.0019999742507935,
+    1.25,
+    1.5,
+    1.5,
+    1.5
+  ],
+  "lanesW": [
+    0,
+    0,
+    0.004000000189989805,
+    0.5,
+    1,
+    1,
+    1
+  ],
+  "worldX": [
+    40,
+    950
+  ],
+  "pairs": {
+    "control": [
+      [
+        4,
+        0
+      ],
+      [
+        5,
+        0
+      ]
+    ],
+    "camera": [
+      [
+        4,
+        3
+      ],
+      [
+        5,
+        0
+      ]
+    ],
+    "lanes": [
+      [
+        4,
+        0
+      ],
+      [
+        6,
+        0
+      ]
+    ]
+  },
+  "positive": {
+    "PURE": 1,
+    "shining": 1,
+    "FAR": 0,
+    "LOST": 0,
+    "combo": 1,
+    "score": 5000001,
+    "health": 40.20000076293945
+  },
+  "engineering": "positive finite duration subset/generalized event times; one opening default-group control; finite region display; desktop input; completed reconstructed results/lifecycle. No original FOV/mesh, closing/mixed control or candidate tie-order oracle.",
+  "engineeringG751FromE007FloatStages": 1.250999927520752,
+  "engineeringG751Bits": 1067458756
+}

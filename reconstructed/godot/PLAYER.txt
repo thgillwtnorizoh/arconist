@@ -1,3 +1,58 @@
+ARCONIST S01 / W2-02 — lane widening qualification build
+
+Extract the ENTIRE ZIP. Open Arconist.exe beside Arconist.pck and its data folder.
+Windows x64; no SDK/editor or separate .NET installation. Start at offset0.
+Music: original CC0 Clockwork Steps; approximately3seconds silent preroll.
+Times below are the HUD's authoritative chart seconds, not wall-clock seconds.
+
+1. Select first W2-02 Outer lanes / audible. At2s the lane transition begins;
+   green side lanes open as W becomes positive. Click near the judgment line:
+   RIGHT outer4s, LEFT outer4.5s, F5s, K5.5s, hold F6–8s,
+   LEFT outer8.5s, RIGHT outer9s. Outer notes require LEFT MOUSE/touch;
+   keyboard D/F/J/K retain the original four ground lanes. PerfectN13.
+2. Select W2-02 Secondary region / audible. GOLD bands accept an additional
+   neighboring lane. Click the positive-X part of the center gold F band at4s,
+  5s,6s; hold F7–9s (key or mouse in its region), click gold F again10s. PerfectN11.
+   A fresh press is required for each tap. Hovering or holding cannot score taps.
+3. Exact silent E039 diagnostics use unmodified original fixture bytes. At1.5s:
+   - Ordinary control: worldX40 andX950 judge neither note (primaryJ/K only).
+   - Camera scalar: worldX40 adds secondaryF. Click center-right gold F overlap.
+     X950 does not judge the outer note.
+   - Lane scalar: worldX950 admits outer RIGHT. X40 does not judge F.
+   Each positive reference has PURE1/score5000001/health40.20000076293945
+   through1.501s. The unplayed note later misses; completed results are our
+   RECONSTRUCTED integration, not a native E039 result observation.
+4. Press P/Escape during the transition or a hold, wait at least60seconds.
+   E/G/W and geometry must freeze. Resume explicitly with R/Resume; music seeks
+   to E+combinedOffset. Actual UP/CANCEL while paused releases its own contact.
+   Focus loss pauses and cancels uncertain desktop contacts; focus return does
+   not resume. Repress after explicit resume if a release/cancel was delivered.
+5. Finish, inspect results, replay and return to menu. No old score, held contact,
+   processed control or widening scalar should leak into the next run.
+6. Test F6 view and F7 resize; F8 captures only when you request it. Existing
+   S01Mixed, crossing, linked, child, group/reverse/noinput and Clockwork Steps
+   choices remain. Test user offsets (positive delays effective chart time).
+
+Left mouse: ground/sky. Right mouse: SKY ONLY, distinct contact sharing cursor.
+Delivered touch/drag/CANCEL supported. No input injection or GUI automation used.
+
+Gold input bands and green outer track are ENGINEERING visual aids sampled from
+our authoritative native-informed selector, finite apronX-1275..1275,1native-unit
+cells. Native strict/truncated input boundaries remain authoritative. This is
+NOT proof that original enwidencamera changes camera FOV or original track meshes.
+G and W are separate; E039 dispatches afterE500, with old interpolation atE501.
+Only one default-group positive-duration direction1 opening control is supported.
+Closing, zero/negative duration, grouped/multiple/mixed controls remain explicit
+unsupported boundaries. No camera actions/fades/flicks/graph-sort expansion.
+
+Diagnostics retain profile, E/R/C, G/previousG/W, transition ownership, processed
+controls, raw ground points, primary/secondary lanes, contact IDs and judgments.
+User evidence remains under the existing Arconist S01 user-data directory.
+Owner alone qualifies Windows launch, visuals, physical controls and actual sound.
+Separate Work1 exact-new-source QA is pending. S01/subsystem OPEN.
+
+PRESERVED W2-01 AND EARLIER GUIDES (historical first-choice labels follow)
+
 ARCONIST S01 / W2-01 — mixed ordinary gameplay qualification build
 
 Extract the ENTIRE ZIP. Open Arconist.exe beside PCK/runtime/notices. Windows10/11

@@ -24,6 +24,11 @@ public partial class Main : Control
     private Label hud = null!, status = null!, holdStatus = null!, chartInfo = null!;
     private readonly List<string> chartData = new();
     private static readonly (string file, string title, string description, string? audio, bool mixed)[] ChartChoices = {
+        ("widen_lanes_practice.aff", "W2-02 · Outer lanes / audible", "At4s click outer RIGHT,4.5s LEFT.\nF5s,K5.5s; Fhold6–8s.\nOuter LEFT8.5s,RIGHT9s. Mouse outer.", "res://content/audio/clockwork_steps.wav.bytes", true),
+        ("widen_camera_practice.aff", "W2-02 · Secondary region / audible", "Gold strip: F can be hit to right of0.\nClick at4,5,6s; hold F7–9s.\nClick gold F region again10s.", "res://content/audio/clockwork_steps.wav.bytes", true),
+        ("native_widen_control.aff", "E039 · Ordinary control / N2", "At1.5s probe X40 then X950.\nNeither probe judges this control.\nClick true F center for normal hit.", null, true),
+        ("native_widen_camera.aff", "E039 · Camera scalar / N2", "At1.5s click gold F overlap, X40.\nSecondary F judges once; outer950 fails.\nUnplayed note later misses.", null, true),
+        ("native_widen_lanes.aff", "E039 · Lane scalar / N2", "At1.5s click outer RIGHT, X950.\nOuter lane6 judges once; X40 fails.\nUnplayed note later misses.", null, true),
         ("s01_mixed.aff", "S01 · Mixed ordinary gameplay / N38", "F hold + curved mouse4–6.5s.\nGold click9s; linked mouse12–14s.\nCrossing L+R16s; reverse20.3s.", "res://content/audio/clockwork_steps.wav.bytes", true),
         ("s01_crossing.aff", "S01 · E028 two-contact crossing", "L+R mouse: two actual contacts.\nFollow sky targets1–2s. Native N6.\nSeparate diagnostic; silent.", null, true),
         ("s01_grouped.aff", "S01 · Grouped long-note diagnostic", "Group1 F hold + mouse curve4–6s.\nSingle judgment clock; separate depth.\nRelease both after6s.", null, true),
@@ -106,6 +111,7 @@ public partial class Main : Control
         pauseButton.Pressed+=()=>session.Pause();AddChild(pauseButton);
         GetWindow().FocusExited += () => {session.FocusLost();pointers.Forget();};
         GetWindow().FocusEntered += () => session.FocusReturned();
+        if (OS.GetCmdlineUserArgs().Contains("--widening-tests")) CallDeferred(nameof(RunWideningTests));
         if (OS.GetCmdlineUserArgs().Contains("--mixed-tests")) CallDeferred(nameof(RunMixedTests));
         if (OS.GetCmdlineUserArgs().Contains("--group-tests")) CallDeferred(nameof(RunGroupTests));
         if (OS.GetCmdlineUserArgs().Contains("--linked-tests")) CallDeferred(nameof(RunLinkedTests));
@@ -201,6 +207,7 @@ public partial class Main : Control
             else if(k.Arcs.Count>0){var arc=k.Arcs.FirstOrDefault(a=>a.Holding)??k.Arcs.First();holdStatus.Text=$"ARC {(arc.Holding?"ON":"OFF")} owner {arc.Color.Owner} units {arc.Records.Count(r=>r.Resolved)}/{arc.Records.Count}";}
             else holdStatus.Text = hold == null ? "HOLDS COMPLETE" : $"HOLD {(hold.Holding ? "ON" : "OFF")}   contacts {hold.ActivatingContacts.Count}   units {hold.Records.Count(r=>r.Resolved)}/{hold.Records.Count}";
         }
+        if(k?.Chart.SceneControls.Count>0)holdStatus.Text=$"WIDENING  G {k.Widening.G:F3}  W {k.Widening.W:F3}";
         charts.Visible = k == null || k.Finished; start.Visible = charts.Visible;
         home.Visible = k != null && k.Finished;
         start.Text = k == null ? "Start chart" : "Play again";
@@ -227,11 +234,12 @@ public partial class Main : Control
     {
         if (font == null) return;
         DrawRect(new Rect2(665,0,435,740),new Color("0b1020"));
-        Text("ARCONIST",72,64,32,ink); Text("S01   /   MIXED GAMEPLAY",692,60,17,muted);
+        Text("ARCONIST",72,64,32,ink); Text("S01   /   WIDENING",692,60,17,muted);
         Text("D  ·  F  ·  J  ·  K",72,102,19,muted);
-        Text("Native coordinates / 425   |   perspective Camera3D",52,713,15,muted);
+        Text(session.Core?.Chart.SceneControls.Count>0?"Gold band: additional lane   |   Green sides: outer mouse lanes":"Native coordinates / 425   |   perspective Camera3D",52,713,15,muted);
         Text("F6 view   F7 resize   F8 capture",692,686,15,muted);
     }
+    private void RunWideningTests()=>WideningValidation.Run(this,track,evidenceDir);
     private void RunMixedTests()=>MixedValidation.Run(this,track,evidenceDir);
     private void RunGroupTests()=>GroupValidation.Run(this,track,evidenceDir);
     private void RunLinkedTests()=>LinkedValidation.Run(this,track,evidenceDir);
@@ -260,7 +268,7 @@ public partial class Main : Control
             health=k?.Health,contacts=k?.ContactCount,held=session.HeldCount,finished=k?.Finished,
             holds=k?.Holds.Select(h=>new { id=h.Data.Id, h.Active, h.Latched, h.Holding, h.ActivatingContacts, h.Records }).ToArray(),
             arcs=k?.Arcs.Select(a=>new{a.Id,a.Active,a.Depth,a.Cache,a.CacheEnabled,a.TargetX,a.TargetY,a.Holding,a.Records,a.ResolutionWrites,generationFlag=a.Data.GenerationFlag,predecessor=a.Predecessor?.Id,successors=a.Successors.Select(next=>next.Id),group=a.Group?.Id,a.SuccessorCleanupPreserved,a.LastLinkScan,trace=a.Data.Trace,children=a.Children.Select(c=>new{c.Id,c.ParentId,time=c.Data.Time,c.Local,c.InputTarget,c.WorldPosition,c.Consumed,c.Missed,c.Contact,c.Outcome,c.ResolvedAt})}),colors=k?.Colors,claimed=k?.ClaimedIds,
-            profile=k?.Chart.Profile.ToString(),proximity=k?.ProximityTrace,
+            widening=k?.Widening,profile=k?.Chart.Profile.ToString(),proximity=k?.ProximityTrace,
             groups=k?.ArcGroups.Select(g=>new{g.Id,g.Active,g.CacheRelated,g.Accepted,g.Window,g.TimestampHistory,g.WindowBehavior,members=g.Members.Select(a=>a.Id)}),recorder=k?.RecorderTrace,recorderCalls=k?.RecorderCalls,
             timingGroups=k?.TimingGroups.Select(g=>new{g.Id,g.Definition.SourceOrder,g.Definition.Attribute,g.Definition.InputEnabled,g.Definition.LifetimeEnd,g.Active,g.QueryLow,g.QueryHigh,g.FrameOffset,g.Records,g.Index}),requestedSpeed=k?.RequestedSpeed,metadataBpm=k?.MetadataBpm,effectiveSpeed=k?.EffectiveSpeed,
             retained=k?.Contacts, judgments=k?.Judgments.ToArray(),

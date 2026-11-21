@@ -54,6 +54,18 @@ public partial class SpatialTrack : Node3D
         if (!screen.IsFinite() || !GetViewport().GetVisibleRect().HasPoint(screen)) return 0;
         return GroundIntersection(Camera.ProjectRayOrigin(screen),Camera.ProjectRayNormal(screen),out hit) ? LaneAt(hit) : 0;
     }
+    public bool PickGround(Vector2 screen,out SkyPoint point)
+    {
+        point=default;
+        if(!screen.IsFinite()||!GetViewport().GetVisibleRect().HasPoint(screen)||!GroundIntersection(Camera.ProjectRayOrigin(screen),Camera.ProjectRayNormal(screen),out var hit))return false;
+        var n=hit/Unit;point=new SkyPoint(n.X,n.Y,n.Z);return point.Finite;
+    }
+    public LanePair PickLanes(Vector2 screen,out SkyPoint point)
+    {
+        if(!PickGround(screen,out point))return default;
+        if(displayedCore?.Chart.Profile==ChartProfile.S01Mixed)return GroundSpatial.Select(point,displayedCore.Widening.G,displayedCore.Widening.W);
+        return new LanePair(LaneAt(World(point.X,point.Y,point.Z)));
+    }
     public static bool SkyIntersection(Vector3 origin,Vector3 direction,out Vector3 hit)
     {
         hit=default;if(!origin.IsFinite()||!direction.IsFinite()||Math.Abs(direction.Z)<1e-6f)return false;
@@ -186,13 +198,14 @@ public partial class SpatialTrack : Node3D
         }
         var ids=core?.Notes.Select(n=>n.Data.Id).ToHashSet() ?? new HashSet<string>();
         foreach (string id in notes.Keys.Where(id=>!ids.Contains(id)).ToArray()) { notes[id].QueueFree(); notes.Remove(id); }
+        RefreshWidening(core);
         if (core == null) return;
         RefreshArcs(core);
         foreach (var note in core.Notes)
         {
             if (!notes.TryGetValue(note.Data.Id,out var mesh))
             { mesh=Box(Vector3.Zero,World(382,8,95),new Color("69e1f7")); notes.Add(note.Data.Id,mesh); }
-            ((StandardMaterial3D)mesh.MaterialOverride).AlbedoColor=new Color(!note.InputEnabled?"8794b0":note.TimingGroupId==1?"ffb5e8":"69e1f7");
+            ((StandardMaterial3D)mesh.MaterialOverride).AlbedoColor=new Color(!note.InputEnabled||((note.Lane==1||note.Lane==6)&&core.Widening.W<=0)?"8794b0":note.TimingGroupId==1?"ffb5e8":"69e1f7");
             mesh.Position=NotePosition(core,note); mesh.Visible=Present(core,note);
         }
         foreach (var hold in core.Holds)

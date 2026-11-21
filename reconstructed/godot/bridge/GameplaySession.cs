@@ -108,6 +108,20 @@ public sealed class GameplaySession
         else {if(!held.Remove(pointer))return false;Core.Up(pointer);Changed?.Invoke("SPATIAL_UP");}
         return true;
     }
+    public bool GroundPointer(int pointer,SkyPoint ground,SkyContact? sky,bool pressed)
+    {
+        if(Core==null||Core.Chart.Profile!=ChartProfile.S01Mixed||!ground.Finite)return false;
+        if(!pressed){if(!held.Remove(pointer))return false;Core.Up(pointer);Changed?.Invoke("GROUND_UP");return true;}
+        if(Core.Finished||PauseModalActive||Core.Paused||!held.Add(pointer))return false;
+        Core.DownGround(clock.Milliseconds,pointer,ground,sky);PublishJudgments();
+        foreach(var classification in Core.Classifications)if(classification.ConsumesInput)Feedback=classification.Outcome.Replace('_',' ');
+        Changed?.Invoke("GROUND_DOWN");return true;
+    }
+    public bool MoveGroundPointer(int pointer,SkyPoint ground,SkyContact? sky)
+    {
+        if(Core==null||Core.Finished||PauseModalActive||Core.Paused||!held.Contains(pointer)||!ground.Finite)return false;
+        Core.MoveGround(pointer,ground,sky);Changed?.Invoke("GROUND_MOVE");return true;
+    }
     public bool MovePointer(int pointer,int lane,SkyContact? sky)
     {if(Core==null||Core.Finished||PauseModalActive||Core.Paused||!held.Contains(pointer))return false;Core.MoveSpatial(pointer,lane,sky);Changed?.Invoke("SPATIAL_MOVE");return true;}
     public bool MoveContact(int pointer, int lane)
