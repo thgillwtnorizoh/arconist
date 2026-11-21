@@ -35,3 +35,7 @@ unchanged Work1 46+37 development reruns,3references and Windows export pending.
 See ../../../validation/S01-W2-02.md for final evidence/receipts when available.
 Separate Work1 exact-new-source QA and owner Windows/physical/audio qualification
 are pending. S01 OPEN; no subsequent task authorized.
+
+## Final recovery state
+
+Exact tested/exported main source068a2f09698417b0ddd09e81ec274e758109a0bf. Final driver57commands0;519/519groups(484old+35new),37+46unchanged Work1 case development reruns,3standalone references;0fail/skip. Windows export/PCK26charts/music/191dependencies/CRC/extracted hashes PASS. E03981serialized fields independently audit native oracle rows; original scope ends1501. Both ZIPs saved successfully; hashes/links in ../../../validation/S01-W2-02.md. Final audit child changes documentation only. New-source Work1 and physical Windows owner qualification remain pending. VERIFIED CHECKPOINT — READY FOR HUMAN QUALIFICATION. S01 OPEN; stop at this delivery.
