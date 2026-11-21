@@ -1,0 +1,185 @@
+{
+  "productionSha": "068a2f09698417b0ddd09e81ec274e758109a0bf",
+  "sources": {
+    "control": {
+      "path": "research_harness/fixtures/native_widen_control.aff",
+      "sha256": "ed24ad498f97fdee73258c5d1ba8cf2e37e9934237196221818b8b02b9eb0ec5",
+      "confidence": "CONFIRMED ORIGINAL E039 sections2,5\u20138"
+    },
+    "camera": {
+      "path": "research_harness/fixtures/native_widen_camera.aff",
+      "sha256": "78554144eafca66fd45c3aa054d2976cb923376cf1210da2ea28b14ee2059093",
+      "confidence": "CONFIRMED ORIGINAL E039 sections2,5\u20138"
+    },
+    "lanes": {
+      "path": "research_harness/fixtures/native_widen_lanes.aff",
+      "sha256": "d8e6cfd800d0d8697854f28d5add18e2eaa9a85ebd432f3ba9eb33b604dd5a28",
+      "confidence": "CONFIRMED ORIGINAL E039 sections2,5\u20138"
+    }
+  },
+  "times": [
+    500,
+    501,
+    502,
+    750,
+    1000,
+    1500
+  ],
+  "g": [
+    [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    [
+      1,
+      1,
+      1.0019999742507935,
+      1.25,
+      1.5,
+      1.5
+    ],
+    [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
+  ],
+  "w": [
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0.004000000189989805,
+      0.5,
+      1,
+      1
+    ]
+  ],
+  "pairs": [
+    [
+      [
+        4,
+        0
+      ],
+      [
+        5,
+        0
+      ]
+    ],
+    [
+      [
+        4,
+        3
+      ],
+      [
+        5,
+        0
+      ]
+    ],
+    [
+      [
+        4,
+        0
+      ],
+      [
+        6,
+        0
+      ]
+    ]
+  ],
+  "positiveLane": [
+    0,
+    3,
+    6
+  ],
+  "positiveContact": [
+    -1,
+    0,
+    1
+  ],
+  "healthBits": 1109445837,
+  "boundaries": [
+    [
+      -425.9,
+      0,
+      3
+    ],
+    [
+      -426,
+      0,
+      2
+    ],
+    [
+      -0.9,
+      0,
+      4
+    ],
+    [
+      424.9,
+      0,
+      4
+    ],
+    [
+      425,
+      0,
+      0
+    ],
+    [
+      425.9,
+      0,
+      0
+    ],
+    [
+      426,
+      0,
+      5
+    ],
+    [
+      -850,
+      1,
+      2
+    ],
+    [
+      -851,
+      1,
+      1
+    ],
+    [
+      850,
+      1,
+      5
+    ],
+    [
+      851,
+      1,
+      6
+    ]
+  ],
+  "provenance": {
+    "native": "E039 sections2\u20138; E004 sections3\u20136",
+    "precision": "E007 prepared equations / E039 scalar trajectory; float32 bits compared",
+    "integration": "ENGINEERING/RECONSTRUCTED: retained MOVE, 60s pause, replay, invalid inputs and unsupported grammar checks; no new native observation"
+  }
+}

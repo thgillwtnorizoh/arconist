@@ -233,3 +233,19 @@ D03 / S01-08.01 / S01-02.01 / S01-10.05 / D12 / S01-13.01 gain bounded VERIFIED 
 D03/S01-08.01 and bounded D12 input/presentation integration VERIFIED COMPONENT at exact production068a2f09698417b0ddd09e81ec274e758109a0bf: E039 one positive group0 opening control, separate G/previousG/W, strict interpolate-before-dispatch chronology, actual-coordinate primary/secondary shared contact input, engineering gold/outer geometry and full audible13/11practice/results/replay.519/519development groups, unchanged37+46Work1 development-rerun cases,3standalone comparisons;0fail/skip;57commands0. Actual Godot import/build/headless and complete Windows export/PCK26charts/music/runtime/CRC/extracted hashes PASS.81field external serialized native audit matches E039 through1501; later results are reconstructed.
 
 VERIFIED CHECKPOINT — READY FOR HUMAN QUALIFICATION; new exact-source independent Work1/owner Windows physicalaudioGUI NOT RUN/PENDING. No complete requirement/discrepancy closed. Closing/grouped/multiple/negative controls, native rendering/FOV, broader mixed-tie/graph/child and G006/G007/G009/G010/P03 requirements stay OPEN/NOT VERIFIED. Immutable source/fixture/test/history expectations preserved. Full report/receipts/changed paths/limitations: ../../validation/S01-W2-02.md. Next actor HQ schedules independent verification/owner; no new assignment executed. S01 OPEN.
+
+
+## QA-W2-02 independent widening QA — 2026-11-21
+
+BLOCKED — INDEPENDENT VERIFICATION INCOMPLETE. Start e82f65c189bdc1a6bdc073c821e5300878334e90
+verified; selected exact production068a2f09698417b0ddd09e81ec274e758109a0bf core/bridge
+bytes checked. Original E039 fixture SHA identities verified, independent values and
+C# driver preserved. SDK10.0.402 installed from official distribution. Build1 NU1301
+unavailable Godot local NuGet source; one targeted CLI configuration recovery build2
+NU1100 missing NETStandard.Library.Ref2.1.0. Stop after two attempts; no further repair.
+All executable comparisons and historical46+37 runtime cases NOT RUN;0runtimePASS/
+0FAIL/0SKIP. No new independently verified production coverage or discrepancy claimed.
+Owner-submitted68desktopPASS/0FAIL/F10touchscreenNOT TESTED preserved, not repeated.
+See campaigns/S01-normal-gameplay/QA-W2-02-report.md and qa-w2-02/v1/receipt.json.
+Recommend separately authorized Work1 reference-pack/NuGet recovery then frozen QA;
+production/historical evidence unchanged. P03 PARKED; no ARM64/GUI/exports. S01 OPEN.

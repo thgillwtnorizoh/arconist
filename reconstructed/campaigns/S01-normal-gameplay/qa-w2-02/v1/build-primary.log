@@ -1,0 +1,38 @@
+
+Welcome to .NET 10.0!
+---------------------
+SDK Version: 10.0.402
+
+Telemetry
+---------
+The .NET tools collect usage data in order to help us improve your experience. It is collected by Microsoft and shared with the community. You can opt-out of telemetry by setting the DOTNET_CLI_TELEMETRY_OPTOUT environment variable to '1' or 'true' using your favorite shell.
+
+Read more about .NET CLI Tools telemetry: https://aka.ms/dotnet-cli-telemetry
+
+----------------
+Installed an ASP.NET Core HTTPS development certificate.
+To trust the certificate, run 'dotnet dev-certs https --trust'
+Learn about HTTPS: https://aka.ms/dotnet-https
+
+----------------
+Write your first app: https://aka.ms/dotnet-hello-world
+Find out what's new: https://aka.ms/dotnet-whats-new
+Explore documentation: https://aka.ms/dotnet-docs
+Report issues and find source on GitHub: https://github.com/dotnet/core
+Use 'dotnet --help' to see available commands or visit: https://aka.ms/dotnet-cli
+--------------------------------------------------------------------------------------
+  Determining projects to restore...
+  Restored /workspace/scratch/e83b3992fd3d/qa202/reconstructed/campaigns/S01-normal-gameplay/qa-w2-02/v1/driver/Driver.csproj (in 113 ms).
+/workspace/scratch/e83b3992fd3d/qa202-production/reconstructed/godot/bridge/Arconist.Bridge.csproj : error NU1301: The local source '/workspace/scratch/e83b3992fd3d/qa202-production/reconstructed/godot/%GODOT_NUPKGS%' doesn't exist. [/workspace/scratch/e83b3992fd3d/qa202/reconstructed/campaigns/S01-normal-gameplay/qa-w2-02/v1/driver/Driver.csproj]
+  Failed to restore /workspace/scratch/e83b3992fd3d/qa202-production/reconstructed/godot/bridge/Arconist.Bridge.csproj (in 11.69 sec).
+/workspace/scratch/e83b3992fd3d/qa202-production/reconstructed/core/Arconist.Core.csproj : error NU1100: Unable to resolve 'NETStandard.Library.Ref (= 2.1.0)' for '.NETStandard,Version=v2.1'. [/workspace/scratch/e83b3992fd3d/qa202/reconstructed/campaigns/S01-normal-gameplay/qa-w2-02/v1/driver/Driver.csproj]
+  Failed to restore /workspace/scratch/e83b3992fd3d/qa202-production/reconstructed/core/Arconist.Core.csproj (in 5 ms).
+
+Build FAILED.
+
+/workspace/scratch/e83b3992fd3d/qa202-production/reconstructed/godot/bridge/Arconist.Bridge.csproj : error NU1301: The local source '/workspace/scratch/e83b3992fd3d/qa202-production/reconstructed/godot/%GODOT_NUPKGS%' doesn't exist. [/workspace/scratch/e83b3992fd3d/qa202/reconstructed/campaigns/S01-normal-gameplay/qa-w2-02/v1/driver/Driver.csproj]
+/workspace/scratch/e83b3992fd3d/qa202-production/reconstructed/core/Arconist.Core.csproj : error NU1100: Unable to resolve 'NETStandard.Library.Ref (= 2.1.0)' for '.NETStandard,Version=v2.1'. [/workspace/scratch/e83b3992fd3d/qa202/reconstructed/campaigns/S01-normal-gameplay/qa-w2-02/v1/driver/Driver.csproj]
+    0 Warning(s)
+    2 Error(s)
+
+Time Elapsed 00:00:12.67

@@ -1433,3 +1433,19 @@ Arconist-S01-W2-02-Windows-x64.zip 76510107bytes SHA256b8362c9b2277c0c7f70d3d731
 Arconist-S01-W2-02-Technical-Evidence.zip 769389bytes SHA256ed3826fbb1ef461f8b812330a84deb463f532a0cb03517dca80a4e6251efc6e1 https://chatgpt.com/library?file_id=libfile_d0d727eedc2c819186d2da2213e73b02&account_id=personal
 
 Next actor: Headquarters arrange separately authorized Work1 exact-source verification and owner qualification of this exact package. No subsequent assignment started; no S01 acceptance. D03/D12 bounded VERIFIED COMPONENT only; unsupported controls and broad campaign requirements/G-series/P03 blockers preserved OPEN. Subsystem OPEN. Stop.
+
+
+## QA-W2-02 independent widening QA — 2026-11-21
+
+BLOCKED — INDEPENDENT VERIFICATION INCOMPLETE. Start e82f65c189bdc1a6bdc073c821e5300878334e90
+verified; selected exact production068a2f09698417b0ddd09e81ec274e758109a0bf core/bridge
+bytes checked. Original E039 fixture SHA identities verified, independent values and
+C# driver preserved. SDK10.0.402 installed from official distribution. Build1 NU1301
+unavailable Godot local NuGet source; one targeted CLI configuration recovery build2
+NU1100 missing NETStandard.Library.Ref2.1.0. Stop after two attempts; no further repair.
+All executable comparisons and historical46+37 runtime cases NOT RUN;0runtimePASS/
+0FAIL/0SKIP. No new independently verified production coverage or discrepancy claimed.
+Owner-submitted68desktopPASS/0FAIL/F10touchscreenNOT TESTED preserved, not repeated.
+See campaigns/S01-normal-gameplay/QA-W2-02-report.md and qa-w2-02/v1/receipt.json.
+Recommend separately authorized Work1 reference-pack/NuGet recovery then frozen QA;
+production/historical evidence unchanged. P03 PARKED; no ARM64/GUI/exports. S01 OPEN.
