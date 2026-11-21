@@ -1449,3 +1449,10 @@ Owner-submitted68desktopPASS/0FAIL/F10touchscreenNOT TESTED preserved, not repea
 See campaigns/S01-normal-gameplay/QA-W2-02-report.md and qa-w2-02/v1/receipt.json.
 Recommend separately authorized Work1 reference-pack/NuGet recovery then frozen QA;
 production/historical evidence unchanged. P03 PARKED; no ARM64/GUI/exports. S01 OPEN.
+
+
+## Headquarters S01 stop-and-pivot / W2-03 scheduling — 2026-11-21
+
+HQ reviewed QA-W2-02 failed builds, published source 8782063fafa8d3ca9b270ce7a75ae574f3c14301, original E013 persistence evidence and D13/S01-14.05. QA-W2-02 remains BLOCKED: 2 restore failures (NU1301 nonexistent Godot package path; NU1100 missing NETStandard.Library.Ref2.1.0), 0 independent runtime tests executed, no production divergence; third restore not automatically authorized. Owner Windows W2-02 qualification 68 PASS/0 FAIL/1 NOT TESTED (F10 physical touchscreen) remains valid for the bounded desktop profile. W102-P03 stays parked.
+
+Pivot selected: Work2 bounded offline local best-score/clear-type persistence for existing chart choices, using native E013 strictly improving score and independently progressing clear-type comparator (0 < 4 < 1 < 5 < 2 < 3), without claiming original on-disk SQLite durability, catalog metadata, account/online, arbitrary AFF support or new normal gameplay mechanics. Production implementation NOT STARTED and tests NOT RUN by Headquarters. Separate Work1 independent verification remains mandatory, with toolchain restoration prerequisite explicitly OPEN. No prior scope/record waiver. S01 OPEN.
