@@ -249,3 +249,10 @@ Owner-submitted68desktopPASS/0FAIL/F10touchscreenNOT TESTED preserved, not repea
 See campaigns/S01-normal-gameplay/QA-W2-02-report.md and qa-w2-02/v1/receipt.json.
 Recommend separately authorized Work1 reference-pack/NuGet recovery then frozen QA;
 production/historical evidence unchanged. P03 PARKED; no ARM64/GUI/exports. S01 OPEN.
+
+
+## HQ W2-03 pivot — original-informed local result persistence (2026-11-21)
+
+After the separate Work1 QA-W2-02 toolchain blocker exhausted its two permitted recovery attempts, HQ parked QA rather than spending more restore retries. Existing W2-02 production 068a2f09698417b0ddd09e81ec274e758109a0bf remains unchanged; owner desktop 68/68 executed PASS, F10 touch NOT TESTED. Work1 QA-W2-02 runtime 0 NOT RUN/blocked, so its independent G5 gate is still OPEN.
+
+Independent path selected: D13 / S01-14.05 bounded offline persistence for existing charts using E013 native-tested strict score improvement and separate clear-type ordering; no external chart catalog/import, no native SQLite-file equivalence or user account/submission claim, no new original-native execution. Work2 to implement/test/build; Work1 later verifies exact production independently when a validated toolchain becomes available. W102-P03 and G006/G007/G009/G010 remain parked/unverified. HQ schedule is NOT technical acceptance; S01 OPEN.
