@@ -1,3 +1,59 @@
+ARCONIST S01 / W2-03 — offline records qualification build
+
+Extract the entire ZIP and launch Arconist.exe. No owner-side compilation needed.
+All26 previous charts/music/controls remain. The new Selected best panel shows
+best score and strongest clear separately, for the selected chart/profile/content.
+
+SHORT NEW OWNER CHECK (no need to repeat the68 W2-02 checks):
+1. Select "Native reference · two taps". With a fresh record it says No record.
+   Start; after the usual3s preroll, tap J at HUD1s and deliberately skip F at2s.
+   Wait for results. The completed category0 result is eligible for a local record;
+   best score should be5000001 for a shining first tap, strongest clear0.
+2. Close the application. Relaunch and select the SAME chart. Its best must still
+   appear, loaded from local records. The default first chart has a different key.
+3. Replay and miss both notes. The lower score must not replace the earlier best
+   or its saved timestamp/counters. The panel reports Saved best unchanged.
+4. Replay and hit J1s/F2s. Perfect score10000002 and stronger clear3 should appear.
+   Close/relaunch to verify retention. Different chart selections must show their
+   own record or No record, with no leakage. Return to menu and replay normally.
+5. Current result remains separate from Selected best. Hover over the best panel
+   for saved counters, final versus recorded LOST, integer health, UTC/native date
+   and the file path. A record error is red and never presented as saved success;
+   gameplay remains usable. Missing and unreadable records are different states.
+
+CLEAR COMPARISON: code order0 < 4 < 1 < 5 < 2 < 3, not numerical maximum.
+Score replaces its associated snapshot/date ONLY on a strictly higher score.
+Clear can improve on an equal/lower score without replacing that best snapshot.
+The42 original E013 comparison cases and independent transitions are technically
+verified; no need to manufacture an unattainable physical score/category combination.
+
+STORAGE (ENGINEERING, not original Android SQLite):
+Windows: %APPDATA%/Arconist/records/best-records.v1.json
+The fixed Arconist user-data namespace survives moving/replacing the extracted
+application directory and release-title changes. Never store records in the ZIP
+or installation directory. One running instance owns a lock. A flushed temporary
+file and same-directory atomic replacement update score/clear together; .previous
+keeps the preceding valid file. Power-loss/filesystem guarantees are NOT VERIFIED.
+
+Identity namespace arconist.synthetic/v1, explicit chart choice/profile and exact
+UTF8 AFF SHA256. Changed chart payload gets a distinct record; old entries remain.
+Synthetic difficulty0, ctfalse and modifier0 are fixed, distinct metadata. They
+are not recovered native catalog/entitlement/ct semantics. No account/network,
+user-chart import, original schema migration or special-mode record support.
+
+ERROR RECOVERY: close all instances, back up the ENTIRE records directory first.
+An unreadable/unknown-schema/currently changed file is preserved and blocks writes;
+there is no silent reset. Keep the bad file under another name before deliberately
+starting fresh, or restore a known-valid backup copy after backup. Report the
+visible error/path if unsure. Never delete/replace records while the app is open.
+
+No GUI automation or synthesized OS input qualified this build. Separate Work1
+new-source QA and owner Windows/physical/audio qualification remain pending.
+W2-02 owner68PASS/0FAIL/touchscreenF10NOT TESTED and its independent QA blocker
+are preserved; neither was repeated or repaired. S01 remains OPEN.
+
+PRESERVED W2-02 AND EARLIER GUIDES FOLLOW
+
 ARCONIST S01 / W2-02 — lane widening qualification build
 
 Extract the ENTIRE ZIP. Open Arconist.exe beside Arconist.pck and its data folder.

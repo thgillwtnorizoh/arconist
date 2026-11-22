@@ -1,0 +1,268 @@
+{
+  "authority": "E013 executed comparator table and controlled native SQLite writer sequences; no production-generated expectations",
+  "clearComparator": [
+    {
+      "stored": -1,
+      "incoming": 0,
+      "accept": true
+    },
+    {
+      "stored": -1,
+      "incoming": 1,
+      "accept": true
+    },
+    {
+      "stored": -1,
+      "incoming": 2,
+      "accept": true
+    },
+    {
+      "stored": -1,
+      "incoming": 3,
+      "accept": true
+    },
+    {
+      "stored": -1,
+      "incoming": 4,
+      "accept": true
+    },
+    {
+      "stored": -1,
+      "incoming": 5,
+      "accept": true
+    },
+    {
+      "stored": 0,
+      "incoming": 0,
+      "accept": false
+    },
+    {
+      "stored": 0,
+      "incoming": 1,
+      "accept": true
+    },
+    {
+      "stored": 0,
+      "incoming": 2,
+      "accept": true
+    },
+    {
+      "stored": 0,
+      "incoming": 3,
+      "accept": true
+    },
+    {
+      "stored": 0,
+      "incoming": 4,
+      "accept": true
+    },
+    {
+      "stored": 0,
+      "incoming": 5,
+      "accept": true
+    },
+    {
+      "stored": 1,
+      "incoming": 0,
+      "accept": false
+    },
+    {
+      "stored": 1,
+      "incoming": 1,
+      "accept": false
+    },
+    {
+      "stored": 1,
+      "incoming": 2,
+      "accept": true
+    },
+    {
+      "stored": 1,
+      "incoming": 3,
+      "accept": true
+    },
+    {
+      "stored": 1,
+      "incoming": 4,
+      "accept": false
+    },
+    {
+      "stored": 1,
+      "incoming": 5,
+      "accept": true
+    },
+    {
+      "stored": 2,
+      "incoming": 0,
+      "accept": false
+    },
+    {
+      "stored": 2,
+      "incoming": 1,
+      "accept": false
+    },
+    {
+      "stored": 2,
+      "incoming": 2,
+      "accept": false
+    },
+    {
+      "stored": 2,
+      "incoming": 3,
+      "accept": true
+    },
+    {
+      "stored": 2,
+      "incoming": 4,
+      "accept": false
+    },
+    {
+      "stored": 2,
+      "incoming": 5,
+      "accept": false
+    },
+    {
+      "stored": 3,
+      "incoming": 0,
+      "accept": false
+    },
+    {
+      "stored": 3,
+      "incoming": 1,
+      "accept": false
+    },
+    {
+      "stored": 3,
+      "incoming": 2,
+      "accept": false
+    },
+    {
+      "stored": 3,
+      "incoming": 3,
+      "accept": false
+    },
+    {
+      "stored": 3,
+      "incoming": 4,
+      "accept": false
+    },
+    {
+      "stored": 3,
+      "incoming": 5,
+      "accept": false
+    },
+    {
+      "stored": 4,
+      "incoming": 0,
+      "accept": false
+    },
+    {
+      "stored": 4,
+      "incoming": 1,
+      "accept": true
+    },
+    {
+      "stored": 4,
+      "incoming": 2,
+      "accept": true
+    },
+    {
+      "stored": 4,
+      "incoming": 3,
+      "accept": true
+    },
+    {
+      "stored": 4,
+      "incoming": 4,
+      "accept": false
+    },
+    {
+      "stored": 4,
+      "incoming": 5,
+      "accept": true
+    },
+    {
+      "stored": 5,
+      "incoming": 0,
+      "accept": false
+    },
+    {
+      "stored": 5,
+      "incoming": 1,
+      "accept": false
+    },
+    {
+      "stored": 5,
+      "incoming": 2,
+      "accept": true
+    },
+    {
+      "stored": 5,
+      "incoming": 3,
+      "accept": true
+    },
+    {
+      "stored": 5,
+      "incoming": 4,
+      "accept": false
+    },
+    {
+      "stored": 5,
+      "incoming": 5,
+      "accept": false
+    }
+  ],
+  "scoreSequence": [
+    {
+      "score": 9000000,
+      "category": 1,
+      "date": 100,
+      "best": 9000000,
+      "bestDate": 100,
+      "clear": 1
+    },
+    {
+      "score": 9100000,
+      "category": 1,
+      "date": 101,
+      "best": 9100000,
+      "bestDate": 101,
+      "clear": 1
+    },
+    {
+      "score": 8900000,
+      "category": 2,
+      "date": 102,
+      "best": 9100000,
+      "bestDate": 101,
+      "clear": 2
+    },
+    {
+      "score": 9100000,
+      "category": 3,
+      "date": 103,
+      "best": 9100000,
+      "bestDate": 101,
+      "clear": 3
+    },
+    {
+      "score": 9200000,
+      "category": 1,
+      "date": 104,
+      "best": 9200000,
+      "bestDate": 104,
+      "clear": 3
+    }
+  ],
+  "nativeGameResult": {
+    "score": 10000002,
+    "pure": 2,
+    "shining": 2,
+    "far": 0,
+    "lost": 0,
+    "recordedLost": 0,
+    "health": 80,
+    "category": 3
+  },
+  "boundary": "Native disk path/durability and full scene UI transition NOT VERIFIED; JSON disk/restart/UI/session bridge are ENGINEERING"
+}

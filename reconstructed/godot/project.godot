@@ -1,6 +1,8 @@
 config_version=5
 
 [application]
+config/use_custom_user_dir=true
+config/custom_user_dir_name="Arconist"
 config/name="Arconist S01 - Mixed Normal Gameplay"
 run/main_scene="res://Main.tscn"
 config/features=PackedStringArray("4.7", "C#", "GL Compatibility")

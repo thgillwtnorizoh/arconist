@@ -1,6 +1,7 @@
 using Godot;
 using Arconist.Bridge;
 using Arconist.Core;
+using Arconist.Records;
 using System.Text.Json;
 
 namespace Arconist.GodotApp;
@@ -61,7 +62,8 @@ public partial class Main : Control
     {
         font = ThemeDB.FallbackFont;
         bgm = new GodotBgmBackend(); AddChild(bgm);
-        session = new GameplaySession(new GodotClock(), bgm);
+        session = new GameplaySession(MakeGameplayClock(), bgm);
+        InitializeRecords();
         bgm.Ended += () => session.Audio?.Finished();
         var container = new SubViewportContainer { Position=trackOrigin, Size=trackSize, Stretch=true, MouseFilter=MouseFilterEnum.Ignore };
         viewport3D = new SubViewport { Size=(Vector2I)trackSize, OwnWorld3D=true, RenderTargetUpdateMode=SubViewport.UpdateMode.Always, HandleInputLocally=false };
@@ -111,6 +113,8 @@ public partial class Main : Control
         pauseButton.Pressed+=()=>session.Pause();AddChild(pauseButton);
         GetWindow().FocusExited += () => {session.FocusLost();pointers.Forget();};
         GetWindow().FocusEntered += () => session.FocusReturned();
+        if (OS.GetCmdlineUserArgs().Contains("--records-tests")) CallDeferred(nameof(RunRecordTests));
+        if (IsRecordProcessProbe) CallDeferred(nameof(RunRecordProcess));
         if (OS.GetCmdlineUserArgs().Contains("--widening-tests")) CallDeferred(nameof(RunWideningTests));
         if (OS.GetCmdlineUserArgs().Contains("--mixed-tests")) CallDeferred(nameof(RunMixedTests));
         if (OS.GetCmdlineUserArgs().Contains("--group-tests")) CallDeferred(nameof(RunGroupTests));
@@ -137,7 +141,7 @@ public partial class Main : Control
     private void Begin()
     {
         pointers.Forget();chartInfo.Text=ChartChoices[charts.Selected].description;
-        try { session.Start(chartData[charts.Selected],(int)userOffset.Value,ChartChoices[charts.Selected].file,ChartChoices[charts.Selected].audio,profile:ChartChoices[charts.Selected].mixed?ChartProfile.S01Mixed:ChartProfile.R010); }
+        try { RecordSessions.Start(ChartChoices[charts.Selected].file,chartData[charts.Selected],(int)userOffset.Value,ChartChoices[charts.Selected].audio); }
         catch(Exception e) { chartInfo.Text="Start error: "+e.Message; GD.Print("SESSION_CONFIGURATION_ERROR "+e.Message); }
         UpdateHud(); QueueRedraw();
     }
@@ -187,6 +191,7 @@ public partial class Main : Control
     }
     private void UpdateHud()
     {
+        RefreshRecords();
         var k = session.Core;
         pauseButton.Visible=k!=null&&!k.Finished&&!session.PauseModalActive;
         pausePanel.Sync();
@@ -214,10 +219,10 @@ public partial class Main : Control
         if (k == null)
         {
             status.Text = "FIND YOUR RHYTHM";
-            hud.Text = "D     F     J     K\n\nCyan: tap and release.\nAmber: hold the key.\nGreen: hold contact active.\n\nKey + mouse = two contacts.\nChoose audible or silent practice.";
+            hud.Text = "D / F / J / K: ground\nLeft mouse: ground / sky\nRight mouse: sky only\nCyan: tap. Amber: hold.\nChoose a chart below.";
             hud.AddThemeFontSizeOverride("font_size",21); return;
         }
-        hud.AddThemeFontSizeOverride("font_size",25);
+        hud.AddThemeFontSizeOverride("font_size",22);
         if (k.Result is { } r)
         {
             status.Text = "SESSION COMPLETE";
@@ -226,7 +231,7 @@ public partial class Main : Control
         else
         {
             status.Text = k.Paused ? "PAUSED" : k.Timeline.EffectiveTime < 0 ? $"READY  {Math.Ceiling(-k.Timeline.EffectiveTime/1000.0)}" : session.Feedback;
-            hud.Text = $"COMBO   {k.Combo}\nSCORE   {k.Score:N0}\nHEALTH   {k.Health:F1}\n\nPURE {k.Pure}  FAR {k.Far}  LOST {k.Lost}\nTime   {k.Timeline.EffectiveTime/1000.0:F2} s\nContacts   {k.ContactCount}";
+            hud.Text = $"COMBO   {k.Combo}\nSCORE   {k.Score:N0}\nHEALTH   {k.Health:F1}\nPURE {k.Pure}  FAR {k.Far}  LOST {k.Lost}\nTime   {k.Timeline.EffectiveTime/1000.0:F2} s\nContacts   {k.ContactCount}";
         }
     }
     private void Text(string value, float x, float y, int size, Color color) => DrawString(font,new Vector2(x,y),value,HorizontalAlignment.Left,-1,size,color);
@@ -234,7 +239,7 @@ public partial class Main : Control
     {
         if (font == null) return;
         DrawRect(new Rect2(665,0,435,740),new Color("0b1020"));
-        Text("ARCONIST",72,64,32,ink); Text("S01   /   WIDENING",692,60,17,muted);
+        Text("ARCONIST",72,64,32,ink); Text("S01   /   LOCAL RECORDS",692,60,17,muted);
         Text("D  ·  F  ·  J  ·  K",72,102,19,muted);
         Text(session.Core?.Chart.SceneControls.Count>0?"Gold band: additional lane   |   Green sides: outer mouse lanes":"Native coordinates / 425   |   perspective Camera3D",52,713,15,muted);
         Text("F6 view   F7 resize   F8 capture",692,686,15,muted);
@@ -265,7 +270,7 @@ public partial class Main : Control
             modelPaused=k?.ModelPaused,timelinePaused=k?.Timeline.Paused,modal=session.PauseModalActive,pauseReason=session.PauseReason,requests=k?.Timeline.StartRequestCount,
             audioState=session.Audio?.State, audioDetail=session.Audio?.Detail, audioSession=session.Audio?.Session,
             pure=k?.Pure,far=k?.Far,lost=k?.Lost,shining=k?.Shining,score=k?.Score,combo=k?.Combo,maxCombo=k?.MaxCombo,
-            health=k?.Health,contacts=k?.ContactCount,held=session.HeldCount,finished=k?.Finished,
+            recordStatus=new{error=RecordStore.HasError,RecordStore.Detail,RecordStore.SuccessfulWrites,RecordSessions.CompletionAttempts,outcome=RecordSessions.LastOutcome},health=k?.Health,contacts=k?.ContactCount,held=session.HeldCount,finished=k?.Finished,
             holds=k?.Holds.Select(h=>new { id=h.Data.Id, h.Active, h.Latched, h.Holding, h.ActivatingContacts, h.Records }).ToArray(),
             arcs=k?.Arcs.Select(a=>new{a.Id,a.Active,a.Depth,a.Cache,a.CacheEnabled,a.TargetX,a.TargetY,a.Holding,a.Records,a.ResolutionWrites,generationFlag=a.Data.GenerationFlag,predecessor=a.Predecessor?.Id,successors=a.Successors.Select(next=>next.Id),group=a.Group?.Id,a.SuccessorCleanupPreserved,a.LastLinkScan,trace=a.Data.Trace,children=a.Children.Select(c=>new{c.Id,c.ParentId,time=c.Data.Time,c.Local,c.InputTarget,c.WorldPosition,c.Consumed,c.Missed,c.Contact,c.Outcome,c.ResolvedAt})}),colors=k?.Colors,claimed=k?.ClaimedIds,
             widening=k?.Widening,profile=k?.Chart.Profile.ToString(),proximity=k?.ProximityTrace,
@@ -282,5 +287,5 @@ public partial class Main : Control
         LogSpatial("CAPTURE_GEOMETRY");
         Error error=GetViewport().GetTexture().GetImage().SavePng(path); GD.Print($"VIEWPORT_CAPTURE {error} {path}");
     }
-    public override void _ExitTree() { session?.Home(); log?.Dispose(); }
+    public override void _ExitTree() { session?.Home(); CloseRecords(); log?.Dispose(); }
 }

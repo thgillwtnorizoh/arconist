@@ -1,3 +1,24 @@
+# S01 / W2-03 — offline local records
+
+All26 bundled chart choices now have versioned synthetic content/profile identities
+and restart-persistent best-score/strongest-clear records. A separate .NET10
+Arconist.Records service observes ordinary completed GameResult; the portable
+kernel and existing bridge are unchanged. Native E013 strict score comparison and
+42-row clear relation are reused; JSON/disk durability/path/UI are ENGINEERING.
+
+Owner records use fixed application user-data root Arconist/records, never the
+source/install tree. Corrupt/unknown-schema/external-edited stores block writes
+with a visible error. Single-owner lock, flushed temporary replacement and previous
+backup are engineering protections; no power-loss/Android SQLite equivalence.
+Read PLAYER.txt and ../validation/S01-W2-03.md. New owner qualification is the short
+save/exit/relaunch/lower/higher/selection test; do not repeat all68 W2-02 checks.
+
+Pinned W2-02 toolchain reused: SDK10.0.402/Godot4.7.2.NET/runtime10.0.13 and
+DOTNET_PROCESSOR_COUNT=1. build.py makes Arconist-S01-W2-03-Windows-x64.zip and
+Arconist-S01-W2-03-Technical-Evidence.zip. No new NuGet package dependencies.
+Separate Work1 new-source verification pending; QA-W2-02 recovery/P03 parked.
+S01 OPEN. Historical Godot documentation follows unchanged:
+
 # S01 / W2-02 lane widening integration
 
 E039 kind5/6 in S01Mixed now update one authoritative core G/W state and

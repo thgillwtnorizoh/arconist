@@ -6,5 +6,6 @@
   <ItemGroup>
     <Compile Remove="bridge/**/*.cs;tests/**/*.cs" />
     <ProjectReference Include="bridge/Arconist.Bridge.csproj" />
+    <ProjectReference Include="../records/Arconist.Records.csproj" />
   </ItemGroup>
 </Project>
