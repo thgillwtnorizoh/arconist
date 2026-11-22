@@ -1,0 +1,108 @@
+{
+  "status": "PASS preservation",
+  "baselineSha": "60cb46ec2b0edde5b9efc4548fc91e048dad9895",
+  "verificationBaselineSha": "60cb46ec2b0edde5b9efc4548fc91e048dad9895",
+  "candidate": "INDEX",
+  "originalFileCount": 609,
+  "protectedByteIdentical": 605,
+  "protectedManifestSha256": "198d65ecad3fceac1404c532ccf68b390fe83e2e21069c18938672eeff26261f",
+  "appendOnly": [
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/coverage-register.md",
+      "prefixBytes": 143311,
+      "prefixSha256": "1be2890c53cac8d14b5693953ef6800d7e30fe7af5804495a0e4a2a0bfc54886",
+      "bytesAfter": 144526,
+      "suffixBytes": 1215
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/dependency-register.md",
+      "prefixBytes": 29652,
+      "prefixSha256": "8234a9e1dafc191cdf88540d6e57f0c89bf3b4449903462ea4c95dd18f063046",
+      "bytesAfter": 30867,
+      "suffixBytes": 1215
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/discrepancy-register.md",
+      "prefixBytes": 26793,
+      "prefixSha256": "cda1b1b60c260cd6836369149d0c1c0c67514ff4442e801ec9e1fa656e916524",
+      "bytesAfter": 28008,
+      "suffixBytes": 1215
+    },
+    {
+      "path": "reconstructed/contexts.md",
+      "prefixBytes": 113914,
+      "prefixSha256": "e545ebeb5d10c2facd319b9c633fa6281f2e6cc16f0b19972829e52eacce03ac",
+      "bytesAfter": 115129,
+      "suffixBytes": 1215
+    }
+  ],
+  "changedPaths": [
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/QA-W2-03-report.md",
+      "status": "added",
+      "sha256": "28a5b29697bd571715b2db6d0c0f9deaeef8c3f9aa339fcb4268ae313b9b5a7a"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/coverage-register.md",
+      "status": "append-only",
+      "sha256": "562bbe76c144fbfeeb138b2e8f0d8de1ea142118a6bde85266a67c61feffd6ac"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/dependency-register.md",
+      "status": "append-only",
+      "sha256": "c0d36d5ac049eb800f3396df463d4a0c3a892437018bd4773465074b762d74cd"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/discrepancy-register.md",
+      "status": "append-only",
+      "sha256": "bc9415e2c92fc10b87fff33deab0b3c1f6a8f6ecab56460a2f2f1baf41e58bca"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/qa-w2-03/v1/expectations.json",
+      "status": "added",
+      "sha256": "dae094de159ba14fcaf166d47159fc0891b207d8e8bdbd4976d72da61371353e"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/qa-w2-03/v1/preflight.json",
+      "status": "added",
+      "sha256": "78aa0c92bf87c5bd44a4e0623ef81c62ce6a097bee498a4c59cf32dde0b2b5ed"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/qa-w2-03/v1/preflight.py",
+      "status": "added",
+      "sha256": "34a34e070cbba372d059806d0b6c5b40881673c375614722db57bd8beb23a6d3"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/qa-w2-03/v1/preservation.json",
+      "status": "added",
+      "sha256": null
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/qa-w2-03/v1/static-validation.json",
+      "status": "added",
+      "sha256": "19cb4f0d17e332e57496d4734e1dc4fe0054a581cfa0bdc27d1e0bfce53a195d"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/qa-w2-03/v1/validate.py",
+      "status": "added",
+      "sha256": "4add7fe790632267296888bb3c2549a4487a6f86ee4582eca20cca9cc6fd9ef7"
+    },
+    {
+      "path": "reconstructed/campaigns/S01-normal-gameplay/qa-w2-03/v1/verify-preservation.py",
+      "status": "added",
+      "sha256": "c5a9f3fdd23e98afb738158641d904e18fad7e1d92201ae93aaa72e7844293b7"
+    },
+    {
+      "path": "reconstructed/contexts.md",
+      "status": "append-only",
+      "sha256": "1492fcad6f33063979c987485d55d23be9e151823bbb8bb9c7f90a07a82d4f50"
+    }
+  ],
+  "changedPathCount": 12,
+  "deletions": 0,
+  "productionChanges": 0,
+  "historicalTestChanges": 0,
+  "executedDriverChanges": 0,
+  "nativeScenesCreated": 0,
+  "selfHashExclusion": "preservation.json only; remote readback checks its bytes"
+}

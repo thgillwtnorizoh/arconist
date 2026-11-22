@@ -841,3 +841,21 @@ D13/S01-14.05 gains bounded VERIFIED COMPONENT preparation:26synthetic content/p
 D13/S01-14.05 bounded VERIFIED COMPONENT at exact production0007c7719eb9b3ea377230a55d6fcfaedbe29898:26synthetic content/profile IDs, E01342clear relations/strict independent score+clear, immutable result-field copying, actual restart-persistent app-owned JSON, completed-once observer and menu/results best display.590/590development groups, unchanged37+46Work1 development-rerun cases,3standalone comparisons;0fail/skip;62commands0. Two separate real Main processes demonstrate save/exit/reload/display of identical bytes; reader0writes. Full Windows/PCK26charts/music/192dependencyassets/CRC/extracted hashes PASS.580protectedfiles/core/bridge/26charts/audio/oldtests/evidence unchanged; history/registerprefixes preserved.
 
 VERIFIED CHECKPOINT — READY FOR OWNER QUALIFICATION. Separate new-source Work1 and short Windows owner test pending; QA-W2-02 BLOCKED/P03 parked unchanged. No68-check repetition requested; owner68PASS/0FAIL/F10touchNOTTESTED retained. Identity/disk/path/schema/backup/UI are ENGINEERING, not native DB/catalog/savegate equivalence. No complete S01 row/discrepancy closes; native disk/migrations/unknowncontexts and other G/campaign requirements remain OPEN/NOT VERIFIED. Full report/source/inventory/commands/artifact receipts: ../../validation/S01-W2-03.md. Next HQ schedules Work1/owner, no other execution begun. S01 OPEN.
+
+
+## QA-W2-03 mandatory read-only preflight — 2026-11-22
+
+BLOCKED / NOT RUN. Assigned main60cb46ec2b0edde5b9efc4548fc91e048dad9895 verified;
+selected production0007c7719eb9b3ea377230a55d6fcfaedbe29898 detached with18tracked
+core/bridge/records file hashes checked. Read-only preflight exit2: no .NET host on
+PATH or enumerated standard/prior SDK paths; no netstandard2.1ref package/cache;
+no workspace Core/Bridge/Records DLL fallback. Prior temporary SDK is absent.
+No installs/downloads/config changes/restores/builds/production executions attempted.
+No third QA-W2-02 recovery. All gates A–D runtime NOT RUN;0runtimePASS/0FAIL/0SKIP.
+Independent E01342clear rows and strict-score/clear sequence frozen, static only.
+No new production discrepancy or verification coverage. D13/S01-14.05/QA OPEN.
+Work2's590groups/83priorcases/3references remain development provenance; W2-03 owner
+qualification PENDING. Prior W2-02 owner68desktopPASS/F10untested remains separate.
+See campaigns/S01-normal-gameplay/QA-W2-03-report.md and qa-w2-03/v1/preflight.json.
+HQ resource decision required before resumed Work1 QA; no dependency repair, native
+P03/asin, GUI, production modifications or next issue. S01 subsystem OPEN.

@@ -1,0 +1,296 @@
+{
+  "schema": 1,
+  "productionSha": "0007c7719eb9b3ea377230a55d6fcfaedbe29898",
+  "productionExecuted": false,
+  "authority": {
+    "path": "excavations/013_result_persistence_and_save_eligibility.md",
+    "sha256": "71915111f94304258f9e570ff245ae5805943d64c0707d831c68022fc831c464",
+    "location": "Clear-type comparison and progression: all42 native comparator pairs; Local best-score persistence / Selection, strict improvement and SQL effects",
+    "nativeFunctions": [
+      "0xe3c054",
+      "0x196b22c",
+      "0x13552d4"
+    ]
+  },
+  "clearTable": [
+    {
+      "old": -1,
+      "incoming": 0,
+      "replace": true
+    },
+    {
+      "old": -1,
+      "incoming": 1,
+      "replace": true
+    },
+    {
+      "old": -1,
+      "incoming": 2,
+      "replace": true
+    },
+    {
+      "old": -1,
+      "incoming": 3,
+      "replace": true
+    },
+    {
+      "old": -1,
+      "incoming": 4,
+      "replace": true
+    },
+    {
+      "old": -1,
+      "incoming": 5,
+      "replace": true
+    },
+    {
+      "old": 0,
+      "incoming": 0,
+      "replace": false
+    },
+    {
+      "old": 0,
+      "incoming": 1,
+      "replace": true
+    },
+    {
+      "old": 0,
+      "incoming": 2,
+      "replace": true
+    },
+    {
+      "old": 0,
+      "incoming": 3,
+      "replace": true
+    },
+    {
+      "old": 0,
+      "incoming": 4,
+      "replace": true
+    },
+    {
+      "old": 0,
+      "incoming": 5,
+      "replace": true
+    },
+    {
+      "old": 1,
+      "incoming": 0,
+      "replace": false
+    },
+    {
+      "old": 1,
+      "incoming": 1,
+      "replace": false
+    },
+    {
+      "old": 1,
+      "incoming": 2,
+      "replace": true
+    },
+    {
+      "old": 1,
+      "incoming": 3,
+      "replace": true
+    },
+    {
+      "old": 1,
+      "incoming": 4,
+      "replace": false
+    },
+    {
+      "old": 1,
+      "incoming": 5,
+      "replace": true
+    },
+    {
+      "old": 2,
+      "incoming": 0,
+      "replace": false
+    },
+    {
+      "old": 2,
+      "incoming": 1,
+      "replace": false
+    },
+    {
+      "old": 2,
+      "incoming": 2,
+      "replace": false
+    },
+    {
+      "old": 2,
+      "incoming": 3,
+      "replace": true
+    },
+    {
+      "old": 2,
+      "incoming": 4,
+      "replace": false
+    },
+    {
+      "old": 2,
+      "incoming": 5,
+      "replace": false
+    },
+    {
+      "old": 3,
+      "incoming": 0,
+      "replace": false
+    },
+    {
+      "old": 3,
+      "incoming": 1,
+      "replace": false
+    },
+    {
+      "old": 3,
+      "incoming": 2,
+      "replace": false
+    },
+    {
+      "old": 3,
+      "incoming": 3,
+      "replace": false
+    },
+    {
+      "old": 3,
+      "incoming": 4,
+      "replace": false
+    },
+    {
+      "old": 3,
+      "incoming": 5,
+      "replace": false
+    },
+    {
+      "old": 4,
+      "incoming": 0,
+      "replace": false
+    },
+    {
+      "old": 4,
+      "incoming": 1,
+      "replace": true
+    },
+    {
+      "old": 4,
+      "incoming": 2,
+      "replace": true
+    },
+    {
+      "old": 4,
+      "incoming": 3,
+      "replace": true
+    },
+    {
+      "old": 4,
+      "incoming": 4,
+      "replace": false
+    },
+    {
+      "old": 4,
+      "incoming": 5,
+      "replace": true
+    },
+    {
+      "old": 5,
+      "incoming": 0,
+      "replace": false
+    },
+    {
+      "old": 5,
+      "incoming": 1,
+      "replace": false
+    },
+    {
+      "old": 5,
+      "incoming": 2,
+      "replace": true
+    },
+    {
+      "old": 5,
+      "incoming": 3,
+      "replace": true
+    },
+    {
+      "old": 5,
+      "incoming": 4,
+      "replace": false
+    },
+    {
+      "old": 5,
+      "incoming": 5,
+      "replace": false
+    }
+  ],
+  "clearConfidence": "CONFIRMED ORIGINAL / native-isolated comparator pairs, not new execution",
+  "scoreRule": "Absent score inserts; existing old>=new retains entire score snapshot/date; clear progression is independent unless native suppression flag applies",
+  "sequence": [
+    {
+      "incomingScore": 9000000,
+      "incomingClear": 4,
+      "incomingDate": 100,
+      "expectedBestScore": 9000000,
+      "expectedSnapshotDate": 100,
+      "expectedSnapshotClear": 4,
+      "expectedStrongestClear": 4
+    },
+    {
+      "incomingScore": 9000000,
+      "incomingClear": 1,
+      "incomingDate": 200,
+      "expectedBestScore": 9000000,
+      "expectedSnapshotDate": 100,
+      "expectedSnapshotClear": 4,
+      "expectedStrongestClear": 1
+    },
+    {
+      "incomingScore": 8000000,
+      "incomingClear": 5,
+      "incomingDate": 300,
+      "expectedBestScore": 9000000,
+      "expectedSnapshotDate": 100,
+      "expectedSnapshotClear": 4,
+      "expectedStrongestClear": 5
+    },
+    {
+      "incomingScore": 9500000,
+      "incomingClear": 0,
+      "incomingDate": 400,
+      "expectedBestScore": 9500000,
+      "expectedSnapshotDate": 400,
+      "expectedSnapshotClear": 0,
+      "expectedStrongestClear": 5
+    },
+    {
+      "incomingScore": 9600000,
+      "incomingClear": 2,
+      "incomingDate": 500,
+      "expectedBestScore": 9600000,
+      "expectedSnapshotDate": 500,
+      "expectedSnapshotClear": 2,
+      "expectedStrongestClear": 2
+    },
+    {
+      "incomingScore": 9600000,
+      "incomingClear": 3,
+      "incomingDate": 600,
+      "expectedBestScore": 9600000,
+      "expectedSnapshotDate": 500,
+      "expectedSnapshotClear": 2,
+      "expectedStrongestClear": 3
+    }
+  ],
+  "sequenceConfidence": "RECONSTRUCTED combination of E013 native rules; not an observed original six-step session; actual production NOT RUN",
+  "invalidStoredNormalization": {
+    "inputs": [
+      -9,
+      6,
+      2147483647
+    ],
+    "normalized": -1,
+    "classification": "ENGINEERING stored JSON admission/normalization contract; original helper maps invalid codes to-1 but JSON handling is not native SQLite equivalence"
+  },
+  "durabilityConfidence": "ENGINEERING: local JSON, lock, schema, backup, external modification and failed-write state; all runtime cases NOT RUN"
+}

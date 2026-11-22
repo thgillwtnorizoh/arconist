@@ -1,0 +1,10 @@
+{
+  "status": "PASS static evidence only; production QA BLOCKED/NOT RUN",
+  "checks": 65,
+  "fail": 0,
+  "skip": 0,
+  "productionExecutions": 0,
+  "nativeExecutions": 0,
+  "clearRows": 42,
+  "sequenceSteps": 6
+}

@@ -1480,3 +1480,21 @@ Arconist-S01-W2-03-Windows-x64.zip 76537963bytes SHA2562548a1c54db9b757aeb375827
 Arconist-S01-W2-03-Technical-Evidence.zip 917934bytes SHA256a9050bd271b276f21da357c9aa084afecd1228c6d7d4b761b593dd8b30960b8b https://chatgpt.com/library?file_id=libfile_3afd9864f2cc8191bf6427f8460ac6e4&account_id=personal
 
 Stable owner path %APPDATA%/Arconist/records/best-records.v1.json. New short owner test only: seed partial two-tap result, close/relaunch same chart, lower score unchanged, higher/stronger result retained, selection/replay isolation. Do not repeat68previousW2-02checks;68PASS/0FAIL/F10touchNOTTESTED attestation preserved. New-source separateWork1/ownerWindows qualification NOT RUN/PENDING. Final main audit documentation only; tested application unchanged. Next actor HQ schedules those checks, no new assignment begun. D13/S01-14.05 bounded component; all other campaign dependencies/unknownnativefilepolicy OPEN. S01/subsystem OPEN. Stop.
+
+
+## QA-W2-03 mandatory read-only preflight — 2026-11-22
+
+BLOCKED / NOT RUN. Assigned main60cb46ec2b0edde5b9efc4548fc91e048dad9895 verified;
+selected production0007c7719eb9b3ea377230a55d6fcfaedbe29898 detached with18tracked
+core/bridge/records file hashes checked. Read-only preflight exit2: no .NET host on
+PATH or enumerated standard/prior SDK paths; no netstandard2.1ref package/cache;
+no workspace Core/Bridge/Records DLL fallback. Prior temporary SDK is absent.
+No installs/downloads/config changes/restores/builds/production executions attempted.
+No third QA-W2-02 recovery. All gates A–D runtime NOT RUN;0runtimePASS/0FAIL/0SKIP.
+Independent E01342clear rows and strict-score/clear sequence frozen, static only.
+No new production discrepancy or verification coverage. D13/S01-14.05/QA OPEN.
+Work2's590groups/83priorcases/3references remain development provenance; W2-03 owner
+qualification PENDING. Prior W2-02 owner68desktopPASS/F10untested remains separate.
+See campaigns/S01-normal-gameplay/QA-W2-03-report.md and qa-w2-03/v1/preflight.json.
+HQ resource decision required before resumed Work1 QA; no dependency repair, native
+P03/asin, GUI, production modifications or next issue. S01 subsystem OPEN.

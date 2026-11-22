@@ -1,0 +1,117 @@
+{
+  "status": "BLOCKED",
+  "productionSha": "0007c7719eb9b3ea377230a55d6fcfaedbe29898",
+  "runtimeTested": false,
+  "environment": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "python": "3.12.14",
+  "dotnetOnPath": null,
+  "toolchainLocations": [
+    {
+      "path": "/tmp/qa202-dotnet",
+      "exists": false,
+      "host": false,
+      "sdks": [],
+      "runtimes": [],
+      "netstandardRef": false
+    },
+    {
+      "path": "/usr/share/dotnet",
+      "exists": false,
+      "host": false,
+      "sdks": [],
+      "runtimes": [],
+      "netstandardRef": false
+    },
+    {
+      "path": "/usr/lib/dotnet",
+      "exists": false,
+      "host": false,
+      "sdks": [],
+      "runtimes": [],
+      "netstandardRef": false
+    },
+    {
+      "path": "/usr/local/share/dotnet",
+      "exists": false,
+      "host": false,
+      "sdks": [],
+      "runtimes": [],
+      "netstandardRef": false
+    },
+    {
+      "path": "/opt/dotnet",
+      "exists": false,
+      "host": false,
+      "sdks": [],
+      "runtimes": [],
+      "netstandardRef": false
+    },
+    {
+      "path": "/home/agent/.dotnet",
+      "exists": false,
+      "host": false,
+      "sdks": [],
+      "runtimes": [],
+      "netstandardRef": false
+    }
+  ],
+  "referencePackageLocations": [
+    {
+      "path": "/home/agent/.nuget/packages/netstandard.library.ref/2.1.0",
+      "exists": false
+    },
+    {
+      "path": "/tmp/qa202-dotnet/packs/NETStandard.Library.Ref/2.1.0",
+      "exists": false
+    }
+  ],
+  "workspaceAssemblyCandidates": [],
+  "nugetConfigurations": {
+    "reconstructed/NuGet.Config": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<configuration><packageSources><clear /></packageSources></configuration>\n",
+    "reconstructed/godot/NuGet.Config": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<configuration><packageSources>\n  <clear />\n  <add key=\"Godot bundled packages\" value=\"%GODOT_NUPKGS%\" />\n  <add key=\"nuget.org\" value=\"https://api.nuget.org/v3/index.json\" />\n</packageSources></configuration>\n"
+  },
+  "godotBundledSource": {
+    "configuredValue": null,
+    "exists": false
+  },
+  "sourceFileSha256": {
+    "reconstructed/core/Arc.cs": "23841c3a866ab802ab0bb65182dcd11282d632fab65cc84bea2eb57927dd2957",
+    "reconstructed/core/ArcTap.cs": "d2cf863e66577d898e8714e673d947ee2be5afba09550c605810ad6283ecc19c",
+    "reconstructed/core/Arconist.Core.csproj": "8e39f064514fc5839ee0969bdd1f294a5cd3eee6ef98209907bf779913f67d51",
+    "reconstructed/core/Chart.cs": "5e277dfc531f36973ed57d3ca8bfe111459f634f2a3a86e1985803f4b5e38014",
+    "reconstructed/core/Kernel.cs": "c14e2756c24098ac0ccdbf839b6fbef5b2d0f0f1995e6c74bda59702ca65f815",
+    "reconstructed/core/LinkedArc.cs": "a162cd079a7078411cbe0e6f7121bacaa1c70fbca3151b655de72c2e1b6be8c1",
+    "reconstructed/core/MixedArcConstruction.cs": "d6fcaf281d6a39eb9a32004bb2e1e4a6b537dc991c922c9c414fa24548effd54",
+    "reconstructed/core/TimingGroup.cs": "53a04d66b088ac5453683fcda6dc175c1aa0b05056257e2f5dec1e3bbffc4c50",
+    "reconstructed/core/Widening.cs": "e5923b8bc31870256bf914dae52490d44d327f3bc6dd9b331ea94d74c7de07b7",
+    "reconstructed/godot/bridge/.gdignore": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "reconstructed/godot/bridge/Arconist.Bridge.csproj": "a357e364ba99fedf60024ecc0b4644422efe56e595d5871b07137c2f057e5837",
+    "reconstructed/godot/bridge/BgmController.cs": "01354de04890be7af7a59c5a0739ea8383bb9d904a8f593803cd7c4efbc23d34",
+    "reconstructed/godot/bridge/GameplaySession.cs": "693555f255df98710b081a442edb120f1feb2294900d320454c25d2c42eea530",
+    "reconstructed/records/Arconist.Records.csproj": "6db17ab130036117af981c92f9986cedf3e1e30b1de827ca26921d9a3df1698c",
+    "reconstructed/records/BundledCatalog.cs": "56556e3ec973a6dffbbfd7d79d4724a65bd3c1ee3c59fa91e00ba8c70999bd14",
+    "reconstructed/records/LocalRecordStore.cs": "372171ac4091ce4ffa642d402e123a416952548e173b12b245f060b881765b21",
+    "reconstructed/records/RecordModel.cs": "0d2b0bd32d8c94f2fb48e1e3da374f398af68e6177cf239683cd78d060260ad5",
+    "reconstructed/records/SessionRecords.cs": "048a7c99b2634f414beeefe319a5f21f5fe7d1ac4764be40b3929c338dd87628"
+  },
+  "sourceFileCount": 18,
+  "archiveLibrarySha256": "3eaca4e6dabb3395f276f8915698d57675757d0df0970e716b23a3dc201c79be",
+  "blockers": [
+    "No already available .NET SDK/runtime host found in PATH or enumerated standard/prior locations.",
+    "NETStandard.Library.Ref 2.1.0 absent from enumerated SDK/package-cache locations.",
+    "No exact-build Core/Bridge/Records assembly set available in workspace; no binary provenance fallback."
+  ],
+  "buildAttempts": 0,
+  "restoreAttempts": 0,
+  "installAttempts": 0,
+  "runtimePass": 0,
+  "runtimeFail": 0,
+  "runtimeSkip": 0,
+  "notRun": [
+    "A original rule comparisons",
+    "B actual session result/save",
+    "C disk fresh-process durability",
+    "D regressions and mutation discrimination"
+  ],
+  "firstProductionDifference": null
+}
